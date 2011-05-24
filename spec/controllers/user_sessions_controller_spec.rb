@@ -24,6 +24,21 @@ describe UserSessionsController do
       end
     end
 
-    describe "with valid email and password"
+    describe "with valid email and password" do
+
+      before(:each) do
+        @user = Factory(:user)
+        @attr = { :email => @user.email, :password => @user.password }
+      end
+
+      it "should sign the user in" do
+        post :create, :user_session => @attr
+      end
+
+      it "should redirect to the home page" do
+        post :create, :user_session => @attr
+        response.should redirect_to(root_path)
+      end
+    end
   end
 end
