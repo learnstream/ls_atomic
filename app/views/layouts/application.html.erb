@@ -4,14 +4,15 @@
   <title>Learnstream Atomic</title>
   <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen'  %>
   <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
+  <%= stylesheet_link_tag 'custom' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-
+  <div class="container">
   <header>
   <nav>
   <ul>
-    <li><%= link_to "Home", '#' %></li>
+    <li><%= link_to "Home", home_path  %></li>
     <li><%= link_to "Sign in", '#'%></li>
   </ul>
   </nav>
@@ -19,5 +20,6 @@
   <section>
   <%= yield %>
   </section>
+</div>
 </body>
 </html>
