@@ -1,12 +1,14 @@
 LsAtomic::Application.routes.draw do |map|
+  resource :user_sessions
+  resources :users
+
   get "users/new"
   match '/signup', :to => 'users#new'
-
+  match '/signin', :to => 'user_sessions#new'
+  match '/signout', :to => 'user_sessions#destroy'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
   
   root :to => 'pages#home'
 
-  resource :user_session
-  resources :users
 end
