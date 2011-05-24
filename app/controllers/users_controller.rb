@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:success] = "Welcome to Learnstream"
-      redirect_to 'pages/home'
+      redirect_to root_path
     else
       @title = "Sign up"
       render 'new'

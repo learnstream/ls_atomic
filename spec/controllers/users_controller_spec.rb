@@ -45,7 +45,7 @@ describe UsersController do
 
     it "should render the home page" do
       post :create, :user => @attr
-      response.should redirect_to('pages/home')
+      response.should redirect_to(root_path)
     end
   end
 
