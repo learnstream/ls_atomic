@@ -1,4 +1,8 @@
 LsAtomic::Application.routes.draw do |map|
+  get "courses/new"
+
+  get "courses/show"
+
   resources :user_sessions
   resources :users
 
