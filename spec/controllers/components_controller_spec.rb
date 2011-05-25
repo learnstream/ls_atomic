@@ -50,5 +50,18 @@ describe ComponentsController do
       response.should have_selector("a", :content => @c2.name)
       response.should have_selector("a", :content => @c3.name)
     end
+
+    describe "for logged in user" do
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+      end
+
+      it "should contain a form" do
+        get :list
+        response.should have_selector("h2", :content => "Create new component")
+        response.should have_selector("form")
+      end
+    end
   end
 end
