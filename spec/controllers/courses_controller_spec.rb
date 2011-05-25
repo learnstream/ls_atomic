@@ -66,7 +66,7 @@ describe CoursesController do
 
       it "should not allow course creation" do
         post :create, :course => @attr
-        response.should redirect_to(new_user_session_path)
+        response.should redirect_to(signin_path)
       end
     end
 
