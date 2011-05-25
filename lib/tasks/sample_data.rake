@@ -4,6 +4,7 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     make_users
     make_components
+    make_courses
   end
 end
 
@@ -20,4 +21,13 @@ def make_components
                          :description => "F = ma")
   c3 = Component.create!(:name => "Newton's third law",
                          :description => "Every action has an opposite and equal reaction")
+end
+
+def make_courses
+  course1 = Course.create!(:name => "Reading",
+                           :description => "rainbows") 
+  course2 = Course.create!(:name => "Writing",
+                           :description => "A Post-Lacanian approach to ruby on rails tutorials")
+  course3 = Course.create!(:name => "Rithmetic",
+                           :description => "numbers and stuff")
 end

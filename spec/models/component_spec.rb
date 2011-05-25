@@ -15,4 +15,22 @@ describe Component do
     duplicate_component = Component.new(@attr)
     duplicate_component.should_not be_valid
   end  
+
+  describe "course associations" do
+
+    before(:each) do
+      @course = Factory(:course)
+      @component = @course.components.create(@attr)
+    end
+
+    it "should have a course attribute" do
+      @component.should respond_to(:course)
+    end
+
+    it "should have the right associated course" do
+      @component.course_id.should == @course.id
+      @component.course.should == @course
+    end
+  end
 end
+

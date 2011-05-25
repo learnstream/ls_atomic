@@ -2,7 +2,7 @@ class Component < ActiveRecord::Base
   attr_accessible :name
   attr_accessible :description
 
-  #belongs_to cousre
+  belongs_to :course
   
   validates :name, :presence => true,
                    :length => { :maximum => 134}, 

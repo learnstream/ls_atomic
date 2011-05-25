@@ -1,8 +1,7 @@
 class CoursesController < ApplicationController
   before_filter :authenticate
   before_filter :authorized_user, :only => [:new, :create]
-
-
+  
   def new
     @course = Course.new
     @title = "New Course"
@@ -21,9 +20,7 @@ class CoursesController < ApplicationController
       @title = "New Course"
       render 'new'
     end
-
   end
-
 
   private
 
@@ -32,6 +29,4 @@ class CoursesController < ApplicationController
         redirect_to(@current_user)
       end
     end
-
-
 end
