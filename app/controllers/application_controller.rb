@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def authenticate
     unless current_user
       flash[:notice] = "You're not logged in!"
-      redirect_to new_user_session_path
+      redirect_to signin_path
       return false
     end
   end
