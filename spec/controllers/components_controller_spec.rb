@@ -32,12 +32,23 @@ describe ComponentsController do
     end  
   end
 
-  describe "List Components" do
+  describe "GET 'list'" do
+    before(:each) do
+      @c1 = Factory(:component, :name => "Newton's first law")
+      @c2 = Factory(:component, :name => "Newton's second law")
+      @c3 = Factory(:component, :name => "Newton's third law")
+    end
+
     it "should be successful" do
       get :list
       response.should be_success
     end
+
+    it "should list all of the components" do
+      get :list
+      response.should have_selector("a", :content => @c1.name)
+      response.should have_selector("a", :content => @c2.name)
+      response.should have_selector("a", :content => @c3.name)
+    end
   end
-
-
 end
