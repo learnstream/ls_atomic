@@ -1,7 +1,7 @@
 LsAtomic::Application.routes.draw do |map|
   #get "courses/new"
 
-  get "courses/show"
+  #get "courses/show"
 
   #get "courses/create"
 

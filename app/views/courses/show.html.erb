@@ -1,2 +1,8 @@
 <h1>Course: <%= @course.name %></h1>
-<p><b>Description:</b> <%= @course.description %>
+<p><b>Description:</b> <%= @course.description %></p>
+
+<h2>Components</h2>
+<ul>
+  <%= render @components %>
+</ul>
+

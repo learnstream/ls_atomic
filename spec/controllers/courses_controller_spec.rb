@@ -102,5 +102,18 @@ describe CoursesController do
       get :show, :id => @course
       response.should be_success
     end
+
+    it "should display components" do
+      get :show, :id => @course
+      response.should have_selector("h2", :content => "Components")
+    end
+
+    it "should contain component from course" do
+      get :show, :id => @course
+      component_in_course = @course.components.create(:name => "Component1", :description => "")
+      response.should have_selector("a", :content => component_in_course.name)
+    end
+
+    it "should not contain components outside course"  
   end
 end
