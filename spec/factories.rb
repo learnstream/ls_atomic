@@ -9,3 +9,7 @@ Factory.define :course do |course|
   course.name         "TestCourse"
   course.description  "CoolCourse"
 end
+
+Factory.sequence :email do |n|
+  "person-#{n}@example.com"
+end

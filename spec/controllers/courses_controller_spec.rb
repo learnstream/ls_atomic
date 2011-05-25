@@ -4,6 +4,8 @@ describe CoursesController do
 
   describe "GET 'new'" do
     it "should be successful" do
+      @user = Factory(:user, :perm => "creator")
+      test_sign_in(@user)
       get :new
       response.should be_success
     end
@@ -14,6 +16,8 @@ describe CoursesController do
     describe "failure" do
       
       before(:each) do
+        @user = Factory(:user, :perm => "creator")
+        test_sign_in(@user)
         @attr = {:name => "", :description => "" }
       end
 
@@ -27,11 +31,15 @@ describe CoursesController do
         post :create, :course => @attr
         response.should render_template('new')
       end
+
+
     end
 
     describe "success" do
 
       before(:each) do
+        @user = Factory(:user, :perm => "creator")
+        test_sign_in(@user)
         @attr = {:name => "Test Course", :description => "This course is really awesome!"}
       end
 
@@ -46,13 +54,53 @@ describe CoursesController do
         response.should redirect_to(course_path(assigns(:course)))
       end
     end
-
   end
 
+  describe "authentication" do
+
+    describe "for not signed-in users" do
+      before(:each) do
+        @not_signed_in = Factory(:user)
+        @attr = {:name => "Test Course", :description => "This course is really awesome!"}
+      end
+
+      it "should not allow course creation" do
+        post :create, :course => @attr
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+
+    describe "for signed-in users" do
+      before(:each) do
+        @signed_in_learner = Factory(:user)
+        @signed_in_creator = Factory(:user, :perm => "creator", :email => Factory.next(:email))
+        @attr = {:name => "Test Course", :description => "This course is really awesome!"}
+      end
+
+      it "should not work for learner" do
+        test_sign_in(@signed_in_learner)
+        post :create, :course => @attr
+        response.should redirect_to @signed_in_learner 
+      end
+      
+      it "should work for creator" do
+        test_sign_in(@signed_in_creator)
+        post :create, :course => @attr
+        response.should redirect_to(course_path(assigns(:course)))
+      end
+
+    end
+      
+
+
+
+  end
 
   
   describe "GET 'show'" do
     before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
       @course = Factory(:course)
     end
   
