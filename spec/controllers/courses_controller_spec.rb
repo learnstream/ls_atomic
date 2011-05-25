@@ -88,14 +88,8 @@ describe CoursesController do
         post :create, :course => @attr
         response.should redirect_to(course_path(assigns(:course)))
       end
-
     end
-      
-
-
-
   end
-
   
   describe "GET 'show'" do
     before(:each) do
@@ -109,5 +103,4 @@ describe CoursesController do
       response.should be_success
     end
   end
-
 end
