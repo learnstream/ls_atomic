@@ -3,6 +3,8 @@ LsAtomic::Application.routes.draw do |map|
 
   get "courses/show"
 
+  get "courses/create"
+
   resources :user_sessions
   resources :users
 
