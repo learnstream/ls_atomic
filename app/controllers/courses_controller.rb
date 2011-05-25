@@ -5,13 +5,14 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @course = Course.find(params[:id])   
   end
 
   def create
     @course = Course.new(params[:course])
     if @course.save
       flash[:success] = "New course created!"
-      redirect_to root_path
+      redirect_to @course 
     else
       @title = "New Course"
       render 'new'

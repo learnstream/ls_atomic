@@ -3,3 +3,9 @@ Factory.define :user do |user|
   user.password              "foobar"
   user.password_confirmation "foobar"
 end
+
+
+Factory.define :course do |course|
+  course.name         "TestCourse"
+  course.description  "CoolCourse"
+end

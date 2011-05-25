@@ -1,12 +1,13 @@
 LsAtomic::Application.routes.draw do |map|
-  get "courses/new"
+  #get "courses/new"
 
   get "courses/show"
 
-  get "courses/create"
+  #get "courses/create"
 
   resources :user_sessions
   resources :users
+  resources :courses
 
   get "users/new"
   match '/signup', :to => 'users#new'
