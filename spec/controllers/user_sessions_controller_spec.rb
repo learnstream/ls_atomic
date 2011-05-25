@@ -33,6 +33,8 @@ describe UserSessionsController do
 
       it "should sign the user in" do
         post :create, :user_session => @attr
+        controller.current_user.should == @user
+        controller.should be_signed_in
       end
 
       it "should redirect to the home page" do
