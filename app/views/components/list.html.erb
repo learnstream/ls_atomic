@@ -1,7 +1,9 @@
 <h1>Knowledge database</h1>
-<ul>
-<%= render @components %>
-</ul>
+<% unless @components.empty? %>
+  <ul>
+  <%= render @components %>
+  </ul>
+<% end %>
 <% if signed_in? %>
   <h2>Create new component</h2>
   <%= render 'shared/component_form' %>

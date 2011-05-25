@@ -1,14 +1,15 @@
 class ComponentsController < ApplicationController
   before_filter :authenticate, :only => [ :create, :destroy ]
+  
   def create
-    @component = Component.new(params[:user])
+    @component = Component.new(params[:component])
     if @component.save
       flash[:success] = "Knowledge component created!"
-      redirect_to ":list"
+      redirect_to :db 
     else
-      render "db"
+      @components = Component.all
+      render 'components/list' 
     end
-    
   end
 
   def destroy
@@ -21,5 +22,6 @@ class ComponentsController < ApplicationController
 
   def list
     @components = Component.all
+    @component = Component.new if signed_in?
   end
 end

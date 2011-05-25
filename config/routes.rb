@@ -8,7 +8,7 @@ LsAtomic::Application.routes.draw do |map|
   match '/signout', :to => 'user_sessions#destroy'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
-  match '/db', :to => 'components#list'
+  match '/db', :to => 'components#list', :as => 'db'
   
   root :to => 'pages#home'
 

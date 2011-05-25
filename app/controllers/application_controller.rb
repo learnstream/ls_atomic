@@ -21,4 +21,9 @@ class ApplicationController < ActionController::Base
   def signed_in?
     !current_user.nil?
   end
+
+  def sign_in(user)
+    activate_authlogic
+    UserSession.create(user)
+  end
 end

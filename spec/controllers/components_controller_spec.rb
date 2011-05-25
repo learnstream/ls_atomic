@@ -64,4 +64,51 @@ describe ComponentsController do
       end
     end
   end
+
+  describe "POST 'create'" do
+    before(:each) do
+      @user = test_sign_in(Factory(:user))
+    end
+
+    describe "failure" do
+
+      before(:each) do
+        @attr = { :name => ""}
+      end
+
+      it "should not create a k-component" do
+        lambda do
+          post :create, :component => @attr
+        end.should_not change(Component, :count)
+      end
+
+      it "should render list page" do
+        post :create, :component => @attr
+        response.should render_template('components/list')
+      end
+    end
+
+    describe "success" do
+
+      before(:each) do
+        @attr = { :name => "Law of Humpty Dumpty", :description => "When Humpty Dumpty fall, All the Kings Men can't put him back together again!!!!!" }
+      end
+
+      it "should create a k-component" do
+        lambda do
+          post :create, :component => @attr
+        end.should change(Component, :count).by(1)
+      end
+
+      it "should redirect to the list" do
+        post :create, :component => @attr
+        response.should redirect_to(:db)
+      end
+
+      it "should flash sucess" do
+        post :create, :component => @attr
+        flash[:success].should =~ /Knowledge component created/i
+      end
+    end
+  end
 end
