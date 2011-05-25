@@ -1,5 +1,5 @@
 LsAtomic::Application.routes.draw do |map|
-  resource :user_sessions
+  resources :user_sessions
   resources :users
 
   get "users/new"

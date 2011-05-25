@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :signed_in?
 
   def current_user_session
     @current_user_session ||= UserSession.find
