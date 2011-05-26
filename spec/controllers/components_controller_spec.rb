@@ -109,6 +109,23 @@ describe ComponentsController do
         post :create, :component => @attr
         flash[:success].should =~ /Knowledge component created/i
       end
+
+      describe "from a course page" do
+        before(:each) do
+          @course = Factory(:course)
+        end
+
+        it "should belong to that course" do
+          lambda do
+            post :create, :component => @attr.merge(:course_id => @course.id)
+          end.should change(@course.components, :count).by(1)
+        end
+
+        it "should redirect to that course" do
+          post :create, :component => @attr.merge(:course_id => @course.id)
+          response.should redirect_to(course_path(@course.id))
+        end
+      end 
     end
   end
 end

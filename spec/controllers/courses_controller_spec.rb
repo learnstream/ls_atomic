@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe CoursesController do
+  render_views
 
   describe "GET 'new'" do
     it "should be successful" do
@@ -109,11 +110,14 @@ describe CoursesController do
     end
 
     it "should contain component from course" do
+      component_in_course = Factory(:component, :course => @course, :name => "Euler's Little Theorem" , :description => "e^pi = -1")
       get :show, :id => @course
-      component_in_course = @course.components.create(:name => "Component1", :description => "")
       response.should have_selector("a", :content => component_in_course.name)
     end
 
-    it "should not contain components outside course"  
+    it "should have a form" do
+      get :show, :id => @course
+      response.should have_selector("h2", :content => "Create new component")
+    end 
   end
 end

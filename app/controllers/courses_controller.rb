@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])   
     @components = @course.components
+    @component = Component.new
   end
 
   def create

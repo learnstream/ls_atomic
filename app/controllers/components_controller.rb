@@ -2,10 +2,21 @@ class ComponentsController < ApplicationController
   before_filter :authenticate, :only => [ :create, :destroy ]
   
   def create
-    @component = Component.new(params[:component])
+    course_id = params[:component][:course_id]
+    if course_id.nil?
+      @component = Component.new(params[:component])
+    else
+      course = Course.find(course_id)
+      @component = course.components.build(params[:component])
+    end
+
     if @component.save
       flash[:success] = "Knowledge component created!"
-      redirect_to :db 
+      if course_id.nil?
+        redirect_to :db 
+      else
+        redirect_to course_path(course_id)
+      end
     else
       @components = Component.all
       render 'components/list' 

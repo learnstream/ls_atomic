@@ -8,6 +8,9 @@
     <%= f.label :description%>
     <%= f.text_area :description%>
   </div>
+  <% if @course %>
+    <%= f.hidden_field :course_id, :value => @course.id %>
+  <% end %>
   <div class="actions">
     <%= f.submit "Submit" %>
   </div>
