@@ -37,16 +37,11 @@ class ComponentsController < ApplicationController
     @component.name = params[:component][:name]
     @component.description = params[:component][:description]
     if @component.save
-      flash[:success] = "Knowledge component created!"
-      if course_id.nil?
-        redirect_to :db 
-      else
-        redirect_to course_path(course_id)
-      end
+      flash[:success] = "Knowledge component updated!"
+      redirect_to component_path
     else
-      # Or redirect to an edit_k-component_path?
-      # Do we want microform?
-      redirect_to course_path(course_id)
+      flash[:error] = "You fucked up!" #change...?
+      redirect_to component_path
     end
   end
 
