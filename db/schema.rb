@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526165307) do
+ActiveRecord::Schema.define(:version => 20110526172320) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20110526165307) do
   create_table "enrollments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "course_id"
-    t.string   "role"
+    t.string   "role",       :default => "student"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
