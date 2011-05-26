@@ -4,7 +4,7 @@ LsAtomic::Application.routes.draw do |map|
   #get "courses/show"
 
   #get "courses/create"
-  post "problems/create"
+#  post "problems/create"
 
   resources :user_sessions
   resources :users

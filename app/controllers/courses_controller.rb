@@ -11,6 +11,8 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])   
     @components = @course.components
     @component = Component.new
+    @problems = @course.problems
+    @problem = Problem.new
   end
 
   def create

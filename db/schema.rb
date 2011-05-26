@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526203441) do
+ActiveRecord::Schema.define(:version => 20110526223617) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20110526203441) do
     t.string   "steps"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
   end
 
   create_table "user_sessions", :force => true do |t|
