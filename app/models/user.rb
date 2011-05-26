@@ -6,9 +6,4 @@ class User < ActiveRecord::Base
     config.logged_in_timeout = 1.year
   end
 
-
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-
-  validates :email, :presence => true,
-                    :format   => { :with => email_regex }
 end
