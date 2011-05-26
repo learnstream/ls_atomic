@@ -8,10 +8,14 @@ LsAtomic::Application.routes.draw do |map|
   resources :user_sessions
   resources :users do
     member do
-      get :enrollments
+      get :courses
     end
   end
-  resources :courses
+  resources :courses do
+    member do
+      get :users
+    end
+  end
   resources :components
   resources :enrollments, :only => [:create, :destroy]
 

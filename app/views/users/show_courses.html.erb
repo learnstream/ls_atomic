@@ -1,0 +1,7 @@
+<h1><%= @title %></h1>
+<% unless @courses.empty? %>
+  <ul class = "courses">
+    <%= render @courses %>
+  </ul>
+  <%= will_paginate @courses %>
+<% end %>

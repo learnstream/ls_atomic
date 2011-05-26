@@ -167,8 +167,33 @@ describe CoursesController do
       get :index
       response.should have_selector("input", :value => "Unenroll")
     end
-
   end
        
+  describe "enrollment page" do
+
+    describe "when not signed in" do
+
+      it "should protect 'users'" do
+        get :users, :id => 1
+        response.should redirect_to(signin_path)
+      end
+    end
+
+    describe "when signed in" do
+
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll!(@course)
+      end
+
+      it "should show enrolled users" do
+        get :users, :id => @user
+        response.should have_selector("a", :href => user_path(@user), 
+                                           :content => @user.email)
+      end
+    end
+  end
 end
 

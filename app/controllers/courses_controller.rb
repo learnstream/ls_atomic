@@ -29,6 +29,15 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
+  def users
+    @title = "Users"
+    @course = Course.find(params[:id])
+    @teachers = @course.teachers
+    @students = @course.students.paginate(:page => params[:page])
+    render 'show_users'
+  end
+
+
   private
 
     def authorized_user

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate, :only => [:index, :update] 
+  before_filter :authenticate, :only => [:index, :update, :courses] 
 
   def new
     @user = User.new
@@ -41,6 +41,13 @@ class UsersController < ApplicationController
         redirect_to @current_user
       end
     end
+  end
+
+  def courses
+    @title = "Courses"
+    @user = User.find(params[:id])
+    @courses = @user.courses.paginate(:page => params[:page])
+    render 'show_courses'
   end
 
   private

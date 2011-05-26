@@ -1,0 +1,14 @@
+<h1><%= @title %></h1>
+<% unless @teachers.empty? %>
+  <h2>Teachers</h2>
+  <ul class = "users">
+    <%= render @teachers , :as => :user %>
+  </ul>
+<% end %>
+<% unless @students.empty? %>
+  <h2>Students</h2>
+  <ul class = "users">
+    <%= render @students , :as => :user %>
+  </ul>
+  <%= will_paginate @students %>
+<% end %>
