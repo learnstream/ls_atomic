@@ -1,5 +1,5 @@
 class ProblemsController < ApplicationController
-  before_filter :authenticate,
+ # before_filter :authenticate
 
   def create
     course_id = params[:problem][:course_id]
@@ -20,8 +20,9 @@ class ProblemsController < ApplicationController
     end   
   end
 
-  #def new
-  #end
+  def new
+    
+  end
 
   def edit
 
