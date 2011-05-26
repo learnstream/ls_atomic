@@ -1,5 +1,5 @@
 class ComponentsController < ApplicationController
-  before_filter :authenticate, :only => [ :create, :destroy ]
+  before_filter :authenticate, :only => [ :create, :destroy, :update ]
   
   def create
     course_id = params[:component][:course_id]
@@ -24,6 +24,25 @@ class ComponentsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def edit
+    @component = Component.find(params[:id])
+  end
+
+
+  def update
+    course_id = params[:component][:course_id]
+    @component = Component.find(params[:id])
+    @component.name = params[:component][:name]
+    @component.description = params[:component][:description]
+    if @component.save
+      flash[:success] = "Knowledge component updated!"
+      redirect_to component_path
+    else
+      flash[:error] = "You fucked up!" #change...?
+      redirect_to component_path
+    end
   end
 
   def show
