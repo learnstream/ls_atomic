@@ -128,4 +128,85 @@ describe ComponentsController do
       end 
     end
   end
+
+  describe "PUT 'update'" do
+
+    before(:each) do
+      @user = test_sign_in(Factory(:user))
+      @course = Factory(:course)
+      @component = Factory(:component)
+      @attr = { :name => @component.name, :description => @component.description }
+      post :create, :component => @attr.merge(:course_id => @course.id) 
+    end
+
+    describe "failure" do
+      it "should not update a k-component to a blank name" do
+        put :update, :id => @component, :component => { :name => "" }
+        @component.reload
+        @component.name.should == @attr[:name]
+      end
+    
+      it "should not update to the same name as a different component" do
+        post :create, :component => { :name => "aaa", :description => "asdfasdf", :course_id => @course.id }
+        put :update, :id => @component, :component => { :name => "aaa", :course_id => @course.id }
+        @component.reload
+        @component.name.should == @attr[:name]
+      end
+    end   
+
+    describe "success" do
+      it "should update the k-component name" do
+        put :update, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
+        @component.reload
+        @component.name.should == "Calabi-Yau Manifolds"
+      end
+
+      it "should update the k-component description" do
+        put :update, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
+        @component.reload
+        @component.description.should == "Calabi-Yau Manifolds are incomprehensible"
+      end   
+    end  
+  end
+
+  describe "GET 'edit'" do
+    
+    before(:each) do
+      @user = test_sign_in(Factory(:user))
+      @course = Factory(:course)
+      @component = Factory(:component)
+      @attr = { :name => @component.name, :description => @component.description }
+      post :create, :component => @attr.merge(:course_id => @course.id)
+    end
+
+    it "should render the edit view" do
+      get :edit, :id => @component
+      response.should be_success
+    end
+
+    it "should have a form" do
+      get :edit, :id => @component
+      response.should have_selector("form")
+    end
+  end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

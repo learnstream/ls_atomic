@@ -35,4 +35,6 @@ describe "LayoutLinks" do
                                          :content => "Sign out")
     end
   end 
+
 end
+
