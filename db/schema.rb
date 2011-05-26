@@ -29,15 +29,6 @@ ActiveRecord::Schema.define(:version => 20110526223617) do
     t.datetime "updated_at"
   end
 
-  create_table "problems", :force => true do |t|
-    t.string   "name"
-    t.string   "statement"
-    t.string   "steps"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "course_id"
-  end
-
   create_table "enrollments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "course_id"
@@ -49,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20110526223617) do
   add_index "enrollments", ["course_id"], :name => "index_enrollments_on_course_id"
   add_index "enrollments", ["user_id", "course_id"], :name => "index_enrollments_on_user_id_and_course_id", :unique => true
   add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
+
+  create_table "problems", :force => true do |t|
+    t.string   "name"
+    t.string   "statement"
+    t.string   "steps"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "course_id"
+  end
 
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"

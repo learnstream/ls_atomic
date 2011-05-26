@@ -10,9 +10,12 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])   
     @components = @course.components
-    @component = Component.new
     @problems = @course.problems
     @problem = Problem.new
+    
+    if current_user.teacher?(@course)
+      @component = Component.new
+    end
   end
 
   def create
@@ -38,7 +41,6 @@ class CoursesController < ApplicationController
     @students = @course.students.paginate(:page => params[:page])
     render 'show_users'
   end
-
 
   private
 

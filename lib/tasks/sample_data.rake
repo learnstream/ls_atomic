@@ -4,11 +4,12 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     make_users
     make_courses_and_components
+    enroll_users
   end
 end
 
 def make_users
-  user = User.create!(:email => "admin@google.com",
+  user = User.create!(:email => "admin@admin.com",
                       :password => "foobar",
                       :password_confirmation => "foobar")
   user.perm = "admin"
@@ -23,6 +24,11 @@ def make_users
   users = User.all
   users[1].perm = "creator"
   users[1].save
+
+  teacher = User.create!(:email => "teacher@teacher.com",
+                         :password => "foobar",
+                         :password_confirmation => "foobar")
+  
 end
 
 def make_courses_and_components
@@ -38,4 +44,18 @@ def make_courses_and_components
                          :description => "F = ma")
   c3 = course1.components.create!(:name => "Newton's third law",
                          :description => "Every action has an opposite and equal reaction")
+end
+
+def enroll_users
+
+  users = User.all
+  normal_users = User.where("email LIKE ?", "%bar.com")
+  teacher = User.find_by_email("teacher@teacher.com")
+  
+  courses = Course.all
+
+  teacher.enroll_as_teacher!(courses[0])
+  normal_users[0..2].each { |u| u.enroll!(courses[0]) }
+  normal_users[3..5].each { |u| u.enroll!(courses[1]) }
+  normal_users[6..8].each { |u| u.enroll!(courses[2]) }
 end

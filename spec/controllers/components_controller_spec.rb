@@ -18,7 +18,9 @@ describe ComponentsController do
 
   describe "GET 'show'" do
     before(:each) do
-      @component = Factory(:component)
+      @course = Factory(:course)
+      @component = Factory(:component, :course => @course)
+      @course.components << @component
     end
 
     it "should be successful" do
@@ -30,6 +32,32 @@ describe ComponentsController do
       get :show, :id => @component
       response.should have_selector("h1", :content => @component.name)
     end  
+
+    describe "for teachers" do 
+      before(:each) do
+        @teacher = Factory(:user, :email => Factory.next(:email))
+        @teacher.enroll_as_teacher!(@course)
+      end
+
+      it "should show edit option" do
+        test_sign_in(@teacher)
+        get :show, :id => @component
+        response.should have_selector("a", :content => "Edit", :href => edit_component_path)
+      end
+    end
+
+    describe "for students" do
+      before(:each) do
+        @student = Factory(:user, :email => Factory.next(:email))
+        @student.enroll!(@course)
+      end
+
+      it "should not show edit option" do
+        test_sign_in(@student)
+        get :show, :id => @component
+        response.should_not have_selector("a", :content => "Edit", :href => edit_component_path(@component))
+      end
+    end
   end
 
   describe "GET 'list'" do
@@ -190,23 +218,3 @@ describe ComponentsController do
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

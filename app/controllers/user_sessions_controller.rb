@@ -3,6 +3,7 @@ class UserSessionsController < ApplicationController
 
   def new 
     @user_session = UserSession.new
+    @title = "Sign in"
   end
 
   def create 
