@@ -1,9 +1,8 @@
 <h1>Welcome to Learnstream</h1>
 
-<p>
-
-
-
-</p>
-
+<br />
+<% if ! signed_in?  %> 
 <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% else %>
+<p> Do something cool!</p>
+<% end %>

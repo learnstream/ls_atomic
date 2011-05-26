@@ -2,11 +2,12 @@
 
 <ul class="users">
   <% @users.each do |useritem| %>
-    <li>
-     <%= link_to useritem.email, useritem %>
-     <%= form_for useritem, :remote => true do |f| %>
-        <%= f.select :perm, [["learner", "learner"], ["creator", "creator"], ["admin", "admin"]], {}, :onchange => 'this.form.submit()' %>
-     <% end %> 
+    <li><%= link_to useritem.email, useritem %>
+          <% if @current_user.perm == "admin" %>
+            <%= form_for useritem, :remote => true do |f| %>
+            <%= f.select :perm, [["learner", "learner"], ["creator", "creator"], ["admin", "admin"]], {}, :onchange => 'this.form.submit()' %>
+          <% end %> 
+        <% end %>
     </li>
   <% end %>
 </ul>

@@ -8,9 +8,21 @@ namespace :db do
 end
 
 def make_users
-  user = User.create!(:email => "foo@bar.com",
+  user = User.create!(:email => "admin@google.com",
                       :password => "foobar",
                       :password_confirmation => "foobar")
+  user.perm = "admin"
+  user.save
+
+  10.times do |n|
+    User.create!(:email => "foo-#{n+1}@bar.com",
+                 :password => "foobar",
+                 :password_confirmation => "foobar")
+  end
+
+  users = User.all
+  users[1].perm = "creator"
+  users[1].save
 end
 
 def make_courses_and_components

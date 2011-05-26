@@ -33,9 +33,10 @@ class UsersController < ApplicationController
         user = User.find(params[:id])
         user.perm = params[:user][:perm]
         user.save
-        flash[:success] = "Changed user data"
+        flash[:success] = "Changed user role!"
         redirect_to users_path 
       else
+        flash[:error] = "You don't have permission to do that!"
         redirect_to @current_user
       end
 
