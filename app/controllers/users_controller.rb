@@ -33,6 +33,7 @@ class UsersController < ApplicationController
         user = User.find(params[:id])
         user.perm = params[:user][:perm]
         user.save
+
         flash[:success] = "Changed user role!"
         redirect_to users_path 
       else
