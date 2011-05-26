@@ -20,8 +20,14 @@ describe User do
     end
   end
 
-      
+  describe "enrollments" do
 
+    before(:each) do
+      @course = Factory(:course)
+    end
 
-
+    it "should have an enrollments method" do
+      @user.should respond_to(:enrollments)
+    end
+  end
 end
