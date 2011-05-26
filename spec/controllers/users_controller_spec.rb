@@ -57,9 +57,7 @@ describe UsersController do
     describe "admin privileges" do
   
       before(:each) do
-        @admin = Factory(:user)
-        @admin.perm = "admin"
-        @admin.save
+        @admin = Factory(:admin)
         @non_admin = Factory(:user, :email => Factory.next(:email))
         @user = Factory(:user, :email => Factory.next(:email))
       end
