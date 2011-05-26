@@ -17,6 +17,7 @@ class CoursesController < ApplicationController
     @course = Course.new(params[:course])
     if @course.save
       flash[:success] = "New course created!"
+      current_user.enroll_as_teacher!(@course)
       redirect_to @course 
     else
       @title = "New Course"

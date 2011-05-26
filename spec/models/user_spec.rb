@@ -60,6 +60,12 @@ describe User do
       @user.courses.should include(@course)
     end 
 
+    it "should be a student by default when enrolling in a course" do
+      @user.enroll!(@course)
+      enrollment = @user.enrollments.find_by_course_id(@course.id)
+      enrollment.role.should == "student"
+    end
+
     it "should have an unenroll! method" do
       @user.should respond_to(:unenroll!)
     end
@@ -88,7 +94,9 @@ describe User do
 
       it "should be able to assign another teacher" 
 
-      it "should return that course with taught_courses"
+      it "should return that course with taught_courses" do
+        @teacher.taught_courses.include?(@course).should == true
+      end
     end
 
     describe "when enrolled to study a course" do

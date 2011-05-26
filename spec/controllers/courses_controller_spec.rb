@@ -54,6 +54,11 @@ describe CoursesController do
         post :create, :course => @attr
         response.should redirect_to(course_path(assigns(:course)))
       end
+
+      it "should enroll creating user as teacher" do
+        post :create, :course => @attr
+        @user.taught_courses.index{|course| course.name == @attr[:name]}.should_not          be_nil
+      end
     end
   end
 
