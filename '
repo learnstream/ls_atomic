@@ -74,6 +74,14 @@ describe User do
       @user.should respond_to(:enroll_as_teacher!)
     end
 
+    describe "protections" do
+
+      it "should prevent duplicate enrollments" do
+        @user.enroll!(@course)
+        @user.enroll!(@course)
+      end
+    end
+    
     describe "when enrolled to teach a course" do
 
       before(:each) do
