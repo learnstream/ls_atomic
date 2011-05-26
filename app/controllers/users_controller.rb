@@ -40,9 +40,7 @@ class UsersController < ApplicationController
         flash[:error] = "You don't have permission to do that!"
         redirect_to @current_user
       end
-
     end
-      
   end
 
   private

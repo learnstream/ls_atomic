@@ -1,0 +1,4 @@
+<%= form_for current_user.enrollments.find_by_course_id(@course),
+              :html => { :method => :delete } do |f| %>
+    <div class = "actions"><%= f.submit "Unenroll" %></div>
+<% end %>

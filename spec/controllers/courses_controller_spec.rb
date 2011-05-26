@@ -154,6 +154,20 @@ describe CoursesController do
       get :index
       response.should have_selector("a", :href => new_course_path)
     end
+
+    it "should have a button to allow users to enroll" do
+      test_sign_in(@user)
+      get :index
+      response.should have_selector("input", :value => "Enroll")
+    end
+
+    it "should show unenroll button if user is already enrolled in course" do
+      test_sign_in(@user)
+      @user.enroll!(@course1)
+      get :index
+      response.should have_selector("input", :value => "Unenroll")
+    end
+
   end
        
 end

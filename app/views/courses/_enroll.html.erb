@@ -1,0 +1,5 @@
+<%= form_for current_user.enrollments.
+  build(:course_id => @course.id) do |f| %>
+    <div><%= f.hidden_field :course_id %></div>
+    <div class = "actions"><%= f.submit "Enroll" %></div>
+<% end %>
