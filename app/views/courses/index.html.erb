@@ -1,9 +1,7 @@
 <h1>All Courses</h1>
 
 <ul class="courses">
-  <% @courses.each do |course| %>
-    <li><%= link_to course.name, course %></li>
-  <% end %>
+  <%= render @courses %> 
 </ul>
 
 <% auth_user = current_user %>

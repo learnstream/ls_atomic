@@ -54,6 +54,11 @@ describe CoursesController do
         post :create, :course => @attr
         response.should redirect_to(course_path(assigns(:course)))
       end
+
+      it "should enroll creating user as teacher" do
+        post :create, :course => @attr
+        @user.taught_courses.index{|course| course.name == @attr[:name]}.should_not          be_nil
+      end
     end
   end
 
@@ -149,7 +154,46 @@ describe CoursesController do
       get :index
       response.should have_selector("a", :href => new_course_path)
     end
+
+    it "should have a button to allow users to enroll" do
+      test_sign_in(@user)
+      get :index
+      response.should have_selector("input", :value => "Enroll")
+    end
+
+    it "should show unenroll button if user is already enrolled in course" do
+      test_sign_in(@user)
+      @user.enroll!(@course1)
+      get :index
+      response.should have_selector("input", :value => "Unenroll")
+    end
   end
        
+  describe "enrollment page" do
+
+    describe "when not signed in" do
+
+      it "should protect 'users'" do
+        get :users, :id => 1
+        response.should redirect_to(signin_path)
+      end
+    end
+
+    describe "when signed in" do
+
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll!(@course)
+      end
+
+      it "should show enrolled users" do
+        get :users, :id => @user
+        response.should have_selector("a", :href => user_path(@user), 
+                                           :content => @user.email)
+      end
+    end
+  end
 end
 

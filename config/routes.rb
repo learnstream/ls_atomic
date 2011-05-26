@@ -7,10 +7,19 @@ LsAtomic::Application.routes.draw do |map|
 #  post "problems/create"
 
   resources :user_sessions
-  resources :users
-  resources :courses
+  resources :users do
+    member do
+      get :courses
+    end
+  end
+  resources :courses do
+    member do
+      get :users
+    end
+  end
   resources :components
   resources :problems 
+  resources :enrollments, :only => [:create, :destroy]
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'

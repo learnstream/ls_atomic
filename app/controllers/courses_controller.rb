@@ -19,6 +19,7 @@ class CoursesController < ApplicationController
     @course = Course.new(params[:course])
     if @course.save
       flash[:success] = "New course created!"
+      current_user.enroll_as_teacher!(@course)
       redirect_to @course 
     else
       @title = "New Course"
@@ -29,6 +30,15 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all
   end
+
+  def users
+    @title = "Users"
+    @course = Course.find(params[:id])
+    @teachers = @course.teachers
+    @students = @course.students.paginate(:page => params[:page])
+    render 'show_users'
+  end
+
 
   private
 
