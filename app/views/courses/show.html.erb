@@ -6,5 +6,7 @@
   <%= render @components %>
 </ul>
 
+<% if current_user.teacher?(@course) %>
 <h2>Create new component</h2>
 <%= render 'shared/component_form' %>
+<% end %>

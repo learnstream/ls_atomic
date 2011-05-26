@@ -38,4 +38,9 @@ class User < ActiveRecord::Base
   def unenroll!(course)
     enrollments.find_by_course_id(course).destroy
   end
+
+  def teacher?(course)
+    enrollment = enrollments.find_by_course_id(course)
+    enrollment and enrollment.role == "teacher"
+  end
 end

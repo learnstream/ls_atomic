@@ -98,6 +98,7 @@ describe CoursesController do
   end
   
   describe "GET 'show'" do
+
     before(:each) do
       @user = Factory(:user)
       test_sign_in(@user)
@@ -120,10 +121,36 @@ describe CoursesController do
       response.should have_selector("a", :content => component_in_course.name)
     end
 
-    it "should have a form" do
-      get :show, :id => @course
-      response.should have_selector("h2", :content => "Create new component")
+    describe "for teachers" do
+
+      before(:each) do
+        @teacher = Factory(:user, :email => Factory.next(:email))
+        @teacher.enroll_as_teacher!(@course)
+      end
+
+      it "should be a teacher" do
+        @teacher.should be_teacher(@course)
+      end
+
+      it "should have a form" do
+        test_sign_in(@teacher)
+        get :show, :id => @course
+        response.should have_selector("h2", :content => "Create new component")
+      end
     end 
+
+    describe "for students" do
+
+      before(:each) do
+        @user.enroll!(@course)
+      end
+
+      it "should not have a form for knowledge components" do
+        get :show, :id => @course
+        response.should_not have_selector("h2", :content => "Create new component")
+      end
+    end
+
   end
 
 
