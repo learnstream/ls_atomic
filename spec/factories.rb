@@ -4,6 +4,20 @@ Factory.define :user do |user|
   user.password_confirmation "foobar"
 end
 
+Factory.define :creator, :class => User do |user|
+  user.email                  "creator@learnstream.com"
+  user.password               "foobar"
+  user.password_confirmation  "foobar"
+  user.perm                   "creator"
+end
+
+Factory.define :admin, :class => User do |user|
+  user.email                  "admin@learnstream.com"
+  user.password               "foobar"
+  user.password_confirmation  "foobar"
+  user.perm                   "admin"
+end
+
 Factory.define :course do |course|
   course.name         "TestCourse"
   course.description  "CoolCourse"
@@ -11,6 +25,10 @@ end
 
 Factory.sequence :email do |n|
   "person-#{n}@example.com"
+end
+
+Factory.sequence :name do |n|
+  "Course-#{n}"
 end
 
 Factory.define :component do |component|

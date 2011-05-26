@@ -27,3 +27,4 @@ class ApplicationController < ActionController::Base
     UserSession.create(user)
   end
 end
+

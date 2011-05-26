@@ -120,4 +120,36 @@ describe CoursesController do
       response.should have_selector("h2", :content => "Create new component")
     end 
   end
+
+
+  describe "GET 'index'" do
+  
+    before(:each) do
+      @user = Factory(:user)
+      @admin = Factory(:admin)
+      @creator = Factory(:creator)
+      @course1 = Factory(:course)
+      @course2 = Factory(:course, :name => Factory.next(:name))
+    end
+
+    it "should be successful" do
+      test_sign_in(@user)
+      get :index
+      response.should be_success
+    end
+
+    it "should have create course link for creators" do
+      test_sign_in(@creator)
+      get :index
+      response.should have_selector("a", :href => new_course_path)
+    end
+
+    it "should have a create course link for admins" do
+      test_sign_in(@admin)
+      get :index
+      response.should have_selector("a", :href => new_course_path)
+    end
+  end
+       
 end
+

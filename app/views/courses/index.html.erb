@@ -1,0 +1,12 @@
+<h1>All Courses</h1>
+
+<ul class="courses">
+  <% @courses.each do |course| %>
+    <li><%= link_to course.name, course %></li>
+  <% end %>
+</ul>
+
+<% auth_user = current_user %>
+<% if not auth_user.perm == "learner" %>
+  <%= link_to "New Course", new_course_path %>
+<% end %>
