@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526223617) do
+ActiveRecord::Schema.define(:version => 20110527163109) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,23 @@ ActiveRecord::Schema.define(:version => 20110526223617) do
   add_index "enrollments", ["course_id"], :name => "index_enrollments_on_course_id"
   add_index "enrollments", ["user_id", "course_id"], :name => "index_enrollments_on_user_id_and_course_id", :unique => true
   add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
+
+  create_table "memories", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "component_id"
+    t.decimal  "ease"
+    t.integer  "interval"
+    t.integer  "views"
+    t.integer  "streak"
+    t.datetime "last_viewed"
+    t.datetime "due"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memories", ["component_id"], :name => "index_memories_on_component_id"
+  add_index "memories", ["user_id", "component_id"], :name => "index_memories_on_user_id_and_component_id", :unique => true
+  add_index "memories", ["user_id"], :name => "index_memories_on_user_id"
 
   create_table "problems", :force => true do |t|
     t.string   "name"
