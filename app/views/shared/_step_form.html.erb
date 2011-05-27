@@ -1,0 +1,13 @@
+<%= form_for @step do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+  </div>
+  <% if @problem %>
+    <%= f.hidden_field :problem_id, :value => @problem.id %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

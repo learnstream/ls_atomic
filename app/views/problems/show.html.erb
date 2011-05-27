@@ -4,3 +4,12 @@
 
 
 <p><%= link_to "Edit", edit_problem_path %></p>
+
+<div>
+  <h2>Steps:</h2>
+  <ul>
+    <%= render @steps %>
+  <ul>
+  <h3>Add new step:</h3>
+    <%= render 'shared/step_form' %>
+</div>

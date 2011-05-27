@@ -1,10 +1,9 @@
 class Problem < ActiveRecord::Base
-  attr_accessible :name, :statement, :steps
+  attr_accessible :name, :statement 
  
-  serialize :steps
 
   belongs_to :course
-
+  has_many :steps, :order => 'order_number ASC'
   validates :name, :presence => true,
                    :length => { :maximum => 134}, 
                    :uniqueness => true 
