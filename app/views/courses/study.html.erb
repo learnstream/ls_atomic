@@ -1,0 +1,5 @@
+<h1>Studying: <%= @course.name %></h1>
+<% current_user.memories.each do |m| %>
+  <%= m.component.name %>
+  <%= m.course %>
+<% end %> 

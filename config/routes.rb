@@ -1,11 +1,4 @@
 LsAtomic::Application.routes.draw do |map|
-  #get "courses/new"
-
-  #get "courses/show"
-
-  #get "courses/create"
-  #post "problems/create"
-
   resources :user_sessions
   resources :users do
     member do
@@ -15,6 +8,7 @@ LsAtomic::Application.routes.draw do |map|
   resources :courses do
     member do
       get :users
+      get :study
     end
   end
   resources :components
@@ -28,7 +22,7 @@ LsAtomic::Application.routes.draw do |map|
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
   match '/db', :to => 'components#list', :as => 'db'
-  
+   
   root :to => 'pages#home'
 
 end

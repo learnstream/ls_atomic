@@ -4,10 +4,18 @@ describe Memory do
 
   before(:each) do
     @user = Factory(:user)
-    @component = Factory(:component)
-
-    @memory = @user.memories.build(:component_id => @component.id)
+    @course = Factory(:course)
+    @component = @course.components.create(:name => "My component")
+    @memory = @user.memories.create(:component_id => @component)
     @default_ease = 2.5
+  end
+
+  it "should respond to user" do
+    @memory.should respond_to(:user)
+  end
+
+  it "should respond to component" do
+    @memory.should respond_to(:component)
   end
 
   it "should create a new instance given valid attributes" do
@@ -50,6 +58,33 @@ describe Memory do
     lambda do
       @memory.view(4)
     end.should change(MemoryRating, :count).by(1)
+  end
+
+  describe "using in_course scope" do
+
+    it "should return memories in that course" do
+      @user.memories.in_course(@course.id).should include(@memory)
+    end
+
+    it "should not return memories in another course" do
+      @another_course = Factory(:course, :name => "Course 2")
+      @user.memories.in_course(@another_course.id).should_not include(@memory)
+    end
+  end
+  
+  describe "using due_now scope" do
+    
+    it "should return memories actually due now" do
+      @memory.due = Date.yesterday.to_time
+      @memory.save
+      @user.memories.due_now.should include(@memory)
+    end
+
+    it "should not return memories not due now" do
+      @memory.due = Date.tomorrow.to_time
+      @memory.save
+      @user.memories.due_now.should_not include(@memory)
+    end
   end
 
   describe "when answered correctly once" do

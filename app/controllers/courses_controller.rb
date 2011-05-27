@@ -42,6 +42,11 @@ class CoursesController < ApplicationController
     render 'show_users'
   end
 
+  def study
+    @course = Course.find(params[:id])
+    render 'study'
+  end
+
   private
 
     def authorized_user
@@ -49,4 +54,5 @@ class CoursesController < ApplicationController
         redirect_to(@current_user)
       end
     end
+
 end

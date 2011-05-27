@@ -1,6 +1,15 @@
 class Memory < ActiveRecord::Base
-
   has_many :memory_ratings, :dependent => :destroy 
+  
+  belongs_to :user
+  belongs_to :component
+
+  scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
+  scope :due_now, where("due <= ?", Time.now)
+  
+  def course
+    component.course
+  end
 
   def view(quality)
     memory_rating = self.memory_ratings.build(:memory_id => self, :quality => quality)
