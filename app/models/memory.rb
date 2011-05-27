@@ -7,6 +7,7 @@ class Memory < ActiveRecord::Base
     memory_rating.save
 
     self.views += 1
+    self.last_viewed = Time.now
 
     if quality < 3 
       self.streak = 0

@@ -53,6 +53,7 @@ describe Memory do
   end
 
   describe "when answered correctly once" do
+
     before(:each) do 
       @quality = 4
       @memory.view(4)
@@ -77,12 +78,18 @@ describe Memory do
     it "should update the due date correctly" do
       @memory.due.to_date.should == Date.today + 1.day
     end
+
+    it "should have last been viewed today" do
+      @memory.last_viewed.to_date.should == Date.today
+    end
+
   end
 
   describe "when answered correctly twice" do
 
     before(:each) do
       @memory.view(4)
+      @old_viewed_time = @memory.last_viewed
       @memory.view(4)
     end
 
@@ -96,6 +103,14 @@ describe Memory do
 
     it "should change the interval correctly" do
       @memory.interval.should == 6.0
+    end
+
+    it "should have last been viewed today" do
+      @memory.last_viewed.to_date.should == Date.today
+    end
+
+    it "should have last been viewed later on the second viewing" do
+      @memory.last_viewed.should > @old_viewed_time
     end
   end
 
