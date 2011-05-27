@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527005311) do
+ActiveRecord::Schema.define(:version => 20110527185319) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(:version => 20110527005311) do
     t.datetime "updated_at"
     t.integer  "course_id"
   end
+
+  create_table "step_components", :force => true do |t|
+    t.integer  "step_id"
+    t.integer  "component_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "step_components", ["component_id"], :name => "index_step_components_on_component_id"
+  add_index "step_components", ["step_id", "component_id"], :name => "index_step_components_on_step_id_and_component_id", :unique => true
+  add_index "step_components", ["step_id"], :name => "index_step_components_on_step_id"
 
   create_table "steps", :force => true do |t|
     t.string   "name"
