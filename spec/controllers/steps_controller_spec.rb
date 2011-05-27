@@ -29,4 +29,38 @@ describe StepsController do
     end
   end
 
+  describe "PUT 'update'" do
+
+    before(:each) do
+      @step = Factory(:step)
+    end
+
+
+    it "should not update to blank text" do
+      old_step = @step.text
+      put :update, :id => @step, :step => { :text => "" }
+      @step.reload
+      @step.text.should == old_step
+    end
+
+    it "should properly update the name" do
+      put :update, :id => @step, :step => { :name => "NEWNAME!!", :text => @step.text }
+      @step.reload
+      @step.name.should == "NEWNAME!!"
+    end
+
+    it "should properly update the step text" do
+      put :update, :id => @step, :step => {:name => @step.name, :text => "New text" }
+      @step.reload
+      @step.text.should == "New text"
+    end
+
+    it "should properly update the order number" do
+      put :update, :id => @step, :step => {:name => @step.name, :text => @step.text, :order_number => 2}
+      @step.reload
+      @step.order_number.should == 2
+    end
+  end  
+
+
 end
