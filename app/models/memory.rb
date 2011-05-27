@@ -6,7 +6,9 @@ class Memory < ActiveRecord::Base
 
   scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
   scope :due_now, where("due <= ?", Time.now)
-  
+  default_scope :order => 'memories.due'  
+
+
   def course
     component.course
   end

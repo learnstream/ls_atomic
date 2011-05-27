@@ -1,5 +1,9 @@
-<h1>Studying: <%= @course.name %></h1>
-<% current_user.memories.each do |m| %>
-  <%= m.component.name %>
-  <%= m.course %>
-<% end %> 
+<h1><%= @course.name %></h1>
+<div id="study_area" class="round">
+<div id="study_item">
+  <%= @component.name %>
+</div>
+<div>
+  \( \rightarrow \) was due <%= time_ago_in_words(@memory.due) %> ago.
+</div>
+</div>
