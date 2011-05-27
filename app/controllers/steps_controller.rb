@@ -48,6 +48,7 @@ class StepsController < ApplicationController
 
   def edit
     @step = Step.find(params[:id])
+    @components = @step.problem.course.components
   end
 
 end
