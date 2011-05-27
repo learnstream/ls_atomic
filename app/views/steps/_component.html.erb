@@ -1,0 +1,9 @@
+<li><%= link_to component.name, component %>
+    <div id= "relate_component_form">
+      <% if @step.related?(component) %> 
+        <%= render :partial => 'steps/unrelate_component', :locals => { :component => component }%> 
+      <%  else %>
+        <%= render :partial => 'steps/relate_component', :locals => { :component => component  } %>
+      <% end %>
+    </div>
+</li>

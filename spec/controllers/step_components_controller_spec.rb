@@ -26,7 +26,7 @@ describe StepComponentsController do
 
     it "should redirect to the step show page" do
       post :create, :step_component => { :step_id => @step.id, :component_id => @component.id }
-      response.should redirect_to @step
+      response.should redirect_to edit_step_path(@step.id) 
     end
   
   end
@@ -44,7 +44,7 @@ describe StepComponentsController do
 
     it "should delete the step-component relationship" do
       delete :destroy, :step_component => { :step_id => @step.id, :component_id => @component.id }
-      response.should redirect_to @step
+      response.should redirect_to edit_step_path(@step.id) 
     end
   end
 
