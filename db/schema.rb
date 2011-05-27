@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527163109) do
+ActiveRecord::Schema.define(:version => 20110527181418) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(:version => 20110527163109) do
   create_table "memories", :force => true do |t|
     t.integer  "user_id"
     t.integer  "component_id"
-    t.decimal  "ease"
-    t.integer  "interval"
-    t.integer  "views"
-    t.integer  "streak"
+    t.decimal  "ease",         :default => 2.5
+    t.decimal  "interval",     :default => 1.0
+    t.integer  "views",        :default => 0
+    t.integer  "streak",       :default => 0
     t.datetime "last_viewed"
-    t.datetime "due"
+    t.datetime "due",          :default => '2011-05-27 17:00:02'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(:version => 20110527163109) do
   add_index "memories", ["component_id"], :name => "index_memories_on_component_id"
   add_index "memories", ["user_id", "component_id"], :name => "index_memories_on_user_id_and_component_id", :unique => true
   add_index "memories", ["user_id"], :name => "index_memories_on_user_id"
+
+  create_table "memory_ratings", :force => true do |t|
+    t.integer  "memory_id"
+    t.integer  "quality"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memory_ratings", ["memory_id"], :name => "index_memory_ratings_on_memory_id"
 
   create_table "problems", :force => true do |t|
     t.string   "name"
