@@ -17,5 +17,10 @@ describe Step do
       long_name_step = Step.new(@attr.merge(:name => long_name))
       long_name_step.should_not be_valid
     end
+    
+    it "should reject order index that is negative" do
+      step = Step.new(@attr.merge(:order_number => -1 ))
+      step.should_not be_valid
+    end
   end
 end

@@ -13,14 +13,19 @@ describe StepsController do
     it "should create a step correctly" do
       lambda do
         post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
-        response.should be_valid
+        #response.should be_valid
       end.should change(Step, :count).by(1)
     end
 
-    it "should associate with a particular problem" do
+    it "should associate step with a particular problem" do
       post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
       @problem.reload
-      @problem.steps.should include(1)
+      @problem.steps.length.should == 1
+    end
+  
+    it "should re-render the problem template" do
+      post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
+      response.should redirect_to(@problem) 
     end
   end
 

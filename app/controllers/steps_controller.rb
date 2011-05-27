@@ -7,16 +7,17 @@ class StepsController < ApplicationController
       redirect_to root_path
     else
       problem = Problem.find(problem_id)
-      problem.steps.order_number
-      @step = problem.step.build(params[:step], )
-      @step = Step.create!(:name => params[:step][:name], :text => params[:step][:text])
-      problem.steps << @step.id.to_s
-      problem.save
+      if problem.steps.last.nil?
+        largest_step_number = 0
+      else
+        largest_step_number = problem.steps.last.order_number
+      end
+      @step = problem.steps.build(params[:step].merge(:order_number => largest_step_number + 1 ))
+      @step.save
+      redirect_to problem_path(problem.id)
     end
   end
 
-  def new
-  end
 
   def destroy
   end

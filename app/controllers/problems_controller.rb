@@ -45,6 +45,8 @@ class ProblemsController < ApplicationController
 
   def show
     @problem = Problem.find(params[:id])
+    @steps = @problem.steps
+    @step = Step.new
   end
 
 end
