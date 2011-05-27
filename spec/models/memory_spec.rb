@@ -7,6 +7,7 @@ describe Memory do
     @component = Factory(:component)
 
     @memory = @user.memories.build(:component_id => @component.id)
+    @default_ease = 2.5
   end
 
   it "should create a new instance given valid attributes" do
@@ -22,7 +23,7 @@ describe Memory do
   end
 
   it "should default to 2.5 ease" do
-    @memory.ease.should == 2.5
+    @memory.ease.should == @default_ease
   end
 
   it "should default to 1.0 interval" do
@@ -39,6 +40,10 @@ describe Memory do
 
   it "should be able to be viewed" do
     @memory.should respond_to(:view)    
+  end
+
+  it "should have a reset method" do
+    @memory.should respond_to(:reset)
   end
 
   it "should create a new memory rating when viewed" do
@@ -62,7 +67,7 @@ describe Memory do
     end
 
     it "should have the correct ease" do
-      @memory.ease.should == 2.5 - 0.8 + 0.28*@quality - 0.02*@quality**2
+      @memory.ease.should == @default_ease - 0.8 + 0.28*@quality - 0.02*@quality**2
     end
 
     it "should change the interval correctly" do
@@ -124,20 +129,49 @@ describe Memory do
     end
 
     it "should have the correct ease" do 
-      @memory.ease.should == 2.5 - 0.8 
+      @memory.ease.should == @default_ease - 0.8 
     end
 
     it "should have the correct due date" do
       @memory.due.to_date.should == Date.today
     end
   end
-
-
-
+  
   it "should not allow the ease to decrease below 1.3" do
     10.times do 
       @memory.view(0)
     end
     @memory.ease.should >= 1.3
+  end
+
+  describe "after being reset" do
+
+    before(:each) do
+      @memory.view(4)
+      @memory.view(5)
+      @memory.view(0)
+      @memory.view(4)
+      @memory.reset
+    end
+
+    it "should have zero views" do
+      @memory.views.should == 0
+    end
+
+    it "should have zero streak" do
+      @memory.streak.should == 0
+    end
+
+    it "should have the default ease" do
+      @memory.ease.should == @default_ease
+    end
+
+    it "should have a null last_viewed" do
+      @memory.last_viewed.should be_nil
+    end
+
+    it "should be due today" do
+      @memory.due.to_date.should == Date.today
+    end
   end
 end

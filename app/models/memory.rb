@@ -33,4 +33,13 @@ class Memory < ActiveRecord::Base
 
     self.due += interval.days
   end
+
+  def reset
+    self.views = 0
+    self.streak = 0
+    self.interval = 1.0
+    self.ease = 2.5
+    self.last_viewed = nil
+    self.due = Time.now
+  end
 end
