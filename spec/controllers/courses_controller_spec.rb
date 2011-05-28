@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CoursesController do
   render_views
-
+  
   describe "GET 'new'" do
     it "should be successful" do
       @user = Factory(:user, :perm => "creator")
@@ -222,10 +222,26 @@ describe CoursesController do
       end
 
       it "should show enrolled users" do
-        get :users, :id => @user
+        get :users, :id => @course
         response.should have_selector("a", :href => user_path(@user), 
                                            :content => @user.email)
       end
+    end
+  end
+
+  describe "GET 'study'" do
+
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      @course = Factory(:course)
+      @component = Factory(:component, :course_id => @course)
+      @memory = @user.memories.create!(:component_id => @component)
+    end
+
+    it "should be successful" do
+      get :study, :id => @course
+      response.should be_success
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526223617) do
+ActiveRecord::Schema.define(:version => 20110527185319) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -41,13 +41,58 @@ ActiveRecord::Schema.define(:version => 20110526223617) do
   add_index "enrollments", ["user_id", "course_id"], :name => "index_enrollments_on_user_id_and_course_id", :unique => true
   add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
 
+  create_table "memories", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "component_id"
+    t.decimal  "ease",         :default => 2.5
+    t.decimal  "interval",     :default => 1.0
+    t.integer  "views",        :default => 0
+    t.integer  "streak",       :default => 0
+    t.datetime "last_viewed"
+    t.datetime "due",          :default => '2011-05-27 23:13:53'
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memories", ["component_id"], :name => "index_memories_on_component_id"
+  add_index "memories", ["user_id", "component_id"], :name => "index_memories_on_user_id_and_component_id", :unique => true
+  add_index "memories", ["user_id"], :name => "index_memories_on_user_id"
+
+  create_table "memory_ratings", :force => true do |t|
+    t.integer  "memory_id"
+    t.integer  "quality"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "memory_ratings", ["memory_id"], :name => "index_memory_ratings_on_memory_id"
+
   create_table "problems", :force => true do |t|
     t.string   "name"
     t.string   "statement"
-    t.string   "steps"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
+  end
+
+  create_table "step_components", :force => true do |t|
+    t.integer  "step_id"
+    t.integer  "component_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "step_components", ["component_id"], :name => "index_step_components_on_component_id"
+  add_index "step_components", ["step_id", "component_id"], :name => "index_step_components_on_step_id_and_component_id", :unique => true
+  add_index "step_components", ["step_id"], :name => "index_step_components_on_step_id"
+
+  create_table "steps", :force => true do |t|
+    t.string   "name"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "order_number"
+    t.integer  "problem_id"
   end
 
   create_table "user_sessions", :force => true do |t|

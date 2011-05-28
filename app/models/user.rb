@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   has_many :courses, :through => :enrollments 
 
+  has_many :memories, :dependent => :destroy
+
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5
     config.logged_in_timeout = 1.year

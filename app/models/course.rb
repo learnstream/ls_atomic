@@ -10,14 +10,12 @@ class Course < ActiveRecord::Base
   validates :name, :presence => true
 
   def students
-    student_enrollments = enrollments.find(:all, 
-                                           :conditions => { :role => "student" })
+    student_enrollments = enrollments.where(:role => "student")
     student_enrollments.map { |e| e.user } 
   end
 
   def teachers
-    teacher_enrollments = enrollments.find(:all,
-                                           :conditions => { :role => "teacher" })
+    teacher_enrollments = enrollments.where(:role => "teacher")
     teacher_enrollments.map { |e| e.user }
   end
 end
