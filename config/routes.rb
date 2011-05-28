@@ -1,7 +1,7 @@
 LsAtomic::Application.routes.draw do |map|
-  get "step_components/create"
+#  get "step_components/create"
 
-  get "step_components/destroy"
+ # get "step_components/destroy"
 
   #get "courses/new"
 
