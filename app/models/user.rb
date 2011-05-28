@@ -45,4 +45,12 @@ class User < ActiveRecord::Base
     enrollment = enrollments.find_by_course_id(course)
     enrollment and enrollment.role == "teacher"
   end
+  
+  def admin?
+    perm == "admin"
+  end
+  
+  def can_edit?(course)
+    teacher?(course) || admin?
+  end
 end

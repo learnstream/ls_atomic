@@ -137,6 +137,35 @@ describe CoursesController do
         get :show, :id => @course
         response.should have_selector("h2", :content => "Create new component")
       end
+      it "should have a problem add form" do
+        test_sign_in(@teacher)
+        get :show, :id => @course
+        response.should have_selector("h2", :content => "Create new problem")
+      end
+
+    end 
+
+    describe "for admins" do
+
+      before(:each) do
+        @admin = Factory(:admin)
+      end
+
+      it "should be a admin" do
+        @admin.should be_admin
+      end
+
+      it "should have a component add form" do
+        test_sign_in(@admin)
+        get :show, :id => @course
+        response.should have_selector("h2", :content => "Create new component")
+      end
+
+      it "should have a problem add form" do
+        test_sign_in(@admin)
+        get :show, :id => @course
+        response.should have_selector("h2", :content => "Create new problem")
+      end
     end 
 
     describe "for students" do
@@ -145,10 +174,16 @@ describe CoursesController do
         @user.enroll!(@course)
       end
 
-      it "should not have a form for knowledge components" do
+      it "should not have a form for adding knowledge components" do
         get :show, :id => @course
         response.should_not have_selector("h2", :content => "Create new component")
       end
+
+      it "should not have a form for adding problems" do
+        get :show, :id => @course
+        response.should_not have_selector("h2", :content => "Create new problem")
+      end
+
     end
 
   end

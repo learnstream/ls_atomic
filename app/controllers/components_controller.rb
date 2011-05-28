@@ -1,14 +1,24 @@
 class ComponentsController < ApplicationController
-  before_filter :authenticate, :only => [ :create, :destroy, :update ]
+  before_filter :authenticate, :only => [ :create, :destroy, :update, :edit ]
   
   def create
     course_id = params[:component][:course_id]
+    
     if course_id.nil?
-      @component = Component.new(params[:component])
+      return # Need to validate the components still!!
+      #@component = Component.new(params[:component])
     else
       course = Course.find(course_id)
-      @component = course.components.build(params[:component])
+
+      if(current_user.can_edit?(course))
+        @component = course.components.build(params[:component])
+      else
+        flash[:error] = "You don't have permission to create components!"
+        redirect_to root_path
+        return
+      end
     end
+
 
     if @component.save
       flash[:success] = "Knowledge component created!"

@@ -6,7 +6,7 @@
   <%= render @components %>
 </ul>
 
-<% if current_user.teacher?(@course) %>
+<% if current_user.can_edit?(@course) %>
 <h2>Create new component</h2>
 <%= render 'shared/component_form' %>
 <% end %>
@@ -16,5 +16,7 @@
   <%= render @problems %>
 </ul>
 
+<% if current_user.can_edit?(@course) %>
 <h2>Create new problem</h2>
 <%= render 'shared/problem_form' %>
+<% end %>
