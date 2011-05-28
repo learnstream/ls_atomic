@@ -3,10 +3,8 @@ class ComponentsController < ApplicationController
   
   def create
     course_id = params[:component][:course_id]
-    
     if course_id.nil?
-      return # Need to validate the components still!!
-      #@component = Component.new(params[:component])
+      return # Need to validate the components still!!   #@component = Component.new(params[:component])
     else
       course = Course.find(course_id)
 
@@ -64,4 +62,26 @@ class ComponentsController < ApplicationController
     @components = Component.all
     @component = Component.new if signed_in?
   end
+
+  private
+
+    def check_permissions(course_id)
+      if course_id.nil?
+        flash[:error] = "You need a course..."
+        redirect_to root_path
+        return
+      else
+        course = Course.find(course_id)
+        if current_user.can_edit?(course)
+          return
+        else
+          flash[:error] = "I'm sorry Dave, I can't do that!"
+          redirect_to root_path
+          return
+        end
+      end
+    end
+
+
+
 end
