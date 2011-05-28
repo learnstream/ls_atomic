@@ -64,7 +64,7 @@ end
 
 def make_memories
   user = User.find_by_email("foo-1@bar.com")
-  component = Component.find_by_name("Newton's first law")
+  component = Course.first.components.first
   user.memories.create!(:component_id => component) 
 end
 

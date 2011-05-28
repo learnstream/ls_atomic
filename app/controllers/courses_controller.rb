@@ -47,6 +47,9 @@ class CoursesController < ApplicationController
     @memory = current_user.memories.in_course(@course).due_now.first
     if @memory
       @component = @memory.component
+      unless @component.steps.empty? 
+        @step = @component.steps.first
+      end
     else 
       @component = nil
     end
