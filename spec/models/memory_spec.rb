@@ -39,7 +39,7 @@ describe Memory do
   end
 
   it "should default to being due today" do 
-    @memory.due.to_date.should == Date.today
+    @memory.due.to_date.should == Time.zone.now.to_date 
   end
 
   it "should default to having never been viewed" do
@@ -111,13 +111,12 @@ describe Memory do
     end
 
     it "should update the due date correctly" do
-      @memory.due.to_date.should == Date.today + 1.day
+      @memory.due.to_date.should == Time.zone.now.to_date + 1.day
     end
 
     it "should have last been viewed today" do
-      @memory.last_viewed.to_date.should == Date.today
+      @memory.last_viewed.to_date.should == Time.zone.now.to_date
     end
-
   end
 
   describe "when answered correctly twice" do
@@ -141,7 +140,7 @@ describe Memory do
     end
 
     it "should have last been viewed today" do
-      @memory.last_viewed.to_date.should == Date.today
+      @memory.last_viewed.to_date.should == Time.zone.now.to_date
     end
 
     it "should have last been viewed later on the second viewing" do
@@ -183,7 +182,7 @@ describe Memory do
     end
 
     it "should have the correct due date" do
-      @memory.due.to_date.should == Date.today
+      @memory.due.to_date.should == Time.zone.now.to_date
     end
   end
   
@@ -221,7 +220,7 @@ describe Memory do
     end
 
     it "should be due today" do
-      @memory.due.to_date.should == Date.today
+      @memory.due.to_date.should == Time.zone.now.to_date
     end
   end
 end

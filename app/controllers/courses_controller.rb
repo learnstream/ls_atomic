@@ -45,7 +45,12 @@ class CoursesController < ApplicationController
   def study
     @course = Course.find(params[:id])
     @memory = current_user.memories.in_course(@course).due_now.first
-    @component = @memory.component
+    if @memory
+      @component = @memory.component
+    else 
+      @component = nil
+    end
+
     render 'study'
   end
 

@@ -6,6 +6,7 @@ namespace :db do
     make_courses_and_components
     enroll_users
     make_memories
+    make_problems_and_steps
   end
 end
 
@@ -42,7 +43,7 @@ def make_courses_and_components
   c1 = course1.components.create!(:name => "Newton's first law",
                          :description => "An object in motion remains in motion")  
   c2 = course1.components.create!(:name => "Newton's second law",
-                         :description => "F = ma")
+                         :description => "\\( \\vec{F} = m\\vec{a} \\)")
   c3 = course1.components.create!(:name => "Newton's third law",
                          :description => "Every action has an opposite and equal reaction")
 end
@@ -66,3 +67,27 @@ def make_memories
   component = Component.find_by_name("Newton's first law")
   user.memories.create!(:component_id => component) 
 end
+
+def make_problems_and_steps
+  course = Course.first
+  c1 = course.components[0]
+  c2 = course.components[1]
+  c3 = course.components[2]
+  
+  problem1 = course.problems.create!(:name => "Problem 1", :statement => "What is newton's second law?")
+  problem2 = course.problems.create!(:name => "Problem 2", :statement => "What is newton's third law?")
+
+  step11 = problem1.steps.create!(:text => "Think about it", :order_number => 1)
+  step12 = problem1.steps.create!(:text => "The second law relates force to mass and acceleration", :order_number => 2)
+  step13 = problem1.steps.create!(:text => "The answer is \\( \\vec{F} = m\\vec{a} \\) !", :order_number => 3)
+
+  step21 = problem2.steps.create!(:text => "Think about it...", :order_number => 1)
+  step22 = problem2.steps.create!(:text => "Every action has an equal and opposite reaction!", :order_number => 2)
+  step23 = problem2.steps.create!(:text => "This means that anything exerting a force on something else has an equal force exerted back on itself!", :order_number => 3)
+
+  step12.relate!(c2)
+  step13.relate!(c2)
+
+  step22.relate!(c3)
+  step23.relate!(c3)
+end  

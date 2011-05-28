@@ -1,4 +1,5 @@
 LsAtomic::Application.routes.draw do |map|
+  
   resources :user_sessions
   resources :users do
     member do
@@ -11,10 +12,12 @@ LsAtomic::Application.routes.draw do |map|
       get :study
     end
   end
+
   resources :components
   resources :problems 
   resources :enrollments, :only => [:create, :destroy]
   resources :steps
+  resources :step_components
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'

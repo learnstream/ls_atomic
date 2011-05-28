@@ -4,10 +4,11 @@ class Memory < ActiveRecord::Base
   belongs_to :user
   belongs_to :component
 
-  scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
-  scope :due_now, where("due <= ?", Time.now)
-  default_scope :order => 'memories.due'  
+  before_create lambda { self.due = Time.now }
 
+  scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
+  scope :due_now, where("due <= ?", Time.zone.now)
+  default_scope :order => 'memories.due'  
 
   def course
     component.course
@@ -18,7 +19,7 @@ class Memory < ActiveRecord::Base
     memory_rating.save
 
     self.views += 1
-    self.last_viewed = Time.now
+    self.last_viewed = Time.zone.now
 
     if quality < 3 
       self.streak = 0
@@ -43,7 +44,7 @@ class Memory < ActiveRecord::Base
       self.interval = interval*ease
     end
 
-    self.due += interval.days
+    self.due = Time.zone.now + interval.days
   end
 
   def reset
@@ -52,6 +53,6 @@ class Memory < ActiveRecord::Base
     self.interval = 1.0
     self.ease = 2.5
     self.last_viewed = nil
-    self.due = Time.now
+    self.due = Time.zone.now
   end
 end
