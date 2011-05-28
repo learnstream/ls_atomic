@@ -170,6 +170,12 @@ describe CoursesController do
       response.should be_success
     end
 
+    it "should not have create course link for learners" do
+      test_sign_in(@user)
+      get :index
+      response.should_not have_selector("a", :href => new_course_path)
+    end
+
     it "should have create course link for creators" do
       test_sign_in(@creator)
       get :index
