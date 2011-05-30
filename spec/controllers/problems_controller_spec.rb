@@ -72,15 +72,29 @@ describe ProblemsController do
 
   describe "GET 'show'" do
     before(:each) do
-      @user = test_sign_in(Factory(:user))
+      @user = Factory(:user)
+      @admin = Factory(:admin)
       @course = Factory(:course)
       @problem = Factory(:problem)
     end
 
-    it "should have the name of the problem" do
+    it "should be success" do
+      test_sign_in(@user)
       get :show, :id => @problem
-      response.should have_selector("h1", :content => @problem.name)
-    end  
+      response.should be_success 
+    end 
+
+    it "should have an 'edit' link for authorized users" do
+      test_sign_in(@admin)
+      get :show, :id => @problem
+      response.should have_selector("a", :content => "Edit")
+    end
+
+    it "should not have an 'edit' link for students" do
+      test_sign_in(@user)
+      get :show, :id => @problem
+      response.should_not have_selector("a", :content => "Edit")
+    end 
   end
 
   describe "PUT 'update'" do
