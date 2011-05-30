@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Problem do
 
   before(:each) do
-    @attr = { :name => "Problem 1", :statement => "What is 2 + 5?" }
+    @course = Factory(:course)
+    @attr = { :name => "Problem 1", :statement => "What is 2 + 5?", :course_id => @course.id }
   end
   
   describe "failure" do
@@ -17,6 +18,13 @@ describe Problem do
       long_name_problem = Problem.new(@attr.merge(:name => long_name))
       long_name_problem.should_not be_valid
     end
+    
+    it "should require a course id" do
+      no_course_problem = Problem.new(@attr.merge(:course_id => ""))
+      no_course_problem.should_not be_valid
+    end
+
+
   end
 
 end

@@ -34,15 +34,18 @@ end
 Factory.define :component do |component|
   component.name            "Newton's First Law"
   component.description     "An object in motion tends to remain in motion, etc."
+  component.association     :course_id, :factory => :course
 end
 
 Factory.define :problem do |problem|
   problem.name              "Euler's Little Theorem"
   problem.statement         "What is \( e^{\pi i} \) equal to?"
+  problem.association       :course_id, :factory => :course
 end
 
 Factory.define :step do |step|
   step.name                 "Step 1"
   step.text                 "do this first"
   step.order_number         1
+  step.association          :problem_id, :factory => :problem
 end

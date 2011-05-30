@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ComponentsController do
   render_views
 
-  describe "access control" do
+  describe "access control for non-signed in users" do
 
     it "should deny access to 'create' " do
       post :create
@@ -62,9 +62,10 @@ describe ComponentsController do
 
   describe "GET 'list'" do
     before(:each) do
-      @c1 = Factory(:component, :name => "Newton's first law")
-      @c2 = Factory(:component, :name => "Newton's second law")
-      @c3 = Factory(:component, :name => "Newton's third law")
+      @course = Factory(:course)
+      @c1 = Factory(:component, :name => "Newton's first law", :course => @course)
+      @c2 = Factory(:component, :name => "Newton's second law", :course => @course)
+      @c3 = Factory(:component, :name => "Newton's third law", :course => @course)
     end
 
     it "should be successful" do
@@ -94,14 +95,13 @@ describe ComponentsController do
   end
 
   describe "POST 'create'" do
-    before(:each) do
-      @user = test_sign_in(Factory(:user))
-    end
 
     describe "failure" do
 
       before(:each) do
-        @attr = { :name => ""}
+        @user = test_sign_in(Factory(:admin))
+        @course = Factory(:course)
+        @attr = { :name => "", :course_id => @course.id}
       end
 
       it "should not create a k-component" do
@@ -116,10 +116,29 @@ describe ComponentsController do
       end
     end
 
-    describe "success" do
+
+    describe "for student" do
 
       before(:each) do
-        @attr = { :name => "Law of Humpty Dumpty", :description => "When Humpty Dumpty fall, All the Kings Men can't put him back together again!!!!!" }
+        @user = test_sign_in(Factory(:user))
+        @course = Factory(:course)
+        @attr = { :name => "Law of Humpty Dumpty", :description => "When Humpty Dumpty fall, All the Kings Men can't put him back together again!!!!!", :course_id => @course.id }
+      end
+
+      it "should not create a k-component" do
+        lambda do
+          post :create, :component => @attr
+        end.should_not change(Component, :count)
+      end
+    end
+
+
+    describe "for admin" do
+
+      before(:each) do
+        @admin = test_sign_in(Factory(:admin))
+        @course = Factory(:course)
+        @attr = { :name => "Law of Humpty Dumpty", :description => "When Humpty Dumpty fall, All the Kings Men can't put him back together again!!!!!", :course_id => @course.id }
       end
 
       it "should create a k-component" do
@@ -128,9 +147,9 @@ describe ComponentsController do
         end.should change(Component, :count).by(1)
       end
 
-      it "should redirect to the list" do
+      it "should redirect to the course" do
         post :create, :component => @attr
-        response.should redirect_to(:db)
+        response.should redirect_to(@course)
       end
 
       it "should flash sucess" do
@@ -139,10 +158,47 @@ describe ComponentsController do
       end
 
       describe "from a course page" do
-        before(:each) do
-          @course = Factory(:course)
+
+        it "should belong to that course" do
+          lambda do
+            post :create, :component => @attr
+          end.should change(@course.components, :count).by(1)
         end
 
+        it "should redirect to that course" do
+          post :create, :component => @attr
+          response.should redirect_to(course_path(@course.id))
+        end
+      end 
+    end
+
+    describe "for teacher" do
+
+      before(:each) do
+        @teacher = Factory(:user)
+        test_sign_in(@teacher)
+        @course = Factory(:course)
+        @teacher.enroll_as_teacher!(@course)
+        @attr = { :name => "Law of Humpty Dumpty", :description => "When Humpty Dumpty fall, All the Kings Men can't put him back together again!!!!!", :course_id => @course.id }
+      end
+
+      it "should create a k-component" do
+        lambda do
+          post :create, :component => @attr
+        end.should change(Component, :count).by(1)
+      end
+
+      it "should redirect to the course" do
+        post :create, :component => @attr
+        response.should redirect_to(@course)
+      end
+
+      it "should flash sucess" do
+        post :create, :component => @attr
+        flash[:success].should =~ /Knowledge component created/i
+      end
+
+      describe "from a course page" do
         it "should belong to that course" do
           lambda do
             post :create, :component => @attr.merge(:course_id => @course.id)
@@ -160,14 +216,13 @@ describe ComponentsController do
   describe "PUT 'update'" do
 
     before(:each) do
-      @user = test_sign_in(Factory(:user))
       @course = Factory(:course)
       @component = Factory(:component)
       @attr = { :name => @component.name, :description => @component.description }
       post :create, :component => @attr.merge(:course_id => @course.id) 
     end
 
-    describe "failure" do
+    describe "generic failure" do
       it "should not update a k-component to a blank name" do
         put :update, :id => @component, :component => { :name => "" }
         @component.reload
@@ -182,7 +237,36 @@ describe ComponentsController do
       end
     end   
 
-    describe "success" do
+
+    describe "for students" do
+
+      before(:each) do 
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @user.enroll!(@course)
+      end
+        
+      it "should not update the k-component name" do
+        put :update, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
+        @component.reload
+        @component.name.should_not == "Calabi-Yau Manifolds"
+      end
+
+      it "should not update the k-component description" do
+        put :update, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
+        @component.reload
+        @component.description.should_not == "Calabi-Yau Manifolds are incomprehensible"
+      end   
+    end  
+
+    describe "for teachers" do
+
+      before(:each) do 
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @user.enroll_as_teacher!(@course)
+      end
+        
       it "should update the k-component name" do
         put :update, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
         @component.reload
@@ -195,26 +279,94 @@ describe ComponentsController do
         @component.description.should == "Calabi-Yau Manifolds are incomprehensible"
       end   
     end  
+    
+    describe "for admins" do
+
+      before(:each) do 
+        @user = Factory(:admin)
+        test_sign_in(@user)
+      end
+        
+      it "should update the k-component name" do
+        put :update, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
+        @component.reload
+        @component.name.should == "Calabi-Yau Manifolds"
+      end
+
+      it "should update the k-component description" do
+        put :update, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
+        @component.reload
+        @component.description.should == "Calabi-Yau Manifolds are incomprehensible"
+      end   
+    end  
+
+
   end
 
   describe "GET 'edit'" do
     
     before(:each) do
-      @user = test_sign_in(Factory(:user))
       @course = Factory(:course)
       @component = Factory(:component)
       @attr = { :name => @component.name, :description => @component.description }
       post :create, :component => @attr.merge(:course_id => @course.id)
     end
 
-    it "should render the edit view" do
-      get :edit, :id => @component
-      response.should be_success
+    describe "for teachers" do
+
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @user.enroll_as_teacher!(@course)
+      end
+
+      it "should render the edit view" do
+        get :edit, :id => @component
+        response.should be_success
+      end
+
+      it "should have a form" do
+        get :edit, :id => @component
+        response.should have_selector("form")
+      end
+    end
+    describe "for admin" do
+
+      before(:each) do
+        @user = Factory(:admin)
+        test_sign_in(@user)
+      end
+
+      it "should render the edit view" do
+        get :edit, :id => @component
+        response.should be_success
+      end
+
+      it "should have a form" do
+        get :edit, :id => @component
+        response.should have_selector("form")
+      end
     end
 
-    it "should have a form" do
-      get :edit, :id => @component
-      response.should have_selector("form")
+    describe "for students" do
+
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @user.enroll!(@course)
+      end
+
+      it "should not render the edit view" do
+        get :edit, :id => @component
+        response.should_not be_success
+      end
+
+      it "should not have a form" do
+        get :edit, :id => @component
+        response.should_not have_selector("form")
+      end
     end
+
+
   end
 end
