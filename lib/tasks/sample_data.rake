@@ -64,11 +64,7 @@ end
 
 def make_memories
   user = User.find_by_email("foo-1@bar.com")
-<<<<<<< student-problem-interface
-  component = Course.first.components.first
-=======
   component = Component.find_by_name("Newton's second law")
->>>>>>> local
   user.memories.create!(:component_id => component) 
 end
 

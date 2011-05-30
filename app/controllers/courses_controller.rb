@@ -48,13 +48,10 @@ class CoursesController < ApplicationController
     @memory = current_user.memories.in_course(@course).due_before(Time.now).first
     if @memory
       @component = @memory.component
-<<<<<<< student-problem-interface
+
       unless @component.steps.empty? 
         @step = @component.steps.first
       end
-=======
-      @step = @component.steps.first
->>>>>>> local
     else 
       @component = nil
       @step = nil

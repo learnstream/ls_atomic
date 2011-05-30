@@ -2,15 +2,7 @@
 <div id="study_area" class="round">
   <% if @step %>
     <div id="study_item">
-<<<<<<< student-problem-interface
-      <% if @step %>
         <%= @step.text %>
-      <% else %>
-        <%= @component.name %>
-      <% end %>
-=======
-      <%= @step.text %>
->>>>>>> local
     </div>
     <div>
       \( \rightarrow \) was due <%= time_ago_in_words(@memory.due) %> ago.
