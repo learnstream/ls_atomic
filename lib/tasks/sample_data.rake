@@ -5,8 +5,8 @@ namespace :db do
     make_users
     make_courses_and_components
     enroll_users
-    make_memories
     make_problems_and_steps
+    make_memories
   end
 end
 
@@ -65,14 +65,14 @@ end
 def make_memories
   user = User.find_by_email("foo-1@bar.com")
   component = Component.find_by_name("Newton's second law")
-  user.memories.create!(:component_id => component) 
+  user.memories.create!(:component_id => component.id) 
 end
 
 def make_problems_and_steps
   course = Course.first
-  c1 = course.components[0]
-  c2 = course.components[1]
-  c3 = course.components[2]
+  c1 = course.components.find_by_name("Newton's first law")
+  c2 = course.components.find_by_name("Newton's second law")
+  c3 = course.components.find_by_name("Newton's third law")
   
   problem1 = course.problems.create!(:name => "Problem 1", :statement => "What is newton's second law?")
   problem2 = course.problems.create!(:name => "Problem 2", :statement => "What is newton's third law?")

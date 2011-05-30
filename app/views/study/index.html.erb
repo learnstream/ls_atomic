@@ -1,13 +1,16 @@
 <h1><%= @course.name %></h1>
 <div id="study_area" class="round">
-  <% if @step %>
-    <div id="study_item">
-      <%= @step.text %>
-    </div>
-    <div>
-      Due <%= time_ago_in_words(@memory.due) %> ago.
-    </div>
-  <% else %>
-    Nothing due right now.
-  <% end %>
-</div>
+  <% if @memory %>
+    <% if not @step %>
+      <div id="study_item">
+        <%= @component.description %>
+      </div>
+      <div>
+        Due <%= time_ago_in_words(@memory.due) %> ago.
+      </div>
+    <% else %>
+      <%= render :partial => "problems/problem_interface", :locals => { :problem => @problem, :steps => @steps } %>
+    <% end %>
+<% else %>
+  <p>Congrats! Nothing is due, go have some fun!</p>
+<% end %>
