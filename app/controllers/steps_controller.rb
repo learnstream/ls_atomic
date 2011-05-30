@@ -1,4 +1,9 @@
 class StepsController < ApplicationController
+  before_filter :authenticate
+  before_filter :only => [:create, :update] do 
+   check_permissions(params)
+  end
+
 
   def create
     problem_id = params[:step][:problem_id]
@@ -50,5 +55,19 @@ class StepsController < ApplicationController
     @step = Step.find(params[:id])
     @components = @step.problem.course.components
   end
+
+  private
+
+    def check_permissions(params)
+
+      course = Step.find(params[:id]).problem.course unless params[:id].nil? 
+      course ||= Problem.find(params[:step][:problem_id]).course 
+
+      unless current_user.can_edit?(course)
+        flash[:error] = "You don't have permissions!"
+        redirect_to root_path
+        return false
+      end 
+    end
 
 end
