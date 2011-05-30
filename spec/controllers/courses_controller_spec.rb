@@ -229,14 +229,32 @@ describe CoursesController do
       @user = Factory(:user)
       test_sign_in(@user)
       @course = Factory(:course)
+      
       @component = Factory(:component, :course_id => @course)
-      @memory = @user.memories.create!(:component_id => @component)
-    end
+      @memory = @user.memories.create!(:component_id => @component, :due => Time.now)
+      @memory.due = Time.now
+      @memory.save!
+      @problem = Factory(:problem)
+      @step = @problem.steps.create(:name => "Step 1", :text => "do this first", :order_number => 1)
+      @step.relate!(@component)
+   end
 
     it "should be successful" do
       get :study, :id => @course
       response.should be_success
     end
+
+    it "should display study components" do
+      get :study, :id => @course
+      @memory.due.should <= Time.now
+      @memory.component.should_not be_nil
+      @memory.component.steps.should_not be_empty
+      response.should have_selector("div", :content => @memory.component.steps.first.text )
+    end
+
+    it "if given step, should output all steps up to that step" do
+      get :show, :id => @problem
+      response.should have_selector("div", :content => @problem.steps.steps_up_to(@step).last.text)
+    end
   end
 end
-

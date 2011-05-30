@@ -45,4 +45,5 @@ Factory.define :step do |step|
   step.name                 "Step 1"
   step.text                 "do this first"
   step.order_number         1
+  step.association :problem, :factory => :problem
 end

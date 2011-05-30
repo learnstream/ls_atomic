@@ -13,12 +13,12 @@ class User < ActiveRecord::Base
   end
 
   def taught_courses
-    taught_enrollments = enrollments.find(:all, { :conditions => { :role => "teacher" }})
+    taught_enrollments = enrollments.where(:role => "teacher")
     taught_enrollments.map { |e| e.course }
   end
 
   def studied_courses
-    studied_enrollments = enrollments.find(:all, { :conditions => { :role => "student" }})
+    studied_enrollments = enrollments.where(:role => "student")
     studied_enrollments.map { |e| e.course }
   end
 

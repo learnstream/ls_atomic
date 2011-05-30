@@ -34,12 +34,11 @@ describe ProblemsController do
     end
   end
 
-
   describe "GET 'show'" do
     before(:each) do
       @user = test_sign_in(Factory(:user))
       @course = Factory(:course)
-      @problem = Factory(:problem, :course_id => @course.id)
+      @problem = Factory(:problem)
     end
 
     it "should have the name of the problem" do
@@ -47,7 +46,6 @@ describe ProblemsController do
       response.should have_selector("h1", :content => @problem.name)
     end  
   end
-
 
   describe "PUT 'update'" do
     before(:each) do
