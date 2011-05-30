@@ -45,12 +45,12 @@ class ProblemsController < ApplicationController
 
   def edit
     @problem = Problem.find(params[:id])
+    @step = Step.new
   end
 
   def show
     @problem = Problem.find(params[:id])
     @steps = @problem.steps
-    @step = Step.new
   end
 
   private

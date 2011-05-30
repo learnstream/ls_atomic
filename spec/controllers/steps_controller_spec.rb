@@ -8,7 +8,6 @@ describe StepsController do
       @course = Factory(:course)
       @problem = Factory(:problem, :course_id => @course.id)
     end
-
    
     describe "for admins" do
       
@@ -118,7 +117,6 @@ describe StepsController do
         @step.reload
         @step.order_number.should == 2
       end
-
     end
 
     describe "for teachers" do
@@ -155,7 +153,6 @@ describe StepsController do
       end
     end
 
-
     describe "for students" do
 
       before(:each) do
@@ -183,6 +180,4 @@ describe StepsController do
       end
     end
   end  
-
-
 end
