@@ -7,6 +7,6 @@ class Problem < ActiveRecord::Base
   validates :name, :presence => true,
                    :length => { :maximum => 134}, 
                    :uniqueness => true 
-
+  validates :course_id, :presence => true
 end
 

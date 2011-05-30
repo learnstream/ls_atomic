@@ -1,6 +1,10 @@
 class ProblemsController < ApplicationController
   before_filter :authenticate
+  before_filter :only => [:create, :update, :new, :edit] do 
+   check_permissions(params)
+  end
 
+ 
   def create
     course_id = params[:problem][:course_id]
     if course_id.nil?
@@ -48,5 +52,20 @@ class ProblemsController < ApplicationController
     @steps = @problem.steps
     @step = Step.new
   end
+
+  private
+
+    def check_permissions(params)
+
+      course = Problem.find(params[:id]).course unless params[:id].nil? 
+      course ||= Course.find(params[:problem][:course_id]) 
+
+      unless current_user.can_edit?(course)
+        flash[:error] = "You don't have permissions!"
+        redirect_to root_path
+        return false
+      end 
+    end
+
 
 end

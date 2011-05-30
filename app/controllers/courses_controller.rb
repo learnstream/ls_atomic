@@ -11,10 +11,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])   
     @components = @course.components
     @problems = @course.problems
-    @problem = Problem.new
     
-    if current_user.teacher?(@course)
+    if current_user.can_edit?(@course)
       @component = Component.new
+      @problem = Problem.new
     end
   end
 

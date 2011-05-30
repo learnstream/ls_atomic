@@ -1,5 +1,5 @@
 LsAtomic::Application.routes.draw do |map|
-  
+
   resources :user_sessions
   resources :users do
     member do

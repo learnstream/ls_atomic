@@ -2,19 +2,25 @@ require 'spec_helper'
 
 describe Component do
   before(:each) do
+    @course = Factory(:course)
     @attr = { :name => "foo", :description => "bar" }
   end
 
   it "should have a name" do
-    no_name_component = Component.new(@attr.merge(:name => ""))
+    no_name_component = @course.components.create(@attr.merge(:name => "")) 
     no_name_component.should_not be_valid
   end    
   
   it "name should be unique" do
-    Component.create!(@attr)
-    duplicate_component = Component.new(@attr)
+    @course.components.create(@attr)
+    duplicate_component = @course.components.create(@attr)
     duplicate_component.should_not be_valid
   end  
+
+  it "should have a course_id" do
+    no_course_component = Component.new(@attr)
+    no_course_component.should_not be_valid
+  end
 
   describe "course associations" do
 
