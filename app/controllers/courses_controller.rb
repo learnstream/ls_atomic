@@ -42,23 +42,6 @@ class CoursesController < ApplicationController
     render 'show_users'
   end
 
-  def study
-    @course = Course.find(params[:id])
-    #@memory = current_user.memories.in_course(@course).where("due <= ?", Time.now).first
-    @memory = current_user.memories.in_course(@course).due_before(Time.now).first
-    if @memory
-      @component = @memory.component
-
-      unless @component.steps.empty? 
-        @step = @component.steps.first
-      end
-    else 
-      @component = nil
-      @step = nil
-    end
-    render 'study'
-  end
-
   private
 
     def authorized_user
