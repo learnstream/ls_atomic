@@ -90,7 +90,7 @@ describe ProblemsController do
       @problem = Factory(:problem, :course_id => @course.id)
     end
 
-    describe "for admin" do
+    describe "for authorized users" do
 
       before(:each) do
         @user = Factory(:admin)
@@ -125,16 +125,10 @@ describe ProblemsController do
         @user.enroll_as_teacher!(@course)
       end
 
-      it "should properly update the name" do
+      it "should also update the changes" do
         put :update, :id => @problem, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
         @problem.reload
         @problem.name.should == "NEWNAME!!"
-      end
-
-      it "should properly update the problem statement" do
-        put :update, :id => @problem, :problem => {:name => @problem.name, :statement => "New statement" }
-        @problem.reload
-        @problem.statement.should == "New statement"
       end
     end
 
@@ -146,19 +140,11 @@ describe ProblemsController do
         @user.enroll!(@course)
       end
 
-      it "should not update the name" do
+      it "should not update the changes" do
         put :update, :id => @problem, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
         @problem.reload
         @problem.name.should_not == "NEWNAME!!"
       end
-
-      it "should not update the problem statement" do
-        put :update, :id => @problem, :problem => {:name => @problem.name, :statement => "New statement" }
-        @problem.reload
-        @problem.statement.should_not == "New statement"
-      end
     end
-
-
   end  
 end
