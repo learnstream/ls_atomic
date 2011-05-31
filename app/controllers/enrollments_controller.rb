@@ -29,7 +29,7 @@ class EnrollmentsController < ApplicationController
       # FIXME: Tests are updating parameters in a different manner from what is actually sent
       # from the view.  
       newrole = params[:enrollment][:role]
-      if (newrole == "teacher" || current_user == @enrollment.user)
+      if (newrole == "teacher" || current_user == @enrollment.user || current_user.perm == "admin")
         @enrollment.role = newrole
       end
     end
