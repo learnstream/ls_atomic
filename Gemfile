@@ -11,6 +11,8 @@ gem 'will_paginate', '3.0.pre2'
 
 group :development, :test do
   gem 'jasmine'
+  gem 'launchy'
+  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
 end
 
 group :development do
