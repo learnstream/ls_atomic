@@ -30,15 +30,18 @@ class User < ActiveRecord::Base
     enrollments.create!(:course_id => course.id)
   end
 
+  def unenroll!(course)
+    enrollments.find_by_course_id(course).destroy
+  end
+
   def enroll_as_teacher!(course)
+    if enrolled?(course)
+      unenroll!(course)
+    end
     enrollments.create!(:course_id => course.id)
     enrollment = Enrollment.find_by_course_id(course.id)
     enrollment.role = "teacher"
     enrollment.save!
-  end
-
-  def unenroll!(course)
-    enrollments.find_by_course_id(course).destroy
   end
 
   def teacher?(course)

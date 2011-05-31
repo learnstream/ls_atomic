@@ -15,7 +15,7 @@ LsAtomic::Application.routes.draw do |map|
 
   resources :components
   resources :problems 
-  resources :enrollments, :only => [:create, :destroy]
+  resources :enrollments, :only => [:create, :update, :destroy]
   resources :steps
   resources :step_components, :only => [:create, :destroy]
 

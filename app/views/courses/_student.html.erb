@@ -1,0 +1,7 @@
+<li><%=link_to "edit" <<  user.email, user %>
+<% if current_user.can_edit?(@course) %>
+  <div id= "add_teacher_form">
+    <%= render :partial => 'courses/make_teacher', :locals => { :course => @course, :user => user  } %>
+</div>
+<% end %>
+</li>
