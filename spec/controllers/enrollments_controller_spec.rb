@@ -56,5 +56,21 @@ describe EnrollmentsController do
       response.should redirect_to courses_path
     end
   end
+
+  describe "PUT 'update'" do
+     before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      @course = Factory(:course)
+      @user.enroll!(@course)
+      @enrollment = @user.enrollments.find_by_course_id(@course)
+    end
+
+    it "should update the role" do
+      put :update, :id => @enrollment, :enrollment => { :role => "teacher"}
+      @enrollment.reload
+      @enrollment.role.should == "teacher"
+    end
+  end
 end
 

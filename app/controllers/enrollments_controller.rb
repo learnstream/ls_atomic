@@ -12,4 +12,17 @@ class EnrollmentsController < ApplicationController
     current_user.unenroll!(@course)
     redirect_to courses_path
   end
+
+  def update
+    @enrollment = Enrollment.find(params[:id])
+    @enrollment.role = params[:enrollment][:role]
+    @course = @enrollment.course
+    if @enrollment.save
+      redirect_to @course
+    else
+      flash[:error] = "You did something wrong!"
+      redirect_to @course 
+    end
+  end
+
 end
