@@ -1,5 +1,8 @@
 class EnrollmentsController < ApplicationController
   before_filter :authenticate
+  before_filter :only => [:update] do
+    check_permissions(params)
+  end
 
   def create
     @course = Course.find(params[:enrollment][:course_id])
@@ -31,5 +34,19 @@ class EnrollmentsController < ApplicationController
       redirect_to @course 
     end
   end
+
+  private
+
+    def check_permissions(params)
+
+      course = Enrollment.find(params[:id]).course unless params[:id].nil? 
+      course ||= Course.find(params[:enrollment][:course_id])
+
+      unless current_user.can_edit?(course)
+        flash[:error] = "You don't have permissions!"
+        redirect_to root_path
+        return false
+      end 
+    end
 
 end

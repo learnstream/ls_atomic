@@ -255,6 +255,11 @@ describe CoursesController do
         response.should have_selector("a", :href => user_path(@user), 
                                            :content => @user.email)
       end
+
+      it "should not allow non teachers to set students as teachers" do
+        get :users, :id => @course
+        response.should_not have_selector( "input", :value => "Make teacher")
+      end
     end
 
     describe "when teacher signed in" do
@@ -270,7 +275,7 @@ describe CoursesController do
 
       it "should allow teachers to set students as teachers" do
         get :users, :id => @course
-        response.should have_selector( "a", :href => user_path(@user2) )
+        response.should have_selector( "input", :value => "Make teacher" )
       end 
     end
   end

@@ -58,19 +58,57 @@ describe EnrollmentsController do
   end
 
   describe "PUT 'update'" do
-     before(:each) do
-      @user = Factory(:user)
-      test_sign_in(@user)
-      @course = Factory(:course)
-      @user.enroll!(@course)
-      @enrollment = @user.enrollments.find_by_course_id(@course)
+     
+    describe "for admins" do
+      before(:each) do
+        @user = Factory(:admin)
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll!(@course)
+        @enrollment = @user.enrollments.find_by_course_id(@course)
+      end
+
+      it "should update the role" do
+        put :update, :id => @enrollment, :enrollment => { :role => "teacher"}
+        @enrollment.reload
+        @enrollment.role.should == "teacher"
+      end
     end
 
-    it "should update the role" do
-      put :update, :id => @enrollment, :enrollment => { :role => "teacher"}
-      @enrollment.reload
-      @enrollment.role.should == "teacher"
+    describe "for teachers" do
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll_as_teacher!(@course)
+        @enrollment = @user.enrollments.find_by_course_id(@course)
+      end
+
+      it "should update the role" do
+        put :update, :id => @enrollment, :enrollment => { :role => "teacher"}
+        @enrollment.reload
+        @enrollment.role.should == "teacher"
+      end
     end
+
+    describe "for students" do
+
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll!(@course)
+        @enrollment = @user.enrollments.find_by_course_id(@course)
+      end
+
+      it "should not update the role" do
+        put :update, :id => @enrollment, :enrollment => { :role => "teacher"}
+        @enrollment.reload
+        @enrollment.role.should_not == "teacher"
+      end
+    end
+
+
   end
 end
 
