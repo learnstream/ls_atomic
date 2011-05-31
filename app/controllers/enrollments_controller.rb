@@ -14,9 +14,16 @@ class EnrollmentsController < ApplicationController
   end
 
   def update
+        
     @enrollment = Enrollment.find(params[:id])
-    @enrollment.role = params[:enrollment][:role]
     @course = @enrollment.course
+    
+    if params['teacher']
+      @enrollment.role = "teacher"
+    elsif params.nil? == false 
+      @enrollment.role = params[:enrollment][:role]
+    end
+
     if @enrollment.save
       redirect_to @course
     else

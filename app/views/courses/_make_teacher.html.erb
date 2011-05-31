@@ -1,4 +1,20 @@
-<%= form_for user.enrollments.build(:course_id => @course, :user_id => @user, :role => "teacher") do |f| %>
+<%= form_for(user.enrollments.find_by_course_id(course)) do |f| %>
+<%= submit_tag "Make teacher", :name => "teacher" %>
+<% end %>
+
+<% if false %> <!-- commented out code -->
+
+<% link_to "Make Teacher", 
+          user_path(@user, 
+                    :enrollment => { :role => "teacher"}),
+          :action => :update, 
+          :confirm => "Are you sure?"%>
+
+<%= link_to user, 
+        {:controller => "enrollments", :action =>:hpdate, :enrollment => user.enrollments.find(course)}, { :role => "teacher", :course_id => @course.id, :user_id => user } %>
+
+
+<%= form_for user.enrollments.update(:course_id => @course.id, :user_id => @user, :role => "teacher") do |f| %>
     <div><%= f.hidden_field :role %></div>
     <div><%= f.hidden_field :course_id %></div>
     <div><%= f.hidden_field :user_id %></div>
@@ -6,7 +22,6 @@
 <% end %>
 
 
-<% if false %> <!-- commented out code -->
 <div class = "actions">  
     <%= user.enroll_as_teacher!(@course) do |f| %>
     <div><%= f.hidden_field :course_id %></div>
