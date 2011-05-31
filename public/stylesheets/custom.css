@@ -107,11 +107,19 @@ a.signup_button {
   width: 500px; 
 }
 
+#study-area #steps-header {
+  font-weight: bold;
+}
+
 #study-area #problem {
   font-size: 1.5em;
   padding: 30px;
   margin-left: auto;
   margin-right: auto;
+}
+
+#answer-area {
+  margin-top: 15px;
 }
 
 #answer-area a {
