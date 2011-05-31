@@ -107,4 +107,16 @@ describe User do
       end
     end
   end
+
+  describe "memories" do 
+    
+    before(:each) do
+      @component = Factory(:component)
+    end
+
+    it "should be able to remember a new component" do
+      @user.remember(@component)
+      @memory = @user.memories.find_by_component_id(@component).should_not be_nil
+    end
+  end
 end

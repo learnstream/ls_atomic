@@ -6,7 +6,6 @@ namespace :db do
     make_courses_and_components
     enroll_users
     make_problems_and_steps
-    make_memories
   end
 end
 
@@ -60,12 +59,6 @@ def enroll_users
   normal_users[0..2].each { |u| u.enroll!(courses[0]) }
   normal_users[3..5].each { |u| u.enroll!(courses[1]) }
   normal_users[6..8].each { |u| u.enroll!(courses[2]) }
-end
-
-def make_memories
-  user = User.find_by_email("foo-1@bar.com")
-  component = Component.find_by_name("Newton's second law")
-  user.memories.create!(:component_id => component.id) 
 end
 
 def make_problems_and_steps

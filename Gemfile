@@ -9,6 +9,7 @@ gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
 gem 'authlogic'
 gem 'will_paginate', '3.0.pre2'
 gem 'escape_utils'
+gem 'jquery-rails', '>= 1.0.3'
 
 group :development, :test do
   gem 'jasmine'

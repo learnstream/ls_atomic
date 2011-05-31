@@ -12,6 +12,7 @@ class StudyController < ApplicationController
         @step = @component.steps.first
         @problem = @step.problem
         @steps = @problem.steps.steps_up_to(@step.order_number)
+        @index = @problem.steps.index(@step) + 1
       end
     else 
       @component = nil

@@ -54,6 +54,17 @@ class ComponentsController < ApplicationController
     @component = Component.new if signed_in?
   end
 
+  def describe
+    @component = Component.find(params[:id])
+    respond_to do |format|
+      format.json { render :json => {
+        :text => @component.description
+      }
+      }
+    end
+  end
+
+
   private
 
     def check_permissions(params)

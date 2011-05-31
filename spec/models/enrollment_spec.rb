@@ -52,7 +52,36 @@ describe Enrollment do
       @enrollment.role = nil 
       @enrollment.should_not be_valid
     end
+  end
 
+  describe "for courses with existing component" do
 
+    before(:each) do
+      @component = Factory(:component, :course_id => @course)
+    end
+
+    describe "for students" do
+
+      before(:each) do
+        @enrollment.role = "student"
+        @enrollment.save
+      end
+
+      it "should create memories for each the course components" do
+        @user.memories.find_by_component_id(@component).should_not be_nil
+      end
+    end
+
+    describe "for teachers" do
+
+      before(:each) do 
+        @enrollment.role = "teacher"
+        @enrollment.save
+      end
+
+      it "should not create memories" do
+        @user.memories.find_by_component_id(@component).should be_nil
+      end
+    end
   end
 end

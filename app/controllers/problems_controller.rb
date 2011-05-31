@@ -40,7 +40,6 @@ class ProblemsController < ApplicationController
       flash[:error] = "You fucked up!" #change...?
       redirect_to problem_path
     end
- 
   end
 
   def edit
@@ -51,6 +50,12 @@ class ProblemsController < ApplicationController
   def show
     @problem = Problem.find(params[:id])
     @steps = @problem.steps
+  end
+
+  def show_step
+    @problem = Problem.find(params[:id])
+    @step = @problem.steps[Integer(params[:step_number])-1]
+    render :json => @step
   end
 
   private
@@ -66,6 +71,4 @@ class ProblemsController < ApplicationController
         return false
       end 
     end
-
-
 end
