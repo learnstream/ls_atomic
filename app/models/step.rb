@@ -10,7 +10,7 @@ class Step < ActiveRecord::Base
   validates :text, :presence => true
   validates_inclusion_of :order_number, :in => 1..1000
 
-  scope :steps_up_to, lambda { |n| where("order_number <= ?", n) }
+  scope :steps_up_to, lambda { |n| where("order_number < ?", n) }
 
   def related?(component)
     step_components.find_by_component_id(component)

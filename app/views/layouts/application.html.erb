@@ -5,9 +5,9 @@
   <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen'  %>
   <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
   <%= stylesheet_link_tag 'custom' %>
-  <script type="text/javascript"
-      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" %>
+  <%= javascript_include_tag "rails" %>
+  <%= javascript_include_tag "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
