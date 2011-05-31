@@ -205,6 +205,12 @@ describe CoursesController do
       response.should be_success
     end
 
+    it "should not have create course link for learners" do
+      test_sign_in(@user)
+      get :index
+      response.should_not have_selector("a", :href => new_course_path)
+    end
+
     it "should have create course link for creators" do
       test_sign_in(@creator)
       get :index
@@ -255,6 +261,28 @@ describe CoursesController do
         response.should have_selector("a", :href => user_path(@user), 
                                            :content => @user.email)
       end
+
+      it "should not allow non teachers to set students as teachers" do
+        get :users, :id => @course
+        response.should_not have_selector( "input", :value => "Make teacher")
+      end
+    end
+
+    describe "when teacher signed in" do
+    
+      before(:each) do
+        @user = Factory(:user)
+        @user2 = Factory(:user, :email => "someotheremail@email.com") 
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll_as_teacher!(@course)
+        @user2.enroll!(@course)
+      end
+
+      it "should allow teachers to set students as teachers" do
+        get :users, :id => @course
+        response.should have_selector( "input", :value => "Make teacher" )
+      end 
     end
   end
 end
