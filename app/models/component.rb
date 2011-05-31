@@ -12,4 +12,9 @@ class Component < ActiveRecord::Base
   has_many :step_components, :dependent => :destroy
   has_many :steps, :through => :step_components
 
+  def after_create 
+    course.students.each do |student|
+      student.remember(self)
+    end
+  end
 end

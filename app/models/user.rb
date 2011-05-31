@@ -56,4 +56,8 @@ class User < ActiveRecord::Base
   def can_edit?(course)
     teacher?(course) || admin?
   end
+
+  def remember(component)
+    memories.create(:component_id => component.id)    
+  end
 end

@@ -5,6 +5,5 @@ $(document).ready(function() {
       $("#rate-button-panel").show();
       $("#show-answer").hide();
       $("#study-item").text("What did you think?");
-
     });
  });

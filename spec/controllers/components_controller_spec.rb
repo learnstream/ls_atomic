@@ -170,6 +170,15 @@ describe ComponentsController do
           response.should redirect_to(course_path(@course.id))
         end
       end 
+
+      it "should add memory for component to all students in course" do
+        @student = Factory(:user)
+        @student.enroll!(@course)
+
+        lambda do
+          post :create, :component => @attr
+        end.should change(@student.memories, :count).by(1)
+      end
     end
 
     describe "for teacher" do
@@ -299,8 +308,6 @@ describe ComponentsController do
         @component.description.should == "Calabi-Yau Manifolds are incomprehensible"
       end   
     end  
-
-
   end
 
   describe "GET 'edit'" do
@@ -330,6 +337,7 @@ describe ComponentsController do
         response.should have_selector("form")
       end
     end
+    
     describe "for admin" do
 
       before(:each) do
@@ -366,7 +374,15 @@ describe ComponentsController do
         response.should_not have_selector("form")
       end
     end
+  end
 
+  describe "GET 'describe'" do
 
+    it "should return the component's description for a valid component" do
+      @component = Factory(:component)
+      @expected = { :text => @component.description }.to_json
+      get :describe, :id => @component, :format => :json
+      response.body.should == @expected
+    end
   end
 end

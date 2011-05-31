@@ -1,20 +1,30 @@
-<div id="problem" class="round"><%= problem.statement %></div><br />
+<% if @problem %> 
+<div id="problem"><%= @problem.statement %></div><br />
 
 <div id="steps-header">Steps</div><br />
 
 <ol>
   <%= render steps %>
-  <li><p id="answer" class="round">...</p></li>
+  <li><p id="answer">...</p></li>
 </ol>
 
 <div id="study-item">What is the next step?</div>
 
 <div id="answer-area">
-  <%= link_to "Show", show_step_problem_path(@problem, :step_number => @index ), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
-  <div id="rate-button-panel">
-  <a id="rate-miss" href="#" class="round">Miss</a>
-  <a id="rate-hard" href="#" class="round">Hard</a>
-  <a id="rate-good" href="#" class="round">Good</a>
-  <a id="rate-easy" href="#" class="round">Easy</a>
+<%= link_to "Show", show_step_problem_path(@problem, :step_number => @index ), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+  
+<% elsif @component %>
+  <div id="problem"><%= component.name %></div>
+  <div id="answer"></div>
+
+<div id="answer-area">
+  <%= link_to "Show", describe_component_path(@component, :format => :json), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+<% end %>
+
+ <div id="rate-button-panel">
+    <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
+    <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round", :method => :get %>
+    <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
+    <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
   </div>
 </div>

@@ -66,7 +66,7 @@ describe StudyController do
       
       it "should show the component description" do
         get :index, :course_id => @course
-        response.should have_selector("div", :content => @component.description)
+        response.should have_selector("div", :content => @component.name)
       end
     end 
   end
