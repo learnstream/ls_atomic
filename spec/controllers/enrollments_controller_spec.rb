@@ -73,6 +73,16 @@ describe EnrollmentsController do
         @enrollment.reload
         @enrollment.role.should == "teacher"
       end
+
+      it "should allow you to remove other teachers" do
+        @user2 = Factory(:user, :email => "yetanotheremail@email.com")
+        @user2.enroll_as_teacher!(@course)
+        @enrollment2 = @user2.enrollments.find_by_course_id(@course)
+        put :update, :id => @enrollment2, :enrollment => { :role => "student" }
+        @enrollment2.reload
+        @enrollment2.role.should == "student"
+      end
+        
     end
 
     describe "for teachers" do
@@ -88,6 +98,15 @@ describe EnrollmentsController do
         put :update, :id => @enrollment, :enrollment => { :role => "teacher"}
         @enrollment.reload
         @enrollment.role.should == "teacher"
+      end
+      
+      it "should not allow you to remove other teachers" do
+        @user2 = Factory(:user, :email => "yetanotheremail@email.com")
+        @user2.enroll_as_teacher!(@course)
+        @enrollment2 = @user2.enrollments.find_by_course_id(@course)
+        put :update, :id => @enrollment2, :enrollment => { :role => "student" }
+        @enrollment2.reload
+        @enrollment2.role.should == "teacher"
       end
     end
 

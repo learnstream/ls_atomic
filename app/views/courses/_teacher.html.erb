@@ -1,0 +1,7 @@
+<li><%=link_to user.email, user %>
+<% if (current_user.can_edit?(@course) && ( (current_user == user) || (current_user.perm == "admin")))%>
+  <div id= "remove_self_teacher_form">
+    <%= render :partial => 'remove_self_as_teacher', :locals => { :course => @course, :user => user  } %>
+</div>
+<% end %>
+</li>

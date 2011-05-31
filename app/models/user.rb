@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
       unenroll!(course)
     end
     enrollments.create!(:course_id => course.id)
-    enrollment = Enrollment.find_by_course_id(course.id)
+    enrollment = self.enrollments.find_by_course_id(course.id)
     enrollment.role = "teacher"
     enrollment.save!
   end
