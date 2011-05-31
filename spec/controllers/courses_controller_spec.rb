@@ -137,6 +137,35 @@ describe CoursesController do
         get :show, :id => @course
         response.should have_selector("h2", :content => "Create new component")
       end
+      it "should have a problem add form" do
+        test_sign_in(@teacher)
+        get :show, :id => @course
+        response.should have_selector("h2", :content => "Create new problem")
+      end
+
+    end 
+
+    describe "for admins" do
+
+      before(:each) do
+        @admin = Factory(:admin)
+      end
+
+      it "should be a admin" do
+        @admin.should be_admin
+      end
+
+      it "should have a component add form" do
+        test_sign_in(@admin)
+        get :show, :id => @course
+        response.should have_selector("h2", :content => "Create new component")
+      end
+
+      it "should have a problem add form" do
+        test_sign_in(@admin)
+        get :show, :id => @course
+        response.should have_selector("h2", :content => "Create new problem")
+      end
     end 
 
     describe "for students" do
@@ -145,10 +174,16 @@ describe CoursesController do
         @user.enroll!(@course)
       end
 
-      it "should not have a form for knowledge components" do
+      it "should not have a form for adding knowledge components" do
         get :show, :id => @course
         response.should_not have_selector("h2", :content => "Create new component")
       end
+
+      it "should not have a form for adding problems" do
+        get :show, :id => @course
+        response.should_not have_selector("h2", :content => "Create new problem")
+      end
+
     end
 
   end
@@ -226,23 +261,28 @@ describe CoursesController do
         response.should have_selector("a", :href => user_path(@user), 
                                            :content => @user.email)
       end
-    end
-  end
 
-  describe "GET 'study'" do
-
-    before(:each) do
-      @user = Factory(:user)
-      test_sign_in(@user)
-      @course = Factory(:course)
-      @component = Factory(:component, :course_id => @course)
-      @memory = @user.memories.create!(:component_id => @component)
+      it "should not allow non teachers to set students as teachers" do
+        get :users, :id => @course
+        response.should_not have_selector( "input", :value => "Make teacher")
+      end
     end
 
-    it "should be successful" do
-      get :study, :id => @course
-      response.should be_success
+    describe "when teacher signed in" do
+    
+      before(:each) do
+        @user = Factory(:user)
+        @user2 = Factory(:user, :email => "someotheremail@email.com") 
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll_as_teacher!(@course)
+        @user2.enroll!(@course)
+      end
+
+      it "should allow teachers to set students as teachers" do
+        get :users, :id => @course
+        response.should have_selector( "input", :value => "Make teacher" )
+      end 
     end
   end
 end
-

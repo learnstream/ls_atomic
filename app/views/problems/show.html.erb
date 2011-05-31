@@ -2,14 +2,11 @@
 
 <p><b> Problem statement: </b> <%= @problem.statement %> </p>
 
-
+<% if current_user.can_edit?(@course) %>
 <p><%= link_to "Edit", edit_problem_path %></p>
+<% end %>
 
-<div>
-  <h2>Steps:</h2>
-  <ul>
-    <%= render @steps %>
-  <ul>
-  <h3>Add new step:</h3>
-    <%= render 'shared/step_form' %>
-</div>
+<h2>Steps:</h2>
+<ol>
+<%= render @problem.steps %>
+</ol>

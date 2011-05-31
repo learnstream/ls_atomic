@@ -11,10 +11,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])   
     @components = @course.components
     @problems = @course.problems
-    @problem = Problem.new
     
-    if current_user.teacher?(@course)
+    if current_user.can_edit?(@course)
       @component = Component.new
+      @problem = Problem.new
     end
   end
 
@@ -42,18 +42,6 @@ class CoursesController < ApplicationController
     render 'show_users'
   end
 
-  def study
-    @course = Course.find(params[:id])
-    @memory = current_user.memories.in_course(@course).due_now.first
-    if @memory
-      @component = @memory.component
-    else 
-      @component = nil
-    end
-
-    render 'study'
-  end
-
   private
 
     def authorized_user
@@ -61,5 +49,4 @@ class CoursesController < ApplicationController
         redirect_to(@current_user)
       end
     end
-
 end

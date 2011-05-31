@@ -13,12 +13,12 @@ class User < ActiveRecord::Base
   end
 
   def taught_courses
-    taught_enrollments = enrollments.find(:all, { :conditions => { :role => "teacher" }})
+    taught_enrollments = enrollments.where(:role => "teacher")
     taught_enrollments.map { |e| e.course }
   end
 
   def studied_courses
-    studied_enrollments = enrollments.find(:all, { :conditions => { :role => "student" }})
+    studied_enrollments = enrollments.where(:role => "student")
     studied_enrollments.map { |e| e.course }
   end
 
@@ -30,19 +30,30 @@ class User < ActiveRecord::Base
     enrollments.create!(:course_id => course.id)
   end
 
+  def unenroll!(course)
+    enrollments.find_by_course_id(course).destroy
+  end
+
   def enroll_as_teacher!(course)
+    if enrolled?(course)
+      unenroll!(course)
+    end
     enrollments.create!(:course_id => course.id)
     enrollment = Enrollment.find_by_course_id(course.id)
     enrollment.role = "teacher"
     enrollment.save!
   end
 
-  def unenroll!(course)
-    enrollments.find_by_course_id(course).destroy
-  end
-
   def teacher?(course)
     enrollment = enrollments.find_by_course_id(course)
     enrollment and enrollment.role == "teacher"
+  end
+  
+  def admin?
+    perm == "admin"
+  end
+  
+  def can_edit?(course)
+    teacher?(course) || admin?
   end
 end

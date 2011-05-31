@@ -69,4 +69,20 @@ describe Step do
       @step.should_not be_related(@component)
     end
   end
+
+  describe "using steps_up_to scope" do
+    before(:each) do
+      @problem = Factory(:problem)
+      @step = Factory(:step, :problem_id => @problem.id)
+      @step2 = Factory(:step, :problem_id => @problem.id, :order_number => 2)
+    end
+
+    it "should include the correct steps" do
+      @problem.steps.steps_up_to(1).should include(@step)
+    end
+
+    it "should not include the later steps" do
+      @problem.steps.steps_up_to(1).should_not include(@step2)
+    end
+  end
 end

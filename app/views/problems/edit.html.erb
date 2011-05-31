@@ -12,3 +12,12 @@
     <%= f.submit "Update" %>
   </div>
 <% end %>
+
+<h2>Steps</h2>
+<% @problem.steps.each do |step| %> 
+  <%= render :partial => 'steps/editable_step', :locals => { :step => step } %>
+<% end %>
+
+Add new step:
+<%= render 'shared/step_form' %>
+

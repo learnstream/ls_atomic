@@ -8,7 +8,7 @@
 <% unless @students.empty? %>
   <h2>Students</h2>
   <ul class = "users">
-    <%= render @students , :as => :user %>
+    <%= render :partial => "student", :collection => @students, :as => :user , :locals => { :course => @course, :user => @user }%>
   </ul>
   <%= will_paginate @students %>
 <% end %>
