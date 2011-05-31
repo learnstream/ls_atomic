@@ -12,7 +12,8 @@
 #
 src_files:
   - public/javascripts/jquery.js
-  - public/javascripts/*.js
+  - spec/javascripts/helpers/jasmine-jquery-1.2.0.js
+  - public/javascripts/YourMom.js
 
 # stylesheets
 #
@@ -39,7 +40,7 @@ stylesheets:
 #   - helpers/**/*.js
 #
 helpers:
-  - helpers/**/*.js
+#  - helpers/jasmine-jquery-1.2.0.js
 
 # spec_files
 #
