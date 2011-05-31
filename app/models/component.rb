@@ -8,8 +8,7 @@ class Component < ActiveRecord::Base
                    :length => { :maximum => 134}, 
                    :uniqueness => true 
   validates :course_id, :presence => true
-  # validates :description, :presence => true, :length => [ :maximum => 10000000}
   has_many :step_components, :dependent => :destroy
   has_many :steps, :through => :step_components
-
+  has_many :videos
 end
