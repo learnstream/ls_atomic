@@ -82,8 +82,15 @@ describe ProblemsController do
       response.should be_success 
     end 
 
-    it "should have an 'edit' link for authorized users" do
+    it "should have an 'edit' link for admins" do
       test_sign_in(@admin)
+      get :show, :id => @problem
+      response.should have_selector("a", :content => "Edit")
+    end
+
+    it "should have an 'edit' link for teachers" do
+      test_sign_in(@user)
+      @user.enroll_as_teacher!(@course)
       get :show, :id => @problem
       response.should have_selector("a", :content => "Edit")
     end

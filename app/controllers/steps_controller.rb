@@ -4,7 +4,6 @@ class StepsController < ApplicationController
    check_permissions(params)
   end
 
-
   def create
     problem_id = params[:step][:problem_id]
     if problem_id.nil?
@@ -21,10 +20,9 @@ class StepsController < ApplicationController
       @step = problem.steps.build(params[:step].merge(:order_number => largest_step_number + 1 ))
       @step.save
       flash[:success] = "Step created!"
-      redirect_to problem_path(problem_id)
+      redirect_to edit_step_path(@step)
     end
   end
-
 
   def destroy
   end
@@ -47,8 +45,7 @@ class StepsController < ApplicationController
     end
     step.save
     flash[:success] = "Step updated!"
-    redirect_to problem_path(problem_id)
-
+    redirect_to edit_problem_path(step.problem)
   end
 
   def edit

@@ -1,3 +1,5 @@
+
+<%= link_to "Back to problem", edit_problem_path(@step.problem) %>
 <%= form_for(@step) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">

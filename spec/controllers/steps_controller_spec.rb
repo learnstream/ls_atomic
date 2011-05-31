@@ -1,12 +1,14 @@
 require 'spec_helper'
 
 describe StepsController do
+  render_views
 
   describe "POST 'create'" do
 
     before(:each) do
       @course = Factory(:course)
       @problem = Factory(:problem, :course_id => @course.id)
+      @attr = { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
     end
 
     describe "for authorized users" do
@@ -18,21 +20,22 @@ describe StepsController do
 
       it "should create a step correctly" do
         lambda do
-          post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
-          #response.should be_valid
+          post :create, :step => @attr 
         end.should change(Step, :count).by(1)
       end
 
       it "should associate step with a particular problem" do
-        post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
+        post :create, :step => @attr
         @problem.reload
         @problem.steps.length.should == 1
       end
 
-      it "should re-render the problem template" do
-        post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
-        response.should redirect_to(@problem) 
+      it "should redirect to the edit step page" do
+        post :create, :step => @attr
+        @step = @problem.steps.first
+        response.should redirect_to edit_step_path(@step)
       end
+
     end
 
     describe "for teachers" do
@@ -45,7 +48,7 @@ describe StepsController do
 
       it "should also create a step" do
         lambda do
-          post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
+          post :create, :step => @attr
           #response.should be_valid
         end.should change(Step, :count).by(1)
       end
@@ -61,8 +64,7 @@ describe StepsController do
 
       it "should not create a step" do
         lambda do
-          post :create, :step => { :name => "Step 1", :text => "Do this first", :problem_id => @problem.id }
-          #response.should be_valid
+          post :create, :step => @attr
         end.should_not change(Step, :count)
       end
     end
@@ -106,6 +108,11 @@ describe StepsController do
         @step.reload
         @step.order_number.should == 2
       end
+
+      it "should redirect to the edit problem page" do
+        put :update, :id => @step, :step => {:name => @step.name, :text => "New text" }
+        response.should redirect_to edit_problem_path(@step.problem)
+      end
     end
 
     describe "for teachers" do
@@ -138,4 +145,18 @@ describe StepsController do
       end
     end
   end  
+
+  describe "GET 'edit'" do
+
+    before(:each) do
+      @admin = Factory(:admin)
+      test_sign_in(@admin)
+      @step = Factory(:step)
+    end 
+
+    it "should have a link back to the problem" do
+      get :edit, :id => @step
+      response.should have_selector("a", :content => "Back to problem")
+    end
+  end
 end

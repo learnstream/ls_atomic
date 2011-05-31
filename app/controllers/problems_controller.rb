@@ -50,6 +50,7 @@ class ProblemsController < ApplicationController
   def show
     @problem = Problem.find(params[:id])
     @steps = @problem.steps
+    @course = @problem.course
   end
 
   def show_step
