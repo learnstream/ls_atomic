@@ -78,11 +78,11 @@ describe Step do
     end
 
     it "should include the correct steps" do
-      @problem.steps.steps_up_to(1).should include(@step)
+      @problem.steps.steps_up_to(2).should include(@step)
     end
 
     it "should not include the later steps" do
-      @problem.steps.steps_up_to(1).should_not include(@step2)
+      @problem.steps.steps_up_to(2).should_not include(@step2)
     end
   end
 end

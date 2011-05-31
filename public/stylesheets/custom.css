@@ -105,12 +105,35 @@ a.signup_button {
   background: #edf;
   padding: 15px;
   margin-top: 50px;
-  margin-left: 100px;
   width: 500px; 
 }
+
+#study_area #problem {
+  font-size: 1.5em;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #09c;
+  background: #fff;
+}
+
+#study_area ol {
+  font-size: 1.8em;
+}
+
+#study_area ol p {
+  font-size: .6em;
+}
+
 #study_item {
   color: #09c;
   font-size: 2em;
-  padding-bottom: 30px;
+  margin: auto;
+}
+
+#answer_area a {
+  font-size: 1.2em;
+  padding: 5px 15px 5px 15px;
+  background: #eee;
   margin: auto;
 }

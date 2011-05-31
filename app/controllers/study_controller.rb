@@ -1,4 +1,5 @@
 class StudyController < ApplicationController
+  before_filter :authenticate
 
   def index
     @course = Course.find(params[:course_id])
@@ -9,6 +10,8 @@ class StudyController < ApplicationController
 
       unless @component.steps.empty? 
         @step = @component.steps.first
+        @problem = @step.problem
+        @steps = @problem.steps.steps_up_to(@step.order_number)
       end
     else 
       @component = nil

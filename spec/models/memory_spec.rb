@@ -39,7 +39,7 @@ describe Memory do
   end
 
   it "should default to being due today" do 
-    @memory.due.to_date.should == Time.now.to_date 
+    @memory.due.to_date.should == Time.now.utc.to_date 
   end
 
   it "should default to having never been viewed" do
@@ -75,15 +75,15 @@ describe Memory do
   describe "using due_before scope" do
     
     it "should return memories actually due now" do
-      @memory.due = Date.yesterday.to_time
+      @memory.due = Time.now.utc.to_date - 1.day
       @memory.save
-      @user.memories.due_before(Time.now).should include(@memory)
+      @user.memories.due_before(Time.now.utc).should include(@memory)
     end
 
     it "should not return memories not due now" do
-      @memory.due = Date.tomorrow.to_time
+      @memory.due = Time.now.utc.to_date + 1.day
       @memory.save
-      @user.memories.due_before(Time.now).should_not include(@memory)
+      @user.memories.due_before(Time.now.utc).should_not include(@memory)
     end
   end
 
@@ -111,11 +111,11 @@ describe Memory do
     end
 
     it "should update the due date correctly" do
-      @memory.due.to_date.should == Time.now.to_date + 1.day
+      @memory.due.to_date.should == Time.now.utc.to_date + 1.day
     end
 
     it "should have last been viewed today" do
-      @memory.last_viewed.to_date.should == Time.now.to_date
+      @memory.last_viewed.to_date.should == Time.now.utc.to_date
     end
   end
 
@@ -140,7 +140,7 @@ describe Memory do
     end
 
     it "should have last been viewed today" do
-      @memory.last_viewed.to_date.should == Time.now.to_date
+      @memory.last_viewed.to_date.should == Time.now.utc.to_date
     end
 
     it "should have last been viewed later on the second viewing" do
@@ -182,7 +182,7 @@ describe Memory do
     end
 
     it "should have the correct due date" do
-      @memory.due.to_date.should == Time.now.to_date
+      @memory.due.to_date.should == Time.now.utc.to_date
     end
   end
   
@@ -220,7 +220,7 @@ describe Memory do
     end
 
     it "should be due today" do
-      @memory.due.to_date.should == Time.now.to_date
+      @memory.due.to_date.should == Time.now.utc.to_date
     end
   end
 end
