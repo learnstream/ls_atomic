@@ -119,11 +119,14 @@ ActiveRecord::Schema.define(:version => 20110531203634) do
 
   create_table "videos", :force => true do |t|
     t.string   "url"
-    t.integer  "start_time", :default => 0
+    t.integer  "start_time",   :default => 0
     t.integer  "end_time"
     t.string   "name"
+    t.integer  "component_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "videos", ["component_id"], :name => "index_videos_on_component_id"
 
 end

@@ -13,6 +13,7 @@ LsAtomic::Application.routes.draw do |map|
     resources :study, :only => [:index]
   end
 
+  resources :videos, :only => [:create, :update, :destroy]
   resources :components
   resources :problems 
   resources :enrollments, :only => [:create, :update, :destroy]

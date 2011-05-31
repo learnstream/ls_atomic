@@ -1,3 +1,5 @@
+<%= javascript_include_tag "YouTubeEmbed" %>
+
 <h1>
   <%= @component.name%>
 </h1>
@@ -8,4 +10,8 @@
 
 <% if current_user and current_user.teacher?(@component.course) %>
 <p> <%= link_to "Edit", edit_component_path %></p>
+<% end %>
+<% if @video %>
+<div id="video-embed-url" class="hidden"><%= @video.url %></div>
+<div id="video-embed-area"></div>
 <% end %>

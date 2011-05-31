@@ -1,4 +1,6 @@
 class Video < ActiveRecord::Base
+  attr_accessible :name, :url, :start_time, :end_time, :component_id
+
   belongs_to :component
   belongs_to :step
 

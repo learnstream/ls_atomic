@@ -23,6 +23,10 @@ section {
   background: #fff;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Links */
 
 a {
