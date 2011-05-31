@@ -92,8 +92,6 @@ describe User do
         enrollment.role.should == "teacher"
       end
 
-      it "should be able to assign another teacher" 
-
       it "should return that course with taught_courses" do
         @teacher.taught_courses.include?(@course).should == true
       end

@@ -89,6 +89,15 @@ describe EnrollmentsController do
         @enrollment.reload
         @enrollment.role.should == "teacher"
       end
+      
+      it "should not allow you to remove other teachers" do
+        @user2 = Factory(:user, :email => "yetanotheremail@email.com")
+        @user2.enroll_as_teacher!(@course)
+        @enrollment2 = @user2.enrollments.find_by_course_id(@course)
+        put :update, :id => @enrollment2, :enrollment => { :role => "student" }
+        @enrollment2.reload
+        @enrollment2.role.should == "teacher"
+      end
     end
 
     describe "for students" do

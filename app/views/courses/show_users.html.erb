@@ -2,7 +2,7 @@
 <% unless @teachers.empty? %>
   <h2>Teachers</h2>
   <ul class = "users">
-    <%= render @teachers , :as => :user %>
+    <%= render :partial => "teacher", :collection => @teachers , :as => :user, :locals => {:course => @course, :user => @user } %>
   </ul>
 <% end %>
 <% unless @students.empty? %>

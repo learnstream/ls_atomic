@@ -1,0 +1,5 @@
+<%= form_for(user.enrollments.find_by_course_id(course)) do |f| %>
+<%= submit_tag "Remove "<<user.email<<" teacher", :name => "student" %>
+<% end %>
+
+

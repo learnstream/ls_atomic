@@ -23,12 +23,19 @@ class EnrollmentsController < ApplicationController
     
     if params['teacher']
       @enrollment.role = "teacher"
+    elsif params['student']
+      @enrollment.role = "student" unless (current_user != @enrollment.user && current_user.perm != "admin")
     elsif params.nil? == false 
-      @enrollment.role = params[:enrollment][:role]
+      # FIXME: Tests are updating parameters in a different manner from what is actually sent
+      # from the view.  
+      newrole = params[:enrollment][:role]
+      if (newrole == "teacher" || current_user == @enrollment.user)
+        @enrollment.role = newrole
+      end
     end
 
     if @enrollment.save
-      redirect_to @course
+      redirect_to :controller => :courses, :id => @course, :action => :users
     else
       flash[:error] = "You did something wrong!"
       redirect_to @course 
