@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe ProblemsController do
   render_views
+
   describe "POST 'create'" do
 
     before(:each) do
@@ -10,6 +11,7 @@ describe ProblemsController do
     end
 
     describe "generic failure" do
+      
       before(:each) do
         @user = test_sign_in(Factory(:admin))
       end
@@ -32,11 +34,9 @@ describe ProblemsController do
       it "should not create a problem" do
         lambda do
           post :create, :problem => @attr.merge(:course_id => @course)
-          #response.should redirect_to problem_path 
         end.should_not change(Problem, :count)
       end
     end
-
 
     describe "for teachers" do
 
@@ -49,7 +49,6 @@ describe ProblemsController do
       it "should create a problem" do
         lambda do
           post :create, :problem => @attr.merge(:course_id => @course)
-          #response.should redirect_to problem_path 
         end.should change(Problem, :count).by(1)
       end
     end
@@ -64,7 +63,6 @@ describe ProblemsController do
       it "should create a problem" do
         lambda do
           post :create, :problem => @attr.merge(:course_id => @course)
-          #response.should redirect_to problem_path 
         end.should change(Problem, :count).by(1)
       end
     end
@@ -161,4 +159,25 @@ describe ProblemsController do
       end
     end
   end  
+
+  describe "GET 'show_step'" do
+
+    before(:each) do 
+      @user = Factory(:user)
+      @course = Factory(:course)
+      test_sign_in(@user)
+      @user.enroll!(@course)
+      @problem = Factory(:problem)
+      @step = Factory(:step, :problem_id => @problem, :text => "hello")
+    end
+
+    it "should return json with the step text" do
+      @expected = {
+        :text => @step.text
+      }.to_json
+
+      get :show_step, :id => @problem, :step_number => 1 
+      response.body.should == @expected 
+    end
+  end
 end

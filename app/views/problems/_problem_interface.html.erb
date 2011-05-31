@@ -2,9 +2,17 @@
 <h3>Steps</h3>
 <ol>
   <%= render steps %>
-  <li><p class="round">...</p></li>
+  <li><p id="answer" class="round">...</p></li>
 </ol>
 
-<div id="study_item">What is the next step?</div>
+<div id="study-item">What is the next step?</div>
 
-<div id="answer_area"><a href="#" class="round">Show</a></div>
+<div id="answer-area">
+  <%= link_to "Show", show_step_problem_path(@problem, :step_number => @index ), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+  <div id="rate-button-panel">
+  <a id="rate-miss" href="#" class="round">Miss</a>
+  <a id="rate-hard" href="#" class="round">Hard</a>
+  <a id="rate-good" href="#" class="round">Good</a>
+  <a id="rate-easy" href="#" class="round">Easy</a>
+  </div>
+</div>

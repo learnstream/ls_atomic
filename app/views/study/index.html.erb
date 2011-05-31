@@ -1,8 +1,8 @@
-<h1><%= @course.name %></h1>
-<div id="study_area" class="round">
+Studying <%= link_to @course.name, course_path(@course) %>
+<div id="study-area">
   <% if @memory %>
     <% if not @step %>
-      <div id="study_item">
+      <div id="study-item">
         <%= @component.description %>
       </div>
       <div>

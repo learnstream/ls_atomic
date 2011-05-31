@@ -10,6 +10,7 @@ class Step < ActiveRecord::Base
   validates :text, :presence => true
   validates_inclusion_of :order_number, :in => 1..1000
 
+  default_scope order("order_number")
   scope :steps_up_to, lambda { |n| where("order_number < ?", n) }
 
   def related?(component)
@@ -22,6 +23,10 @@ class Step < ActiveRecord::Base
 
   def unrelate!(component)
     step_components.find_by_component_id(component).destroy
+  end
+
+  def as_json(options={})
+    { :text => self.text }
   end
 end
 
