@@ -8,7 +8,9 @@ class Enrollment < ActiveRecord::Base
   validates :course_id, :presence => true
   validates :role, :presence => true
 
-  def after_create
+  after_create :remember_components
+
+  def remember_components
     if role == "student" 
       course.components.each do |component|
        user.remember(component)
