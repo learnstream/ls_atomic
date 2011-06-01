@@ -64,7 +64,7 @@ class ProblemsController < ApplicationController
       course ||= Course.find(params[:problem][:course_id]) 
 
       unless current_user.can_edit?(course)
-        flash[:error] = "You don't have permissions!"
+        flash[:error] = "You don't have permission to do that!"
         redirect_to root_path
         return false
       end 

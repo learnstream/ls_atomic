@@ -16,9 +16,9 @@ describe ProblemsController do
         @user = test_sign_in(Factory(:admin))
       end
 
-      it "should not create a problem with a blank name" do
+      it "should not create a problem with a blank statement" do
         lambda do
-          post :create, :problem => @attr.merge(:name => "")
+          post :create, :problem => @attr.merge(:statement => "")
         end.should change(Problem, :count).by(0)
       end  
     end
@@ -116,11 +116,11 @@ describe ProblemsController do
         test_sign_in(@user)
       end
 
-      it "should not update to a blank name" do
-        old_problem = @problem.name
-        put :update, :id => @problem, :problem => { :name => "" }
+      it "should not update to a blank statement" do
+        old_problem_statement = @problem.statement
+        put :update, :id => @problem, :problem => { :statement => "" }
         @problem.reload
-        @problem.name.should == old_problem
+        @problem.statement.should == old_problem_statement
       end
 
       it "should properly update the name" do
@@ -186,6 +186,37 @@ describe ProblemsController do
 
       get :show_step, :id => @problem, :step_number => 1 
       response.body.should == @expected 
+    end
+  end
+
+  describe "GET 'edit'" do
+
+    describe "for admins" do
+      before(:each) do
+        @user = Factory(:admin)
+        test_sign_in(@user)
+        @problem = Factory(:problem)
+      end
+
+      it "should be successsful" do
+        get 'edit', :id => @problem
+        response.should be_success
+      end
+    end
+
+    describe "for students" do
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @course = Factory(:course)
+        @user.enroll!(@course)
+        @problem = Factory(:problem)
+      end
+
+      it "should deny access to edit" do
+        get 'edit', :id => @problem
+        response.should_not be_success
+      end
     end
   end
 end

@@ -8,9 +8,10 @@ describe Problem do
   end
   
   describe "failure" do
-    it "should require a name" do
-      no_name_problem = Problem.new(@attr.merge(:name => ""))
-      no_name_problem.should_not be_valid
+
+    it "should require a statement" do
+      no_statement_problem = Problem.new(@attr.merge(:statement => ""))
+      no_statement_problem.should_not be_valid
     end
 
     it "should reject a name that is too long" do
