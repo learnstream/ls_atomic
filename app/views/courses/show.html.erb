@@ -1,7 +1,7 @@
 <h1>Course: <%= @course.name %></h1>
 <p><b>Description:</b> <%= @course.description %></p>
 
-<p><%= link_to "Study", course_study_index_path(@course) %></p>
+<p><%= link_to "Study", course_study_index_path(@course), :class => "study_button round" %></p>
 
 <h2>Components</h2>
 <ul>

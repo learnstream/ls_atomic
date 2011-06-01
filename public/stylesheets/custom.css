@@ -91,6 +91,20 @@ a.signup_button {
 }
 
 
+
+/* Study button */
+
+a.study_button {
+  color: #fff;
+  font-weight: bold;
+  padding: 15px 30px 15px 30px;
+  background: #0000ff;
+  margin: 15px;
+}
+
+a.study_button:hover {
+  background: #66f;
+}
 /* Round corners */
 
 .round {
