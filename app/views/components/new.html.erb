@@ -1,16 +1,14 @@
-<%= form_for @problem, :html => {:multipart => true}  do |f| %>
+<h1>New component for <%= @course.name %></h1>
+
+<%= form_for @component do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :statement%><br />
-    <%= f.text_area :statement%>
-  </div>
-  <div class = "field">
-    <%= f.label :image %>
-    <%= f.file_field :image %>
+    <%= f.label :description%><br />
+    <%= f.text_area :description%>
   </div>
   <% if @course %>
     <%= f.hidden_field :course_id, :value => @course.id %>

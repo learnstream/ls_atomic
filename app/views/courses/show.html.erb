@@ -9,8 +9,7 @@
 </ul>
 
 <% if current_user.can_edit?(@course) %>
-<h2>Create new component</h2>
-<%= render 'shared/component_form' %>
+  <%= link_to "Add component", new_component_path(:course_id => @course.id)  %>
 <% end %>
 
 <h2> Problems </h2>
@@ -19,6 +18,5 @@
 </ul>
 
 <% if current_user.can_edit?(@course) %>
-<h2>Create new problem</h2>
-<%= render 'shared/problem_form' %>
+  <%= link_to "Add problem", new_problem_path(:course_id => @course.id) %>
 <% end %>

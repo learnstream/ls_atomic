@@ -135,12 +135,12 @@ describe CoursesController do
       it "should have a form" do
         test_sign_in(@teacher)
         get :show, :id => @course
-        response.should have_selector("h2", :content => "Create new component")
+        response.should have_selector("a", :content => "Add component")
       end
       it "should have a problem add form" do
         test_sign_in(@teacher)
         get :show, :id => @course
-        response.should have_selector("h2", :content => "Create new problem")
+        response.should have_selector("a", :content => "Add problem")
       end
 
     end 
@@ -158,13 +158,13 @@ describe CoursesController do
       it "should have a component add form" do
         test_sign_in(@admin)
         get :show, :id => @course
-        response.should have_selector("h2", :content => "Create new component")
+        response.should have_selector("a", :content => "Add component")
       end
 
       it "should have a problem add form" do
         test_sign_in(@admin)
         get :show, :id => @course
-        response.should have_selector("h2", :content => "Create new problem")
+        response.should have_selector("a", :content => "Add problem")
       end
     end 
 
@@ -176,12 +176,12 @@ describe CoursesController do
 
       it "should not have a form for adding knowledge components" do
         get :show, :id => @course
-        response.should_not have_selector("h2", :content => "Create new component")
+        response.should_not have_selector("a", :content => "Add component")
       end
 
       it "should not have a form for adding problems" do
         get :show, :id => @course
-        response.should_not have_selector("h2", :content => "Create new problem")
+        response.should_not have_selector("a", :content => "Add problem")
       end
 
     end

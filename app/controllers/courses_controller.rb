@@ -11,11 +11,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])   
     @components = @course.components
     @problems = @course.problems
-    
-    if current_user.can_edit?(@course)
-      @component = Component.new
-      @problem = Problem.new
-    end
   end
 
   def create

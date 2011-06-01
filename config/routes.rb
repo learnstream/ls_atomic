@@ -6,6 +6,7 @@ LsAtomic::Application.routes.draw do
       get :courses
     end
   end
+
   resources :courses do
     member do
       get :users
@@ -24,6 +25,7 @@ LsAtomic::Application.routes.draw do
       get :show_step
     end
   end
+
   resources :videos, :only => [:create, :update, :destroy]
   resources :enrollments, :only => [:create, :update, :destroy]
   resources :steps do
@@ -45,7 +47,6 @@ LsAtomic::Application.routes.draw do
   match '/signout', :to => 'user_sessions#destroy'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
-  match '/db', :to => 'components#list', :as => 'db'
    
   root :to => 'pages#home'
 

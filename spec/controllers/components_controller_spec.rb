@@ -73,40 +73,6 @@ describe ComponentsController do
     end
   end
 
-  describe "GET 'list'" do
-    before(:each) do
-      @course = Factory(:course)
-      @c1 = Factory(:component, :name => "Newton's first law", :course => @course)
-      @c2 = Factory(:component, :name => "Newton's second law", :course => @course)
-      @c3 = Factory(:component, :name => "Newton's third law", :course => @course)
-    end
-
-    it "should be successful" do
-      get :list
-      response.should be_success
-    end
-
-    it "should list all of the components" do
-      get :list
-      response.should have_selector("a", :content => @c1.name)
-      response.should have_selector("a", :content => @c2.name)
-      response.should have_selector("a", :content => @c3.name)
-    end
-
-    describe "for logged in user" do
-      before(:each) do
-        @user = Factory(:user)
-        test_sign_in(@user)
-      end
-
-      it "should contain a form" do
-        get :list
-        response.should have_selector("h2", :content => "Create new component")
-        response.should have_selector("form")
-      end
-    end
-  end
-
   describe "POST 'create'" do
 
     describe "failure" do
@@ -121,11 +87,6 @@ describe ComponentsController do
         lambda do
           post :create, :component => @attr
         end.should_not change(Component, :count)
-      end
-
-      it "should render list page" do
-        post :create, :component => @attr
-        response.should render_template('components/list')
       end
     end
 
@@ -344,11 +305,6 @@ describe ComponentsController do
         get :edit, :id => @component
         response.should be_success
       end
-
-      it "should have a form" do
-        get :edit, :id => @component
-        response.should have_selector("form")
-      end
     end
     
     describe "for admin" do
@@ -361,11 +317,6 @@ describe ComponentsController do
       it "should render the edit view" do
         get :edit, :id => @component
         response.should be_success
-      end
-
-      it "should have a form" do
-        get :edit, :id => @component
-        response.should have_selector("form")
       end
     end
 
@@ -381,11 +332,6 @@ describe ComponentsController do
         get :edit, :id => @component
         response.should_not be_success
       end
-
-      it "should not have a form" do
-        get :edit, :id => @component
-        response.should_not have_selector("form")
-      end
     end
   end
 
@@ -396,6 +342,38 @@ describe ComponentsController do
       @expected = { :text => @component.description }.to_json
       get :describe, :id => @component, :format => :json
       response.body.should == @expected
+    end
+  end
+
+  describe "GET 'new'" do
+
+    before(:each) do
+      @course = Factory(:course)
+    end
+
+    describe "for authorized users" do
+      before(:each) do
+        @user = Factory(:admin)
+        test_sign_in(@user)
+      end
+
+      it "should be successful" do
+        get :new, :course_id => @course 
+        response.should be_success
+      end
+    end
+
+    describe "for students" do
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @user.enroll!(@course)
+      end
+
+      it "should not be successful" do
+        get :new, :course_id => @course
+        response.should_not be_success
+      end
     end
   end
 end

@@ -18,13 +18,14 @@ class ProblemsController < ApplicationController
       flash[:success] = "Problem created!"
       redirect_to @problem
     else
-      flash[:error] = "Problem creation failed. Be sure to include the problem statement."
-      redirect_to course_path(course)
+      @course = course
+      render 'new'
     end
    end
 
   def new
-   @problem = Problem.new  
+    @course = Course.find(params[:course_id])
+    @problem = Problem.new  
   end
 
   def update
@@ -61,6 +62,7 @@ class ProblemsController < ApplicationController
     def check_permissions(params)
 
       course = Problem.find(params[:id]).course unless params[:id].nil? 
+      course ||= Course.find(params[:course_id]) unless params[:course_id].nil?
       course ||= Course.find(params[:problem][:course_id]) 
 
       unless current_user.can_edit?(course)

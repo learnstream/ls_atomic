@@ -1,8 +1,13 @@
 class ComponentsController < ApplicationController
   before_filter :authenticate, :only => [ :create, :destroy, :update, :edit ]
-  before_filter :only => [:create, :edit, :update] do 
+  before_filter :only => [:create, :edit, :update, :new] do 
     check_permissions(params)
   end 
+
+  def new 
+    @course = Course.find(params[:course_id])
+    @component = Component.new
+  end
  
   def create
     course_id = params[:component][:course_id]
@@ -14,9 +19,8 @@ class ComponentsController < ApplicationController
       flash[:success] = "Knowledge component created!"
       redirect_to course_path(course_id)
     else
-      flash[:error] = "Something went wrong... contact customer support!"
-      @components = Component.all
-      render 'components/list' 
+      @course = course
+      render 'new'
     end
   end
 
@@ -28,7 +32,6 @@ class ComponentsController < ApplicationController
     @video = Video.new
   end
 
-
   def update
     course_id = params[:component][:course_id]
     @component = Component.find(params[:id])
@@ -39,7 +42,7 @@ class ComponentsController < ApplicationController
       flash[:success] = "Knowledge component updated!"
       redirect_to component_path
     else
-      redirect_to edit_component_path
+      render 'edit'
     end
   end
 
@@ -47,11 +50,6 @@ class ComponentsController < ApplicationController
     @component = Component.find(params[:id])
     @video = @component.videos[0]
     @title = @component.name
-  end
-
-  def list
-    @components = Component.all
-    @component = Component.new if signed_in?
   end
 
   def describe
@@ -67,8 +65,8 @@ class ComponentsController < ApplicationController
   private
 
     def check_permissions(params)
-
       course = Component.find(params[:id]).course unless params[:id].nil? 
+      course ||= Course.find(params[:course_id]) unless params[:course_id].nil?
       course ||= Course.find(params[:component][:course_id])
 
       unless current_user.can_edit?(course)
