@@ -151,3 +151,20 @@ a.study_button:hover {
   margin: auto;
 }
 
+/* COMPONENT show page */
+
+.video-name {
+  font-size: 1.5em;
+  padding: 10px 0px;
+}
+
+.video-name a {
+  font-size: 0.75em;
+}
+
+
+
+
+
+
+
