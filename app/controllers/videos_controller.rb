@@ -9,10 +9,6 @@ class VideosController < ApplicationController
     component = Component.find(component_id)
 
     @video = component.videos.build(params[:video])
-
-                                    #:url => params[:video][:url], 
-                                    #:start_time => params[:video][:start_time],
-                                    #:end_time => params[:video][:end_time])
     @video.save!
  
     if @video.save
