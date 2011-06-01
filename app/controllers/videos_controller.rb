@@ -1,6 +1,8 @@
 class VideosController < ApplicationController
   before_filter :authenticate
-  #add authentication for teachers/admins...
+  before_filter do
+    check_permissions(params)
+  end
 
   def create
     component_id = params[:video][:component_id]
@@ -27,5 +29,20 @@ class VideosController < ApplicationController
 
   def update
   end
+
+  private
+
+    def check_permissions(params)
+
+      course = Video.find(params[:id]).component.course unless params[:id].nil? 
+      course ||= Component.find(params[:video][:component_id]).course
+
+      unless current_user.can_edit?(course)
+        flash[:error] = "You don't have permissions!"
+        redirect_to root_path
+        return false
+      end 
+    end
+
 
 end

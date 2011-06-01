@@ -26,6 +26,7 @@ class ComponentsController < ApplicationController
 
   def edit
     @component = Component.find(params[:id])
+    @video = Video.new
   end
 
 

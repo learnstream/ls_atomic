@@ -8,7 +8,7 @@
   <%= @component.description %>
 </p>
 
-<% if current_user and current_user.teacher?(@component.course) %>
+<% if current_user and current_user.can_edit?(@component.course) %>
 <p> <%= link_to "Edit", edit_component_path %></p>
 <% end %>
 <% if @video %>
