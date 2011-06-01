@@ -1,4 +1,4 @@
-LsAtomic::Application.routes.draw do |map|
+LsAtomic::Application.routes.draw do 
 
   resources :user_sessions
   resources :users do
