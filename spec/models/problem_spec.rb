@@ -23,8 +23,5 @@ describe Problem do
       no_course_problem = Problem.new(@attr.merge(:course_id => ""))
       no_course_problem.should_not be_valid
     end
-
-
   end
-
 end
