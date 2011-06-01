@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527185319) do
+ActiveRecord::Schema.define(:version => 20110531203634) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -116,5 +116,17 @@ ActiveRecord::Schema.define(:version => 20110527185319) do
     t.string   "last_login_ip"
     t.string   "perm",                :default => "learner"
   end
+
+  create_table "videos", :force => true do |t|
+    t.string   "url"
+    t.integer  "start_time",   :default => 0
+    t.integer  "end_time"
+    t.string   "name"
+    t.integer  "component_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "videos", ["component_id"], :name => "index_videos_on_component_id"
 
 end

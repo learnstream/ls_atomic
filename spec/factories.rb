@@ -49,3 +49,11 @@ Factory.define :step do |step|
   step.order_number         1
   step.association          :problem, :factory => :problem
 end
+
+Factory.define :video do |video|
+  video.name                "The Best Video"
+  video.url                 "http://www.youtube.com/watch?v=U7mPqycQ0tQ" 
+  video.start_time          0
+  video.end_time            60
+  video.association         :component, :factory => :component
+end

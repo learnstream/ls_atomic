@@ -26,6 +26,7 @@ class ComponentsController < ApplicationController
 
   def edit
     @component = Component.find(params[:id])
+    @video = Video.new
   end
 
 
@@ -46,6 +47,7 @@ class ComponentsController < ApplicationController
 
   def show
     @component = Component.find(params[:id])
+    @video = @component.videos[0]
     @title = @component.name
   end
 

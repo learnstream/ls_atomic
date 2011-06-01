@@ -24,6 +24,7 @@ LsAtomic::Application.routes.draw do |map|
       get :show_step
     end
   end
+  resources :videos, :only => [:create, :update, :destroy]
   resources :enrollments, :only => [:create, :update, :destroy]
   resources :steps do
     member do
