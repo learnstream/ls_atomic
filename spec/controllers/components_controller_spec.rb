@@ -70,6 +70,13 @@ describe ComponentsController do
         get :show, :id => @component
         response.should have_selector("div", :id => "video-embed-url", :content => @video.url)
       end 
+
+      it "should display all  related videos" do
+        @video = @component.videos.create!(:name => "Awesome example video", :url => "http://www.youtube.com/watch?v=U7mPqycQ0tQ", :start_time => 0, :end_time => 60)
+        get :show, :id => @component
+        response.should have_selector("div", :content => "Awesome example video")
+      end
+
     end
   end
 
@@ -293,6 +300,45 @@ describe ComponentsController do
       post :create, :component => @attr.merge(:course_id => @course.id)
     end
 
+    describe "for authorized users" do
+
+      before(:each) do
+        @user = Factory(:admin)
+        test_sign_in(@user)
+      end
+
+      it "should render the edit view" do
+        get :edit, :id => @component
+        response.should be_success
+      end
+
+      it "should have a form" do
+        get :edit, :id => @component
+        response.should have_selector("form")
+      end
+
+      it "should display related videos" do
+        @video = @component.videos.create!(:description => "Awesome example video", :url => "http://www.youtube.com/watch?v=U7mPqycQ0tQ", :start_time => 0, :end_time => 60)
+        get :edit, :id => @component
+        response.should have_selector("div", :content => "Awesome example video")
+      end
+
+      it "should have a form to add new videos" do
+        get :edit, :id => @component
+        response.should have_selector("label", :content => "Url")
+      end
+
+      it "should have a link to edit videos" do
+        get :edit, :id => @component
+        response.should have_selector("a", :content => "Edit")
+      end
+      
+      it "should have a link to remove videos" do
+        get :edit, :id => @component
+        response.should have_selector("a", :content => "Delete")
+      end
+    end
+
     describe "for teachers" do
 
       before(:each) do
@@ -307,18 +353,6 @@ describe ComponentsController do
       end
     end
     
-    describe "for admin" do
-
-      before(:each) do
-        @user = Factory(:admin)
-        test_sign_in(@user)
-      end
-
-      it "should render the edit view" do
-        get :edit, :id => @component
-        response.should be_success
-      end
-    end
 
     describe "for students" do
 

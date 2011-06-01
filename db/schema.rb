@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20110601171111) do
     t.integer  "component_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   add_index "videos", ["component_id"], :name => "index_videos_on_component_id"

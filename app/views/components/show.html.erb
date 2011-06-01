@@ -11,11 +11,11 @@
 <% if current_user and current_user.can_edit?(@component.course) %>
 <p> <%= link_to "Edit", edit_component_path %></p>
 <% end %>
-<% if @video %>
-<div id="video-parameters" class="hidden">
-  <div id="video-embed-url"><%= @video.url %></div>
-  <div id="video-start-time"><%= @video.start_time %></div>
-  <div id="video-end-time"><%= @video.end_time %></div>
-</div>
+
+<h3>Related Videos:</h3>
+
 <div id="video-embed-area"></div>
-<% end %>
+
+<div id="related-videos">
+<%= render :partial => 'videos/video', :collection => @videos, :locals => { :edit => false } %>
+</div>

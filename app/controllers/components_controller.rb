@@ -30,6 +30,7 @@ class ComponentsController < ApplicationController
   def edit
     @component = Component.find(params[:id])
     @video = Video.new
+    @videos = @component.videos
   end
 
   def update
@@ -48,7 +49,7 @@ class ComponentsController < ApplicationController
 
   def show
     @component = Component.find(params[:id])
-    @video = @component.videos[0]
+    @videos = @component.videos
     @title = @component.name
   end
 
@@ -57,7 +58,7 @@ class ComponentsController < ApplicationController
     respond_to do |format|
       format.json { render :json => {
         :text => @component.description
-      }
+        }
       }
     end
   end
