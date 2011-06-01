@@ -6,21 +6,29 @@ class StepsController < ApplicationController
 
   def create
     problem_id = params[:step][:problem_id]
-    if problem_id.nil?
+    problem = Problem.find(problem_id)
+
+    if problem.nil?
       flash[:error] = "Something went wrong... you need to add steps to problems!"
       redirect_to root_path
       return
+    end
+
+    problem = Problem.find(problem_id)
+    if problem.steps.last.nil?
+      largest_step_number = 0
     else
-      problem = Problem.find(problem_id)
-      if problem.steps.last.nil?
-        largest_step_number = 0
-      else
-        largest_step_number = problem.steps.last.order_number
-      end
-      @step = problem.steps.build(params[:step].merge(:order_number => largest_step_number + 1 ))
-      @step.save
+      largest_step_number = problem.steps.last.order_number
+    end
+
+    @step = problem.steps.build(params[:step].merge(:order_number => largest_step_number + 1 ))
+    
+    if @step.save
       flash[:success] = "Step created!"
       redirect_to edit_step_path(@step)
+    else
+      flash[:error] = "Step could not be created. Make sure it isn't blank."
+      redirect_to edit_problem_path(problem)
     end
   end
 
@@ -28,24 +36,15 @@ class StepsController < ApplicationController
   end
 
   def update
-    step = Step.find(params[:id])
-    name = params[:step][:name]
-    text = params[:step][:text]
-    order_number = params[:step][:order_number]
-    problem_id = step.problem_id 
-
-    step.name = name
-    step.order_number = order_number unless order_number.nil?
-    if text.blank?
-      flash[:error] = "You can't have a blank step! Delete it if you dare...."
-      redirect_to problem_path(problem_id) 
-      return
+    @step = Step.find(params[:id])
+       
+    if @step.update_attributes(params[:step])
+      flash[:success] = "Step updated!"
+      redirect_to edit_problem_path(@step.problem)
     else
-      step.text = text
+      @components = @step.problem.course.components
+      render 'edit'
     end
-    step.save
-    flash[:success] = "Step updated!"
-    redirect_to edit_problem_path(step.problem)
   end
 
   def edit

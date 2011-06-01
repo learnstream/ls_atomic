@@ -4,7 +4,6 @@ class StepComponentsController < ApplicationController
     check_permissions(params)
   end
 
-
   def create
     @step = Step.find(params[:step_component][:step_id])
     @component = Component.find(params[:step_component][:component_id])
@@ -32,7 +31,4 @@ class StepComponentsController < ApplicationController
         return false
       end 
     end
-
-
-
 end

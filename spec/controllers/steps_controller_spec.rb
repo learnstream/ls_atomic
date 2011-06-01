@@ -85,10 +85,9 @@ describe StepsController do
       end
 
       it "should not update to blank text" do
-        old_step = @step.text
         put :update, :id => @step, :step => { :text => "" }
         @step.reload
-        @step.text.should == old_step
+        @step.text.should_not == ""
       end
 
       it "should properly update the name" do
