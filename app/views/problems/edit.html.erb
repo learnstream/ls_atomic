@@ -18,9 +18,11 @@
 <% end %>
 
 <h2>Steps</h2>
+<ol>
 <% @problem.steps.each do |step| %> 
   <%= render :partial => 'steps/editable_step', :locals => { :step => step } %>
 <% end %>
+</ol>
 
 Add new step:
 <%= render 'shared/step_form' %>
