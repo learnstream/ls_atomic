@@ -5,8 +5,7 @@ class Problem < ActiveRecord::Base
   has_many :steps, :order => 'order_number ASC'
 
   validates :name, :presence => true,
-                   :length => { :maximum => 134}, 
-                   :uniqueness => true 
+                   :length => { :maximum => 134} 
   validates :course_id, :presence => true
 end
 
