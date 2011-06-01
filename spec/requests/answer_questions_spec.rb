@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "AnswerQuestions" do
+describe "Studying" do
 
   before(:each) do
     @user = Factory(:user)
@@ -23,18 +23,16 @@ describe "AnswerQuestions" do
     click_button "Sign in"
   end
 
-  describe "study mode" do
  
-   it "should be accessible from the course page" do
-      visit course_path(@course)
-      click_link "Study"
-      page.should have_content("Studying #{@course.name}")
-    end
+ it "should be accessible from the course page" do
+    visit course_path(@course)
+    click_link "Study"
+    page.should have_content("Studying #{@course.name}")
+  end
 
-    pending "should reveal an answer after clicking the show button" do
-      visit course_study_index_path(@course)
-      click_link "Show"
-      page.should have_content("Answer:")
-    end
+  pending "should reveal an answer after clicking the show button" do
+    visit course_study_index_path(@course)
+    click_link "Show"
+    page.should have_content("Answer:")
   end
 end
