@@ -13,6 +13,18 @@ function getYoutubeID(url, name) {
     return null;
 }
 
+function check_end_time() {
+  var time = ytplayer.getCurrentTime();
+  var end_time = parseInt($("#video-end-time").text());
+  if (time > end_time){
+    ytplayer.pauseVideo();
+  }
+}
+
+function onYouTubePlayerReady(playerId) {
+      ytplayer = document.getElementById("ytPlayer");
+    }
+
 $(document).ready(function(){
 
 var videoURL = $("#video-embed-url").text();
@@ -22,6 +34,8 @@ var params = { allowScriptAccess: "always" };
 var atts = { id: "ytPlayer" };
 swfobject.embedSWF("http://www.youtube.com/v/" + videoID + "&enablejsapi=1&playerapiid=player1&start=" + videoStart, 
                    "video-embed-area", "480", "295", "8", null, null, params, atts); 
+
+var timer = window.setInterval(check_end_time, 1000);
 
 });
 
