@@ -180,6 +180,7 @@ describe ProblemsController do
 
     it "should return json with the step text" do
       @expected = {
+        :id => @step.id,
         :text => @step.text
       }.to_json
 

@@ -25,7 +25,11 @@ LsAtomic::Application.routes.draw do |map|
     end
   end
   resources :enrollments, :only => [:create, :update, :destroy]
-  resources :steps
+  resources :steps do
+    member do
+      get :help
+    end
+  end
   resources :step_components, :only => [:create, :destroy]
 
   resources :memories do

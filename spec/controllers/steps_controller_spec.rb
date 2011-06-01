@@ -159,4 +159,20 @@ describe StepsController do
       response.should have_selector("a", :content => "Back to problem")
     end
   end
+
+  describe "GET 'help'" do
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      @component1 = Factory(:component)
+      @step = Factory(:step)
+      @step.relate!(@component1)
+    end
+
+    it "should have links for the related components" do
+      @expected = [{:name => @component1.name, :path => component_path(@component1)}].to_json
+      get :help, :id => @step, :format => :json
+      response.body.should == @expected
+    end
+  end
 end

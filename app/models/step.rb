@@ -26,7 +26,7 @@ class Step < ActiveRecord::Base
   end
 
   def as_json(options={})
-    { :text => self.text }
+    { :id => self.id, :text => self.text }
   end
 end
 

@@ -53,6 +53,19 @@ class StepsController < ApplicationController
     @components = @step.problem.course.components
   end
 
+  def help
+    @step = Step.find(params[:id])
+    @component_list = []
+    @step.components.each do |component|
+      @component_list << { :name => component.name,
+                           :path => component_path(component) }
+    end
+
+    respond_to do |format|
+      format.json { render :json => @component_list.to_json }
+    end
+  end
+
   private
 
     def check_permissions(params)

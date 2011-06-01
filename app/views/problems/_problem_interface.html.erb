@@ -8,7 +8,7 @@
   <li><p id="answer">...</p></li>
 </ol>
 
-<div id="study-item">What is the next step?</div>
+<div id="study-item" class="header">What is the next step?</div>
 
 <div id="answer-area">
 <%= link_to "Show", show_step_problem_path(@problem, :step_number => @index ), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
@@ -27,4 +27,11 @@
     <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
     <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
   </div>
+</div>
+
+<div id="help">
+  <p class="header">Need help?</p>
+  <p>This step uses the following components:</p>
+<ul id="help-items">
+</ul>
 </div>
