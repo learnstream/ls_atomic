@@ -25,9 +25,29 @@ class VideosController < ApplicationController
   end
 
   def destroy
+    video = Video.find(params[:id])
+    component_id = video.component_id
+    video.delete
+    flash[:success] = "Video deleted!"
+    redirect_to edit_component_path(component_id)
   end
 
   def update
+    @video = Video.find(params[:id])
+    @component = @video.component
+    @video.attributes = params[:video]
+
+    if @video.save
+      flash[:success] = "Video updated!"
+      redirect_to edit_component_path(@component)
+    else
+      render 'edit'
+    end 
+  end
+
+  def edit
+    @video = Video.find(params[:id])
+    @component = @video.component
   end
 
   private
