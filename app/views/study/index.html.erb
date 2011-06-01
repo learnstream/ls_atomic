@@ -6,10 +6,6 @@ Studying <%= link_to @course.name, course_path(@course) %>
    <% else %>
       <%= render :partial => "problems/problem_interface", :locals => { :problem => @problem, :steps => @steps } %>
     <% end %>
-    <div>
-      Due <%= time_ago_in_words(@memory.due) %> ago.
-    </div>
-
   <% else %>
     <p>Congrats! Nothing is due, go have some fun!</p>
   <% end %>
