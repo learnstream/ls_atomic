@@ -31,7 +31,12 @@ describe ComponentsController do
     it "should include the name of the component" do
       get :show, :id => @component
       response.should have_selector("h1", :content => @component.name)
-    end  
+    end 
+
+    it "should not have related video headers if no videos have been added" do
+      get :show, :id => @component
+      response.should_not have_selector("h3", :content => "Related Videos:")
+    end
 
     describe "for teachers" do 
       before(:each) do

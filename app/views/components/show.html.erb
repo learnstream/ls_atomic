@@ -12,6 +12,7 @@
 <p> <%= link_to "Edit", edit_component_path %></p>
 <% end %>
 
+<% if ! @videos.empty? %>
 <h3>Related Videos:</h3>
 
 <div id="video-embed-area"></div>
@@ -19,3 +20,4 @@
 <div id="related-videos">
 <%= render :partial => 'videos/video', :collection => @videos, :locals => { :edit => false } %>
 </div>
+<% end %>
