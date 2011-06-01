@@ -6,10 +6,13 @@ $(document).ready(function() {
       $("#answer").html(data.text);
       $("#answer").fadeIn('slow');
       $("#rate-button-panel").show();
-      $("#help").show();
       $("#show-answer").hide();
       $("#study-item").text("What did you think?");
       $.get("/steps/" + data.id + "/help/", function(comp_data) {
+        if (comp_data.length > 0) {
+          $("#help").show();
+        }
+
         for (i = 0; i < comp_data.length; i++) {
           comp = comp_data[i];
           var old_html = $("#help-items").html();
