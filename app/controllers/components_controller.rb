@@ -5,7 +5,6 @@ class ComponentsController < ApplicationController
   end 
  
   def create
-
     course_id = params[:component][:course_id]
     course = Course.find(course_id)
 
@@ -40,8 +39,7 @@ class ComponentsController < ApplicationController
       flash[:success] = "Knowledge component updated!"
       redirect_to component_path
     else
-      flash[:error] = "You fucked up!" 
-      redirect_to component_path
+      redirect_to edit_component_path
     end
   end
 
@@ -66,7 +64,6 @@ class ComponentsController < ApplicationController
     end
   end
 
-
   private
 
     def check_permissions(params)
@@ -80,5 +77,4 @@ class ComponentsController < ApplicationController
         return false
       end 
     end
-
 end

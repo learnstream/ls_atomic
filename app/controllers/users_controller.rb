@@ -54,5 +54,4 @@ class UsersController < ApplicationController
     def is_admin? 
       @current_user.perm == "admin"
     end
-
 end
