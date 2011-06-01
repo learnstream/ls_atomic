@@ -62,4 +62,50 @@ describe VideosController do
       end
     end
   end
+
+  describe "GET 'edit'" do
+    describe "for authorized users" do
+      it "should render the edit page" do
+        @admin = test_sign_in(Factory(:admin))
+        @video = Factory(:video, :component_id => @component)
+        get :edit, :id => @video
+        response.should be_success
+      end
+    end
+
+    describe "for unauthorized users" do
+      it "should not render the edit page" do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @video = Factory(:video, :component_id => @component)
+        @user.enroll!(@video.component.course)
+        get :edit, :id => @video
+        response.should_not be_success
+      end
+    end
+  end
+
+  describe "DELETE 'destroy'" do
+    describe "for authorized users" do
+      it "should delete the video" do
+        @admin = test_sign_in(Factory(:admin))
+        @video = Factory(:video, :component_id => @component)
+        lambda do
+          delete :destroy, :id => @video
+        end.should change(Video, :count).by(-1)
+      end
+    end
+
+    describe "for unauthorized users" do
+      it "should not delete the video" do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @video = Factory(:video, :component_id => @component)
+        @user.enroll!(@video.component.course)
+        lambda do
+          delete :destroy, :id => @video
+        end.should_not change(Video, :count)
+      end
+    end
+  end
 end
