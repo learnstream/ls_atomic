@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110601171111) do
+ActiveRecord::Schema.define(:version => 20110601221029) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -130,8 +130,10 @@ ActiveRecord::Schema.define(:version => 20110601171111) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+    t.integer  "step_id"
   end
 
   add_index "videos", ["component_id"], :name => "index_videos_on_component_id"
+  add_index "videos", ["step_id"], :name => "index_videos_on_step_id"
 
 end
