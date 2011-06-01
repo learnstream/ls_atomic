@@ -337,6 +337,7 @@ describe ComponentsController do
       @component = Factory(:component)
       @attr = { :name => @component.name, :description => @component.description }
       post :create, :component => @attr.merge(:course_id => @course.id)
+      @video = Factory(:video, :component_id => @component)
     end
 
     describe "for authorized users" do
