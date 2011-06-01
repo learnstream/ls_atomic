@@ -28,18 +28,29 @@ class UsersController < ApplicationController
   end
 
   def update
-    if params[:user][:perm]
-      if is_admin?
-        user = User.find(params[:id])
-        user.perm = params[:user][:perm]
-        user.save
+    if not is_admin?
+      flash[:error] = "You don't have permission to do that!"
+      redirect_to @current_user
+      return 
+    end
 
-        flash[:success] = "Changed user role!"
-        redirect_to users_path 
-      else
-        flash[:error] = "You don't have permission to do that!"
-        redirect_to @current_user
-      end
+    user = User.find(params[:id])
+    new_perm = params[:user][:perm]
+    
+    if user == current_user and new_perm != "admin"
+      flash[:error] = "You cannot remove yourself as admin"
+      redirect_to users_path
+      return
+    end
+
+    user.perm = new_perm
+
+    if user.save
+      flash[:success] = "Changed user role!"
+      redirect_to users_path 
+    else 
+      flash[:error] = "Couldn't update user role"
+      redirect_to users_path
     end
   end
 
