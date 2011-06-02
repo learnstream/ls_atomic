@@ -41,14 +41,14 @@ describe "Problem creation" do
   it "should allow components to be related to steps" do
     @component = Factory(:component, :course_id => @course)
     @problem = Factory(:problem, :course_id => @course)
-    @step = Factoy(:step, :problem_id => @problem)
+    @step = Factory(:step, :problem_id => @problem)
     visit problem_path(@problem)
     click_link "Edit"
     click_link "edit"
-    fill_in "Components", :with => @component.name
+    fill_in "Components", :with => @component.id
     click_button "Update"
     click_link "edit"
-    page.should have_content(@component.name)
+    @step.should be_related(@component)
   end
 
   it "should allow steps to be edited" do

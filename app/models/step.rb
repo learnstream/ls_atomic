@@ -1,6 +1,6 @@
 class Step < ActiveRecord::Base
-  attr_accessible :name, :text, :order_number, :problem_id
-
+  attr_accessible :name, :text, :order_number, :problem_id, :component_tokens
+  attr_reader :component_tokens
   belongs_to :problem
 
   has_many :step_components, :dependent => :destroy
@@ -14,6 +14,10 @@ class Step < ActiveRecord::Base
 
   default_scope order("order_number")
   scope :steps_up_to, lambda { |n| where("order_number < ?", n) }
+
+  def component_tokens=(ids)
+    self.component_ids = ids.split(",")
+  end
 
   def related?(component)
     step_components.find_by_component_id(component)

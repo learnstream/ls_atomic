@@ -63,6 +63,14 @@ class ComponentsController < ApplicationController
     end
   end
 
+  def index
+    @components = Component.where(:course_id => params[:course_id]).where("name like ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.html
+      format.json { render :json => @components.map(&:attributes) }
+    end
+  end
+
   private
 
     def check_permissions(params)

@@ -1,4 +1,5 @@
 <%= link_to "Back to problem", edit_problem_path(@step.problem) %>
+<div id="course_id" style="display: none"><%= @step.problem.course.id %></div>
 <%= form_for(@step) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
@@ -9,14 +10,13 @@
     <%= f.label :order_number %>
     <%= f.text_field :order_number %>
   </div>
+  <div>
+    <%= f.label :component_tokens, "Components" %><br />
+    <%= f.text_field :component_tokens, "data-pre" => @step.components.map(&:attributes).to_json  %>
+  </div>
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
 
-<div>
-<h2>Relate some course components!</h2>
-<%= render :partial => "component", :collection => @components %>
-
-</div>
 
