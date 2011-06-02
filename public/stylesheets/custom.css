@@ -16,6 +16,18 @@ header img {
   background: #fff;
 }
 
+header a#logo {
+  color: #000;
+  font-size: 1.5em;
+  font-weight: bold;
+  display: inline;
+  clear: left;  
+}
+
+header a:visited {
+  color: #000;
+}
+
 section {
   margin-top: 1em;
   font-size: 120%;
@@ -26,6 +38,8 @@ section {
 .hidden {
   display: none;
 }
+
+tbody tr:nth-child(even) td, tbody tr.even td {background:#fff;}
 
 /* Links */
 
@@ -42,6 +56,7 @@ a:hover {
 a:visited {
   color: #069;
 }
+
 
 /* Navigation */
 
@@ -78,23 +93,6 @@ nav ul li a:visited {
 nav ul li a:hover {
   text-decoration: underline;
 }
-
-/* Sign up button */
-
-a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #ccc;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
-}
-
-
 
 /* Study button */
 
@@ -162,9 +160,57 @@ a.study_button:hover {
   font-size: 0.75em;
 }
 
+/* Home page */
 
+#course-overview tr {
+  background: #fff;
+}
 
+#course-overview td.course-name {
+  width: 150px;
+}
 
+/* Welcome page */
 
+#tagline {
+  font-size: 2.5em;
+  width: 350px;
+  clear: none;
+  float: left;
+  margin-left: 15px;
+}
+
+#quotes {
+  color: #fff;
+  clear: both;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+#quotes ul {
+  display: inline;
+  line-height: 4em;
+}
+
+#quotes li {
+  display: inline;
+  background: #8cff8c;
+  margin: .6em;
+  padding: 1em;
+}
+
+a.signup_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 190px;
+  color: #fff;
+  background: #ccc;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 20px;
+  clear: both;
+}
 
 

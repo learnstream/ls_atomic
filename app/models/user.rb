@@ -2,10 +2,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
 
   has_many :enrollments, :dependent => :destroy
-
   has_many :courses, :through => :enrollments 
-
   has_many :memories, :dependent => :destroy
+  has_many :memory_ratings, :through => :memories
 
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5

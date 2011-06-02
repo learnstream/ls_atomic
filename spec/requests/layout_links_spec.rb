@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "LayoutLinks" do
 
-  it "should have a Home page at '/'" do
+  it "should have a Welcome page at '/'" do
     get '/'
     response.should be_success
   end
@@ -18,6 +18,11 @@ describe "LayoutLinks" do
       visit root_path
       page.should have_css("a", :href => signin_path,
                                 :text => "Sign in")
+    end
+
+    it "should default to a welcome page" do
+      visit root_path
+      page.should have_css("div#tagline")
     end
   end
 
@@ -35,6 +40,11 @@ describe "LayoutLinks" do
       visit root_path
       page.should have_css("a", :href => signout_path, 
                                 :text => "Sign out")
+    end
+
+    it "should redirect to a home page for that user" do
+      visit root_path
+      page.should have_css("div#course-overview")
     end
   end 
 end

@@ -1,8 +1,36 @@
-<h1>Welcome to Learnstream</h1>
 
-<br />
-<% if ! signed_in?  %> 
-<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<h2>Courses you are taking</h2>
+<% if @studied_courses.count == 0 %>
+  <p> You are currently not taking any courses </p>
 <% else %>
-<p> Do something cool!</p>
+<div id="course-overview">
+<table>
+  <% @studied_courses.each do |course| %>
+  <tr>
+    <td class="course-name"><%= link_to course.name, course_path(course.id) %></td>
+    <td><%= link_to "You currently have " + pluralize(current_user.memories.in_course(course).due_before(Time.now.utc).count.to_s, "item") + " for review", course_study_index_path(course.id) %></td>
+    <td><% if current_user.memories.in_course(course.id).latest_studied.first %>
+        Last studied <%= time_ago_in_words(current_user.memories.in_course(course.id).latest_studied.first.last_viewed) %> ago
+      <% else %>
+        You haven't started studying yet!
+      <% end %>
+      </td>
+  </tr>
 <% end %>
+</table>
+<% end %>
+
+<% if not @taught_courses.empty? %>
+<h2>Courses you are teaching</h2>
+<table>
+  <% @taught_courses.each do |course| %>
+  <tr>
+    <td class="course-name"><%= link_to course.name, course_path(course.id) %></td>
+    <td>You currently have <%=course.enrollments.count%> students in your course...Shape up! </td>
+  </tr>
+<% end %>
+</table>
+</div>
+<%end%>
+
+Check out the rest of our <%= link_to "courses", courses_path, :id => "more-courses-link" %>!

@@ -1,4 +1,8 @@
 <li><a href="<%= problem_path(problem.id) %>">
-  <%= problem.name %>
+  <% if problem.name.blank? %>
+    <%= truncate(problem.statement.reverse, :length => 80).reverse %>
+  <% else %>
+    <%= problem.name %>
+  <% end %>
 </a>
 </li>
