@@ -14,7 +14,7 @@ describe "Problem creation" do
     fill_in "Name", :with => "How to read Moby Dick"
     fill_in "Statement", :with => "Does the whale exist?"
     click_button "Submit"
-    page.should have_content("Moby Dick")
+    page.should have_css("h1", :content => "Moby Dick")
   end 
 
   it "should allow the problems to be edited" do
