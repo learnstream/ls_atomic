@@ -29,12 +29,12 @@ $(document).ready(function() {
             video = video_data[i];
             var videoID = getYoutubeID(video.url, 'v');
             var old_html = $("#help-items-videos").html();
-            $("#help-items-videos").html(old_html + '<li>' + video.name + ' | <a class="youtube" href="#" rel="' + videoID + '" title="' + video.name + '" id="' + i + '">Watch</a><br />' + video.description + '</li>');
+            $("#help-items-videos").html(old_html + '<li>' + video.name + ' | <a class="youtube" href="#" rel="' + videoID + '" title="' + video.name + '" id="' + i + '" data-start="5">Watch</a><br />' + video.description + '</li>');
 
           }
         }
 
-        $("a.youtube").YouTubePopup({ 'youtubeID': $(this).attr('rel')}); 
+        $("a.youtube").YouTubePopup({ 'youtubeID': $(this).attr('rel'), 'start': parse_start(video_data, $(this).attr('id')) }); 
 
         if (comp_data.length > 0){
           $("#component-help-header").show();

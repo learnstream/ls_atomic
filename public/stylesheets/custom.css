@@ -3,6 +3,8 @@
   width: 710px;
 }
 
+#video-dialog{ background:grey;}
+
 body {
   background: #fff;
 }
@@ -149,6 +151,14 @@ a.study_button:hover {
   padding: 5px 15px 5px 15px;
   background: #eee;
   margin: auto;
+}
+
+#rate-button-panel {
+  display: none;
+}
+
+#help {
+  display: none;
 }
 
 /* COMPONENT show page */

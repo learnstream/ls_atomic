@@ -1,7 +1,9 @@
 var current_end_time;
 var ytplayer;
+var ytTimer;
 
-// name is 'v' for youtube videos... pulls out parameter.
+
+// Gets the Youtube ID from a URL; name => 'v' for youtube URL format
 function getYoutubeID(url, name) {
     var urlparts = url.split('?');
     if (urlparts.length > 1) {
@@ -16,58 +18,50 @@ function getYoutubeID(url, name) {
     return null;
 }
 
-function check_end_time() {
-  var time = ytplayer.getCurrentTime();
-  // var end_time = parseInt($("#video-end-time").text());
-  if (time > current_end_time){
-    ytplayer.pauseVideo();
+
+// Loads the youtube player into the div with name 'embed_area'
+function load_youtube_player(video_url, start_time, end_time, embed_area) {
+  var videoID = getYoutubeID(video_url, 'v');
+  alert(start_time + 3);
+  var params = { allowScriptAccess: "always" };
+  var atts = { id: "ytPlayer" };
+  swfobject.embedSWF("http://www.youtube.com/v/" + videoID + "&enablejsapi=1&playerapiid=player1&start=" + start_time, embed_area, "480", "295", "8", null, null, params, atts); 
+  if (! end_time == 0){
+  current_end_time = end_time;
+  ytTimer = window.setInterval(check_end_time, 1000);
   }
 }
 
+
+//Called after successful youtube player load
 function onYouTubePlayerReady(playerId) {
+    alert('ytready');
       ytplayer = document.getElementById("ytPlayer");
     }
+
+
 
 // plays the video in the video player ytplayer
 function play_video(video_url, start_time, end_time) {
   var videoID = getYoutubeID(video_url, 'v');
   ytplayer.loadVideoById(videoID, start_time)
-  current_end_time = end_time;
-}
 
-// cue_videos()
-// Looks for all video-area IDs and binds the title of the video
-// to a play_video function
-function cue_videos() {
-  $("div#related-videos > div#video-area").each(function(index){
-      var video_url = $("#video-embed-url", this).text();
-      var start_time = parseInt($("#video-start-time", this).text());
-      var end_time = parseInt($("#video-end-time", this).text());
-      $("a", this).click(function(){
-            play_video(video_url, start_time, end_time);
-            return false;
-      }); 
-    });
-
+  if (! end_time == 0){
+    current_end_time = end_time;
+    clearInterval(ytTimer);
+    ytTimer = window.setInterval(check_end_time, 1000);
+  }
 }
 
 
-$(document).ready(function(){
+// Checks to see if current video is past the designated 'end time'
+// This function should be called every second by ytTimer, after playing a video
+function check_end_time() {
+  var time = ytplayer.getCurrentTime();
+  if (time > current_end_time){
+    ytplayer.pauseVideo();
+    clearInterval(ytTimer);
+  }
+}
 
-  cue_videos();
-
-
-  var videoURL = $("#video-embed-url").text();
-  var videoID = getYoutubeID(videoURL, 'v'); 
-  var videoStart = $("#video-start-time").text();
-  var params = { allowScriptAccess: "always" };
-  var atts = { id: "ytPlayer" };
-  swfobject.embedSWF("http://www.youtube.com/v/" + videoID + "&enablejsapi=1&playerapiid=player1&start=" + videoStart, 
-                     "video-embed-area", "480", "295", "8", null, null, params, atts); 
-
-  var timer = window.setInterval(check_end_time, 1000);
-
-  
-
-});
 
