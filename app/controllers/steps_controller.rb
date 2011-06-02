@@ -44,6 +44,7 @@ class StepsController < ApplicationController
       redirect_to edit_problem_path(@step.problem)
     else
       @video = Video.new
+      @videos = @step.videos
       @components = @step.problem.course.components
       render 'edit'
     end
