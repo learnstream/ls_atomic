@@ -44,7 +44,7 @@ describe "LayoutLinks" do
 
     it "should redirect to a home page for that user" do
       visit root_path
-      page.should have_css("div#course-overview")
+      page.should have_css("#course-overview")
     end
   end 
 end
