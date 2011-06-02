@@ -36,12 +36,14 @@ class StepsController < ApplicationController
   end
 
   def update
+    
     @step = Step.find(params[:id])
        
     if @step.update_attributes(params[:step])
       flash[:success] = "Step updated!"
       redirect_to edit_problem_path(@step.problem)
     else
+      @video = Video.new
       @components = @step.problem.course.components
       render 'edit'
     end
@@ -50,6 +52,8 @@ class StepsController < ApplicationController
   def edit
     @step = Step.find(params[:id])
     @components = @step.problem.course.components
+    @video = Video.new
+    @videos = @step.videos
   end
 
   def help
@@ -60,8 +64,18 @@ class StepsController < ApplicationController
                            :path => component_path(component) }
     end
 
+    @video_list = []
+    @step.videos.each do |video|
+      @video_list << {  :name => video.name,
+                        :url => video.url,
+                        :start_time => video.start_time,
+                        :end_time => video.end_time,
+                        :description => video.description }
+    end
+    
+    @response = { :components => @component_list, :videos =>  @video_list } 
     respond_to do |format|
-      format.json { render :json => @component_list.to_json }
+      format.json { render :json => @response.to_json }
     end
   end
 

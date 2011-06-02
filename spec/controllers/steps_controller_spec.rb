@@ -157,6 +157,7 @@ describe StepsController do
       get :edit, :id => @step
       response.should have_selector("a", :content => "Back to problem")
     end
+
   end
 
   describe "GET 'help'" do
