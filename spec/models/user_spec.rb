@@ -118,5 +118,49 @@ describe User do
       @user.remember(@component)
       @memory = @user.memories.find_by_component_id(@component).should_not be_nil
     end
+
+    it "should respond to a all_memories method" do
+      @user.should respond_to(:all_memories)
+    end
+
+    it "should pull up all memories when calling all_memories" do
+      @memory = @user.remember(@component)
+      @course = @component.course
+      @comp2 = @course.components.create!(:name => "Comp22", :description => "test")
+      @memory2 = @user.remember(@comp2)
+      @memory2.due = Time.now.utc + 1000
+      @memory.due = Time.now.utc - 1000
+      @memory.save!
+      @memory2.save!
+      @user.all_memories(@component.course).should == [@memory, @memory2]
+    end
+
+    it "should respond to a memories_due method" do
+      @user.should respond_to(:memories_due)
+    end
+
+    it "should pull up the right memories that are due" do
+      @memory = @user.remember(@component)
+      @memory.due = (Time.now.utc - 1000)
+      @user.memories_due(@component.course)[0] == @memory
+    end 
   end
+
+  describe "user statistics" do
+
+    before(:each) do
+      @course = Factory(:course)
+      @component = Factory(:component, :course_id => @course.id)
+      @memory = @user.remember(@component)
+    end
+
+    it "should respond to a stats method" do
+      @user.should respond_to(:stats)
+    end
+
+    it "should pull up a stats array" do
+      @memory.view(3)
+      @user.stats(@course, Time.now.utc - 1.day, Time.now.utc).should == [0,1,0,0]
+    end
+  end 
 end

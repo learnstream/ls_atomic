@@ -69,4 +69,29 @@ class User < ActiveRecord::Base
     memory = memories.find_by_component_id(component.id)
     memory.destroy
   end
+
+  def memories_due(course)
+    memories.in_course(course).due_before(Time.now.utc)
+  end
+
+  def all_memories(course)
+    memories.in_course(course)
+  end
+
+  def stats(course, stime, etime)
+    time_range = stime..etime
+    ratings = memory_ratings.in_course(course).ratings_between(time_range)
+    m = h = g = e = 0   #initializing ratings
+    ratings.each { |r|
+      if r.quality == 0
+        m += 1
+      elsif r.quality == 3
+        h += 1
+      elsif r.quality == 4
+        g += 1
+      elsif r.quality == 5
+        e += 1
+      end }
+    return [m, h, g, e]
+  end
 end
