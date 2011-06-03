@@ -5,11 +5,13 @@
   <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen'  %>
   <%= stylesheet_link_tag 'blueprint/print', :media => 'print' %>
   <%= stylesheet_link_tag 'custom' %>
-  <%= javascript_include_tag "jquery.min" %>
-  <%= javascript_include_tag "jquery_ujs" %>
+  <%= stylesheet_link_tag 'colorbox/colorbox' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery.colorbox.min" %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js" %>
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" %> 
   <%= javascript_include_tag "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" %>
+  <%= javascript_include_tag "YouTubeEmbed" %>
   <%= javascript_include_tag "Study" %>
   <%= csrf_meta_tag %>
 </head>
