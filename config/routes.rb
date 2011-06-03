@@ -23,6 +23,8 @@ LsAtomic::Application.routes.draw do
   resources :problems do
     member do
       get :show_step
+      get :new_tex
+      post :tex_create
     end
   end
   resources :videos, :only => [:create, :update, :destroy, :edit]
