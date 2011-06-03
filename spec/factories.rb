@@ -58,3 +58,11 @@ Factory.define :video do |video|
   video.end_time            60
   video.association         :component, :factory => :component
 end
+
+Factory.define :quiz do |quiz|
+  quiz.steps              ""
+  quiz.question           "What is the answer"
+  quiz.answer_input       '{"type" : "text"}'
+  quiz.answer             "42"
+  quiz.answer_output      '{"type" : "text"}'
+end

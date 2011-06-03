@@ -60,5 +60,15 @@ describe Component do
       @component.steps.should include(@step)
     end 
   end
+
+  describe "quiz associations" do
+    before(:each) do
+      @component = Factory(:component)
+    end
+
+    it "should have a quizzes method" do
+      @component.should respond_to(:quizzes)
+    end
+  end
 end
 

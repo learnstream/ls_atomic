@@ -1,6 +1,7 @@
 class Problem < ActiveRecord::Base
   belongs_to :course
   has_many :steps, :order => 'order_number ASC'
+  has_many :quizzes
   has_attached_file :image
 
   validates :name, :length => { :maximum => 134} 
