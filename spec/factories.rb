@@ -60,8 +60,9 @@ Factory.define :video do |video|
 end
 
 Factory.define :quiz do |quiz|
-  quiz.steps              ""
+  quiz.steps              []
   quiz.question           "What is the answer"
+  quiz.answer_type        "text"
   quiz.answer_input       '{"type" : "text"}'
   quiz.answer             "42"
   quiz.answer_output      '{"type" : "text"}'

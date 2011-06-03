@@ -6,7 +6,7 @@ describe "CreateQuizzes" do
     @course = Factory(:course)
     @component = Factory(:component, :course_id => @course)
     @problem = Factory(:problem, :course_id => @course)
-    @step = Factory(:step, :problem_id => @problem)
+    @step = Factory(:step, :text => "The first step", :problem_id => @problem)
     @user = Factory(:admin)
     integration_sign_in(@user)
   end
@@ -15,9 +15,9 @@ describe "CreateQuizzes" do
     visit course_path(@course)
     click_link "Add quiz"
     fill_in "Components", :with => @component.id
-    check "Step 1"
+    select "The first step", :from => "Steps to show"
     fill_in "Question", :with => "What is the answer?"
-    select "Self-rate", :from => "Answer type"
+    select "Self-rating", :from => "Answer type"
     fill_in "Answer", :with => "42"
     click_button "Add quiz"
     page.should have_content("Quiz created!")
