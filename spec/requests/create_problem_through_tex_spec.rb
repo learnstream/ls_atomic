@@ -26,6 +26,20 @@ describe "Tex problem creation" do
     page.should have_css("p", :content => " This is the problem statement.")
   end
 
+  it "should properly add problem name" do
+    visit course_path(@course)
+    click_link "Add entire problem with .tex"
+    fill_in "problem_statement", :with => "\\begin{document} 
+                              \\begin{problem}
+                              \\begin{name} problem numero uno
+                              \\end{name}
+                              \\begin{statement} This is the problem statement.\\end{statement}
+                              \\end{problem}
+                              \\end{document}" 
+    click_button "problem_submit"
+    page.should have_content("problem numero uno")
+  end
+
   it "should properly add a problem step" do
     visit course_path(@course)
     click_link "Add entire problem with .tex"
@@ -65,5 +79,43 @@ describe "Tex problem creation" do
                               \\end{document}" 
     click_button "problem_submit"
     page.should_not have_content("\\begin")
+  end
+
+  it "should allow multiple questions to be made" do
+    visit course_path(@course)
+    click_link "Add entire problem with .tex"
+    fill_in "problem_statement", :with => "#include amsmath
+                              \\begin{document} 
+                              \\begin{problem}
+                              \\begin{statement} This is the problem statement.\\end{statement}
+                              \\begin{step} This is the first step.\\end{step}
+                              \\end{problem}
+                              \\begin{problem}
+                              \\begin{statement}
+                              this is the problem statement for problem 2
+                              \\end{statement}
+                              \\end{problem}
+                              \\end{document}" 
+    click_button "problem_submit"
+    page.should have_content("this is the problem statement for problem 2")
+  end
+
+  it "should properly remove problems already created on an error" do
+    visit course_path(@course)
+    click_link "Add entire problem with .tex"
+    fill_in "problem_statement", :with => "#include amsmath
+                              \\begin{document} 
+                              \\begin{problem}
+                              \\begin{statement} Something very different.\\end{statement}
+                              \\begin{step} This is the first step.\\end{step}
+                              \\end{problem}
+                              \\begin{problem}
+                              \\begin{sttement}
+                              this is the problem statement for problem 2
+                              \\end{statement}
+                              \\end{problem}
+                              \\end{document}" 
+    click_button "problem_submit"
+    page.should_not have_content("Something very different")
   end
 end
