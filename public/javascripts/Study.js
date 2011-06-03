@@ -51,7 +51,6 @@ $(document).ready(function() {
               });
           }); 
         }
-        /*
         if (comp_data.length > 0){
           $("#component-help-header").show();
           for (i = 0; i < comp_data.length; i++) {
@@ -59,7 +58,7 @@ $(document).ready(function() {
             var old_html = $("#help-items-components").html();
             $("#help-items-components").html(old_html + '<li><a href="' + comp.path + '">' + comp.name + '</a></li>');
           } 
-        }*/
+        }
       });
     });
  });
