@@ -1,8 +1,9 @@
-<h1>New problem for <%= @course.name %> Enter .tex here</h1>
+<h1>New problem for <%= @course.name %> </h1>
+<%= link_to "Back to course", @course %>
 <%= form_for @problem, :url => tex_create_problem_path, :html => {:multipart => true}  do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
-    <%= f.label "Text"%><br />
+    <%= f.label "Enter .tex here"%><br />
     <%= f.text_area :statement%>
   </div>
   <% if @course %>

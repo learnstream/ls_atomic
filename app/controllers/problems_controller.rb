@@ -35,7 +35,7 @@ class ProblemsController < ApplicationController
     original_text = params[:problem][:statement]
     problems = find_problems(original_text)
     if problems.empty?
-      flash[:error] = "No problems found! Did you remember your \\begin{problem} and \\end{problem} tags?"
+      flash.now[:error] = "No problems found! Did you remember your \\begin{problem} and \\end{problem} tags?"
       @problem = course.problems.build(params[:problem])
       @problem.statement = original_text
       @course = course
@@ -53,7 +53,7 @@ class ProblemsController < ApplicationController
    
       if @problem.save
       else
-        flash[:notice] = "Only the first " + count.to_s + " problems out of " + problems.length.to_s + " were created. Please review your TeX and correct any errors." 
+        flash.now[:notice] = "Only the first " + count.to_s + " problems out of " + problems.length.to_s + " were created. Please review your TeX and correct any errors." 
         @problem.statement = original_text
         @course = course
         render 'new_tex'

@@ -29,7 +29,7 @@
   <div>
     <h2>Course control panel</h2>
     <%= link_to "Add component", new_component_path(:course_id => @course.id)  %><br />
-    <%= link_to "Add problem", new_problem_path(:course_id => @course.id) %>
-    <%= link_to "Add entire problem with .tex", new_tex_problem_path(:course_id => @course.id) %>
+    <%= link_to "Add problem", new_problem_path(:course_id => @course.id) %><br />
+    <%= link_to "Add problem(s) with .tex", new_tex_problem_path(:course_id => @course.id) %> 
   </div>
 <% end %>

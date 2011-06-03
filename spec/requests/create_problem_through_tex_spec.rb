@@ -10,13 +10,13 @@ describe "Tex problem creation" do
 
   it "should allow user to access tex page" do
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
-    page.should have_content("Text")
+    click_link "Add problem(s) with .tex"
+    page.should have_content(".tex")
   end
 
   it "should properly add problem statement" do
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
+    click_link "Add problem(s) with .tex"
     fill_in "problem_statement", :with => "\\begin{document} 
                               \\begin{problem}
                               \\begin{statement} This is the problem statement.\\end{statement}
@@ -28,7 +28,7 @@ describe "Tex problem creation" do
 
   it "should properly add problem name" do
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
+    click_link "Add problem(s) with .tex"
     fill_in "problem_statement", :with => "\\begin{document} 
                               \\begin{problem}
                               \\begin{name} problem numero uno
@@ -42,7 +42,7 @@ describe "Tex problem creation" do
 
   it "should properly add a problem step" do
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
+    click_link "Add problem(s) with .tex"
     fill_in "problem_statement", :with => "\\begin{document} 
                               \\begin{problem}
                               \\begin{statement} This is the problem statement.\\end{statement}
@@ -55,7 +55,7 @@ describe "Tex problem creation" do
 
   it "should throw out any header stuff" do 
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
+    click_link "Add problem(s) with .tex"
     fill_in "problem_statement", :with => "#include amsmath
                               \\begin{document} 
                               \\begin{problem}
@@ -69,7 +69,7 @@ describe "Tex problem creation" do
 
   it "should not include the slash begin stuff" do
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
+    click_link "Add problem(s) with .tex"
     fill_in "problem_statement", :with => "#include amsmath
                               \\begin{document} 
                               \\begin{problem}
@@ -83,7 +83,7 @@ describe "Tex problem creation" do
 
   it "should allow multiple questions to be made" do
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
+    click_link "Add problem(s) with .tex"
     fill_in "problem_statement", :with => "#include amsmath
                               \\begin{document} 
                               \\begin{problem}
@@ -102,7 +102,7 @@ describe "Tex problem creation" do
 
   it "should properly remove problems already created on an error" do
     visit course_path(@course)
-    click_link "Add entire problem with .tex"
+    click_link "Add problem(s) with .tex"
     fill_in "problem_statement", :with => "#include amsmath
                               \\begin{document} 
                               \\begin{problem}
