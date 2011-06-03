@@ -15,7 +15,6 @@ describe "CreateQuizzes" do
     visit course_path(@course)
     click_link "Add quiz"
     fill_in "Components", :with => @component.id
-    fill_in "Problem", :with => @problem.id
     check "Step 1"
     fill_in "Question", :with => "What is the answer?"
     select "Self-rate", :from => "Answer type"

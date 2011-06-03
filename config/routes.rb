@@ -42,6 +42,7 @@ LsAtomic::Application.routes.draw do
     end
   end
 
+  resources :quizzes 
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'

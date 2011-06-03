@@ -1,0 +1,32 @@
+<h1>New quiz item for Problem <%= @problem.id %></h1>
+
+<%= form_for @quiz do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :component_tokens, "Components" %><br />
+    <%= f.text_field :component_tokens %>
+  </div>
+
+  <div class="field">
+    <%= f.label :steps, "Steps to show" %><br />
+    <%= f.collection_select :steps, @problem.steps, :id, :text, :multiple => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :question %><br />
+    <%= f.text_field :question %>
+  </div>
+
+  <div class="field">
+    <label for="answer_type">Answer type</label><br />
+    <select>
+      <option value="self-rate">Self-rating</option>
+      <option value="text">Text input</option>
+    </select>
+  </div>
+
+  <div class="field hidden">
+    <%= f.label :answer %><br />
+    <%= f.text_field :answer %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
     <%= f.label :order_number %>
     <%= f.text_field :order_number %>
   </div>
-  <div>
+  <div class="field">
     <%= f.label :component_tokens, "Components" %><br />
     <%= f.text_field :component_tokens, "data-pre" => @step.components.map(&:attributes).to_json  %>
   </div>
