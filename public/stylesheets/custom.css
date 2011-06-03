@@ -117,6 +117,10 @@ a.study_button:hover {
 
 /* Study mode */
 
+#study-header {
+  position: relative;
+  top: -20px;
+}
 #study-area {
   padding: 15px;
   margin-top: 20px;

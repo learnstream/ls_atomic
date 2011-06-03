@@ -1,4 +1,16 @@
-Studying <%= link_to @course.name, course_path(@course) %>
+<div id="study-header">
+<% due = current_user.memories_due(@course).length %>
+<% total = current_user.all_memories(@course).length %>
+<span style="color: <% if due == 0 %> green<% else %> red <% end %>">
+<%=  pluralize(due, "item") %>  due</span> /
+<%= pluralize(total, "items") %> total.<br />
+<% if current_user.memories_due(@course).length == 0 %>
+You're done for now!
+<% else %>
+ Time to study!
+<% end %>
+</div><br /> 
+<h4>Studying <%= link_to @course.name, course_path(@course) %></h4>
 <div id="study-area">
   <% if @memory %>
     <% if not @step %>
