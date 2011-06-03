@@ -1,0 +1,34 @@
+<%= form_for(@video) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+    <% if @step %>
+      <%= f.hidden_field :step_id, :value => @step.id %>
+    <% else %>
+      <%= f.hidden_field :component_id, :value => @component.id %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br />
+    <%= f.text_field :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br />
+    <%= f.text_field :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+ 
+  <div class="actions">
+    <%= f.submit "Add video" %>
+  </div>
+<% end %>
+
+

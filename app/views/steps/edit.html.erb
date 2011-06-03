@@ -19,4 +19,12 @@
   </div>
 <% end %>
 
+<div>
+<% if ! @videos.empty? %>
+<h3>Related videos:</h3>
+<%= render :partial => 'videos/video', :collection => @videos, :locals => { :edit => true } %>
+<% end %>
 
+<h3>Add another video!</h3>
+<%= render 'shared/video_add_form' %>
+</div>

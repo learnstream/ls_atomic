@@ -11,9 +11,12 @@
 #   - dist/**/*.js
 #
 src_files:
-  - public/javascripts/jquery.js
+  - public/javascripts/jquery.min.js
   - spec/javascripts/helpers/jasmine-jquery-1.2.0.js
-  - public/javascripts/YourMom.js
+  - public/javascripts/jquery.colorbox.min.js
+  - public/javascripts/YouTubeEmbed.js
+  - public/javascripts/Study.js   
+
 
 # stylesheets
 #

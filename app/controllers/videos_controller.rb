@@ -5,27 +5,40 @@ class VideosController < ApplicationController
   end
 
   def create
-    component_id = params[:video][:component_id]
-    component = Component.find(component_id)
 
-    @video = component.videos.build(params[:video])
-    @video.save!
+    component_id = params[:video][:component_id]
+    if(component_id)
+      component = Component.find(component_id)
+      @video = component.videos.build(params[:video])
+      @redirect = edit_component_path(component_id)
+    end
+
+    step_id = params[:video][:step_id]
+    if(step_id)
+      step = Step.find(step_id)
+      @video = step.videos.build(params[:video])
+      @redirect = edit_step_path(step_id)
+    end
  
-    if @video.save
+    if @video.save!
       flash[:success] = "Video created!"
-      redirect_to component_path(component_id)
+      redirect_to @redirect 
     else
-      flash[:error] = "Sorry, there was an error. Try again. If error persists, contact customer support."
-      redirect_to component_path(component_id)
+      render @redirect 
     end
   end
 
   def destroy
     video = Video.find(params[:id])
-    component_id = video.component_id
+    
+    if(video.component_id)
+      redirect = edit_component_path(video.component_id)
+    elsif(video.step_id)
+      redirect = edit_step_path(video.step_id)
+    end
     video.delete
     flash[:success] = "Video deleted!"
-    redirect_to edit_component_path(component_id)
+    redirect_to redirect
   end
 
   def update
@@ -50,9 +63,21 @@ class VideosController < ApplicationController
 
     def check_permissions(params)
 
-      course = Video.find(params[:id]).component.course unless params[:id].nil? 
-      course ||= Component.find(params[:video][:component_id]).course
-
+      if params[:id]
+        video = Video.find(params[:id])
+        if video.step
+          course = video.step.problem.course
+        else
+          course = video.component.course
+        end
+      else
+        if params[:video][:step_id]
+          course = Step.find(params[:video][:step_id]).problem.course
+        else
+          course = Component.find(params[:video][:component_id]).course 
+        end
+      end
+      
       unless current_user.can_edit?(course)
         flash[:error] = "You don't have permissions!"
         redirect_to root_path

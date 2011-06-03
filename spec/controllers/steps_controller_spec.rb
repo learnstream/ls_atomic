@@ -157,6 +157,7 @@ describe StepsController do
       get :edit, :id => @step
       response.should have_selector("a", :content => "Back to problem")
     end
+
   end
 
   describe "GET 'help'" do
@@ -169,9 +170,10 @@ describe StepsController do
     end
 
     it "should have links for the related components" do
-      @expected = [{:name => @component1.name, :path => component_path(@component1)}].to_json
+      @expected = [{"name"=> @component1.name, "path"=> component_path(@component1)}]
       get :help, :id => @step, :format => :json
-      response.body.should == @expected
+      parsed_body = JSON.parse(response.body)
+      parsed_body["components"].should == @expected
     end
   end
 end

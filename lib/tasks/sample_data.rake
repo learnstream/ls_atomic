@@ -73,6 +73,8 @@ def make_problems_and_steps
   step11 = problem1.steps.create!(:text => "Think about it", :order_number => 1)
   step12 = problem1.steps.create!(:text => "The second law relates force to mass and acceleration", :order_number => 2)
   step13 = problem1.steps.create!(:text => "The answer is \\( \\vec{F} = m\\vec{a} \\) !", :order_number => 3)
+  
+  step12.videos.create!(:name => "Cats", :url => "http://www.youtube.com/watch?v=nTasT5h0LEg", :start_time => 20, :end_time => 30, :description => "Funny cats")
 
   step21 = problem2.steps.create!(:text => "Think about it...", :order_number => 1)
   step22 = problem2.steps.create!(:text => "Every action has an equal and opposite reaction!", :order_number => 2)

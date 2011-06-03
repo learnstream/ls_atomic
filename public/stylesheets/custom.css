@@ -3,6 +3,8 @@
   width: 710px;
 }
 
+#video-dialog{ background:grey;}
+
 body {
   background: #fff;
 }
@@ -149,6 +151,14 @@ a.study_button:hover {
   margin: auto;
 }
 
+#rate-button-panel {
+  display: none;
+}
+
+#help {
+  display: none;
+}
+
 /* COMPONENT show page */
 
 .video-name {
@@ -212,5 +222,4 @@ a.signup_button {
   padding: 20px;
   clear: both;
 }
-
 

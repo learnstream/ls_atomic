@@ -20,38 +20,22 @@ $(document).ready(function() {
             $("#help").fadeIn('slow');
         }
 
+
         if (video_data.length > 0) {
-
           $("#video-help-header").show();
-          
+         // load_youtube_player(video_data[0].url,video_data[0].start_time,0,"video-embed-area");
+ 
           for (i = 0; i < video_data.length; i++) {
-            var old_html = $('#help-items-videos').html();
-            var watch_link = constructColorBoxLink(video_data[i], i);
-            $('#help-items-videos').html(old_html + watch_link);
-            var video = video_data[i];
-        
-          }
+            video = video_data[i];
+            var videoID = getYoutubeID(video.url, 'v');
+            var old_html = $("#help-items-videos").html();
+            $("#help-items-videos").html(old_html + '<li>' + video.name + ' | <a class="youtube" href="#" rel="' + videoID + '" title="' + video.name + '" id="' + i + '" data-start="5">Watch</a><br />' + video.description + '</li>');
 
-          $(".color-box-link").each( function(){ 
-              $(this).colorbox({
-                innerHeight:300, innerWidth:485, inline:true,
-                href: "#color-box-container", 
-                onOpen:  function() {
-                  loadAndPlayVideo($(this).attr('data-url'),
-                                   $(this).attr('data-start-time'),
-                                   $(this).attr('data-end-time'), 
-                                   'embed-video-area');
-                  return false;
-                },
-                onCleanup: function() {
-                  $("#color-box-container").html('<div id="embed-video-area"></div>');
-                  ytplayer = null;
-                  clearInterval(ytTimer);
-                }
-              });
-          }); 
+          }
         }
-        /*
+
+        $("a.youtube").YouTubePopup({ 'youtubeID': $(this).attr('rel'), 'start': parse_start(video_data, $(this).attr('id')) }); 
+
         if (comp_data.length > 0){
           $("#component-help-header").show();
           for (i = 0; i < comp_data.length; i++) {
@@ -59,9 +43,15 @@ $(document).ready(function() {
             var old_html = $("#help-items-components").html();
             $("#help-items-components").html(old_html + '<li><a href="' + comp.path + '">' + comp.name + '</a></li>');
           } 
-        }*/
+        }
       });
     });
  });
 
 
+function parse_start(video_data, index){
+  alert(index);
+  
+  return video_data[parseInt(index)].start_time;
+
+}
