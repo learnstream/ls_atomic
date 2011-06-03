@@ -18,7 +18,9 @@ describe "Tex problem creation" do
     visit course_path(@course)
     click_link "Add entire problem with .tex"
     fill_in "problem_statement", :with => "\\begin{document} 
+                              \\begin{problem}
                               \\begin{statement} This is the problem statement.\\end{statement}
+                              \\end{problem}
                               \\end{document}" 
     click_button "problem_submit"
     page.should have_css("p", :content => " This is the problem statement.")
@@ -28,8 +30,10 @@ describe "Tex problem creation" do
     visit course_path(@course)
     click_link "Add entire problem with .tex"
     fill_in "problem_statement", :with => "\\begin{document} 
+                              \\begin{problem}
                               \\begin{statement} This is the problem statement.\\end{statement}
                               \\begin{step} This is the first step.\\end{step}
+                              \\end{problem}
                               \\end{document}" 
     click_button "problem_submit"
     page.should have_css("li", " This is the first step.")
@@ -40,8 +44,10 @@ describe "Tex problem creation" do
     click_link "Add entire problem with .tex"
     fill_in "problem_statement", :with => "#include amsmath
                               \\begin{document} 
+                              \\begin{problem}
                               \\begin{statement} This is the problem statement.\\end{statement}
                               \\begin{step} This is the first step.\\end{step}
+                              \\end{problem}
                               \\end{document}" 
     click_button "problem_submit"
     page.should_not have_content("amsmath")
@@ -52,8 +58,10 @@ describe "Tex problem creation" do
     click_link "Add entire problem with .tex"
     fill_in "problem_statement", :with => "#include amsmath
                               \\begin{document} 
+                              \\begin{problem}
                               \\begin{statement} This is the problem statement.\\end{statement}
                               \\begin{step} This is the first step.\\end{step}
+                              \\end{problem}
                               \\end{document}" 
     click_button "problem_submit"
     page.should_not have_content("\\begin")

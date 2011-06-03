@@ -30,24 +30,58 @@ class ProblemsController < ApplicationController
       redirect_to root_path
       return
     end
-    
-    @problem = course.problems.build(params[:problem])
-    @problem.name = find_name(params[:problem][:statement])   
-    @problem.statement = find_statement(params[:problem][:statement])
+  
+    # Hack! We used the statement field of the form to the entire TeX input, and now we extract the problems.  
+    original_text = params[:problem][:statement]
+    problems = find_problems(original_text)
+    if problems.empty?
+      flash[:error] = "No problems found! Did you remember your \\begin{problem} and \\end{problem} tags?"
+      @problem = course.problems.build(params[:problem])
+      @problem.statement = original_text
+      @course = course
+      render 'new_tex'
+      return
+    end
    
-    @problem.save #may want to check this
-    array = params[:problem][:statement].scan(/\\begin{step}(.*?)\\end{step}/im)
-      array.each {|step|
-        stepText = step.first.chomp 
-        @problem.steps.create!(:text => stepText, :order_number => 1)
+    count = 0 
+    problems.each { |problem|
+      problemText = problem.first.chomp
+      @problem = course.problems.build(params[:problem])
+      @problem.name = find_name(problemText)   
+      @problem.statement = find_statement(problemText)
+      
+   
+      if @problem.save
+      else
+        flash[:notice] = "Only the first " + count.to_s + " problems out of " + problems.length.to_s + " were created. Please review your TeX and correct any errors." 
+        @problem.statement = original_text
+        @course = course
+        render 'new_tex'
+        return
+      end
+ 
+      array = problemText.scan(/\\begin{step}(.*?)\\end{step}/im)
+        array.each {|step|
+          stepText = step.first.chomp 
+          @problem.steps.create!(:text => stepText, :order_number => 1)
+        }
+
+        original_text = original_text.sub(/\\begin{problem}.*?\\end{problem}/im,  "")
+        count += 1
       }
 
     if @problem.save
-      flash[:success] = "Problem created!"
-      redirect_to @problem
+      if(problems.length == 1)
+        flash[:success] = "Problem created!"
+        redirect_to @problem
+      else
+        flash[:success] = "Problems created! Please review the problems separately."
+        redirect_to course
+      end
     else
+      @problem.statement = original_text
       @course = course
-      render 'new'
+      render 'new_tex'
     end
   end
 
@@ -104,15 +138,19 @@ class ProblemsController < ApplicationController
         return false
       end 
     end
+    
+    def find_problems(text)
+      return text.scan(/\\begin{problem}(.*?)\\end{problem}/im)
+    end
 
     def find_name(text)
-      statement = text.scan(/\\begin{name}(.*)\\end{name}/im)
+      statement = text.scan(/\\begin{name}(.*?)\\end{name}/im)
       text = statement.map{ |x| x[0]}.join
       return text.chomp
     end
 
     def find_statement(text)
-      statement = text.scan(/\\begin{statement}(.*)\\end{statement}/im)
+      statement = text.scan(/\\begin{statement}(.*?)\\end{statement}/im)
       text = statement.map{ |x| x[0]}.join
       return text.chomp
     end
