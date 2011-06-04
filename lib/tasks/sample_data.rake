@@ -45,6 +45,7 @@ def make_courses_and_components
                          :description => "\\( \\vec{F} = m\\vec{a} \\)")
   c3 = course1.components.create!(:name => "Newton's third law",
                          :description => "Every action has an opposite and equal reaction")
+  
 end
 
 def enroll_users
