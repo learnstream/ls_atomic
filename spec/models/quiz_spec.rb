@@ -20,4 +20,7 @@ describe Quiz do
     @quiz.should respond_to(:components)
   end
 
+  it "should have a responses method" do
+    @quiz.should respond_to(:responses)
+  end
 end

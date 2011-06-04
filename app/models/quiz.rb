@@ -4,6 +4,7 @@ class Quiz < ActiveRecord::Base
   belongs_to :problem
   has_many :quiz_components, :dependent => :destroy
   has_many :components, :through => :quiz_components
+  has_many :responses, :dependent => :destroy
 
   validates :problem_id, :presence => true
   validates :question, :presence => true 

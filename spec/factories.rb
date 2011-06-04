@@ -85,3 +85,8 @@ Factory.define :self_rate_quiz, :class => Quiz do |quiz|
   quiz.answer             "42"
   quiz.answer_output      'text'
 end
+
+Factory.define :response do |response|
+  response.answer         "41"
+  response.status         "incorrect"
+end

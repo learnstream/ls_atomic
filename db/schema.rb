@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110603174701) do
+ActiveRecord::Schema.define(:version => 20110604005229) do
 
   create_table "component_tests", :force => true do |t|
     t.integer  "component_id"
@@ -113,6 +113,18 @@ ActiveRecord::Schema.define(:version => 20110603174701) do
   end
 
   add_index "quizzes", ["problem_id"], :name => "index_quizzes_on_problem_id"
+
+  create_table "responses", :force => true do |t|
+    t.string   "answer"
+    t.string   "status"
+    t.integer  "user_id"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "responses", ["quiz_id"], :name => "index_responses_on_quiz_id"
+  add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
 
   create_table "step_components", :force => true do |t|
     t.integer  "step_id"
