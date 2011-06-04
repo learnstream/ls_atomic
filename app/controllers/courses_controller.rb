@@ -37,6 +37,22 @@ class CoursesController < ApplicationController
     render 'show_users'
   end
 
+  def stats
+    @course = Course.find(params[:id])
+    output = []
+    (1..30).each { |i|
+      success_ratio = nil
+      start_time = Time.now.utc - (31 - i).day
+      end_time = Time.now.utc - (30 - i).day
+      day_stats = current_user.stats(@course, start_time, end_time)
+      success_ratio = (day_stats.sum - day_stats[0]) / day_stats.sum unless day_stats.sum == 0
+      output << [ i, success_ratio ] unless success_ratio.nil?
+      }
+    output_json = { :stats => [output] }
+    respond_to do |format|
+      format.json { render :json => output_json.to_json }
+    end
+  end
   private
 
     def authorized_user

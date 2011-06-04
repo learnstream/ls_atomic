@@ -10,6 +10,7 @@ LsAtomic::Application.routes.draw do
   resources :courses do
     member do
       get :users
+      get :stats
     end
     resources :study, :only => [:index]
   end

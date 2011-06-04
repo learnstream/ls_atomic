@@ -207,6 +207,18 @@ a.study_button:hover {
   width: 150px;
 }
 
+
+/* Course Show page */
+#stats-sidebar{
+    float: right;
+    display: block;
+}
+
+#course-content{
+  float:left;
+  width: 500px;
+}
+
 /* Welcome page */
 
 #tagline {
