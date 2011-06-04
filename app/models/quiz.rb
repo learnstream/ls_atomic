@@ -25,6 +25,11 @@ class Quiz < ActiveRecord::Base
   end
 
   def answer_type
+    if answer_input.nil?
+      "none"
+    else
+      JSON.parse(answer_input)["type"] 
+    end
   end
 
   def answer_type=(type)

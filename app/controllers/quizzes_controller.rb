@@ -23,6 +23,7 @@ class QuizzesController < ApplicationController
    @quiz.answer_input = params[:quiz][:answer_type]
    @quiz.answer_output = params[:quiz][:answer_type]
 
+
    if @quiz.save
      flash[:success] = "Quiz created!"
      redirect_to course
@@ -30,6 +31,15 @@ class QuizzesController < ApplicationController
      @problem = problem
      render 'new'
    end
+  end
+
+  def show
+    @quiz = Quiz.find(params[:id])
+    if @quiz.answer_type == "text"
+      @input_fields = "text_input"
+    else
+      @input_fields = nil
+    end
   end
 
   private 

@@ -1,0 +1,55 @@
+<% if @quiz %> 
+<div id="problem"><%= @quiz.problem.statement %></div><br />
+
+<div id="steps-header">Steps</div><br />
+
+<ol>
+  <% @quiz.problem.steps.each_with_index do |step, index| %>
+    <% if @quiz.steps.split(",").include?((index + 1).to_s) %>
+      <%= render :partial => 'steps/step', :locals => { :step => step } %>
+    <% end %>
+  <% end %>
+  <li><p id="answer">...</p></li>
+</ol>
+
+<div id="study-item" class="header"><%= @quiz.question %></div>
+
+<% if @input_fields %>
+<%= form_for @response do |f| %>
+  <%= render @input_fields, :object => f.object %>
+<% end %>
+<% end %>
+
+<div id="answer-area">
+<%= link_to "Check answer", show_step_problem_path(@problem, :step_number => @index ), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+  
+<% elsif @component %>
+  <div id="problem"><%= component.name %></div>
+  <div id="answer"></div>
+
+<div id="answer-area">
+  <%= link_to "Show", describe_component_path(@component, :format => :json), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+<% end %>
+
+ <div id="rate-button-panel">
+    <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
+    <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round", :method => :get %>
+    <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
+    <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
+  </div>
+</div>
+
+<div id="help">
+  <p class="header">Need help?</p>
+  
+  <p id="video-help-header">See more explanation of this step:</p>
+  <ul id="help-items-videos"></ul>
+
+  <div style="display: none;">
+    <div  id="color-box-container"><div id="embed-video-area"></div></div>
+  </div>
+
+  <p id="component-help-header">This step uses the following components:</p>
+  <ul id="help-items-components"></ul>
+</div>
+

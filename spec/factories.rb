@@ -63,7 +63,25 @@ Factory.define :quiz do |quiz|
   quiz.steps              []
   quiz.question           "What is the answer"
   quiz.answer_type        "text"
-  quiz.answer_input       '{"type" : "text"}'
+  quiz.answer_input       'text'
   quiz.answer             "42"
-  quiz.answer_output      '{"type" : "text"}'
+  quiz.answer_output      'text'
+end
+
+Factory.define :text_quiz, :class => Quiz do |quiz|
+  quiz.steps              []
+  quiz.question           "What is the answer?"
+  quiz.answer_type        "text"
+  quiz.answer_input       'text'
+  quiz.answer             "42"
+  quiz.answer_output      'text'
+end
+
+Factory.define :self_rate_quiz, :class => Quiz do |quiz|
+  quiz.steps              []
+  quiz.question           "What is the answer?"
+  quiz.answer_type        "self-rate"
+  quiz.answer_input       'self-rate'
+  quiz.answer             "42"
+  quiz.answer_output      'text'
 end

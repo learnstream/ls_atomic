@@ -8,11 +8,10 @@ class StudyController < ApplicationController
     if @memory
       @component = @memory.component
 
-      unless @component.steps.empty? 
-        @step = @component.steps.first
-        @problem = @step.problem
-        @steps = @problem.steps.steps_up_to(@step.order_number)
-        @index = @problem.steps.index(@step) + 1
+      unless @component.quizzes.empty?
+        @quiz = @component.quizzes.first
+        redirect_to quiz_path(@quiz)
+        return
       end
     else 
       @component = nil

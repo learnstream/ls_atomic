@@ -40,30 +40,10 @@ describe StudyController do
         get :index, :course_id => @course
         response.should be_success
       end
-
-      it "should display the steps leading up to the tested step" do
-        get :index, :course_id => @course
-        response.should have_selector("div", :content => @problem.steps.first.text)
-      end
-
-      it "should not display later steps" do
-        get :index, :course_id => @course
-        response.should_not have_selector("div", :content => @problem.steps.last.text)
-      end
-
-      it "should ask the user for the next step" do
-        get :index, :course_id => @course
-        response.should have_selector("div", :content => "next step")
-      end
-      
-      it "should have a button to reveal the next step" do
-        get :index, :course_id => @course
-        response.should have_selector("a", :content => "Show")
-      end
     end
 
     describe "component studying" do
-      
+
       it "should show the component description" do
         get :index, :course_id => @course
         response.should have_selector("div", :content => @component.name)
