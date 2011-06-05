@@ -184,29 +184,17 @@ a.study_button:hover {
 
 #tagline {
   font-size: 2.5em;
-  width: 350px;
-  clear: none;
-  float: left;
-  margin-left: 15px;
+  margin: 15px;
 }
 
-#quotes {
-  color: #fff;
-  clear: both;
-  font-size: 1.5em;
-  text-align: center;
+#tagline ul {
+  font-size: .4em;
+  list-style-type: none;
 }
 
-#quotes ul {
-  display: inline;
-  line-height: 4em;
-}
-
-#quotes li {
-  display: inline;
-  background: #8cff8c;
-  margin: .6em;
-  padding: 1em;
+#tagline .feature-head {
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
 a.signup_button {
@@ -222,4 +210,5 @@ a.signup_button {
   padding: 20px;
   clear: both;
 }
+
 
