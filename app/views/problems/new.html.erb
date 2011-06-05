@@ -1,5 +1,5 @@
 <h1>New problem for <%= @course.name %></h1>
-
+<%= link_to "Back to course", @course %>
 <%= form_for @problem, :html => {:multipart => true}  do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
