@@ -43,12 +43,18 @@ describe EnrollmentsController do
       @course = Factory(:course)
       @user.enroll!(@course)
       @enrollment = @user.enrollments.find_by_course_id(@course)
+      @component = Factory(:component, :course_id => @course)
     end
 
     it "should destroy an enrollment" do
       lambda do
         delete :destroy, :id => @enrollment
       end.should change(Enrollment, :count).by(-1)
+    end
+
+    it "should destroy the user's memories for each of the course components" do
+      delete :destroy, :id => @enrollment
+      @user.memories.find_by_component_id(@component).should be_nil
     end
 
     it "should redirect to the courses page" do
