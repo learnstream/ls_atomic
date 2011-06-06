@@ -58,4 +58,13 @@ class Quiz < ActiveRecord::Base
     parsed_answer_input = JSON.parse(answer_input)
     errors.add(:answer_type, "must be present") if not parsed_answer_input.has_key?("type") or parsed_answer_input["type"].blank?
   end
+
+  def check_answer(response)
+    response_answer = response.answer
+    if answer.downcase == response_answer.downcase
+     return true
+    else
+     return false
+    end
+  end 
 end

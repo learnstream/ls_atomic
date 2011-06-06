@@ -35,6 +35,9 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    @course = @quiz.problem.course
+    @response = Response.new
+
     if @quiz.answer_type == "text"
       @input_fields = "text_input"
     else

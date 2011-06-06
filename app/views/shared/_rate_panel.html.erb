@@ -1,0 +1,7 @@
+ <div id="rate-button-panel">
+    <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
+    <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round", :method => :get %>
+ i   <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
+    <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
+  </div>
+</div>

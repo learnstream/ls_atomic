@@ -1,3 +1,4 @@
+Studying <%= link_to @course.name, course_path(@course) %>
 <% if @quiz %> 
 <div id="problem"><%= @quiz.problem.statement %></div><br />
 
@@ -14,22 +15,28 @@
 
 <div id="study-item" class="header"><%= @quiz.question %></div>
 
-<% if @input_fields %>
 <%= form_for @response do |f| %>
-  <%= render @input_fields, :object => f.object %>
-<% end %>
+
+<% if @input_fields %>
+  <%= render :partial => @input_fields, :locals => { :f => f }, :object => f.object %>
 <% end %>
 
-<div id="answer-area">
-<%= link_to "Check answer", show_step_problem_path(@problem, :step_number => @index ), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+<%= f.hidden_field :quiz_id, :value => @quiz.id %>
+
+<div class="actions">
+<%= f.submit "Check answer" %>
+</div>
+
+<% end %>
   
 <% elsif @component %>
+  
+<div id="answer-area">
   <div id="problem"><%= component.name %></div>
   <div id="answer"></div>
 
 <div id="answer-area">
   <%= link_to "Show", describe_component_path(@component, :format => :json), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
-<% end %>
 
  <div id="rate-button-panel">
     <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
@@ -38,6 +45,8 @@
     <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
   </div>
 </div>
+
+<% end %>
 
 <div id="help">
   <p class="header">Need help?</p>

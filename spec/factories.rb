@@ -39,7 +39,7 @@ end
 
 Factory.define :problem do |problem|
   problem.name              "Euler's Little Theorem"
-  problem.statement         "What is \( e^{\pi i} \) equal to?"
+  problem.statement         "What is \\( e^{\\pi i} \\) equal to?"
   problem.association       :course_id, :factory => :course
 end
 
@@ -86,7 +86,7 @@ Factory.define :self_rate_quiz, :class => Quiz do |quiz|
   quiz.answer_output      'text'
 end
 
-Factory.define :response do |response|
-  response.answer         "41"
-  response.status         "incorrect"
+Factory.define :response do |r|
+  r.answer         "41"
+  r.status         "incorrect"
 end

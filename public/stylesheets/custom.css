@@ -144,20 +144,13 @@ a.study_button:hover {
   margin: 15px;
 }
 
-#answer-area a {
+#rate-button-panel a {
   font-size: 1.2em;
   padding: 5px 15px 5px 15px;
   background: #eee;
   margin: auto;
 }
 
-#rate-button-panel {
-  display: none;
-}
-
-#help {
-  display: none;
-}
 
 /* COMPONENT show page */
 

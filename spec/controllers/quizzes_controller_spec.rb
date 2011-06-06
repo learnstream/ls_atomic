@@ -132,4 +132,21 @@ describe QuizzesController do
       end
     end
   end
+
+  describe "GET 'show'" do
+
+    before(:each) do
+      @course = Factory(:course)
+      @student = Factory(:user)
+      test_sign_in(@student)
+      @student.enroll!(@course)
+      @problem = Factory(:problem, :course_id => @course)
+      @quiz = Factory(:quiz, :problem_id => @problem)
+    end
+
+    it "should be successful" do
+      get :show, :id => @quiz
+      response.should be_success
+    end
+  end
 end

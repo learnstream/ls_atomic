@@ -5,11 +5,9 @@ describe "StudyQuizzes" do
   before(:each) do
     @user = Factory(:user)
     @course = Factory(:course)
+    @user.enroll!(@course)
 
     @component = Factory(:component, :course_id => @course)
-    @memory = @user.memories.create!(:component_id => @component)
-    @memory.due = Time.now.utc
-    @memory.save!
 
     @problem = Factory(:problem, :course_id => @course)
     @step1 = @problem.steps.create(:text => "do this first", :order_number => 1)
@@ -18,6 +16,7 @@ describe "StudyQuizzes" do
 
     @quiz = Factory(:quiz, :problem_id => @problem)
     @quiz.steps = ["1", "2"]
+    @quiz.components << @component
  
     integration_sign_in(@user) 
   end
@@ -53,29 +52,73 @@ describe "StudyQuizzes" do
     describe "for text input questions" do
 
       before(:each) do
-        @quiz = Factory(:text_quiz, :problem_id => @problem)
+        @quiz.answer_input = "text"
+        @quiz.save 
       end
 
       it "should have a box for text input" do
-        page.should have_css("input", :id => "response_answer",
-                             :type => "text") 
+        visit course_study_index_path(@course)
+        page.should have_css("input#response_answer")
       end
     end
 
     describe "for self-rated questions" do
 
       before(:each) do
-        @quiz = Factory(:self_rate_quiz, :problem_id => @problem)
+        @quiz.answer_input = "self-rate"
+        @quiz.save
       end
 
       it "should not have a box for text input" do
-        page.should_not  have_css("input", :id => "response_answer",
-                             :type => "text") 
+        visit course_study_index_path(@course)
+        page.should_not have_css("input#response_answer")
       end
     end
 
-    describe "after revealing the answer" do
-      it "should have a self rating panel"
+    describe "after submitting the response" do
+      before(:each) do
+        visit course_study_index_path(@course)
+      end
+
+      it "should show the correct answer" do
+        fill_in :input, :with => "41"
+        click_button "Check answer"
+        page.should have_content("42")
+      end
+
+      describe "for text input" do
+
+        it "should say whether the answer was correct" do 
+          fill_in :input, :with => "42"
+          click_button "Check answer"
+          page.should have_content("correct")
+        end
+
+        it "should say whether the answer was incorrect" do
+          fill_in :input, :with => "wrong asnwfaerw"
+          click_button "Check answer"
+          page.should have_content("incorrect")
+        end
+
+        it "should have a self rating panel" do
+          fill_in :input, :with => "42"
+          click_button "Check answer"
+          page.should have_css("a#rate-hard")
+          page.should have_css("a#rate-good")
+          page.should have_css("a#rate-easy")
+        end
+      end
+
+      describe "for self-rating" do
+
+        it "should have a full self rating panel" do
+          click_button "Check answer"
+          page.should have_css("a#rate-miss")
+          page.should have_css("a#rate-hard")
+          page.should have_css("a#rate-good")
+          page.should have_css("a#rate-easy")
+        end
+      end
     end
   end
 end
