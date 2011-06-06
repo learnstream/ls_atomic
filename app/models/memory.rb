@@ -18,7 +18,7 @@ class Memory < ActiveRecord::Base
   def view(quality)
 
     if (quality > 5 || quality < 0)
-      return false
+      return
     end
 
     memory_rating = self.memory_ratings.build(:memory_id => self, :quality => quality)
@@ -52,7 +52,7 @@ class Memory < ActiveRecord::Base
 
     self.due = Time.now + interval.days
 
-    return true
+    self.save()
   end
 
   def reset

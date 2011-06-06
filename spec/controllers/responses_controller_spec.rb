@@ -11,8 +11,10 @@ describe ResponsesController do
         test_sign_in(@student)
         @course = Factory(:course)
         @student.enroll!(@course)
+        @component = Factory(:component, :course_id => @course)
         @problem = Factory(:problem, :course_id => @course)
         @quiz = Factory(:quiz, :problem_id => @problem, :answer => "42")
+        @quiz.components << @component
         @attr = { :quiz_id => @quiz, :answer => "42" }
       end
 
@@ -32,6 +34,14 @@ describe ResponsesController do
         post :create, :response => @attr.merge({ :answer => "43" })
         incorrect_response = Response.first
         incorrect_response.status.should == "incorrect"
+      end
+
+      it "should record a memory miss for an incorrect response" do
+        post :create, :response => @attr.merge({ :answer => "43" })
+        incorrect_response = Response.first
+        component = incorrect_response.quiz.components.first
+        memory = incorrect_response.user.memories.find_by_component_id(component)
+        memory.memory_ratings.last.quality.should == 0
       end
 
       it "should belong to the signed in user" do

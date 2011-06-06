@@ -89,7 +89,7 @@ def make_problems_and_steps
 end  
 
 def make_quizzes
-  problem = Problem.first
+  problem = Problem.find_by_name("Newton's second law")
   quiz = Quiz.create!(:problem_id => problem, 
                       :component_tokens => "1",
                       :steps => ["1"],

@@ -17,7 +17,7 @@ describe "StudyQuizzes" do
     @quiz = Factory(:quiz, :problem_id => @problem)
     @quiz.steps = ["1", "2"]
     @quiz.components << @component
- 
+
     integration_sign_in(@user) 
   end
 
@@ -76,48 +76,92 @@ describe "StudyQuizzes" do
     end
 
     describe "after submitting the response" do
-      before(:each) do
-        visit course_study_index_path(@course)
-      end
 
       it "should show the correct answer" do
+        visit course_study_index_path(@course)
         fill_in :input, :with => "41"
         click_button "Check answer"
         page.should have_content("42")
       end
 
+
       describe "for text input" do
 
-        it "should say whether the answer was correct" do 
-          fill_in :input, :with => "42"
-          click_button "Check answer"
-          page.should have_content("correct")
+        describe "for correct answers" do
+
+          it "should say the answer was correct" do 
+            visit course_study_index_path(@course)
+            fill_in :input, :with => "42"
+            click_button "Check answer"
+            page.should have_content("correct")
+          end
+
+          it "should have a self rating panel" do
+            visit course_study_index_path(@course)
+            fill_in :input, :with => @quiz.answer
+            click_button "Check answer"
+            page.should have_css("a#rate-hard")
+            page.should have_css("a#rate-good")
+            page.should have_css("a#rate-easy")
+          end
+
+          it "should not allow the user to select a miss" do
+            visit course_study_index_path(@course)
+            fill_in :input, :with => @quiz.answer
+            click_button "Check answer"
+            page.should_not have_css("a#rate-miss")
+          end
         end
 
-        it "should say whether the answer was incorrect" do
-          fill_in :input, :with => "wrong asnwfaerw"
-          click_button "Check answer"
-          page.should have_content("incorrect")
-        end
+        describe "for incorrect answers" do 
 
-        it "should have a self rating panel" do
-          fill_in :input, :with => "42"
-          click_button "Check answer"
-          page.should have_css("a#rate-hard")
-          page.should have_css("a#rate-good")
-          page.should have_css("a#rate-easy")
+          it "should say the answer was incorrect" do
+            visit course_study_index_path(@course)
+            fill_in :input, :with => "wrong asnwfaerw"
+            click_button "Check answer"
+            page.should have_content("incorrect")
+          end
+
+          it "should have a next button" do
+            visit course_study_index_path(@course)
+            fill_in :input, :with => "wrong asnwfaerw"
+            click_button "Check answer"
+            page.should have_content("Next")
+          end
         end
       end
 
       describe "for self-rating" do
 
+        before(:each) do
+          @quiz.answer_input = "self-rate"
+          @quiz.save
+        end
+
+        it "should not judge the answer" do
+          visit course_study_index_path(@course)
+          click_button "Check answer"
+          page.should_not have_css("p.flash")
+        end
+
         it "should have a full self rating panel" do
+          visit course_study_index_path(@course)
           click_button "Check answer"
           page.should have_css("a#rate-miss")
           page.should have_css("a#rate-hard")
           page.should have_css("a#rate-good")
           page.should have_css("a#rate-easy")
         end
+      end
+    end
+
+    describe "rating panel" do
+      it "should redirect to the study page for the course" do
+        visit course_study_index_path(@course)
+        fill_in :input, :with => @quiz.answer
+        click_button "Check answer"
+        click_link "Good"
+        page.should have_content("Studying " + @course.name)
       end
     end
   end

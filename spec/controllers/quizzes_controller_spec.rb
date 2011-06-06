@@ -149,4 +149,29 @@ describe QuizzesController do
       response.should be_success
     end
   end
+
+  describe "GET 'rate_components'" do
+    before(:each) do
+      @course = Factory(:course)
+      @student = Factory(:user)
+      test_sign_in(@student)
+      @student.enroll!(@course)
+      @problem = Factory(:problem, :course_id => @course)
+      @quiz = Factory(:quiz, :problem_id => @problem)
+      @component = Factory(:component, :course_id => @course)
+      @quiz.components << @component
+      @memory = @student.memories.find_by_component_id(@component)
+    end
+
+    it "should rate each component" do
+      lambda do
+        get :rate_components, :id => @quiz, :quality => 3
+      end.should change(MemoryRating, :count).by(1)
+    end
+
+    it "should give the correct rating to the components" do
+      get :rate_components, :id => @quiz, :quality => 3
+      @student.memories.last.memory_ratings.last.quality.should == 3
+    end
+  end
 end

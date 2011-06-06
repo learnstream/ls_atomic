@@ -1,13 +1,15 @@
-<% if @response.status == "correct" %>
-  <p class="flash success">You're correct!</p>
-<% else %>
-  <p class="flash error">That's incorrect.</p>
+<% if not @response.status.blank? %> 
+  <% if @response.status == "correct" %>
+    <p class="flash success">You're correct!</p>
+  <% else %>
+    <p class="flash error">That's incorrect.</p>
+  <% end %>
+
+  <p>Your answer: <%= @response.answer %></p>
 <% end %>
 
-<p>Your answer: <%= @response.answer %><br />
-The correct answer: <%= @response.quiz.answer %></p>
+<p>The correct answer: <%= @response.quiz.answer %></p>
 
 <p>How did you feel about this problem?</p>
 
-<%= render 'shared/rate_panel' %>
-
+<%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>

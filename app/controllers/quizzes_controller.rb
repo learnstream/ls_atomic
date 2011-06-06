@@ -45,6 +45,12 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def rate_components
+    @quiz = Quiz.find(params[:id])
+    @quiz.rate_components!(current_user, Integer(params[:quality]))
+    redirect_to course_study_index_path(@quiz.problem.course)
+  end
+
   private 
   
     def check_permissions(params)
