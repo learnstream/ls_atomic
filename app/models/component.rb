@@ -12,6 +12,7 @@ class Component < ActiveRecord::Base
   has_many :step_components, :dependent => :destroy
   has_many :steps, :through => :step_components
   has_many :videos
+  has_many :memories, :dependent => :destroy
 
   after_create :add_to_each_student
 
@@ -20,4 +21,5 @@ class Component < ActiveRecord::Base
       student.remember(self)
     end
   end
+
 end

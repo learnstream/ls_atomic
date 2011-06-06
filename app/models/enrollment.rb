@@ -9,13 +9,21 @@ class Enrollment < ActiveRecord::Base
   validates :role, :presence => true
 
   after_create :remember_components
+  before_destroy :forget_components
 
   def remember_components
     if role == "student" 
       course.components.each do |component|
-       user.remember(component)
+        user.remember(component)
       end
     end
   end
 
+  def forget_components
+    if role == "student"
+      course.components.each do |component|
+        user.forget(component)
+      end
+    end
+  end
 end

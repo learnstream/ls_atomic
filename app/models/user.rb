@@ -43,6 +43,11 @@ class User < ActiveRecord::Base
     enrollment.save!
   end
 
+  def student?(course)
+    enrollment = enrollments.find_by_course_id(course)
+    enrollment and enrollment.role == "student"
+  end
+
   def teacher?(course)
     enrollment = enrollments.find_by_course_id(course)
     enrollment and enrollment.role == "teacher"
@@ -57,6 +62,11 @@ class User < ActiveRecord::Base
   end
 
   def remember(component)
-    memories.create(:component_id => component.id)    
+    memories.create(:component_id => component.id) 
+  end
+
+  def forget(component)
+    memory = memories.find_by_component_id(component.id)
+    memory.destroy
   end
 end
