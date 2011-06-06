@@ -1,4 +1,6 @@
-<h1>Course: <%= @course.name %></h1>
+<h1>Course: <%= @course.name %>
+</h1>
+
 <p><b>Description:</b> <%= @course.description %></p>
 
 <% if current_user.enrolled?(@course) %>
