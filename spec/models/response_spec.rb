@@ -9,7 +9,7 @@ describe Response do
     @response = Factory(:response, :user_id => @user, :quiz_id => @quiz)
   end
 
-  it "should have a user_id attribute" do
+  it "should have a user attribute" do
     @response.should respond_to(:user)
   end
 
