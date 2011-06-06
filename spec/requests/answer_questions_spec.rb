@@ -5,9 +5,10 @@ describe "Studying" do
   before(:each) do
     @user = Factory(:user)
     @course = Factory(:course)
+    @user.enroll!(@course)
 
     @component = Factory(:component, :course_id => @course)
-    @memory = @user.memories.create!(:component_id => @component)
+    @memory = @user.memories.find_by_component_id(@component)
     @memory.due = Time.now.utc
     @memory.save!
 
@@ -21,6 +22,8 @@ describe "Studying" do
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => @user.password
     click_button "Sign in"
+
+    
   end
 
  
