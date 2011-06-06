@@ -50,7 +50,7 @@ class Memory < ActiveRecord::Base
       self.interval = interval*ease
     end
 
-    self.due = Time.now + interval.days
+    self.due = Time.now + BigDecimal(interval.to_s).days
 
     return true
   end
