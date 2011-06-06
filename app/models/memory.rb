@@ -50,7 +50,7 @@ class Memory < ActiveRecord::Base
       self.interval = interval*ease
     end
 
-    self.due = Time.now + Rational(interval).days
+    self.due = Time.now + interval.days
 
     return true
   end
