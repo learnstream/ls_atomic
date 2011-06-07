@@ -119,18 +119,31 @@ a.study_button:hover {
 
 /* Study mode */
 
-#study-header {
-  position: relative;
-  top: -20px;
+#panel {
+  margin-top: 80px;
+  width: 300px;
+  float: right;
+  background: #eee;
+  padding: 20px;
 }
+
+#panel .number {
+  font-size: 4em;
+}
+
 #study-area {
   padding: 15px;
-  margin-top: 20px;
-  width: 500px; 
+  margin-right: 340px;
 }
 
 #study-area #steps-header {
   font-weight: bold;
+}
+
+#study-area .flash {
+  width: 150px;
+  font-size: 1.2em;
+  text-align: center;
 }
 
 .header {
@@ -139,18 +152,27 @@ a.study_button:hover {
 }
 
 #study-area #problem {
-  font-size: 1.5em;
-  padding: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1.0em;
+  /*padding: 30px;*/
 }
 
 #answer-area {
   margin: 15px;
 }
 
+#study-area #judgement {
+}
+
+#study-area #judgement .answer {
+}
+
 #rate-button-panel {
   margin-bottom: 15px;
+}
+
+#rate-buttons { 
+  margin-top: 25px;
+  text-align: center;
 }
 
 #rate-button-panel a {
@@ -158,11 +180,6 @@ a.study_button:hover {
   padding: 5px 15px 5px 15px;
   background: #eee;
   margin: auto;
-}
-
-#quiz {
-  margin-top: 15px;
-  margin-right: 400px;
 }
 
 .quizbutton {

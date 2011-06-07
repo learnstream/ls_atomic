@@ -1,8 +1,9 @@
 <div id="rate-button-panel">
   <% if myresponse.quiz.answer_type == "self-rate" or myresponse.status != "incorrect" %>
-    <p>How did you feel about this problem?</p>
+    <p class="header">How did you feel about this problem?</p>
   <% end %>
 
+  <div id="rate-buttons">
   <% if myresponse.quiz.answer_type == "self-rate" %>
     <%= link_to "Miss", rate_components_quiz_path(myresponse.quiz, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
   <% end %>
@@ -14,4 +15,5 @@
   <% else %>
     <%= link_to "Next", course_study_index_path(myresponse.quiz.problem.course), :class => "round"  %>
   <% end %>
+</div>
 </div>
