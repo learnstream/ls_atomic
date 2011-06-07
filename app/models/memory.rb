@@ -21,8 +21,6 @@ class Memory < ActiveRecord::Base
       return false
     end
 
-    memory_rating = self.memory_ratings.build(:memory_id => self, :quality => quality)
-    memory_rating.save
 
     self.views += 1
     self.last_viewed = Time.now
@@ -52,6 +50,10 @@ class Memory < ActiveRecord::Base
 
     self.due = Time.now + interval.days
 
+    memory_rating = self.memory_ratings.build(:memory_id => self, :quality => quality,
+                                              :streak => streak, :interval => interval,
+                                              :ease => ease)
+    memory_rating.save
     return true
   end
 

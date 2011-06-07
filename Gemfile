@@ -16,6 +16,7 @@ group :development, :test do
   gem 'jasmine'
   gem 'launchy'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'timecop'
 end
 
 group :development do

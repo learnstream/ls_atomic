@@ -6,6 +6,7 @@ namespace :db do
     make_courses_and_components
     enroll_users
     make_problems_and_steps
+    create_old_memories
   end
 end
 
@@ -85,3 +86,14 @@ def make_problems_and_steps
   step22.relate!(c3)
   step23.relate!(c3)
 end  
+
+def create_old_memories
+  course = Course.first
+  user = User.find_by_email("foo-1@bar.com")
+  Timecop.travel(Time.now - 30.days) do
+   user.memories.in_course(@course).each { |memory| 
+    memory.view(4)
+    memory.save
+  }
+  end
+end
