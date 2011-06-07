@@ -1,0 +1,22 @@
+<div id="help">
+  <p class="header">Need help?</p>
+  
+  <p id="video-help-header">See more explanation of this step:</p>
+  <ul id="help-items-videos">
+    <% @response.quiz.problem.steps.each { |step| %>
+      <%= render :partial => 'steps/video', :collection => step.videos %>
+    <% } %> 
+  </ul>
+
+  <div style="display: none;">
+    <div  id="color-box-container"><div id="embed-video-area"></div></div>
+  </div>
+
+  <% if !@response.quiz.components.empty? %>
+    <p>This step uses the following components:</p>
+    <ul id="help-items-components">
+      <%= render @response.quiz.components %>
+    </ul>
+  <% end %>
+</div>
+

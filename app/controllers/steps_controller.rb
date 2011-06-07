@@ -73,7 +73,7 @@ class StepsController < ApplicationController
                         :end_time => video.end_time,
                         :description => video.description }
     end
-    
+
     @response = { :components => @component_list, :videos =>  @video_list } 
     respond_to do |format|
       format.json { render :json => @response.to_json }

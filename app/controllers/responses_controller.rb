@@ -3,17 +3,6 @@ class ResponsesController < ApplicationController
     @response = Response.new(params[:response])
     @response.user = current_user
      
-    if @response.quiz.answer_type != "self-rate" 
-      if @response.quiz.check_answer(@response) 
-        @response.status = "correct"
-      else
-        @response.status = "incorrect"
-        @response.quiz.rate_components!(@response.user, 0)
-      end
-    else
-      @response.status = ""
-    end
-
     if @response.save
       redirect_to @response
     else

@@ -10,6 +10,7 @@
 
 <p>The correct answer: <%= @response.quiz.answer %></p>
 
-<p>How did you feel about this problem?</p>
 
 <%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
+
+<%= render :partial => 'components/help' %>

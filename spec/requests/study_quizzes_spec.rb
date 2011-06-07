@@ -85,6 +85,13 @@ describe "StudyQuizzes" do
       end
 
 
+      it "should display help for the problem" do
+        visit course_study_index_path(@course)
+        fill_in :input, :with => "41"
+        click_button "Check answer"
+        page.should have_css("div#help")
+      end
+
       describe "for text input" do
 
         describe "for correct answers" do
