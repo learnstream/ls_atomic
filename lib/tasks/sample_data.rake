@@ -2,12 +2,14 @@ namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
-    make_users
-    make_courses_and_components
-    enroll_users
-    make_problems_and_steps
-    make_quizzes
-    create_old_memories
+    Timecop.travel(2011, 1, 1, 0, 0, 0) do
+      make_users
+      make_courses_and_components
+      enroll_users
+      make_problems_and_steps
+    end
+
+    view_memories
   end
 end
 
@@ -102,13 +104,15 @@ def make_quizzes
                       :answer_output => "text")
 end
 
-def create_old_memories
+def view_memories
   course = Course.first
   user = User.find_by_email("foo-1@bar.com")
-  Timecop.travel(Time.now - 30.days) do
-   user.memories.in_course(@course).each { |memory| 
-    memory.view(4)
-    memory.save
-  }
+  user.memories.in_course(course).each do |memory| 
+    Timecop.travel(DateTime.now - 30.days) { memory.view(0) }
+    Timecop.travel(DateTime.now - 20.days) { memory.view(4) }
+    Timecop.travel(DateTime.now - 20.days) { memory.view(4) }
+    Timecop.travel(DateTime.now - 10.days) { memory.view(4) }
+    Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
+    Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
   end
 end
