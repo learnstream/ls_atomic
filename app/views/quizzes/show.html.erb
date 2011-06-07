@@ -3,6 +3,7 @@ Studying <%= link_to @course.name, course_path(@course) %>
   <div id="quiz">
     <div id="problem" class="header"><%= @quiz.problem.statement %></div>
 
+    <% if not @quiz.steps.empty? %>
     <div id="steps-header">Steps</div><br />
 
     <ol>
@@ -13,6 +14,7 @@ Studying <%= link_to @course.name, course_path(@course) %>
       <% end %>
       <li><p id="answer">...</p></li>
     </ol>
+  <% end %>
 
     <div id="study-item" class="header"><%= @quiz.question %></div>
 

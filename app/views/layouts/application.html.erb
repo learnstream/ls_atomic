@@ -38,8 +38,10 @@
     <div class="flash <%= key %>"><%= value %></div>
   <% end %>
   <%= yield %>
+  <div id="panel">
+    <%= yield(:panel) if content_for?(:panel) %>
+  </div>
   </section>
-
 </div>
 </body>
 </html>

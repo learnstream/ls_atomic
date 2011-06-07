@@ -33,7 +33,7 @@ describe "StudyQuizzes" do
     end
 
     it "should show the question" do
-      page.should have_css("p", :content => @quiz.question)
+      page.should have_css("div", :content => @quiz.question)
     end
 
     it "should show the appropriate steps" do
@@ -42,7 +42,7 @@ describe "StudyQuizzes" do
     end
 
     it "should show the problem" do
-      page.should have_css("p", :content => @problem.statement)
+      page.should have_css("div", :content => @problem.statement)
     end
 
     it "should have a Check Answer button" do
@@ -83,7 +83,6 @@ describe "StudyQuizzes" do
         click_button "Check answer"
         page.should have_content("42")
       end
-
 
       it "should display help for the problem" do
         visit course_study_index_path(@course)
