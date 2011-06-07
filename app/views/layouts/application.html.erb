@@ -34,12 +34,15 @@
   </nav>
   </header>
   <section class="round">
+  <div id="panel">
+    <%= yield(:panel) if content_for?(:panel) %>
+  </div>
+ 
   <% flash.each do |key, value| %>
     <div class="flash <%= key %>"><%= value %></div>
   <% end %>
   <%= yield %>
-  </section>
-
+ </section>
 </div>
 </body>
 </html>

@@ -9,6 +9,7 @@ class Memory < ActiveRecord::Base
   scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
   scope :due_before, lambda { |time| where("due <= ?", time) }
   scope :latest_studied, :order => 'last_viewed DESC'
+
   default_scope :order => 'memories.due'  
 
   def course
@@ -18,7 +19,7 @@ class Memory < ActiveRecord::Base
   def view(quality)
 
     if (quality > 5 || quality < 0)
-      return false
+      return
     end
 
     memory_rating = self.memory_ratings.build(:memory_id => self, :quality => quality)
@@ -52,7 +53,7 @@ class Memory < ActiveRecord::Base
 
     self.due = Time.now + interval.days
 
-    return true
+    self.save()
   end
 
   def reset

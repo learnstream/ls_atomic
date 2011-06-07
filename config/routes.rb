@@ -42,6 +42,13 @@ LsAtomic::Application.routes.draw do
     end
   end
 
+  resources :quizzes do
+    member do
+      get :rate_components
+    end
+  end
+
+  resources :responses, :only => [:create, :update, :edit, :index, :show]
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'

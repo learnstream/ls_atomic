@@ -1,11 +1,1 @@
-Studying <%= link_to @course.name, course_path(@course) %>
-<div id="study-area">
-  <% if @memory %>
-    <% if not @step %>
-      <%= render :partial => "problems/problem_interface", :locals => { :component => @component } %>
-   <% else %>
-      <%= render :partial => "problems/problem_interface", :locals => { :problem => @problem, :steps => @steps } %>
-    <% end %>
-  <% else %>
-    <p>Congrats! Nothing is due, go have some fun!</p>
-  <% end %>
+<p>Congrats! Nothing is due, go have some fun!</p>
