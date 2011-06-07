@@ -172,6 +172,7 @@ a.study_button:hover {
 
 .quizbutton:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #check-answer {

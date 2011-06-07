@@ -1,4 +1,6 @@
 class QuizzesController < ApplicationController
+  layout "study", :only => [:show]
+
   before_filter :authenticate
   before_filter :only => [:create, :update, :new, :edit] do
     check_permissions(params)

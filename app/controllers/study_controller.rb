@@ -1,6 +1,8 @@
 class StudyController < ApplicationController
   before_filter :authenticate
 
+  layout "study"
+
   def index
     @course = Course.find(params[:course_id])
     @memory = current_user.memories.in_course(@course).due_before(Time.now.utc).first

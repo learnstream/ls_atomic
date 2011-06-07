@@ -1,4 +1,6 @@
 class ResponsesController < ApplicationController
+  layout "study", :only => [:show]
+  
   def create
     @response = Response.new(params[:response])
     @response.user = current_user
@@ -18,6 +20,7 @@ class ResponsesController < ApplicationController
     @response = Response.find(params[:id])
     @answer_output = JSON.parse(@response.quiz.answer_output)
     @answer_type = @response.quiz.answer_type
+    @course = @response.quiz.problem.course
   end
 
   def index
