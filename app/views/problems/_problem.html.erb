@@ -4,5 +4,9 @@
   <% else %>
     <%= problem.name %>
   <% end %>
+
+  <% if current_user.can_edit?(problem.course) %>
+    <%= link_to "Add quiz", new_quiz_path(:problem_id => problem.id) %>
+  <% end %>
 </a>
 </li>

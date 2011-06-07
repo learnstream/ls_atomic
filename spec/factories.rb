@@ -39,7 +39,7 @@ end
 
 Factory.define :problem do |problem|
   problem.name              "Euler's Little Theorem"
-  problem.statement         "What is \( e^{\pi i} \) equal to?"
+  problem.statement         "What is \\( e^{\\pi i} \\) equal to?"
   problem.association       :course_id, :factory => :course
 end
 
@@ -57,4 +57,36 @@ Factory.define :video do |video|
   video.start_time          0
   video.end_time            60
   video.association         :component, :factory => :component
+end
+
+Factory.define :quiz do |quiz|
+  quiz.steps              []
+  quiz.question           "What is the answer"
+  quiz.answer_type        "text"
+  quiz.answer_input       'text'
+  quiz.answer             "42"
+  quiz.answer_output      'text'
+end
+
+Factory.define :text_quiz, :class => Quiz do |quiz|
+  quiz.steps              []
+  quiz.question           "What is the answer?"
+  quiz.answer_type        "text"
+  quiz.answer_input       'text'
+  quiz.answer             "42"
+  quiz.answer_output      'text'
+end
+
+Factory.define :self_rate_quiz, :class => Quiz do |quiz|
+  quiz.steps              []
+  quiz.question           "What is the answer?"
+  quiz.answer_type        "self-rate"
+  quiz.answer_input       'self-rate'
+  quiz.answer             "42"
+  quiz.answer_output      'text'
+end
+
+Factory.define :response do |r|
+  r.answer         "41"
+  r.status         "incorrect"
 end

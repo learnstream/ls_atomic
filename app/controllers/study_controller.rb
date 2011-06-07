@@ -1,24 +1,24 @@
 class StudyController < ApplicationController
   before_filter :authenticate
 
+  layout "study"
+
   def index
     @course = Course.find(params[:course_id])
     @memory = current_user.memories.in_course(@course).due_before(Time.now.utc).first
 
-    if @memory
-      @component = @memory.component
-
-      unless @component.steps.empty? 
-        @step = @component.steps.first
-        @problem = @step.problem
-        @steps = @problem.steps.steps_up_to(@step.order_number)
-        @index = @problem.steps.index(@step) + 1
-      end
-    else 
-      @component = nil
-      @step = nil
+    if @memory.nil?
+      render 'index'
+      return
     end
 
-    render 'index'
+    @quiz = @memory.component.quizzes.first
+    while not @quiz and @memory 
+      @memory.view(0)
+      @memory = current_user.memories.in_course(@course).due_before(Time.now.utc).first 
+      @quiz = @memory.component.quizzes.first
+    end
+
+    redirect_to @quiz
   end
 end

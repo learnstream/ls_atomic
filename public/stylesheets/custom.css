@@ -131,6 +131,7 @@ a.study_button:hover {
 
 .header {
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 #study-area #problem {
@@ -144,21 +145,43 @@ a.study_button:hover {
   margin: 15px;
 }
 
-#answer-area a {
+#rate-button-panel {
+  margin-bottom: 15px;
+}
+
+#rate-button-panel a {
   font-size: 1.2em;
   padding: 5px 15px 5px 15px;
   background: #eee;
   margin: auto;
 }
 
-#rate-button-panel {
-  display: none;
+#quiz {
+  margin-top: 15px;
+  margin-right: 400px;
 }
 
-#help {
-  display: none;
+.quizbutton {
+  font-size: 1.2em;
+  color: #09c;
+  padding: 5px 15px 5px 15px;
+  background: #eee;
+  border: 0px none;
+  margin: auto;
 }
 
+.quizbutton:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#check-answer {
+  margin-top: 15px;
+}
+
+#check-answer .actions {
+  text-align: center;
+}
 /* COMPONENT show page */
 
 .video-name {

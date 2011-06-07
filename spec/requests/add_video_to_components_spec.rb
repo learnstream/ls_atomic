@@ -7,11 +7,7 @@ describe "AddVideoToComponents" do
     @teacher = Factory(:user)
     @teacher.enroll_as_teacher!(@course)
     @component = Factory(:component, :course_id => @course)
-
-    visit signin_path
-    fill_in "Email", :with => @teacher.email
-    fill_in "Password", :with => @teacher.password
-    click_button "Sign in"
+    integration_sign_in(@teacher)
   end
 
   it "should add a video to a component" do

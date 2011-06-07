@@ -7,4 +7,7 @@ $(function () {
       crossDomain: false,
       prePopulate: $('#step_component_tokens').data('pre')
     });
+
+    $('#quiz_component_tokens').tokenInput('/components.json?course_id=' + course_id,
+      { crossDomain: false });
   });

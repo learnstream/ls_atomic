@@ -1,11 +1,10 @@
 class Step < ActiveRecord::Base
   attr_accessible :name, :text, :order_number, :problem_id, :component_tokens
   attr_reader :component_tokens
-  belongs_to :problem
 
+  belongs_to :problem
   has_many :step_components, :dependent => :destroy
   has_many :components, :through => :step_components
-
   has_many :videos
 
   validates :name, :length => { :maximum => 134 }
