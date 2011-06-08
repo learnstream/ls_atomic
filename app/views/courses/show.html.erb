@@ -6,7 +6,6 @@
 <% if current_user.student?(@course) %>
 <p><%= link_to "Study", course_study_index_path(@course), :class => "study_button round" %></p>
 <% end %>
-
   <div>
   <h2>Components</h2>
   <% if @components.empty? %>

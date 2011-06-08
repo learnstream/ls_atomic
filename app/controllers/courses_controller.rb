@@ -39,6 +39,7 @@ class CoursesController < ApplicationController
 
   def success_stats 
     @course = Course.find(params[:id])
+<<<<<<< HEAD
     total_output = []
     correct_output = []
     (0..28).each { |i|
@@ -52,6 +53,18 @@ class CoursesController < ApplicationController
       correct_output << [i, correct_mr]
       }
     output_json = { :success_stats => [ {label: "Total", lines: {fill: true, fillColor: "rgba(0,0,255,0.8)"}, data: total_output},{label: "Correct", lines: {fill: true, fillColor: "rgba(0,255,0,0.8)"}, data: correct_output}] }
+=======
+    output = []
+    (1..30).each { |i|
+      success_ratio = nil
+      start_time = Time.now.utc - (31 - i).day
+      end_time = Time.now.utc - (30 - i).day
+      day_stats = current_user.stats(@course, start_time, end_time)
+      success_ratio = (day_stats.sum - day_stats[0]) / day_stats.sum unless day_stats.sum == 0
+      output << [ i, success_ratio ] unless success_ratio.nil?
+      }
+    output_json = { :success_stats => [output] }
+>>>>>>> origin/progress-bar
     respond_to do |format|
       format.json { render :json => output_json.to_json }
     end
@@ -62,7 +75,11 @@ class CoursesController < ApplicationController
     output = []
     (0..21).each{ |i|
       cards_due_day = current_user.memories.in_course(@course).due_before(Time.now.utc + i.day)
+<<<<<<< HEAD
       output << [i, cards_due_day.count]
+=======
+      output << [i, cards_due_day]
+>>>>>>> origin/progress-bar
     }
     output_json = { :cards_due_stats => [output] }
     respond_to do |format|

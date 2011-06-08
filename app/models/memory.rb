@@ -51,7 +51,6 @@ class Memory < ActiveRecord::Base
     self.due = Time.now + interval.days
 
     self.save()
-
     memory_rating = self.memory_ratings.build(:memory_id => self, :quality => quality,
                                               :streak => streak, :interval => interval,
                                               :ease => ease)
