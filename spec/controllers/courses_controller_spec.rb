@@ -325,4 +325,18 @@ describe CoursesController do
       get :course_achieved_stats, :id => @course, :format => :json 
     end 
   end
+
+  describe "teacher stats page" do
+    before(:each) do
+      @teacher = Factory(:user)
+      test_sign_in(@teacher)
+      @course  = Factory(:course)
+      @teacher.enroll_as_teacher!(@course)
+    end
+
+    it "should allow teacher to see the student status page" do
+      get :student_status, :id => @course
+      response.should have_selector("table")
+    end
+  end
 end

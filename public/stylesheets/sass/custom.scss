@@ -163,14 +163,26 @@ a.study_button {
 /* Teacher stats */
 
 #student-status { 
-  td { 
-    padding: .3em; border: .2em solid #000; 
+  overflow: auto;
+  margin-left: 116px;
+  td {
+    padding: 0px; border: 1px solid #000; height: 40px; max-height: 40px; min-width: 110px; max-width: 110px; margin-left: -110px; 
     &.label { background: #ccf; }
     &.due { background: red; }
     &.good { background: green; }                     
-    &.unviewed { color: white; background: white; }  
+    &.unviewed { background: white; }  
+    &.student-column { position:fixed; margin-left: -116px; padding-right:4px;background: #ccf; }
     &.unused { background: #fff; border: 0px none; }
   }
+}
+
+.popup {
+  z-index: 99;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  position: absolute;
+  margin-left: 15px;
 }
 
 /* Welcome page */

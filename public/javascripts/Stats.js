@@ -3,6 +3,13 @@ $(document).ready(function(){
   build_success_chart(course_id);
   build_cards_due_chart(course_id);
   build_achievement_chart(course_id);
+
+  $("td").hover(function() {
+      $(this).find("div").show();
+    }, 
+    function() {
+      $(this).find("div").hide(); 
+    });
 });
 
 
