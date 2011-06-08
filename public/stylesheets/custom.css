@@ -1,281 +1,38 @@
+/*
+Syntax error: Invalid CSS after "": expected selector or at-rule, was "<%= stylesheet_..."
+        on line 2 of custom.scss
 
-<%= stylesheet_link_tag 'custom' %ner {
-  width: 710px;
-}
+1: 
+2: <%= stylesheet_link_tag 'custom' %ner {
+3:   width: 710px;
+4: }
+5: 
+6: #video-dialog{ background:grey;}
+7: 
 
-#video-dialog{ background:grey;}
-
-body {
-  background: #fff;
-}
-
-header {
-  padding-top: 20px;
-}
-
-header img {
-  padding: 1em;
-  background: #fff;
-}
-
-header a#logo {
-  color: #000;
-  font-size: 1.5em;
-  font-weight: bold;
-  display: inline;
-  clear: left;  
-}
-
-header a:visited {
-  color: #000;
-}
-
-section {
-  margin-top: 1em;
-  font-size: 120%;
-  padding: 20px;
-  background: #fff;
-}
-
-.hidden {
-  display: none;
-}
-
-tbody tr:nth-child(even) td, tbody tr.even td {background:#fff;}
-
-/* Links */
-
-a {
-  color: #09c;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #069;
-  text-decoration: underline;
-}
-
-a:visited {
-  color: #069;
-}
-
-
-/* Navigation */
-
-nav {
-  float: right;
-}
-
-nav {
-  background-color: white;
-  padding: 0 0.7em;
-  white-space: nowrap;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li {
-  list-style-type: none;
-  display: inline-block;
-  padding: 0.2em 0;
-}
-
-nav ul li a {
-  padding: 0 5px;
-  font-weight: bold;
-}
-
-nav ul li a:visited {
-  color: #09c;
-}
-
-nav ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Study button */
-
-a.study_button {
-  color: #fff;
-  font-weight: bold;
-  padding: 15px 30px 15px 30px;
-  background: #0000ff;
-  margin: 15px;
-}
-
-a.study_button:hover {
-  background: #66f;
-}
-/* Round corners */
-
-.round {
-  -moz-border-radius:    10px;
-  -webkit-border-radius: 10px;
-  border-radius:         10px;
-}
-
-/* Study mode */
-
-#panel {
-  margin-top: 80px;
-  width: 300px;
-  float: right;
-  background: #eee;
-  padding: 20px;
-}
-
-#panel .number {
-  font-size: 4em;
-}
-
-#study-area {
-  padding: 15px;
-  margin-right: 340px;
-}
-
-#study-area #steps-header {
-  font-weight: bold;
-}
-
-#study-area .flash {
-  width: 150px;
-  font-size: 1.2em;
-  text-align: center;
-}
-
-.header {
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-#study-area #problem {
-  font-size: 1.0em;
-  /*padding: 30px;*/
-}
-
-#answer-area {
-  margin: 15px;
-}
-
-#study-area #judgement {
-}
-
-#study-area #judgement .answer {
-}
-
-#rate-button-panel {
-  margin-bottom: 15px;
-}
-
-#rate-buttons { 
-  margin-top: 25px;
-  text-align: center;
-}
-
-#rate-button-panel a {
-  font-size: 1.2em;
-  padding: 5px 15px 5px 15px;
-  background: #eee;
-  margin: auto;
-}
-
-.quizbutton {
-  font-size: 1.2em;
-  color: #09c;
-  padding: 5px 15px 5px 15px;
-  background: #eee;
-  border: 0px none;
-  margin: auto;
-}
-
-.quizbutton:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-#check-answer {
-  margin-top: 15px;
-}
-
-#check-answer .actions {
-  text-align: center;
-}
-/* COMPONENT show page */
-
-.video-name {
-  font-size: 1.5em;
-  padding: 10px 0px;
-}
-
-.video-name a {
-  font-size: 0.75em;
-}
-
-/* Home page */
-
-#course-overview tr {
-  background: #fff;
-}
-
-#course-overview td.course-name {
-  width: 150px;
-}
-
-
-/* Course Show page */
-#stats-sidebar{
-    float: right;
-    display: block;
-}
-
-#course-content{
-  float:left;
-  width: 500px;
-}
-
-/* Welcome page */
-
-#tagline {
-  font-size: 2.5em;
-  margin: 15px;
-}
-
-#tagline ul {
-  font-size: .4em;
-  list-style-type: none;
-}
-
-#tagline .feature-head {
-  font-weight: bold;
-  font-size: 1.3em;
-}
-
-a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #ccc;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
-  clear: both;
-}
-
-/* Buttons/Forms */
-
-#enroll_form {
-  display: inline;
-}
-#enroll_form form {
-  display: inline;
-}
-#enroll_form .actions {
-  display: inline;
-}
-
+Backtrace:
+custom.scss:2
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/scss/parser.rb:898:in `expected'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/scss/parser.rb:841:in `expected'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/scss/parser.rb:27:in `parse'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/engine.rb:319:in `_to_tree'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/engine.rb:291:in `_render'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/engine.rb:238:in `render'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/plugin/compiler.rb:319:in `update_stylesheet'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/plugin/compiler.rb:169:in `block in update_stylesheets'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/plugin/compiler.rb:167:in `each'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/plugin/compiler.rb:167:in `update_stylesheets'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/plugin/compiler.rb:214:in `watch'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/plugin.rb:111:in `method_missing'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/exec.rb:408:in `watch_or_update'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/exec.rb:294:in `process_result'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/exec.rb:41:in `parse'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/lib/sass/exec.rb:21:in `parse!'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/gems/sass-3.1.2/bin/sass:8:in `<top (required)>'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/bin/sass:19:in `load'
+/Users/rmuller/.rvm/gems/ruby-1.9.2-p180/bin/sass:19:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Invalid CSS after \"\": expected selector or at-rule, was \"<%= stylesheet_...\"\A         on line 2 of custom.scss\A \A 1: \A 2: <%= stylesheet_link_tag 'custom' %ner {\A 3:   width: 710px;\A 4: }\A 5: \A 6: #video-dialog{ background:grey;}\A 7: "; }
