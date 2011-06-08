@@ -11,6 +11,7 @@ gem 'will_paginate', '3.0.pre2'
 gem 'escape_utils'
 gem 'jquery-rails', '>= 1.0.3'
 gem 'paperclip', '~> 2.3'
+gem 'time_diff'
 
 group :development, :test do
   gem 'jasmine'

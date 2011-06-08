@@ -39,16 +39,19 @@ class CoursesController < ApplicationController
 
   def success_stats 
     @course = Course.find(params[:id])
-    output = []
-    (1..30).each { |i|
+    total_output = []
+    correct_output = []
+    (0..28).each { |i|
       success_ratio = nil
-      start_time = Time.now.utc - (31 - i).day
-      end_time = Time.now.utc - (30 - i).day
+      start_time = Time.now.utc - (29 - i).day
+      end_time = Time.now.utc - (28 - i).day
       day_stats = current_user.stats(@course, start_time, end_time)
-      success_ratio = (day_stats.sum - day_stats[0]) / day_stats.sum unless day_stats.sum == 0
-      output << [ i, success_ratio ] unless success_ratio.nil?
+      total_mr = day_stats.sum
+      correct_mr = total_mr - day_stats[0] 
+      total_output << [ i, total_mr ] 
+      correct_output << [i, correct_mr]
       }
-    output_json = { :success_stats => [output] }
+    output_json = { :success_stats => [ {label: "Total", lines: {fill: true, fillColor: "rgba(0,0,255,0.8)"}, data: total_output},{label: "Correct", lines: {fill: true, fillColor: "rgba(0,255,0,0.8)"}, data: correct_output}] }
     respond_to do |format|
       format.json { render :json => output_json.to_json }
     end
@@ -59,7 +62,7 @@ class CoursesController < ApplicationController
     output = []
     (0..21).each{ |i|
       cards_due_day = current_user.memories.in_course(@course).due_before(Time.now.utc + i.day)
-      output << [i, cards_due_day]
+      output << [i, cards_due_day.count]
     }
     output_json = { :cards_due_stats => [output] }
     respond_to do |format|
@@ -71,7 +74,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     output = []
     first_rating = current_user.memory_ratings.in_course(@course).first
-    diff = (DateTime.now.day - first_rating.created_at.day)
+    diff = (Date.today - first_rating.created_at.to_date).to_i
     (0..diff).each{ |i|
       output << [i, 0]
     }
@@ -80,7 +83,7 @@ class CoursesController < ApplicationController
       ignore_below = 0 
       memory.memory_ratings.each { |rating|
         interval = rating.interval.floor
-        index  = rating.created_at - first_rating.created_at
+        index  = (rating.created_at.to_date - first_rating.created_at.to_date).to_i
         (0..interval).each { |i| 
           if (i >= ignore_below and ((index + i) < output.length))
             output[index + i][1] += 1
@@ -91,6 +94,8 @@ class CoursesController < ApplicationController
       }
     }
     
+    output.each{ |x| x[1] = Float(x[1]) / current_user.memories.count}
+
     output_json = { :course_achieved_stats => [output] }
     respond_to do |format|
       format.json { render :json => output_json.to_json }
