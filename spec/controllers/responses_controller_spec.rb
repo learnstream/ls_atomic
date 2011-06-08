@@ -24,6 +24,13 @@ describe ResponsesController do
         end.should change(Response, :count).by(1)
       end
 
+      it "should not create multiple responses in quick succession" do
+        lambda do
+          post :create, :response => @attr
+          post :create, :response => @attr
+        end.should change(Response, :count).by(1)
+      end
+
       it "should record 'correct' for a correct response" do
         post :create, :response => @attr
         correct_response = Response.first
