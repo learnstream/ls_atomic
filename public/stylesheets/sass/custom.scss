@@ -160,6 +160,19 @@ a.study_button {
 #stats-sidebar{ float: right; display: block; }
 #course-content{ float:left; width: 500px; }
 
+/* Teacher stats */
+
+#student-status { 
+  td { 
+    padding: .3em; border: .2em solid #000; 
+    &.label { background: #ccf; }
+    &.due { background: red; }
+    &.good { background: green; }                     
+    &.unviewed { color: white; background: white; }  
+    &.unused { background: #fff; border: 0px none; }
+  }
+}
+
 /* Welcome page */
 
 #tagline {

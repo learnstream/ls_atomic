@@ -1,0 +1,192 @@
+body {
+  background: white; }
+
+header {
+  padding-top: 20px; }
+  header img {
+    padding: 1em;
+    background: #fff; }
+  header a#logo {
+    color: black;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: inline;
+    clear: left; }
+    header a#logo:visited {
+      color: black; }
+
+section {
+  margin-top: 1em;
+  font-size: 120%;
+  padding: 20px;
+  background: white; }
+
+/* Common stuff */
+.hidden {
+  display: none; }
+
+.round {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; }
+
+tbody tr:nth-child(even) td, tbody tr.even td {
+  background: #fff; }
+
+/* Links */
+a {
+  color: #0099cc;
+  text-decoration: none; }
+  a:hover {
+    color: #006699;
+    text-decoration: underline; }
+  a:visited {
+    color: #0099cc; }
+
+/* Navigation */
+nav {
+  background-color: white;
+  padding: 0 0.7em;
+  white-space: nowrap;
+  float: right; }
+  nav ul {
+    margin: 0;
+    padding: 0; }
+  nav li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0.2em 0; }
+    nav li a {
+      padding: 0 5px;
+      font-weight: bold;
+      color: #0099cc; }
+      nav li a:visited {
+        color: #0099cc; }
+      nav li a:hover {
+        text-decoration: underline; }
+
+/* Study button */
+a.study_button {
+  color: #fff;
+  font-weight: bold;
+  padding: 15px 30px 15px 30px;
+  background: #0000ff;
+  margin: 15px; }
+  a.study_button:hover {
+    background: #66f; }
+
+/* Study mode */
+#panel {
+  margin-top: 80px;
+  width: 300px;
+  float: right;
+  background: #eee;
+  padding: 20px; }
+  #panel .number {
+    font-size: 4em; }
+
+#study-area {
+  padding: 15px;
+  margin-right: 340px; }
+  #study-area .header {
+    font-weight: bold;
+    margin-bottom: 15px; }
+  #study-area .flash {
+    width: 150px;
+    font-size: 1.2em;
+    text-align: center; }
+
+#rate-button-panel {
+  margin-bottom: 15px; }
+  #rate-button-panel #rate-buttons {
+    margin-top: 25px;
+    text-align: center; }
+
+.quizbutton {
+  font-size: 1.2em;
+  color: #09c;
+  padding: 5px 15px 5px 15px;
+  background: #eee;
+  border: 0px none;
+  margin: auto; }
+  .quizbutton:hover {
+    text-decoration: underline;
+    cursor: pointer; }
+
+#check-answer {
+  margin-top: 15px; }
+  #check-answer .actions {
+    text-align: center; }
+
+/* Component show page */
+.video-name {
+  font-size: 1.5em;
+  padding: 10px 0px; }
+  .video-name a {
+    font-size: 0.75em; }
+
+/* Home page */
+#course-overview td.course-name {
+  width: 150px; }
+
+/* Course Show page */
+#stats-sidebar {
+  float: right;
+  display: block; }
+
+#course-content {
+  float: left;
+  width: 500px; }
+
+/* Teacher stats */
+#student-status td {
+  padding: .3em;
+  border: .2em solid #000; }
+  #student-status td.label {
+    background: #ccf; }
+  #student-status td.due {
+    background: red; }
+  #student-status td.good {
+    background: green; }
+  #student-status td.unviewed {
+    color: white;
+    background: white; }
+  #student-status td.unused {
+    background: #fff;
+    border: 0px none; }
+
+/* Welcome page */
+#tagline {
+  font-size: 2.5em;
+  margin: 15px; }
+  #tagline ul {
+    font-size: .4em;
+    list-style-type: none; }
+  #tagline .feature-head {
+    font-weight: bold;
+    font-size: 1.3em; }
+
+a.signup_button {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: 190px;
+  color: #fff;
+  background: #ccc;
+  font-size: 150%;
+  font-weight: bold;
+  padding: 20px;
+  clear: both; }
+
+/* Buttons/Forms */
+#enroll_form {
+  display: inline; }
+  #enroll_form form {
+    display: inline; }
+  #enroll_form .actions {
+    display: inline; }
+
+/* Help/videos */
+#video-dialog {
+  background: grey; }
