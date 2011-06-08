@@ -13,11 +13,13 @@ class ResponsesController < ApplicationController
     most_recent = @quiz.responses.last
     if(most_recent)
       if((most_recent.status == "correct") && (due < most_recent.created_at))
-        flash[:error] = "You have already responded to this problem. Please rate your response."
+        flash[:error] = "You have already responded to this problem. 
+                         Please rate your response."
         redirect_to most_recent
         return
       elsif((due - Time.now) > 0)
-        flash[:error] = "You have already responded to that problem. Please wait until it is due before answering again"
+        flash[:error] = "You have already responded to that problem. 
+                         Please wait until it is due before answering again"
         redirect_to most_recent
         return
       end
