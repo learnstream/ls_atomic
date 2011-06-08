@@ -2,12 +2,17 @@
 <div id="panel">
 <p>Studying <%= link_to @course.name, @course %></p>
 
+<div id="completion">
+Total course completion<br />
+<div id="progressbar" data-progress="<%= (100 * current_user.enrollments.find_by_course_id(@course).course_completion).round %>"></div>
+</div>
+
 <% due = current_user.memories_due(@course).length %>
 <% total = current_user.all_memories(@course).length %>
 <p><span style="color: <% if due == 0 %> green<% else %> red <% end %>">
 	<span class="number"><%= due %></span> due</span>
 <span class="number">/</span>
-	<span class="number"><%= total %></span> total</p>
+	<span class="number"><%= total %></span> total for today</p>
 
 <p>
 <% if current_user.memories_due(@course).length == 0 %>

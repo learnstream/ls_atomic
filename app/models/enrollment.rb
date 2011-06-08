@@ -10,6 +10,10 @@ class Enrollment < ActiveRecord::Base
 
   after_create :remember_components
   before_destroy :forget_components
+  
+  def memories
+    user.memories.in_course(course)
+  end
 
   def remember_components
     if role == "student" 
@@ -25,5 +29,19 @@ class Enrollment < ActiveRecord::Base
         user.forget(component)
       end
     end
+  end
+
+  def course_completion
+    total_components = course.components.count
+
+    return 1.0 if total_components == 0
+
+    ready_components = 0.0
+
+    memories.each do |memory|
+      ready_components += 1.0 unless memory.due?
+    end
+
+    return ready_components / total_components
   end
 end

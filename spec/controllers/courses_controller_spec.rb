@@ -10,6 +10,13 @@ describe CoursesController do
       get :new
       response.should be_success
     end
+
+    it "should redirect to the home page for unauthorized users" do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      get :new
+      response.should redirect_to root_path
+    end
   end
 
   describe "POST 'create'" do
@@ -86,7 +93,7 @@ describe CoursesController do
       it "should not work for learner" do
         test_sign_in(@signed_in_learner)
         post :create, :course => @attr
-        response.should redirect_to @signed_in_learner 
+        response.should redirect_to root_path
       end
       
       it "should work for creator" do
@@ -314,11 +321,8 @@ describe CoursesController do
 
     end
 
-    it "initially have a progress of 0 for today" do
+    pending "initially have a progress of 0 for today" do
       get :course_achieved_stats, :id => @course, :format => :json 
-  
     end 
-
-
   end
 end

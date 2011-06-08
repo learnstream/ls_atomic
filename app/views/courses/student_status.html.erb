@@ -1,0 +1,27 @@
+<div id="student-status"> 
+  <table>
+    <tr>
+      <td class="unused"></td>
+      <% @course.components.each { |component| %>
+        <td class="label"><%= link_to component.name, component %></td>
+      <% } %>
+    </tr>
+    <% @course.student_enrollments.each { |enrollment| %>
+      <% student = enrollment.user %>
+      <tr>
+        <td class="label">
+          <%= link_to student.email, student %><br />
+          (<%= (enrollment.course_completion*100).round %>%)
+        </td>
+
+        <% @course.components.each { |component| %>
+          <% memory = student.memories.find_by_component_id(component) %>
+          <% memory.viewed? ? (memory.due? ? status="due" : status="good") : status="unviewed" %> 
+          <td class="<%= status %>">
+            Ease: <%= memory.ease %><br />
+            Interval: <%= memory.interval %></td>
+        <% } %>
+      </tr>
+    <% } %>
+  </table>
+</div>
