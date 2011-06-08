@@ -297,5 +297,28 @@ describe CoursesController do
       end
     end
   end
-end
 
+  describe "stats methods" do
+    before(:each) do
+      @user = Factory(:user)
+      @course = Factory(:course)
+      @component = Factory(:component, :course_id => Course)
+      
+      @user.enroll!(@course)
+      
+      # Create a bunch of components
+      (0...3).each { |i|
+        Timecop.travel(Time.now + i*2)
+        Factory(:component, :course_id => Course, :name => i.to_s)
+      }
+
+    end
+
+    it "initially have a progress of 0 for today" do
+      get :course_achieved_stats, :id => @course, :format => :json 
+  
+    end 
+
+
+  end
+end

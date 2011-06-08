@@ -2,11 +2,14 @@ namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
-    make_users
-    make_courses_and_components
-    enroll_users
-    make_problems_and_steps
-    make_quizzes
+    Timecop.travel(2011, 1, 1, 0, 0, 0) do
+      make_users
+      make_courses_and_components
+      enroll_users
+      make_problems_and_steps
+    end
+
+    view_memories
   end
 end
 
@@ -46,6 +49,7 @@ def make_courses_and_components
                          :description => "\\( \\vec{F} = m\\vec{a} \\)")
   c3 = course1.components.create!(:name => "Newton's third law",
                          :description => "Every action has an opposite and equal reaction")
+  
 end
 
 def enroll_users
@@ -98,4 +102,17 @@ def make_quizzes
                       :answer_input => "text",
                       :answer => "42",
                       :answer_output => "text")
+end
+
+def view_memories
+  course = Course.first
+  user = User.find_by_email("foo-1@bar.com")
+  user.memories.in_course(course).each do |memory| 
+    Timecop.travel(DateTime.now - 30.days) { memory.view(0) }
+    Timecop.travel(DateTime.now - 20.days) { memory.view(4) }
+    Timecop.travel(DateTime.now - 20.days) { memory.view(4) }
+    Timecop.travel(DateTime.now - 10.days) { memory.view(4) }
+    Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
+    Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
+  end
 end

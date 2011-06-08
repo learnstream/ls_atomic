@@ -14,6 +14,8 @@
   <%= javascript_include_tag "YouTubeEmbed" %>
   <%= javascript_include_tag "Study" %>
   <%= javascript_include_tag "jquery.tokeninput" %> 
+  <%= javascript_include_tag "jquery.flot.js" %>
+  <%= javascript_include_tag "Stats" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -34,13 +36,12 @@
   </nav>
   </header>
   <section class="round">
-  <div id="panel">
-    <%= yield(:panel) if content_for?(:panel) %>
-  </div>
+  <%= yield(:panel) if content_for?(:panel) %>
  
   <% flash.each do |key, value| %>
     <div class="flash <%= key %>"><%= value %></div>
   <% end %>
+  
   <%= yield %>
  </section>
 </div>

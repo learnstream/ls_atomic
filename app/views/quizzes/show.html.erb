@@ -1,19 +1,19 @@
-<% if @quiz %> 
-  <div id="quiz">
+<div id="study-area">
+  <% if @quiz %> 
     <div id="problem" class="header"><%= @quiz.problem.statement %></div>
 
     <% if not @quiz.steps.empty? %>
-    <div id="steps-header">Steps</div><br />
+      <div id="steps-header">Steps</div><br />
 
-    <ol>
-      <% @quiz.problem.steps.each_with_index do |step, index| %>
-        <% if @quiz.steps.split(",").include?((index + 1).to_s) %>
-          <%= render :partial => 'steps/step', :locals => { :step => step } %>
+      <ol>
+        <% @quiz.problem.steps.each_with_index do |step, index| %>
+          <% if @quiz.steps.split(",").include?((index + 1).to_s) %>
+            <%= render :partial => 'steps/step', :locals => { :step => step } %>
+          <% end %>
         <% end %>
-      <% end %>
-      <li><p id="answer">...</p></li>
-    </ol>
-  <% end %>
+        <li><p id="answer">...</p></li>
+      </ol>
+    <% end %>
 
     <div id="study-item" class="header"><%= @quiz.question %></div>
 
@@ -32,23 +32,23 @@
       </div>
 
     <% end %>
-  </div>
 
-<% elsif @component %>
-
-  <div id="answer-area">
-    <div id="problem"><%= component.name %></div>
-    <div id="answer"></div>
+  <% elsif @component %>
 
     <div id="answer-area">
-      <%= link_to "Show", describe_component_path(@component, :format => :json), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+      <div id="problem"><%= component.name %></div>
+      <div id="answer"></div>
 
-      <div id="rate-button-panel">
-        <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
-        <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round", :method => :get %>
-        <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
-        <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
+      <div id="answer-area">
+        <%= link_to "Show", describe_component_path(@component, :format => :json), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
+
+        <div id="rate-button-panel">
+          <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
+          <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round", :method => :get %>
+          <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
+          <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
+        </div>
       </div>
-    </div>
 
-  <% end %>
+    <% end %>
+  </div>

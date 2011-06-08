@@ -1,5 +1,22 @@
 <% content_for :panel do %>
-Studying <%= link_to @course.name, @course %>
+<div id="panel">
+<p>Studying <%= link_to @course.name, @course %></p>
+
+<% due = current_user.memories_due(@course).length %>
+<% total = current_user.all_memories(@course).length %>
+<p><span style="color: <% if due == 0 %> green<% else %> red <% end %>">
+	<span class="number"><%= due %></span> due</span>
+<span class="number">/</span>
+	<span class="number"><%= total %></span> total</p>
+
+<p>
+<% if current_user.memories_due(@course).length == 0 %>
+You're done for now!
+<% else %>
+ Time to study!
+<% end %>
+</p>
+</div>
 <% end %>
 
 <%= render :file => 'layouts/application' %>
