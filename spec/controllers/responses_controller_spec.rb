@@ -15,7 +15,7 @@ describe ResponsesController do
         @problem = Factory(:problem, :course_id => @course)
         @quiz = Factory(:quiz, :problem_id => @problem, :answer => "42")
         @quiz.components << @component
-        @attr = { :quiz_id => @quiz, :answer => "42" }
+        @attr = { :quiz_id => @quiz, :answer => "42", :user_id => @student }
       end
 
       it "should create a new response object" do
@@ -54,6 +54,8 @@ describe ResponsesController do
         post :create, :response => @attr
         response.should redirect_to response_path(1)
       end
+
+      
     end
   end
 

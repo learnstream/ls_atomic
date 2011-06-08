@@ -37,6 +37,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    @user = current_user
     @course = @quiz.problem.course
     @response = Response.new
 
