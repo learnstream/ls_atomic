@@ -283,10 +283,25 @@ a.signup_button {
 
 /* Stats */
 
-#student-status td { padding: .3em; border: .2em solid #000; }
+div#student-status { margin-left: 116px; }
+#student-status td { padding: 0px; border: 1px solid #000; height: 40px; max-height: 40px; min-width: 110px; max-width: 110px; margin-left: -110px; }
 #student-status td.label { background: #ccf; }
 #student-status td.due { background: red; }
 #student-status td.good { background: green; }
-#student-status td.unviewed { color: white; background: white; }
+#student-status td.unviewed { background: white; }
+#student-status td.student-column { position:fixed; margin-left: -116px; padding-right:4px;background: #ccf; }
 #student-status td.unused { background: #fff; border: 0px none; }
+
+#student-status {
+  overflow:auto
+}
+
+.popup {
+  z-index: 99;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  position: absolute;
+  margin-left: 15px;
+}
 

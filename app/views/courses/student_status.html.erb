@@ -1,7 +1,8 @@
+
 <div id="student-status"> 
   <table>
     <tr>
-      <td class="unused"></td>
+      <td class="unused student-column"></td>
       <% @course.components.each { |component| %>
         <td class="label"><%= link_to component.name, component %></td>
       <% } %>
@@ -9,7 +10,7 @@
     <% @course.student_enrollments.each { |enrollment| %>
       <% student = enrollment.user %>
       <tr>
-        <td class="label">
+        <td class="student-column">
           <%= link_to student.email, student %><br />
           (<%= (enrollment.course_completion*100).round %>%)
         </td>
@@ -18,8 +19,11 @@
           <% memory = student.memories.find_by_component_id(component) %>
           <% memory.viewed? ? (memory.due? ? status="due" : status="good") : status="unviewed" %> 
           <td class="<%= status %>">
+          <div class="hidden popup">
             Ease: <%= memory.ease %><br />
-            Interval: <%= memory.interval %></td>
+            Interval: <%= memory.interval %>
+          </div>
+        </td>
         <% } %>
       </tr>
     <% } %>

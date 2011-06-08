@@ -8,6 +8,7 @@ namespace :db do
       enroll_users
       make_problems_and_steps
       make_quizzes
+      create_many_components
     end
 
     view_memories
@@ -52,6 +53,17 @@ def make_courses_and_components
                          :description => "Every action has an opposite and equal reaction")
   
 end
+
+def create_many_components
+  course = Course.find(1)
+
+  20.times do |n|
+    course.components.create!(:name => "Newton's #{n}th law", :description => "what comes up, must come #{ n.times do
+                                                                                                              "down"
+                                                                                                            end }")
+  end
+end
+
 
 def enroll_users
 

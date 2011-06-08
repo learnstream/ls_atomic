@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_filter :authenticate
-  before_filter :authorized_user, :only => [:new, :create, :student_status]
-  
+  before_filter :authorized_user, :only => [:new, :create]
+  before_filter :authorized_teacher, :only => [:student_stats]
   def new
     @course = Course.new
     @title = "New Course"
@@ -118,6 +118,13 @@ class CoursesController < ApplicationController
 
     def authorized_user
       if current_user.nil? or (current_user.perm != "admin" and current_user.perm != "creator")
+        redirect_to root_path
+      end
+    end
+
+    def authorized_teacher
+      @course = Course.find(params[:id])
+      if current_user.nil? or (current_user.perm != "admin" and !current_user.teacher?(@course))
         redirect_to root_path
       end
     end
