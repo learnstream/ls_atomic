@@ -5,15 +5,15 @@
 
   <div id="rate-buttons">
   <% if myresponse.quiz.answer_type == "self-rate" %>
-    <%= link_to "Miss", rate_components_quiz_path(myresponse.quiz, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
+    <%= link_to "Miss", rate_components_quiz_path(myresponse.quiz, :quality => 0), :id => "rate-miss", :class => "round quizbutton", :method => :get %>
   <% end %>
 
   <% if myresponse.status != "incorrect" %>
-    <%= link_to "Hard", rate_components_quiz_path(myresponse.quiz, :quality => 3), :id => "rate-hard", :class => "round", :method => :get %>
-    <%= link_to "Good", rate_components_quiz_path(myresponse.quiz, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
-    <%= link_to "Easy", rate_components_quiz_path(myresponse.quiz, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
+    <%= link_to "Hard", rate_components_quiz_path(myresponse.quiz, :quality => 3), :id => "rate-hard", :class => "round quizbutton", :method => :get %>
+    <%= link_to "Good", rate_components_quiz_path(myresponse.quiz, :quality => 4), :id => "rate-good", :class => "round quizbutton", :method => :get %>
+    <%= link_to "Easy", rate_components_quiz_path(myresponse.quiz, :quality => 5), :id => "rate-easy", :class => "round quizbutton", :method => :get %>
   <% else %>
-    <%= link_to "Next", course_study_index_path(myresponse.quiz.problem.course), :class => "round"  %>
+    <%= link_to "Next", course_study_index_path(myresponse.quiz.problem.course), :class => "round quizbutton"  %>
   <% end %>
 </div>
 </div>

@@ -1,5 +1,5 @@
 
-#container {
+<%= stylesheet_link_tag 'custom' %ner {
   width: 710px;
 }
 
@@ -109,8 +109,6 @@ a.study_button {
 a.study_button:hover {
   background: #66f;
 }
-
-
 /* Round corners */
 
 .round {
@@ -280,13 +278,4 @@ a.signup_button {
 #enroll_form .actions {
   display: inline;
 }
-
-/* Stats */
-
-#student-status td { padding: .3em; border: .2em solid #000; }
-#student-status td.label { background: #ccf; }
-#student-status td.due { background: red; }
-#student-status td.good { background: green; }
-#student-status td.unviewed { color: white; background: white; }
-#student-status td.unused { background: #fff; border: 0px none; }
 
