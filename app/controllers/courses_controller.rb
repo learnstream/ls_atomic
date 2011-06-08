@@ -94,7 +94,15 @@ class CoursesController < ApplicationController
       }
     }
     
-    output.each{ |x| x[1] = Float(x[1]) / current_user.memories.count}
+    total_memories = @course.components.count
+
+    output.each do |x|
+      if total_memories == 0
+        x[1] = 1.0
+      else   
+        x[1] = Float(x[1]) / total_memories
+      end
+    end
 
     output_json = { :course_achieved_stats => [output] }
     respond_to do |format|

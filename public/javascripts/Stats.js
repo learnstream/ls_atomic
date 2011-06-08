@@ -39,12 +39,3 @@ function achievementTicks(axis) {
   }
   return res;
 }
-
-function findXAxis(data) {
-  console.log(data);
-  xAxis = [];
-  for(i = 0; i < data[0].length; i++) {
-    xAxis.push(data[0][i][0]);
-  }
-  return xAxis;
-}

@@ -38,4 +38,7 @@
     </div>
   <% end %>
 </div>
+
+<% if current_user.memory_ratings.in_course(@course).count > 0 %>
 <div id="stats-sidebar"><%= render 'stats' %></div>
+<% end %>
