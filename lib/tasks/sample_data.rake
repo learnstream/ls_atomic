@@ -7,6 +7,7 @@ namespace :db do
       make_courses_and_components
       enroll_users
       make_problems_and_steps
+      make_quizzes
     end
 
     view_memories

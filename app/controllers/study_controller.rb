@@ -8,14 +8,14 @@ class StudyController < ApplicationController
     @quiz = nil
     
     while @quiz.nil?
-      @memory = current_user.memories.in_course(@course).due_before(Time.now.utc).first 
+      @memory = current_user.memories_due(@course).first 
 
       if @memory.nil? 
         render 'index'
         return
       end
       
-      @quiz = @memory.component.quizzes.first unless @memory.nil?
+      @quiz = @memory.component.quizzes.first
       
       if @quiz.nil?
         @memory.view(0)
