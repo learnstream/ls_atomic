@@ -1,5 +1,5 @@
 body {
-  background: #fff; }
+  background: white; }
 
 header {
   padding-top: 20px; }
@@ -7,19 +7,19 @@ header {
     padding: 1em;
     background: #fff; }
   header a#logo {
-    color: #000;
+    color: black;
     font-size: 1.5em;
     font-weight: bold;
     display: inline;
     clear: left; }
-  header a:visited {
-    color: #000; }
+    header a#logo:visited {
+      color: black; }
 
 section {
   margin-top: 1em;
   font-size: 120%;
   padding: 20px;
-  background: #fff; }
+  background: white; }
 
 /* Common stuff */
 .hidden {
@@ -35,13 +35,13 @@ tbody tr:nth-child(even) td, tbody tr.even td {
 
 /* Links */
 a {
-  color: #09c;
+  color: #0099cc;
   text-decoration: none; }
   a:hover {
-    color: #069;
+    color: #006699;
     text-decoration: underline; }
   a:visited {
-    color: #069; }
+    color: #0099cc; }
 
 /* Navigation */
 nav {
@@ -59,9 +59,9 @@ nav {
     nav li a {
       padding: 0 5px;
       font-weight: bold;
-      color: #09c; }
+      color: #0099cc; }
       nav li a:visited {
-        color: #09c; }
+        color: #0099cc; }
       nav li a:hover {
         text-decoration: underline; }
 
@@ -126,8 +126,6 @@ a.study_button {
     font-size: 0.75em; }
 
 /* Home page */
-#course-overview tr {
-  background: #fff; }
 #course-overview td.course-name {
   width: 150px; }
 

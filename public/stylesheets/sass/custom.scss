@@ -1,5 +1,8 @@
+$body-color: #fff;
 
-body { background: #fff; }
+body {
+  background: $body-color; 
+}
 
 header {
   padding-top: 20px;
@@ -7,43 +10,49 @@ header {
   img { padding: 1em; background: #fff; }
 
   a#logo {
-    color: #000;
+    $logo-color: #000;
+    color: $logo-color;
     font-size: 1.5em;
     font-weight: bold;
     display: inline;
     clear: left;  
-  }    
 
-  a:visited { color: #000; }
+    &:visited { color: $logo-color; }
+  }    
 }
 
 section {
   margin-top: 1em;
   font-size: 120%;
   padding: 20px;
-  background: #fff;
+  background: $body-color;
 }
 
 /* Common stuff */ 
 
 .hidden { display: none; }
 
-.round {
-  -moz-border-radius:    10px;
-  -webkit-border-radius: 10px;
-  border-radius:         10px;
+@mixin rounded($radius: 10px) {
+  -moz-border-radius:    $radius;
+  -webkit-border-radius: $radius;
+  border-radius:         $radius;
 }
+
+.round { @include rounded(10px); }
 
 tbody tr:nth-child(even) td, tbody tr.even td {background:#fff;}
 
 /* Links */
 
+$link-color: #09c;
+$link-hover-color: #069;
+
 a {
-  color: #09c;
+  color: $link-color;
   text-decoration: none;
 
-  &:hover { color: #069; text-decoration: underline; }
-  &:visited { color: #069; }
+  &:hover { color: $link-hover-color; text-decoration: underline; }
+  &:visited { color: $link-color; }
 }
 
 
@@ -65,9 +74,9 @@ nav {
     a {
       padding: 0 5px;
       font-weight: bold;
-      color: #09c;
+      color: $link-color;
 
-      &:visited { color: #09c; }
+      &:visited { color: $link-color; }
       &:hover { text-decoration: underline; }
     }
   }
@@ -143,7 +152,6 @@ a.study_button {
 /* Home page */
 
 #course-overview { 
-  tr { background: #fff; }
   td.course-name { width: 150px; }
 }
 
