@@ -1,16 +1,10 @@
-#video-dialog{ background:grey;}
 
-body {
-  background: #fff;
-}
+body { background: #fff; }
 
 header {
   padding-top: 20px;
 
-  img {
-    padding: 1em;
-    background: #fff;
-  }
+  img { padding: 1em; background: #fff; }
 
   a#logo {
     color: #000;
@@ -20,9 +14,7 @@ header {
     clear: left;  
   }    
 
-  a:visited {
-    color: #000;
-  }
+  a:visited { color: #000; }
 }
 
 section {
@@ -50,11 +42,7 @@ a {
   color: #09c;
   text-decoration: none;
 
-  &:hover {
-    color: #069;
-    text-decoration: underline;
-  }
-
+  &:hover { color: #069; text-decoration: underline; }
   &:visited { color: #069; }
 }
 
@@ -67,11 +55,8 @@ nav {
   white-space: nowrap;
   float: right;
 
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-    
+  ul { margin: 0; padding: 0; }
+
   li {
     list-style-type: none;
     display: inline-block;
@@ -83,7 +68,6 @@ nav {
       color: #09c;
 
       &:visited { color: #09c; }
-
       &:hover { text-decoration: underline; }
     }
   }
@@ -115,121 +99,66 @@ a.study_button {
 }
 
 #study-area {
-  padding: 15px;
-  margin-right: 340px;
+  padding: 15px; margin-right: 340px;
 
-  .header { 
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
+  .header { font-weight: bold; margin-bottom: 15px; }
 
   .flash { 
     width: 150px;
     font-size: 1.2em;
     text-align: center;
-  }
-}
-
-#study-area #problem {
-  font-size: 1.0em;
-  /*padding: 30px;*/
-}
-
-#answer-area {
-  margin: 15px;
-}
-
-#study-area #judgement {
-}
-
-#study-area #judgement .answer {
+  } 
 }
 
 #rate-button-panel {
   margin-bottom: 15px;
+
+  #rate-buttons { margin-top: 25px; text-align: center; }
 }
 
-#rate-buttons { 
-  margin-top: 25px;
-  text-align: center;
-}
-
-#rate-button-panel a {
-  font-size: 1.2em;
-  padding: 5px 15px 5px 15px;
-  background: #eee;
-  margin: auto;
-}
-
-.quizbutton {
+.quizbutton { 
   font-size: 1.2em;
   color: #09c;
   padding: 5px 15px 5px 15px;
   background: #eee;
   border: 0px none;
   margin: auto;
-}
 
-.quizbutton:hover {
-  text-decoration: underline;
-  cursor: pointer;
+  &:hover { text-decoration: underline; cursor: pointer; }
 }
 
 #check-answer {
   margin-top: 15px;
+
+  .actions { text-align: center; }
 }
 
-#check-answer .actions {
-  text-align: center;
-}
-/* COMPONENT show page */
+/* Component show page */
 
 .video-name {
-  font-size: 1.5em;
-  padding: 10px 0px;
-}
-
-.video-name a {
-  font-size: 0.75em;
+  font-size: 1.5em; padding: 10px 0px;
+  a { font-size: 0.75em; }
 }
 
 /* Home page */
 
-#course-overview tr {
-  background: #fff;
+#course-overview { 
+  tr { background: #fff; }
+  td.course-name { width: 150px; }
 }
-
-#course-overview td.course-name {
-  width: 150px;
-}
-
 
 /* Course Show page */
-#stats-sidebar{
-    float: right;
-    display: block;
-}
 
-#course-content{
-  float:left;
-  width: 500px;
-}
+#stats-sidebar{ float: right; display: block; }
+#course-content{ float:left; width: 500px; }
 
 /* Welcome page */
 
 #tagline {
-  font-size: 2.5em;
-  margin: 15px;
-}
+  font-size: 2.5em; margin: 15px;
 
-#tagline ul {
-  font-size: .4em;
-  list-style-type: none;
-}
-
-#tagline .feature-head {
-  font-weight: bold;
-  font-size: 1.3em;
+  ul { font-size: .4em; list-style-type: none; }
+  .feature-head { font-weight: bold; font-size: 1.3em; }
 }
 
 a.signup_button {
@@ -250,11 +179,11 @@ a.signup_button {
 
 #enroll_form {
   display: inline;
-}
-#enroll_form form {
-  display: inline;
-}
-#enroll_form .actions {
-  display: inline;
+
+  form { display: inline; }
+  .actions { display: inline; }
 }
 
+/* Help/videos */
+
+#video-dialog{ background:grey;}
