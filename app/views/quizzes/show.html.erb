@@ -3,7 +3,7 @@
     <div id="problem" class="header"><%= @quiz.problem.statement %></div>
 
     <% if not @quiz.steps.empty? %>
-      <div id="steps-header">Steps</div><br />
+      <div class="header">Steps</div><br />
 
       <ol>
         <% @quiz.problem.steps.each_with_index do |step, index| %>
