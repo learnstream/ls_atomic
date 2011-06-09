@@ -15,6 +15,18 @@ class Memory < ActiveRecord::Base
   def course
     component.course
   end
+  
+  def due?
+    return self.due <= Time.now.utc
+  end
+  
+  def viewed?
+    return !last_viewed.nil?
+  end
+
+  def has_quiz?
+    return !component.quizzes.empty?
+  end
 
   def view(quality)
 

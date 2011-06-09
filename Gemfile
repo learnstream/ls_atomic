@@ -12,6 +12,7 @@ gem 'escape_utils'
 gem 'jquery-rails', '>= 1.0.3'
 gem 'paperclip', '~> 2.3'
 gem 'time_diff'
+gem 'sass'
 
 group :development, :test do
   gem 'jasmine'

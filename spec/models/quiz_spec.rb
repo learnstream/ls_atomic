@@ -3,8 +3,9 @@ require 'spec_helper'
 describe Quiz do
   
   before(:each) do
-    @problem = Factory(:problem)
-    @component = Factory(:component)
+    @course = Factory(:course)
+    @problem = Factory(:problem, :course_id => @course)
+    @component = Factory(:component, :course_id => @course)
     @quiz = Factory(:quiz, :problem_id => @problem)
   end
 
@@ -22,5 +23,13 @@ describe Quiz do
 
   it "should have a responses method" do
     @quiz.should respond_to(:responses)
+  end
+
+  it "should have a course method" do
+    @quiz.should respond_to(:course)
+  end
+
+  it "should have the right course" do
+    @quiz.course.should == @course
   end
 end

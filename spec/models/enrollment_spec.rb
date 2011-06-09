@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Enrollment do
 
   before(:each) do
-      @course = Factory(:course)
-      @user = Factory(:user)
+    @course = Factory(:course)
+    @user = Factory(:user)
 
-      @enrollment = @user.enrollments.build(:course_id => @course.id)
+    @enrollment = @user.enrollments.build(:course_id => @course.id)
   end
 
   it "should create a new instance given valid attributes" do
@@ -33,6 +33,15 @@ describe Enrollment do
 
     it "should have the right course" do
       @enrollment.course.should == @course
+    end
+
+    it "should have a memories attribute" do
+      @enrollment.should respond_to(:memories)
+    end
+
+    it "should have the right memories" do
+      @component = Factory(:component, :course_id => @course)
+      @enrollment.memories.first.should == @component.memories.find_by_user_id(@user)
     end
   end
 

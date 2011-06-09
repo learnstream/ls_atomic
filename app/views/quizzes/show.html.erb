@@ -1,13 +1,13 @@
 <div id="study-area">
   <% if @quiz %> 
-    <div id="problem" class="header"><%= @quiz.problem.statement %></div>
+    <div id="problem"><%= @quiz.problem.statement %></div>
 
     <% if not @quiz.steps.empty? %>
-      <div id="steps-header">Steps</div><br />
+      <div class="header">Steps</div>
 
       <ol>
         <% @quiz.problem.steps.each_with_index do |step, index| %>
-          <% if @quiz.steps.split(",").include?((index + 1).to_s) %>
+          <% if @quiz.steps.split(",").include?(step.id.to_s) %>
             <%= render :partial => 'steps/step', :locals => { :step => step } %>
           <% end %>
         <% end %>
@@ -15,7 +15,7 @@
       </ol>
     <% end %>
 
-    <div id="study-item" class="header"><%= @quiz.question %></div>
+    <div class="header"><%= @quiz.question %></div>
 
     <%= form_for @response do |f| %>
 
@@ -44,10 +44,10 @@
         <%= link_to "Show", describe_component_path(@component, :format => :json), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
 
         <div id="rate-button-panel">
-          <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round", :method => :get %>
-          <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round", :method => :get %>
-          <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round", :method => :get %>
-          <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round", :method => :get %>
+          <%= link_to "Miss", rate_memory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round quizbutton", :method => :get %>
+          <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round quizbutton", :method => :get %>
+          <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round quizbutton", :method => :get %>
+          <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round quizbutton", :method => :get %>
         </div>
       </div>
 

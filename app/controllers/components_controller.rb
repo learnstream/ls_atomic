@@ -1,5 +1,5 @@
 class ComponentsController < ApplicationController
-  before_filter :authenticate, :only => [ :create, :destroy, :update, :edit ]
+  before_filter :authenticate
   before_filter :only => [:create, :edit, :update, :new] do 
     check_permissions(params)
   end 

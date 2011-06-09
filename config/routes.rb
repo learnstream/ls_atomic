@@ -13,6 +13,7 @@ LsAtomic::Application.routes.draw do
       get :success_stats
       get :cards_due_stats
       get :course_achieved_stats
+      get :student_status
     end
     resources :study, :only => [:index]
   end

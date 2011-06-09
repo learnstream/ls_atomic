@@ -78,6 +78,14 @@ class User < ActiveRecord::Base
     memories.in_course(course)
   end
 
+  def memories_due_with_quiz(course)
+    memories_due(course).map { |m| m.has_quiz? ? m : nil }.compact
+  end
+
+  def all_memories_with_quiz(course)
+    all_memories(course).map { |m| m.has_quiz? ? m : nil }.compact
+  end
+
   def stats(course, stime, etime)
     time_range = stime..etime
     ratings = memory_ratings.in_course(course).ratings_between(time_range)
