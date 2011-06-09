@@ -16,7 +16,7 @@ $(document).ready(function () {
   }
 
   var length = 60;
-
+  var enableHolderClick = false;
   var selectAngle = false;
   var startedAngle = false;
 
@@ -25,9 +25,17 @@ $(document).ready(function () {
 
   var force = null;
 
+    $("#holder").click(function(f) {
+        if (!enableHolderClick) return;
+        selectAngle = false;
+        enableHolderClick = false;
+        startedAngle = false;
+        $('.selection-area').show();
+      });
+
+
   $('.selection-area').click(function() {
     if (startedAngle) return;
-
     startedAngle = true; 
     $('.selection-area').hide();
 
@@ -40,12 +48,13 @@ $(document).ready(function () {
     force = paper.path(initPath);
 
     selectAngle = true;
+
+   
   });
 
 
   $("#holder").mousemove(function(e) { 
     if (!selectAngle) return;
-
     var interval = Math.PI/12.0;
     var multiplier = 1.0/interval;    
     var angle = Math.atan2(oy - e.pageY, e.pageX - ox);
@@ -62,6 +71,7 @@ $(document).ready(function () {
     
     force.attr({ path: newPath });
     $('#status').html(angle_deg);
+    enableHolderClick = true; 
   });
 });
 
