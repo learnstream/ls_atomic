@@ -33,7 +33,7 @@ function achievementTicks(axis) {
   var num = 4;
   res.push([axis.max, "Today"]);
   for(var i = axis.max; i > axis.min;) {
-    i -= Math.floor(axis.max/num);
+    i -= Math.ceil(axis.max/num);
     console.log(i);
     res.push([i, axis.max - i + " days ago"]);
   }

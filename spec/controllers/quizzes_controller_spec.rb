@@ -173,5 +173,20 @@ describe QuizzesController do
       get :rate_components, :id => @quiz, :quality => 3
       @student.memories.last.memory_ratings.last.quality.should == 3
     end
+
+    it "should not allow student to rate components that have been rated recently" do
+      get :rate_components, :id => @quiz, :quality => 3
+      get :rate_components, :id => @quiz, :quality => 4
+      @student.memories.last.memory_ratings.last.quality.should == 3
+    end
+
+    it "should allow student to rate components again once they are due" do
+      get :rate_components, :id => @quiz, :quality => 3
+      @memory = @student.memories.last
+      @memory.due = Date.today.prev_day.to_datetime
+      @memory.save
+      get :rate_components, :id => @quiz, :quality => 4
+      @memory.memory_ratings.last.quality.should == 4
+    end
   end
 end
