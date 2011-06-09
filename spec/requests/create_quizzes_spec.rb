@@ -8,6 +8,7 @@ describe "CreateQuizzes" do
     @problem = Factory(:problem, :course_id => @course)
     @step = Factory(:step, :text => "The first step", :problem_id => @problem)
     @user = Factory(:admin)
+    @quiz = Factory(:quiz, :problem => @problem)
     integration_sign_in(@user)
   end
 
@@ -26,8 +27,20 @@ describe "CreateQuizzes" do
     fill_in "Question", :with => "What is the answer?"
     select "Self-rating", :from => "Answer type"
     fill_in "Answer", :with => "42"
-    click_button "Add quiz"
+    click_button "Submit"
     page.should have_content("Quiz created!")
   end 
+
+  it "should allow an authorized user to edit a quiz" do
+    visit course_path(@course)
+    click_link "Quiz"
+    fill_in "Question", :with => "Did I change the question?"
+    fill_in "Answer", :with => "Yes!"
+    click_button "Submit"
+    page.should have_content("Quiz edited.")
+    
+  end
+
+
 
 end

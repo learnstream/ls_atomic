@@ -1,0 +1,38 @@
+<%= form_for @quiz do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <%= f.hidden_field :problem_id, :value => @problem.id %> 
+
+  <div class="field">
+    <%= f.label :component_tokens, "Components" %><br />
+    <%= f.text_field :component_tokens, "data-pre" => @quiz.components.map(&:attributes).to_json  %>
+  </div>
+
+  <div class="hidden" id="course_id"><%= @problem.course.id %></div>
+  <div class="field">
+    <%= f.label :steps, "Steps to show" %><br />
+    <%= f.collection_select :steps, @problem.steps, :id, :text, {}, {:size => @problem.steps.count, :multiple => true} %> 
+  </div>
+
+  <div class="field">
+    <%= f.label :question %><br />
+    <%= f.text_field :question %>
+  </div>
+
+  <div class="field">
+    <%= f.label :answer_type, "Answer type" %><br />
+    <%= f.select :answer_type, options_for_select([['Self-rating', 'self-rate'], 
+                                                  ['Text input', 'text']]) %>
+                                                  
+  </div>
+
+  <div class="field">
+    <%= f.label :answer %><br />
+    <%= f.text_field :answer %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+
+<% end %>

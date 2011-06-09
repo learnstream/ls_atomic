@@ -48,6 +48,22 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def update
+    @quiz = Quiz.find(params[:id])
+    
+    if @quiz.update_attributes(params[:quiz])
+      flash[:success] = "Quiz edited."
+      redirect_to course_path(@quiz.course)
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def edit
+    @quiz = Quiz.find(params[:id])
+    @problem = @quiz.problem
+  end
+
   def rate_components
     @quiz = Quiz.find(params[:id])
     @firstcomponent = @quiz.components.first 

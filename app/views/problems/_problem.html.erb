@@ -8,5 +8,10 @@
   <% if current_user.can_edit?(problem.course) %>
     <%= link_to "Add quiz", new_quiz_path(:problem_id => problem.id) %>
   <% end %>
+  <ul>
+    <% problem.quizzes.each { |quiz| %>
+      <%= link_to "Quiz", edit_quiz_path(quiz) %>
+    <% } %>
+  </ul>
 </a>
 </li>

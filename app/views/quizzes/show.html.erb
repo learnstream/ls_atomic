@@ -7,7 +7,7 @@
 
       <ol>
         <% @quiz.problem.steps.each_with_index do |step, index| %>
-          <% if @quiz.steps.split(",").include?((index + 1).to_s) %>
+          <% if @quiz.steps.split(",").include?(step.id.to_s) %>
             <%= render :partial => 'steps/step', :locals => { :step => step } %>
           <% end %>
         <% end %>
