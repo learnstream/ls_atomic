@@ -10,6 +10,10 @@ class Quiz < ActiveRecord::Base
   validates :question, :presence => true 
   validate :answer_type_present
 
+  def course
+    problem.course
+  end
+
   def component_tokens=(ids)
     self.component_ids = ids.split(",")
   end
