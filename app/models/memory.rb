@@ -24,6 +24,10 @@ class Memory < ActiveRecord::Base
     return !last_viewed.nil?
   end
 
+  def has_quiz?
+    return !component.quizzes.empty?
+  end
+
   def view(quality)
 
     if (quality > 5 || quality < 0)

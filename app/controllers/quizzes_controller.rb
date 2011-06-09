@@ -1,6 +1,5 @@
 class QuizzesController < ApplicationController
-  layout "study", :only => [:show]
-  layout "application", :except => [:show] 
+  layout :choose_layout 
 
   before_filter :authenticate
   before_filter :only => [:create, :update, :new, :edit] do
@@ -72,6 +71,14 @@ class QuizzesController < ApplicationController
         flash[:error] = "You don't have permission to edit this course"
         redirect_to root_path
         return false
+      end
+    end
+
+    def choose_layout
+      if [ 'show' ].include? action_name
+        'study'
+      else
+        'application'
       end
     end
 end
