@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
   layout "study", :only => [:show]
+  layout "application", :except => [:show] 
 
   before_filter :authenticate
   before_filter :only => [:create, :update, :new, :edit] do
