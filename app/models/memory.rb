@@ -60,7 +60,8 @@ class Memory < ActiveRecord::Base
       self.interval = interval*ease
     end
 
-    self.due = Time.now + interval.days
+    #self.due = Time.now + interval.days
+    self.due = Time.now + (interval * 24 * 60 * 60).round
 
     self.save()
 

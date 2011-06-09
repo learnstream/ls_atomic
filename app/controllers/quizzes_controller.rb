@@ -37,6 +37,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    @user = current_user
     @course = @quiz.problem.course
     @response = Response.new
 
@@ -49,7 +50,15 @@ class QuizzesController < ApplicationController
 
   def rate_components
     @quiz = Quiz.find(params[:id])
+    @firstcomponent = @quiz.components.first 
+    @memory = current_user.memories.find_by_component_id(@firstcomponent)
+    
+    if((@memory.due - Time.now) > 0)
+      flash[:error] = "You have already rated your response for that problem!"
+    else
     @quiz.rate_components!(current_user, Integer(params[:quality]))
+    end
+
     redirect_to course_study_index_path(@quiz.problem.course)
   end
 

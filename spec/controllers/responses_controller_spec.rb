@@ -15,11 +15,18 @@ describe ResponsesController do
         @problem = Factory(:problem, :course_id => @course)
         @quiz = Factory(:quiz, :problem_id => @problem, :answer => "42")
         @quiz.components << @component
-        @attr = { :quiz_id => @quiz, :answer => "42" }
+        @attr = { :quiz_id => @quiz, :answer => "42", :user_id => @student }
       end
 
       it "should create a new response object" do
         lambda do
+          post :create, :response => @attr
+        end.should change(Response, :count).by(1)
+      end
+
+      it "should not create multiple responses in quick succession" do
+        lambda do
+          post :create, :response => @attr
           post :create, :response => @attr
         end.should change(Response, :count).by(1)
       end
@@ -54,6 +61,8 @@ describe ResponsesController do
         post :create, :response => @attr
         response.should redirect_to response_path(1)
       end
+
+      
     end
   end
 
