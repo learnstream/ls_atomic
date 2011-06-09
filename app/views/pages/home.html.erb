@@ -9,7 +9,7 @@
   <% @studied_courses.each do |course| %>
   <tr>
     <td class="course-name"><%= link_to course.name, course_path(course.id) %></td>
-    <td><%= link_to "You currently have " + pluralize(current_user.memories_due(course).count, "item") + " for review", course_study_index_path(course.id) %></td>
+    <td><%= link_to "You currently have " + pluralize(current_user.memories_due_with_quiz(course).count, "item") + " for review", course_study_index_path(course.id) %></td>
     <td><% if current_user.all_memories(course).latest_studied.first and current_user.all_memories(course).latest_studied.first.last_viewed %>
         Last studied <%= time_ago_in_words(current_user.all_memories(course).latest_studied.first.last_viewed) %> ago
       <% else %>

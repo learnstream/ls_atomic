@@ -84,6 +84,12 @@ a.study_button {
   padding: 20px; }
   #panel .number {
     font-size: 4em; }
+  #panel .section {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #aaa; }
+  #panel .bottom {
+    border-bottom: 0px none; }
 
 #study-area {
   padding: 15px;

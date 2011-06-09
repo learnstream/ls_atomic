@@ -71,13 +71,19 @@ class User < ActiveRecord::Base
   end
 
   def memories_due(course)
-    due_mem = memories.in_course(course).due_before(Time.now.utc)
-    val = due_mem.map { |m| m.has_quiz? ? m : nil }.compact
-    return val
+    memories.in_course(course).due_before(Time.now.utc)
   end
 
   def all_memories(course)
     memories.in_course(course)
+  end
+
+  def memories_due_with_quiz(course)
+    memories_due(course).map { |m| m.has_quiz? ? m : nil }.compact
+  end
+
+  def all_memories_with_quiz(course)
+    all_memories(course).map { |m| m.has_quiz? ? m : nil }.compact
   end
 
   def stats(course, stime, etime)

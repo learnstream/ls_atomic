@@ -105,6 +105,16 @@ a.study_button {
   padding: 20px;
 
   .number { font-size: 4em; }
+
+  .section {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #aaa;
+  }
+
+  .bottom {
+    border-bottom: 0px none;
+  }
 }
 
 #study-area {

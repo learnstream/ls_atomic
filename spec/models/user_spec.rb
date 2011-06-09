@@ -111,12 +111,25 @@ describe User do
   describe "memories" do 
     
     before(:each) do
-      @component = Factory(:component)
+      @course = Factory(:course)
+      @component = Factory(:component, :course_id => @course)
+      @memory = @user.remember(@component)
+      @comp2 = @course.components.create!(:name => "Comp22", :description => "test")
+      @memory2 = @user.remember(@comp2)
+      @memory2.due = Time.now.utc + 1000.days
+      @memory.due = Time.now.utc - 1000.days
+      @memory.save!
+      @memory2.save!
+
+      @problem = Factory(:problem, :course_id => @course)
+      @quiz = Factory(:quiz, :problem_id => @problem) 
+      @quiz.components << @component
     end
 
     it "should be able to remember a new component" do
-      @user.remember(@component)
-      @memory = @user.memories.find_by_component_id(@component).should_not be_nil
+      @newcomponent = Factory(:component, :name => "Brand new!")
+      @user.remember(@newcomponent)
+      @memory = @user.memories.find_by_component_id(@newcomponent).should_not be_nil
     end
 
     it "should respond to a all_memories method" do
@@ -124,14 +137,6 @@ describe User do
     end
 
     it "should pull up all memories when calling all_memories" do
-      @memory = @user.remember(@component)
-      @course = @component.course
-      @comp2 = @course.components.create!(:name => "Comp22", :description => "test")
-      @memory2 = @user.remember(@comp2)
-      @memory2.due = Time.now.utc + 1000
-      @memory.due = Time.now.utc - 1000
-      @memory.save!
-      @memory2.save!
       @user.all_memories(@component.course).should == [@memory, @memory2]
     end
 
@@ -140,10 +145,27 @@ describe User do
     end
 
     it "should pull up the right memories that are due" do
-      @memory = @user.remember(@component)
-      @memory.due = (Time.now.utc - 1000)
-      @user.memories_due(@component.course)[0] == @memory
+      @memory.due = (Time.now.utc - 1000.days)
+      @memory.save!
+      @user.memories_due(@component.course).should == [@memory]
     end 
+
+    it "should pull up all memories with a quiz when calling all_memories_with_quiz" do
+      @user.all_memories_with_quiz(@course).should == [@memory]
+    end
+
+    it "should have a memories_due_with_quiz method" do
+      @user.should respond_to(:memories_due_with_quiz)
+    end
+
+    it "should only pull up memories due with a quiz" do
+      @memory.due = (Time.now.utc - 1000.days)
+      @memory2.due = (Time.now.utc - 3000.days)
+      @memory.save!
+      @memory2.save!
+      @user.memories_due_with_quiz(@component.course).should == [@memory]
+    end 
+
   end
 
   describe "user statistics" do
