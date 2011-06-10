@@ -40,24 +40,6 @@ class Quiz < ActiveRecord::Base
   def answer_type=(type)
   end
 
-  def answer_input
-    read_attribute(:answer_input)
-  end
-
-  def answer_input=(type, options = {})
-    input = {"type" => type }.to_json()
-    write_attribute(:answer_input, input)
-  end
-
-  def answer_output
-    read_attribute(:answer_output)
-  end
-
-  def answer_output=(type, options = {})
-    output = {"type" => type }.to_json()
-    write_attribute(:answer_output, output)
-  end
-
   def answer_type_present
     parsed_answer_input = JSON.parse(answer_input)
     errors.add(:answer_type, "must be present") if not parsed_answer_input.has_key?("type") or parsed_answer_input["type"].blank?
