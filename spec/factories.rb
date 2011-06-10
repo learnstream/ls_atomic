@@ -34,13 +34,13 @@ end
 Factory.define :component do |component|
   component.name            "Newton's First Law"
   component.description     "An object in motion tends to remain in motion, etc."
-  component.association     :course_id, :factory => :course
+  component.association :course, :factory => :course
 end
 
 Factory.define :problem do |problem|
   problem.name              "Euler's Little Theorem"
   problem.statement         "What is \\( e^{\\pi i} \\) equal to?"
-  problem.association       :course_id, :factory => :course
+  problem.association :course, :factory => :course
 end
 
 Factory.define :step do |step|
@@ -66,6 +66,7 @@ Factory.define :quiz do |quiz|
   quiz.answer_input       'text'
   quiz.answer             "42"
   quiz.answer_output      'text'
+  quiz.association        :problem, :factory => :problem
 end
 
 Factory.define :text_quiz, :class => Quiz do |quiz|
@@ -89,4 +90,6 @@ end
 Factory.define :response do |r|
   r.answer         "41"
   r.status         "incorrect"
+  r.association    :user, :factory => :user
+  r.association    :quiz, :factory => :quiz
 end

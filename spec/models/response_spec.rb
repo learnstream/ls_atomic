@@ -5,8 +5,8 @@ describe Response do
   before(:each) do
     @problem = Factory(:problem)
     @user = Factory(:user)
-    @quiz = Factory(:text_quiz, :problem_id => @problem)
-    @response = Factory(:response, :user_id => @user, :quiz_id => @quiz)
+    @quiz = Factory(:text_quiz, :problem => @problem)
+    @response = Factory(:response, :user => @user, :quiz => @quiz)
   end
 
   it "should have a user attribute" do

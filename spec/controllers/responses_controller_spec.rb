@@ -11,11 +11,12 @@ describe ResponsesController do
         test_sign_in(@student)
         @course = Factory(:course)
         @student.enroll!(@course)
-        @component = Factory(:component, :course_id => @course)
-        @problem = Factory(:problem, :course_id => @course)
-        @quiz = Factory(:quiz, :problem_id => @problem, :answer => "42")
+        @component = Factory(:component, :course => @course)
+
+        @problem = Factory(:problem, :course => @course)
+        @quiz = Factory(:quiz, :problem => @problem)
         @quiz.components << @component
-        @attr = { :quiz_id => @quiz, :answer => "42", :user_id => @student }
+        @attr = { :quiz_id => @quiz, :answer => @quiz.answer, :user_id => @student }
       end
 
       it "should create a new response object" do
@@ -59,10 +60,8 @@ describe ResponsesController do
 
       it "should redirect to the response" do
         post :create, :response => @attr
-        response.should redirect_to response_path(1)
+        response.should redirect_to Response.first
       end
-
-      
     end
   end
 
@@ -73,9 +72,9 @@ describe ResponsesController do
       test_sign_in(@student)
       @course = Factory(:course)
       @student.enroll!(@course)
-      @problem = Factory(:problem, :course_id => @course)
-      @quiz = Factory(:quiz, :problem_id => @problem, :answer => "42")
-      @myresponse = Factory(:response, :quiz_id => @quiz, :user_id => @student)
+      @problem = Factory(:problem, :course => @course)
+      @quiz = Factory(:quiz, :problem => @problem, :answer => "42")
+      @myresponse = Factory(:response, :quiz => @quiz, :user => @student)
     end
 
     it "should be successful" do

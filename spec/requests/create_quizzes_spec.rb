@@ -4,9 +4,9 @@ describe "CreateQuizzes" do
 
   before(:each) do
     @course = Factory(:course)
-    @component = Factory(:component, :course_id => @course)
-    @problem = Factory(:problem, :course_id => @course)
-    @step = Factory(:step, :text => "The first step", :problem_id => @problem)
+    @component = Factory(:component, :course => @course)
+    @problem = Factory(:problem, :course => @course)
+    @step = Factory(:step, :text => "The first step", :problem => @problem)
     @user = Factory(:admin)
     @quiz = Factory(:quiz, :problem => @problem)
     integration_sign_in(@user)
@@ -38,9 +38,5 @@ describe "CreateQuizzes" do
     fill_in "Answer", :with => "Yes!"
     click_button "Submit"
     page.should have_content("Quiz edited.")
-    
   end
-
-
-
 end

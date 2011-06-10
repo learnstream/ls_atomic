@@ -6,7 +6,7 @@ describe "AddVideoToComponents" do
     @course = Factory(:course)
     @teacher = Factory(:user)
     @teacher.enroll_as_teacher!(@course)
-    @component = Factory(:component, :course_id => @course)
+    @component = Factory(:component, :course => @course)
     integration_sign_in(@teacher)
   end
 

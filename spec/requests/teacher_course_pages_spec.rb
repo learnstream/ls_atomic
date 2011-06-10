@@ -4,7 +4,7 @@ describe "teacher statistics" do
 
   before(:each) do
     @course = Factory(:course)
-    @component = Factory(:component, :course_id => @course)
+    @component = Factory(:component, :course => @course)
     @teacher = Factory(:user, :email => "iamateacher@teacher.com")
     integration_sign_in(@teacher)
     @teacher.enroll_as_teacher!(@course)

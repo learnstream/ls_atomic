@@ -9,8 +9,9 @@ describe MemoriesController do
       test_sign_in(@user)
       @course = Factory(:course)
 
-      @component = Factory(:component, :course_id => @course)
+      @component = @course.components.create!(:name => "name", :description => "desc")
       @memory = @user.memories.create!(:component_id => @component)
+      @component.memories << @memory
     end
 
     it "should fail when given an invalid quality score" do
