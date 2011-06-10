@@ -1,3 +1,4 @@
+<div class="back"> <%= link_to "Back to problem", @problem %> </div>
 <%= form_for @problem, :html => {:multipart => true} do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
