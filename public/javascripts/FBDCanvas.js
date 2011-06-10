@@ -1,103 +1,138 @@
 $(document).ready(function () {
-var paper = Raphael("holder", 600, 350);
-var border = paper.rect(1, 1, 598, 348);
-var sidebar = paper.rect(490, 10, 100, 330)
-// Include sidebar things
-// Draw permissions
+    var paper = Raphael("holder", 600, 350);
+    var border = paper.rect(1, 1, 598, 348);
 
-var draw_mode = "rect";
-var drawing = false;
-var current_rect = [0, 0, 0, 0];
+    var selection_areas = [];
 
-  $("#holder").click(function(f) {
+    var selection_radius = 10;
 
-    if (draw_mode == "rect") {
-      if (drawing == false){
-        drawing = true;
-        current_rect[0] = f.pageX;
-        current_rect[1] = f.pageY;
-      } else {
-        drawing = false;
-        current_rect[2] = f.pageX - current_rect[0];
-        current_rect[3] = f.pageY - current_rect[1];
-        paper.rect(current_rect[0], current_rect[1], current_rect[2], current_rect[3]);
+    var fb = new Object;
+
+    fb.shape = "none";
+
+    fb.top = 80;
+    fb.left = 80;
+    fb.width = 162;
+    fb.height = 100;
+
+    fb.radius = 60;
+    fb.cx = fb.top + fb.radius;
+    fb.cy = fb.left + fb.radius;
+    fb.cinterval = 30; // number of degrees between selection points on circle
+
+    fb.rotation = 0;
+
+    var surface_offset = 40;
+
+    fb.obj = null;
+    fb.extra = null; 
+
+    var draw = function(fb, paper) { 
+      var selection_areas = [];
+
+      if (fb.shape == "rect"){
+        fb.obj = paper.rect(fb.top, fb.left, fb.width, fb.height);     
+        selection_areas = applySelectionPtsRect(fb);
+      } else if (fb.shape == "rect-line") {
+        fb.obj = paper.rect(fb.top, fb.left, fb.width, fb.height);     
+        var surface_path = ["M", fb.left - surface_offset,            fb.top + fb.height,
+                            "L", fb.left + fb.width + surface_offset, fb.top + fb.height];
+        fb.extra = paper.path(surface_path);
+        selection_areas = applySelectionPtsRect(fb);
+      } else if (fb.shape == "circle") {
+        fb.obj = paper.circle(fb.cx, fb.cy, fb.radius);
+        selection_areas = applySelectionPtsCirc(fb);
       }
+
+        applyRotation(fb, selection_areas);
+
+        return selection_areas;
+    };
+
+    var applyRotation = function(fb, selection_areas) {
+      var centerx = (fb.shape == "circle") ? fb.cx : (2*fb.left + fb.width)/2;
+      var centery = (fb.shape == "circle") ? fb.cy : (2*fb.top + fb.height)/2;
+
+      var object_set = paper.set();
+      object_set.push( fb.obj, fb.extra );
+      for (var i=0; i < selection_areas.length; i++) {
+        object_set.push(selection_areas[i]);
+      }
+
+      object_set.rotate(fb.rotation, centerx, centery);
+    };
+    
+    var cleanup = function() {
+      if (fb.obj != null) fb.obj.remove();
+      if (fb.extra != null) fb.extra.remove();
+      selection_areas = [];
+      $(".selection-area").remove();
+      $("#rotate-select").val(0);
+      fb.rotation = 0;
+    };
+
+    $('#fbd-select :radio').click(function(e){
+      cleanup();
+      fb.shape = $(this).val();
+      selection_areas = draw(fb, paper);
+      });
+
+  var printSelectionPoints = function(pts){
+    var selection_areas = [];
+
+    for (var i=0; i < pts.length; i++) {
+      selection_areas.push(paper.circle(pts[i][0], pts[i][1], selection_radius));
+      selection_areas[i].node.setAttribute("class", "selection-area");
     }
 
+    return selection_areas;
+  };
 
+  $("#rotate-select").change(function() {
+    if (fb.obj == null) return; 
+    
 
-
-   });
-
-$("#holder").mousemove(function(e) { 
-  $("#pos").text(current_rect.toString());
-});
-
-
-
-
-
-var freebody = paper.rect(80, 80, 100, 100);
-
-var selection_pts = [[130, 130], [80, 80], [80, 180], [180, 80], [180,180]];
-var selection_areas = [];
-var selection_radius = 15;
-
-for (var i = 0; i < selection_pts.length; i++) {
-  selection_areas.push(paper.circle(selection_pts[i][0], selection_pts[i][1], selection_radius));
-  selection_areas[i].attr({fill: "blue"});
-  selection_areas[i].node.setAttribute("class", "selection-area");
+    fb.rotation = -1*$("#rotate-select option:selected").val();
+    applyRotation(fb, selection_areas);
   
-}
+  });
 
-var length = 60;
-var enableHolderClick = false;
-var selectAngle = false;
-var startedAngle = false;
+  var applySelectionPtsCirc = function(fb){
+    var pts = [];
+    for (var i=0; i<360; i+= fb.cinterval){
+      pts.push([fb.cx + fb.radius * Math.cos(i*Math.PI/180), 
+                fb.cy + fb.radius * Math.sin(i*Math.PI/180)]);
+    }
+    pts.push([fb.cx, fb.cy]);
+    return printSelectionPoints(pts);
+  }
 
-var ox = 0;
-var oy = 0;
+  var applySelectionPtsRect = function(fb) {
+    var width = fb.obj.attr("width");
+    var height = fb.obj.attr("height");
+    var TLx = fb.obj.attr("x");
+    var TLy = fb.obj.attr("y");
 
-var force = null;
+    var TRx = TLx + width;
+    var TRy = TLy;
+    var BLx = TLx;
+    var BLy = TLy + height;
+    var BRx = BLx + width;
+    var BRy = BLy;
 
-$('.selection-area').click(function() {
-  if (startedAngle) return;
-  startedAngle = true; 
-  $('.selection-area').hide();
+    var pts = [];
+    pts.push([TRx, TRy]);
+    pts.push([TLx, TLy]);
+    pts.push([BRx, BRy]);
+    pts.push([BLx, BLy]);
+    pts.push([(TRx + TLx)/2, TRy]);
+    pts.push([(BRx + BLx)/2, BRy]);
+    pts.push([TRx, (TRy + BRy)/2]);
+    pts.push([TLx, (TLy + BLy)/2]);
+    pts.push([(TRx + TLx)/2, (TRy + BRy)/2]);
+    
+    return printSelectionPoints(pts);
+  };
 
-  ox = parseInt($(this).attr("cx"));
-  oy = parseInt($(this).attr("cy"));
-
-  var initPath = ["M", ox,          oy,
-                  "L", ox + length, oy]
-
-  force = paper.path(initPath);
-
-  selectAngle = true;
-
- 
 });
 
-});
-/* 
-$("#holder").mousemove(function(e) { 
-  if (!selectAngle) return;
-  var interval = Math.PI/12.0;
-  var multiplier = 1.0/interval;    
-  var angle = Math.atan2(oy - e.pageY, e.pageX - ox);
-  var rounded_angle = interval*Math.round(multiplier * angle);
-  var angle_deg = Math.round(180.0/Math.PI * rounded_angle);
-
-
-  var x_off = Math.cos(rounded_angle)*length;
-  var y_off = -1.0*Math.sin(rounded_angle)*length;
-
-
-  var newPath = ["M", ox,         oy,
-                 "L", ox + x_off, oy + y_off];
-  
-  force.attr({ path: newPath });
-  $('#status').html(angle_deg);
-  enableHolderClick = true; 
-});
-*/
