@@ -53,25 +53,5 @@ $(document).ready(function () {
   });
 
 
-  $("#holder").mousemove(function(e) { 
-    if (!selectAngle) return;
-    var interval = Math.PI/12.0;
-    var multiplier = 1.0/interval;    
-    var angle = Math.atan2(oy - e.pageY, e.pageX - ox);
-    var rounded_angle = interval*Math.round(multiplier * angle);
-    var angle_deg = Math.round(180.0/Math.PI * rounded_angle);
-
-
-    var x_off = Math.cos(rounded_angle)*length;
-    var y_off = -1.0*Math.sin(rounded_angle)*length;
-
-
-    var newPath = ["M", ox,         oy,
-                   "L", ox + x_off, oy + y_off];
-    
-    force.attr({ path: newPath });
-    $('#status').html(angle_deg);
-    enableHolderClick = true; 
-  });
 });
 
