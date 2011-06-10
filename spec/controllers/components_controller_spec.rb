@@ -18,6 +18,7 @@ describe ComponentsController do
 
   describe "GET 'show'" do
     before(:each) do
+      test_sign_in(Factory(:admin))
       @course = Factory(:course)
       @component = Factory(:component, :course => @course)
       @course.components << @component
@@ -364,6 +365,9 @@ describe ComponentsController do
   end
 
   describe "GET 'describe'" do
+    before(:each) do
+      test_sign_in(Factory(:admin))
+    end
 
     it "should return the component's description for a valid component" do
       @course = Factory(:course)
