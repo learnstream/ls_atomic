@@ -24,23 +24,23 @@ describe "Enrolling in a course" do
     page.should have_content("Description")
   end
   
-  it "should flash a confirmation when you try to unenroll" do
+  it "should flash a confirmation when you try to unenroll", :js => true do
     @user.enroll!(@course)
     visit current_path
 
     click_button "Unenroll"
     page.driver.browser.switch_to.alert.accept
-    page.should have_content("Enroll")
+    page.should have_css("input", :content => "Enroll")
   end
 
   
-  it "should allow user to choose not to unenroll" do
+  it "should allow user to choose not to unenroll", :js => true do
     @user.enroll!(@course)
     visit current_path
 
     click_button "Unenroll"
     page.driver.browser.switch_to.alert.dismiss
-    page.should have_content("Unenroll")
+    page.should have_css("input", :content => "Unenroll")
   end
 end
 
