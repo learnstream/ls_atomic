@@ -2,9 +2,10 @@ $(document).ready(function () {
 //...
 
    ff = new FBD;
+
    ff.loadJSONFBD({"shape":"rect-line","top":80,"left":80,"width":162,"height":100,"radius":60,"rotation":-15,"cinterval":30});
   
-   var x = ff.getJSONFBD();
+   
    
    
    $("#print-json").click(function(){
@@ -21,10 +22,22 @@ function FBD() {
   
   var paper = Raphael("holder", 600, 350);
   var border = paper.rect(1, 1, 598, 348);
-  var fb = new Object;
   var selection_areas = [];
   var selection_radius = 10;  
   var surface_offset = 40;
+  
+  // Initialize with some parameters...
+  var fb = new Object;
+  fb.shape = "rect";
+  fb.top = 80;
+  fb.left = 80;
+  fb.width = 162;
+  fb.height = 100;
+  fb.radius = 60;
+  fb.cx = fb.top + fb.radius;
+  fb.cy = fb.left + fb.radius;
+  fb.rotation = 0;
+  fb.cinterval = 30; // number of degrees between selection points on circle
 
   var init = function() {
     fb.cx = fb.top + fb.radius;
