@@ -28,8 +28,20 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, comment the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = false
     
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
+
     def test_sign_in(user)
       controller.sign_in(user)
     end  

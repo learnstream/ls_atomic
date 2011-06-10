@@ -4,9 +4,9 @@ describe VideosController do
 
   before(:each) do
     @course = Factory(:course)
-    @component = Factory(:component, :course_id => @course.id)
-    @problem = Factory(:problem, :course_id => @course)
-    @step = Factory(:step, :problem_id => @problem)
+    @component = Factory(:component, :course => @course)
+    @problem = Factory(:problem, :course => @course)
+    @step = Factory(:step, :problem => @problem)
     @attr = { :url => "http://www.youtube.com/watch?v=U7mPqycQ0tQ", :start_time => 0, :end_time => 25 }
   end
 
@@ -72,7 +72,7 @@ describe VideosController do
     describe "for authorized users" do
       it "should render the edit page" do
         @admin = test_sign_in(Factory(:admin))
-        @video = Factory(:video, :component_id => @component)
+        @video = Factory(:video, :component => @component)
         get :edit, :id => @video
         response.should be_success
       end
@@ -82,7 +82,7 @@ describe VideosController do
       it "should not render the edit page" do
         @user = Factory(:user)
         test_sign_in(@user)
-        @video = Factory(:video, :component_id => @component)
+        @video = Factory(:video, :component => @component)
         @user.enroll!(@video.component.course)
         get :edit, :id => @video
         response.should_not be_success
@@ -94,7 +94,7 @@ describe VideosController do
     describe "for authorized users" do
       it "should delete the video" do
         @admin = test_sign_in(Factory(:admin))
-        @video = Factory(:video, :component_id => @component)
+        @video = Factory(:video, :component => @component)
         lambda do
           delete :destroy, :id => @video
         end.should change(Video, :count).by(-1)
@@ -105,7 +105,7 @@ describe VideosController do
       it "should not delete the video" do
         @user = Factory(:user)
         test_sign_in(@user)
-        @video = Factory(:video, :component_id => @component)
+        @video = Factory(:video, :component => @component)
         @user.enroll!(@video.component.course)
         lambda do
           delete :destroy, :id => @video

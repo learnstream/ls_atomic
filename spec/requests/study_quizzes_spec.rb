@@ -7,14 +7,14 @@ describe "StudyQuizzes" do
     @course = Factory(:course)
     @user.enroll!(@course)
 
-    @component = Factory(:component, :course_id => @course)
+    @component = Factory(:component, :course => @course)
 
-    @problem = Factory(:problem, :course_id => @course)
+    @problem = Factory(:problem, :course => @course)
     @step1 = @problem.steps.create(:text => "do this first", :order_number => 1)
     @step2 = @problem.steps.create(:text => "do this next", :order_number => 2) 
     @step3 = @problem.steps.create(:text => "finally do this", :order_number => 3)
 
-    @quiz = Factory(:quiz, :problem_id => @problem)
+    @quiz = Factory(:quiz, :problem => @problem)
     @quiz.steps = ["1", "2"]
     @quiz.components << @component
 

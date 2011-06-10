@@ -28,6 +28,7 @@ class ResponsesController < ApplicationController
     # Create a new response
     @response = Response.new(params[:response])
     @response.user = current_user
+    @response.quiz = @quiz
      
     if @response.save
       redirect_to @response

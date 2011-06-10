@@ -12,7 +12,7 @@ describe StudyController do
 
       @user.enroll!(@course)
       
-      @component = Factory(:component, :course_id => @course)
+      @component = Factory(:component, :course => @course)
       @memory = @user.memories.find_by_component_id(@component)
       @memory.due = Time.now
       @memory.save!

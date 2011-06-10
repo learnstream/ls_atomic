@@ -18,7 +18,7 @@ describe "Problem creation" do
   end 
 
   it "should allow the problems to be edited" do
-    @problem = Factory(:problem)
+    @problem = Factory(:problem, :course => @course)
     visit problem_path(@problem)
     click_link "Edit"
     fill_in "Name", :with => "Forgotten problem"
@@ -28,7 +28,7 @@ describe "Problem creation" do
   end
 
   it "should allow steps to be added" do
-    @problem = Factory(:problem)
+    @problem = Factory(:problem, :course => @course)
     visit problem_path(@problem)
     click_link "Edit"
     fill_in "Text", :with => "A forgotten step for a forgotten problem"
@@ -39,9 +39,9 @@ describe "Problem creation" do
   end
 
   it "should allow components to be related to steps" do
-    @component = Factory(:component, :course_id => @course)
-    @problem = Factory(:problem, :course_id => @course)
-    @step = Factory(:step, :problem_id => @problem)
+    @component = Factory(:component, :course => @course)
+    @problem = Factory(:problem, :course => @course)
+    @step = Factory(:step, :problem => @problem)
     visit problem_path(@problem)
     click_link "Edit"
     click_link "edit"
@@ -62,7 +62,7 @@ describe "Problem creation" do
   end
 
   it "should allow steps to be rearranged" do
-    @problem = Factory(:problem)
+    @problem = Factory(:problem, :course => @course)
     visit problem_path(@problem)
     click_link "Edit"
     fill_in "Text", :with => "An intermediate step"

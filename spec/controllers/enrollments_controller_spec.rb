@@ -43,7 +43,7 @@ describe EnrollmentsController do
       @course = Factory(:course)
       @user.enroll!(@course)
       @enrollment = @user.enrollments.find_by_course_id(@course)
-      @component = Factory(:component, :course_id => @course)
+      @component = @course.components.create!(:name => "name", :description => "desc")
     end
 
     it "should destroy an enrollment" do
