@@ -1,4 +1,4 @@
-<%= link_to "Back to problem", edit_problem_path(@step.problem) %>
+<div class ="back"><%= link_to "Back to problem edit", edit_problem_path(@step.problem) %></div>
 <div id="course_id" style="display: none"><%= @step.problem.course.id %></div>
 <%= form_for(@step) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
