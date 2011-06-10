@@ -22,8 +22,8 @@ class QuizzesController < ApplicationController
    end 
 
    @quiz = problem.quizzes.build(params[:quiz])
-   @quiz.answer_input = params[:quiz][:answer_type]
-   @quiz.answer_output = params[:quiz][:answer_type]
+   @quiz.answer_input = jsonify(params[:quiz][:answer_type])
+   @quiz.answer_output = jsonify(params[:quiz][:answer_type])
 
 
    if @quiz.save
@@ -105,5 +105,9 @@ class QuizzesController < ApplicationController
       else
         'application'
       end
+    end
+
+    def jsonify(type, options=nil)
+      options ? { :type => type, :options => options }.to_json : { :type => type }.to_json
     end
 end
