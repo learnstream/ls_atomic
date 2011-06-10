@@ -73,7 +73,7 @@ describe ProblemsController do
       @user = Factory(:user)
       @admin = Factory(:admin)
       @course = Factory(:course)
-      @problem = Factory(:problem)
+      @problem = @course.problems.create!(:name => "Your problem", :statement => "You suck")
     end
 
     it "should be success" do
@@ -106,7 +106,7 @@ describe ProblemsController do
 
     before(:each) do
       @course = Factory(:course)
-      @problem = Factory(:problem, :course_id => @course.id)
+      @problem = @course.problems.create!(:name => "Oilers theorem", :statement => "blah")
     end
 
     describe "for authorized users" do
@@ -174,8 +174,8 @@ describe ProblemsController do
       @course = Factory(:course)
       test_sign_in(@user)
       @user.enroll!(@course)
-      @problem = Factory(:problem)
-      @step = Factory(:step, :problem_id => @problem, :text => "hello")
+      @problem = @course.problems.create!(:name => "Oilers theorem", :statement => "blah")
+      @step = Factory(:step, :problem => @problem)
     end
 
     it "should return json with the step text" do
@@ -210,7 +210,7 @@ describe ProblemsController do
         test_sign_in(@user)
         @course = Factory(:course)
         @user.enroll!(@course)
-        @problem = Factory(:problem)
+        @problem = @course.problems.create!(:name => "Your problem", :statement => "You suck")
       end
 
       it "should deny access to edit" do

@@ -5,8 +5,9 @@ describe Memory do
   before(:each) do
     @user = Factory(:user)
     @course = Factory(:course)
-    @component = @course.components.create(:name => "My component")
-    @memory = @user.memories.create(:component_id => @component)
+    @component = @course.components.create!(:name => "My component")
+    @memory = @user.memories.create!(:component_id => @component)
+    @component.memories << @memory
     @default_ease = 2.5
   end
 

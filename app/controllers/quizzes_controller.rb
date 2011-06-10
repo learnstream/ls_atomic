@@ -72,7 +72,7 @@ class QuizzesController < ApplicationController
     if((@memory.due - Time.now) > 0)
       flash[:error] = "You have already rated your response for that problem!"
     else
-    @quiz.rate_components!(current_user, Integer(params[:quality]))
+      @quiz.rate_components!(current_user, Integer(params[:quality]))
     end
 
     redirect_to course_study_index_path(@quiz.problem.course)

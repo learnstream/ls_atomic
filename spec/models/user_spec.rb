@@ -112,7 +112,7 @@ describe User do
     
     before(:each) do
       @course = Factory(:course)
-      @component = Factory(:component, :course_id => @course)
+      @component = Factory(:component, :course => @course)
       @memory = @user.remember(@component)
       @comp2 = @course.components.create!(:name => "Comp22", :description => "test")
       @memory2 = @user.remember(@comp2)
@@ -121,7 +121,7 @@ describe User do
       @memory.save!
       @memory2.save!
 
-      @problem = Factory(:problem, :course_id => @course)
+      @problem = Factory(:problem, :course => @course)
       @quiz = Factory(:quiz, :problem_id => @problem) 
       @quiz.components << @component
     end
@@ -172,7 +172,7 @@ describe User do
 
     before(:each) do
       @course = Factory(:course)
-      @component = Factory(:component, :course_id => @course.id)
+      @component = Factory(:component, :course => @course)
       @memory = @user.remember(@component)
     end
 

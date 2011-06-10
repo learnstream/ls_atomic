@@ -213,9 +213,8 @@ describe ComponentsController do
 
     before(:each) do
       @course = Factory(:course)
-      @component = Factory(:component)
+      @component = @course.components.create!(:name => "hello", :description => "You are my friend")
       @attr = { :name => @component.name, :description => @component.description }
-      post :create, :component => @attr.merge(:course_id => @course.id) 
     end
 
     describe "generic failure" do
@@ -226,7 +225,6 @@ describe ComponentsController do
       end
     
       it "should not update to the same name as a different component" do
-        post :create, :component => { :name => "aaa", :description => "asdfasdf", :course_id => @course.id }
         put :update, :id => @component, :component => { :name => "aaa", :course_id => @course.id }
         @component.reload
         @component.name.should == @attr[:name]
@@ -301,9 +299,9 @@ describe ComponentsController do
     
     before(:each) do
       @course = Factory(:course)
-      @component = Factory(:component)
+      @component = @course.components.create(:name => "yo", :description => "desc")
+
       @attr = { :name => @component.name, :description => @component.description }
-      post :create, :component => @attr.merge(:course_id => @course.id)
       @video = Factory(:video, :component_id => @component)
     end
 
@@ -333,16 +331,6 @@ describe ComponentsController do
       it "should have a form to add new videos" do
         get :edit, :id => @component
         response.should have_selector("label", :content => "Url")
-      end
-
-      it "should have a link to edit videos" do
-        get :edit, :id => @component
-        response.should have_selector("a", :content => "Edit")
-      end
-      
-      it "should have a link to remove videos" do
-        get :edit, :id => @component
-        response.should have_selector("a", :content => "Delete")
       end
     end
 
@@ -382,7 +370,9 @@ describe ComponentsController do
     end
 
     it "should return the component's description for a valid component" do
-      @component = Factory(:component)
+      @course = Factory(:course)
+      @component = @course.components.create(:name => "name", :descriptions => "desc")
+
       @expected = { :text => @component.description }.to_json
       get :describe, :id => @component, :format => :json
       response.body.should == @expected

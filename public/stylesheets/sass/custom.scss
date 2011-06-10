@@ -198,10 +198,26 @@ a.study_button {
 /* Welcome page */
 
 #tagline {
-  font-size: 2.5em; margin: 15px;
+  font-size: 2.5em; 
+  text-align: center;
+  $image-dim: 150px;
 
-  ul { font-size: .4em; list-style-type: none; }
+
+  ul { font-size: .4em; list-style-type: none;  }
+  ul li { display: inline-block; vertical-align: top; }
+
+  div {  max-width: $image-dim + 50px; }
+
   .feature-head { font-weight: bold; font-size: 1.3em; }
+
+  
+  img { 
+    display: inline;
+    min-width: $image-dim; 
+    height: $image-dim; 
+    border: 1px solid black; 
+    @include rounded(15px);
+  }
 }
 
 a.signup_button {

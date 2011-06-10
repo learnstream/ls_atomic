@@ -5,7 +5,8 @@ gem 'rails', '3.0.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
+#gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
+gem 'sqlite3-ruby', '1.3.2', :group => :development
 gem 'authlogic'
 gem 'will_paginate', '3.0.pre2'
 gem 'escape_utils'
@@ -16,8 +17,9 @@ gem 'sass'
 
 group :development, :test do
   gem 'jasmine'
-  gem 'launchy'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'launchy'
+  gem 'database_cleaner'
   gem 'timecop'
 end
 

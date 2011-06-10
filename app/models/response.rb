@@ -2,11 +2,13 @@ class Response < ActiveRecord::Base
   belongs_to :user
   belongs_to :quiz
 
-  before_save :grade_response
+  before_create :grade_response
+
+  private
 
   def grade_response
-    if self.quiz.answer_type != "self-rate" 
-      if self.quiz.check_answer(self) 
+    if quiz.answer_type != "self-rate" 
+      if quiz.check_answer(self) 
         self.status = "correct"
       else
         self.status = "incorrect"

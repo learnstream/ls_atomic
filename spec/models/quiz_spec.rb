@@ -4,9 +4,9 @@ describe Quiz do
   
   before(:each) do
     @course = Factory(:course)
-    @problem = Factory(:problem, :course_id => @course)
-    @component = Factory(:component, :course_id => @course)
-    @quiz = Factory(:quiz, :problem_id => @problem)
+    @problem = Factory(:problem, :course => @course)
+    @component = Factory(:component, :course => @course)
+    @quiz = Factory(:quiz, :problem => @problem)
   end
 
   it "should have a problem method" do

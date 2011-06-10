@@ -1,4 +1,4 @@
-<%= link_to "Back to course", @course %>
+<div class = "back"><%= link_to "Back to course", @course %></div>
 <h1>New component for <%= @course.name %></h1>
 <%= form_for @component do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>

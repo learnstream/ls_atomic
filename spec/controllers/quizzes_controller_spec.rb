@@ -6,7 +6,7 @@ describe QuizzesController do
 
     before(:each) do
       @course = Factory(:course)
-      @problem = Factory(:problem, :course_id => @course)
+      @problem = @course.problems.create!(:name => "Your problem", :statement => "You suck")
     end
 
     describe "for authorized users" do
@@ -39,12 +39,17 @@ describe QuizzesController do
     
     before(:each) do
       @course = Factory(:course)
-      @problem = Factory(:problem, :course_id =>@course)
-      @step = Factory(:step, :problem_id => @problem)
-      @step2 = Factory(:step, :text => "Another step", :problem_id => @problem)
-      @component = Factory(:component, :course_id => @course)
-      @component2 = Factory(:component, :name => "Another component", :course_id => @course)
-      @attr = {:problem_id => @problem, :component_tokens => "1,2", :steps => ["1", "2"], :question => "What is the color of the sky?", :answer => "blue", :answer_type => "text"}
+      #@problem = @course.problems.create!(:name => "Your problem", :statement => "You suck")
+      @problem = Factory(:problem, :course => @course)
+      
+      @step = Factory(:step, :problem => @problem)
+      @step2 = Factory(:step, :name => "Another step", :order_number => 2, :problem => @problem)
+
+      #@component = @course.components.create!(:name => "name", :description => "desc")
+      #@component2 = @course.components.create!(:name => "diff name", :description => "diff desc")
+      @component = Factory(:component, :course => @course)
+      @component2 = Factory(:component, :name => "wooooo", :course => @course)
+      @attr = {:problem_id => @problem, :component_tokens => "#{@component.id},#{@component2.id}", :steps => ["1", "2"], :question => "What is the color of the sky?", :answer => "blue", :answer_type => "text"}
     end
 
     describe "generic failure" do
@@ -55,7 +60,7 @@ describe QuizzesController do
 
       it "should not allow quiz to be created with a blank problem" do
         lambda do
-          post :create, :quiz => @attr.delete(:problem_id)
+          post :create, :quiz => @attr.delete(:problem)
         end.should_not change(Quiz, :count)
       end
 
@@ -75,7 +80,8 @@ describe QuizzesController do
     describe "for authorized users" do
 
       before(:each) do
-        test_sign_in(Factory(:admin))
+        @admin = Factory(:admin)
+        test_sign_in(@admin)
       end
 
       it "should create a quiz" do
@@ -140,8 +146,8 @@ describe QuizzesController do
       @student = Factory(:user)
       test_sign_in(@student)
       @student.enroll!(@course)
-      @problem = Factory(:problem, :course_id => @course)
-      @quiz = Factory(:quiz, :problem_id => @problem)
+      @problem = @course.problems.create!(:name => "asdf", :statement => "blah")
+      @quiz = Factory(:quiz, :problem => @problem)
     end
 
     it "should be successful" do
@@ -156,9 +162,9 @@ describe QuizzesController do
       @student = Factory(:user)
       test_sign_in(@student)
       @student.enroll!(@course)
-      @problem = Factory(:problem, :course_id => @course)
-      @quiz = Factory(:quiz, :problem_id => @problem)
-      @component = Factory(:component, :course_id => @course)
+      @problem = Factory(:problem, :course => @course)
+      @quiz = Factory(:quiz, :problem => @problem)
+      @component = Factory(:component, :course => @course)
       @quiz.components << @component
       @memory = @student.memories.find_by_component_id(@component)
     end
