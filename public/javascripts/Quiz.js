@@ -1,6 +1,4 @@
 $(document).ready(function () {
-//...
-
    ff = new FBD;
 
    ff.loadJSONFBD({"shape":"rect-line","top":80,"left":80,"width":162,"height":100,"radius":60,"rotation":-15,"cinterval":30});
@@ -10,15 +8,13 @@ $(document).ready(function () {
     ff.addNewForce();
   });
    
-   $("#print-json").click(function(){
      console.log('JSON is:');
      console.log(ff.getJSONFBD());
-   });
 
 });
 
 function Force() {
-  this.length = 80;
+  this.length = 110;
 }
 
 
@@ -29,12 +25,13 @@ function FBD() {
   var selection_areas = [];
   var selection_radius = 10;  
   var surface_offset = 40;
-  var startedAngle = false;
 
   var startForce = false;
   var startAngle = false;
   var selectAngle = false;
   var enableHolderClick = false;
+
+  var answer = "";
   
   // Initialize with some parameters...
   var fb = new Object;
@@ -71,6 +68,8 @@ function FBD() {
         
         forces.push(current_force);
         
+        console.log(getJSONFBD());
+        
         var force_disp = $("<li>").text(current_force.origin_index + " " + current_force.angle + " ");
 
         var remove_link = $("<a>").text("Remove").attr("href", "#").click(function() {
@@ -87,7 +86,22 @@ function FBD() {
               
           $(this).parent().hide();
           });
+
+        var add_answer = $("<a>")
+          .text("Use as answer")
+          .attr("href", "#")
+          .css("margin-left", "8px")
+          .click(function() {
+            var oi = $(this).parent().text().split(" ")[0];
+            var a = $(this).parent().text().split(" ")[1];
+            answer = oi + " " + a; 
+
+            $("#answer").text(answer);
+        });
+          
+
         force_disp.append(remove_link);
+        force_disp.append(add_answer);
 
         force_disp.appendTo($("#forces"));
         });
@@ -262,7 +276,7 @@ function FBD() {
         var theta = fb.rotation * Math.PI/180;
         current_force.ox = (ox - centerx())*Math.cos(theta) - (oy - centery())*Math.sin(theta) + centerx();
         current_force.oy = (ox - centerx())*Math.sin(theta) + (oy - centery())*Math.cos(theta) + centery();
-        console.log(current_force.length);
+
         var initPath = ["M", current_force.ox,         current_force.oy,
                         "L", current_force.ox + current_force.length, current_force.oy];
         current_force.obj = paper.path(initPath);
@@ -306,9 +320,30 @@ function FBD() {
     init();
   };
   
+
+  var getInputJSON = function() { 
+    return '{ "fb" : ' 
+      + fb.toJSONString(["shape", "top", "left", "width", "height", "radius", "rotation", "cinterval"])
+      + '}';
+  };
+
+  var getOutputJSON = function() {
+    var forces_json = "[ ";
+
+    for (var i=0; i < forces.length; i++) {
+      forces_json += forces[i].toJSONString(["origin_index", "ox", "oy", "angle"])                              + ", ";
+      
+    }
+
+    forces_json += "]";
+
+    return '{ "fb" : ' 
+      + fb.toJSONString(["shape", "top", "left", "width", "height", "radius", "rotation", "cinterval"])
+      + ', "forces" : ' 
+      + forces_json + '}';
+  };
   
-  this.getJSONFBD = function(){
-    return fb.toJSONString(["shape", "top", "left", "width", "height", "radius", "rotation", "cinterval"])
+  var getJSONFBD = function(){
   };
 
   this.addNewForce = function() {
