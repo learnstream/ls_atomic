@@ -88,7 +88,8 @@ function FBD() {
 
         forces.push(current_force);
 
-        var force_disp = $("<li>").text(current_force.origin_index + " " + current_force.angle + " ");
+        var force_disp = $("<li>").text(current_force.origin_index + " " + current_force.angle + " ")
+        .addClass("force-item");
 
         var remove_link = $("<a>").text("Remove").attr("href", "#").click(function() {
           for (var i=0; i < forces.length; i++) {
@@ -112,12 +113,17 @@ function FBD() {
           .text("Use as answer")
           .attr("href", "#")
           .css("margin-left", "8px")
+          .addClass("force-add-answer")
           .click(function() {
               var oi = $(this).parent().text().split(" ")[0];
               var a = $(this).parent().text().split(" ")[1];
               answer = oi + " " + a; 
 
               $("#quiz_answer").val(answer);
+              $("#response_answer").val(answer);
+              $(".force-item").css("border", "0px none");
+              $(this).parent().css("border", "1px solid #000");
+
               updateJSON();
               return false;
               });
