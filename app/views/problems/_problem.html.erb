@@ -6,12 +6,14 @@
   <% end %>
 
   <% if current_user.can_edit?(problem.course) %>
-    <%= link_to "Add quiz", new_quiz_path(:problem_id => problem.id) %>
+     | <%= link_to "Add quiz", new_quiz_path(:problem_id => problem.id) %>
     <ul>
       <% count = 1 %>
     <% problem.quizzes.each { |quiz| %>
+      <li>
       <%= link_to "Quiz #{count}", edit_quiz_path(quiz) %><br />
       <% count+=1 %>
+      </li>
     <% } %>
   </ul>
   <% end %>
