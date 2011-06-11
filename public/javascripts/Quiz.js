@@ -65,11 +65,10 @@ function FBD() {
   fb.cx = fb.top + fb.radius;
   fb.cy = fb.left + fb.radius;
   fb.rotation = 0;
-  fb.cinterval = 30; // number of degrees between selection points on circle
-
+  fb.cinterval = 30;  // number of degrees between selection points on circle
   var forces = [];
-  var current_force = null;
 
+  var current_force = null;
 
   var init = function() {
     fb.cx = fb.top + fb.radius;
@@ -167,6 +166,19 @@ function FBD() {
     draw();
   };
 
+  var drawArrow = function(ox, oy, angle) {
+    var path = ["M", ox,            oy,
+                "L", ox + 110,      oy,
+                "L", ox + 110 - 10, oy + 5,
+                "M", ox + 110,      oy,
+                "L", ox + 110 - 10, oy - 5];
+
+    var arrow = paper.path(path);
+    arrow.attr({"stroke-width": 3, stroke: "#f33"});
+    arrow.rotate(-1*angle, ox, oy);
+    return arrow; 
+  }
+
   var draw = function() { 
     selection_areas = [];
 
@@ -186,6 +198,12 @@ function FBD() {
 
     applyRotation();
 
+    
+    for (var i=0; i < forces.length; i++) {
+      if (!("obj" in forces[i])) {
+        forces[i].obj = drawArrow(forces[i].ox, forces[i].oy, forces[i].angle);
+      }
+    }
   };
 
 
@@ -309,14 +327,7 @@ function FBD() {
           current_force.ox = (ox - centerx())*Math.cos(theta) - (oy - centery())*Math.sin(theta) + centerx();
           current_force.oy = (ox - centerx())*Math.sin(theta) + (oy - centery())*Math.cos(theta) + centery();
 
-          var initPath = ["M", current_force.ox,         current_force.oy,
-          "L", current_force.ox + current_force.length, current_force.oy,
-          "L", current_force.ox + current_force.length - 10, current_force.oy + 5,
-          "M", current_force.ox + current_force.length, current_force.oy,
-          "L", current_force.ox + current_force.length - 10, current_force.oy - 5];
-
-          current_force.obj = paper.path(initPath);
-          current_force.obj.attr({"stroke-width": 3, stroke: "#f33"});
+          current_force.obj = drawArrow(current_force.ox, current_force.oy, 0);
           });
     }
 
@@ -352,6 +363,7 @@ function FBD() {
 
   this.loadJSONFBD = function(data){
     fb = data.fb;
+    forces = data.forces || [];
     init();
   };
 
@@ -395,7 +407,7 @@ function FBD() {
   };
 
   this.addNewForce = function() {
-      current_force = new Force();
+      current_force = new Object();
       startForce = true;
   };
 };
