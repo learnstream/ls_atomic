@@ -122,7 +122,22 @@ describe QuizzesController do
         post :create, :quiz => @attr
         response.should redirect_to course_path(@course)
       end
+
+      it "should be able to create a free body diagram quiz" do
+        lambda do
+          post :create, :quiz => @attr.merge(:answer_type => "fbd", 
+                                           :answer_input => "{ \"type\" : \"fbd\", \"fb\" : {\"shape\" : \"rect-line\", \"top\" : 80, \"left\" : 80, \"width\" : 162, \"height\" : 100, \"radius\" : 60, \"rotation\" : -15, \"cinterval\" : 30}}",
+                                           :answer_output =>"{ \"type\" : \"fbd\", \"fb\" : {\"shape\" : \"rect-line\", \"top\" : 80, \"left\" : 80, \"width\" : 162, \"height\" : 100, \"radius\" : 60, \"rotation\" : -15, \"cinterval\" : 30}, \"forces\" : [{\"origin_index\" : \"8\", \"ox\" : 161, \"oy\" : 130, \"angle\" : -90}]}" )
+        end.should change(Quiz, :count).by(1)
+      end
+
+      it "should be able to create a quiz with no steps" do
+        lambda do
+          post :create, :quiz => @attr.delete(:steps => "")
+        end.should change(Quiz, :count).by(1)
+      end
     end
+
 
     describe "for students" do
       before(:each) do

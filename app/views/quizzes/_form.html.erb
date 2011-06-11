@@ -2,6 +2,8 @@
   <%= render 'shared/error_messages', :object => f.object %>
 
   <%= f.hidden_field :problem_id, :value => @problem.id %> 
+  <%= f.hidden_field :answer_input, :value => "" %>
+  <%= f.hidden_field :answer_output, :value => "" %>
 
   <div class="field">
     <%= f.label :component_tokens, "Components" %><br />
@@ -18,13 +20,13 @@
     <%= f.label :question %><br />
     <%= f.text_field :question %>
   </div>
-
+  
   <div class="field">
     <%= f.label :answer_type, "Answer type" %><br />
     <%= f.select :answer_type, options_for_select([['Self-rating', 'self-rate'], 
-                                                  ['Text input', 'text'], ['Free Body Diagram', 'fbd']]) %>
-                                                  
+      ['Text input', 'text'], ['Free body diagram', 'fbd']]), :selected => 'self-rate' %>
   </div>
+
 
   <div class="field">
     <%= f.label :answer %><br />
@@ -36,3 +38,5 @@
   </div>
 
 <% end %>
+
+  <div class="hidden" id="fbd_form"> <%= render "fbd_input" %> </div>

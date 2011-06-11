@@ -43,7 +43,7 @@ describe "CreateQuizzes" do
   it "should support free-body-diagram quizzes", :js => true do
     visit course_path(@course)
     click_link "Add quiz"
-    fill_in "Components", :with => @component.id
+    page.evaluate_script('$("#quiz_component_tokens").val('+@component.id.to_s+')');
     select "The first step", :from => "Steps to show"
     fill_in "Question", :with => "What force is acting on the object"
     select "Free body diagram", :from => "Answer type"

@@ -22,9 +22,14 @@ class QuizzesController < ApplicationController
    end 
 
    @quiz = problem.quizzes.build(params[:quiz])
-   @quiz.answer_input = jsonify(params[:quiz][:answer_type])
-   @quiz.answer_output = jsonify(params[:quiz][:answer_type])
 
+   if params[:quiz][:answer_input].blank?
+     @quiz.answer_input = jsonify(params[:quiz][:answer_type])
+   end
+
+   if params[:quiz][:answer_output].blank?
+     @quiz.answer_output = jsonify("text")
+   end
 
    if @quiz.save
      flash[:success] = "Quiz created!"
@@ -43,6 +48,8 @@ class QuizzesController < ApplicationController
 
     if @quiz.answer_type == "text"
       @input_fields = "text_input"
+    elsif @quiz.answer_type == "fbd"
+      @input_fields = "fbd_student_input"
     else
       @input_fields = nil
     end

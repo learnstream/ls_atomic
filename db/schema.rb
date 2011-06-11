@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607001421) do
+ActiveRecord::Schema.define(:version => 20110611005527) do
+
+  create_table "component_tests", :force => true do |t|
+    t.integer  "component_id"
+    t.integer  "test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "component_tests", ["component_id"], :name => "index_component_tests_on_component_id"
+  add_index "component_tests", ["test_id", "component_id"], :name => "index_component_tests_on_test_id_and_component_id", :unique => true
+  add_index "component_tests", ["test_id"], :name => "index_component_tests_on_test_id"
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -95,7 +106,7 @@ ActiveRecord::Schema.define(:version => 20110607001421) do
 
   create_table "quizzes", :force => true do |t|
     t.integer  "problem_id"
-    t.string   "steps"
+    t.string   "steps",         :default => ""
     t.string   "question"
     t.text     "answer_input"
     t.string   "answer"
@@ -137,6 +148,19 @@ ActiveRecord::Schema.define(:version => 20110607001421) do
     t.integer  "order_number"
     t.integer  "problem_id"
   end
+
+  create_table "tests", :force => true do |t|
+    t.integer  "problem_id"
+    t.string   "steps"
+    t.string   "question"
+    t.text     "answer_input"
+    t.string   "answer"
+    t.text     "answer_output"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tests", ["problem_id"], :name => "index_tests_on_problem_id"
 
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"
