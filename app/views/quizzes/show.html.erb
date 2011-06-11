@@ -3,8 +3,8 @@
   <% if @quiz %> 
     <div id="problem"><%= @quiz.problem.statement %></div>
 
-    <% if not @quiz.steps.empty? %>
-      <div class="header">Steps</div>
+    <% if not @quiz.steps.nil? %>
+      <div class="header">Solution steps:</div>
 
       <ol>
         <% @quiz.problem.steps.each_with_index do |step, index| %>

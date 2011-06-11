@@ -101,6 +101,8 @@ a.study_button {
     width: 150px;
     font-size: 1.2em;
     text-align: center; }
+  #study-area #problem {
+    padding-bottom: 15px; }
 
 #rate-button-panel {
   margin-bottom: 15px; }
