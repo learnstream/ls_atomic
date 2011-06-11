@@ -29,7 +29,7 @@ $(document).ready(function () {
       ff.addNewForce();
       return false;
     });
-  }
+  } 
 });
 
 function Force() {
@@ -158,7 +158,8 @@ function FBD() {
 
         current_force.angle = angle_deg;
 
-        current_force.obj.attr({ path: newPath });
+        //current_force.obj.attr({ path: newPath });
+        current_force.obj.rotate(-1*angle_deg, current_force.ox, current_force.oy);
         $('#status').html(angle_deg);
         enableHolderClick = true; 
     });
@@ -309,7 +310,11 @@ function FBD() {
           current_force.oy = (ox - centerx())*Math.sin(theta) + (oy - centery())*Math.cos(theta) + centery();
 
           var initPath = ["M", current_force.ox,         current_force.oy,
-          "L", current_force.ox + current_force.length, current_force.oy];
+          "L", current_force.ox + current_force.length, current_force.oy,
+          "L", current_force.ox + current_force.length - 10, current_force.oy + 5,
+          "M", current_force.ox + current_force.length, current_force.oy,
+          "L", current_force.ox + current_force.length - 10, current_force.oy - 5];
+
           current_force.obj = paper.path(initPath);
           current_force.obj.attr({"stroke-width": 3, stroke: "#f33"});
           });
