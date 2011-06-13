@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var ff = null;
     $("#quiz_answer_type").change(function() { 
+      $("#quiz_answer").val("");
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
         $("#fbd_form").show();
         if (ff == null) {
@@ -8,10 +9,6 @@ $(document).ready(function () {
 
           ff.loadJSONFBD({ "fb" :{"shape":"rect-line","top":80,"left":80,"width":162,"height":100,"radius":60,"rotation":-15,"cinterval":30}});
 
-          $("#add-force-begin").click(function() {
-            ff.addNewForce();
-            return false;
-          });
          }
       } else {
         $("#fbd_form").hide();
@@ -25,10 +22,6 @@ $(document).ready(function () {
 
     ff.loadJSONFBD($("#holder").data("json"));
 
-    $("#add-force-begin").click(function() {
-      ff.addNewForce();
-      return false;
-    });
   } 
 });
 
@@ -44,11 +37,11 @@ function FBD() {
   var paper = Raphael("holder", canvas_width, canvas_height);
   var border = paper.rect(1, 1, canvas_width - 2, canvas_height - 2);
   var selection_areas = [];
-  var selection_radius = 10;  
+  var selection_radius = 8;  
   var surface_offset = 40;
 
-  var startForce = false;
-  var startAngle = false;
+  var waitingToBeginForce = true;
+  var waitingToSetAngle = false;
   var selectAngle = false;
   var enableHolderClick = false;
 
@@ -76,19 +69,23 @@ function FBD() {
     fb.obj = null;
     fb.extra = null;
 
+    waitingToBeginForce = true;
+    current_force = new Object();
+
     $("#rotate-select").val(fb.rotation);
     $('#fbd-select input[value="' + fb.shape + '"]').attr('checked', 'checked');
     $("#holder").click(function(f) {
-        if (!enableHolderClick) return;
-
-        startForce = false;
-        enableHolderClick = false;
-        startAngle = false;
+        if (!waitingToSetAngle) return;
+        
+        waitingToSetAngle = false;
+        waitingToBeginForce = true;
 
         forces.push(current_force);
 
         var force_disp = $("<li>").text(current_force.origin_index + " " + current_force.angle + " ")
         .addClass("force-item");
+
+        current_force = new Object();
 
         var remove_link = $("<a>").text("Remove").attr("href", "#").click(function() {
           for (var i=0; i < forces.length; i++) {
@@ -114,34 +111,41 @@ function FBD() {
           .css("margin-left", "8px")
           .addClass("force-add-answer")
           .click(function() {
-              var oi = $(this).parent().text().split(" ")[0];
-              var a = $(this).parent().text().split(" ")[1];
-              answer = oi + " " + a; 
-
-              $("#quiz_answer").val(answer);
-              $("#response_answer").val(answer);
-              $(".force-item").css("border", "0px none");
-              $(this).parent().css("border", "1px solid #000");
-
-              updateJSON();
+              assignAnswer($(this));
               return false;
               });
-
 
         force_disp.append(remove_link);
         force_disp.append(add_answer);
 
         force_disp.appendTo($("#forces"));
 
+        if (!$(".force-item").hasClass("selected-answer")) {
+          assignAnswer($(".force-add-answer"));
+        }
+
         updateJSON();
 
         return false;
     });
 
+    var assignAnswer = function(answerDiv) {
+      var oi = answerDiv.parent().text().split(" ")[0];
+      var a = answerDiv.parent().text().split(" ")[1];
+      answer = oi + " " + a; 
+
+      $("#quiz_answer").val(answer);
+      $("#response_answer").val(answer);
+      $(".force-item").removeClass("selected-answer");
+      answerDiv.parent().addClass("selected-answer");
+      $(".force-add-answer").text("Use as answer");
+      answerDiv.text("Selected answer");
+
+      updateJSON();
+    }
 
     $("#holder").mousemove(function(e) { 
-
-        if (!startAngle) return;
+        if (waitingToBeginForce) return; // don't care about the mouse if we're still picking the force
 
         var interval = Math.PI/12.0;
         var multiplier = 1.0/interval;    
@@ -157,10 +161,8 @@ function FBD() {
 
         current_force.angle = angle_deg;
 
-        //current_force.obj.attr({ path: newPath });
         current_force.obj.rotate(-1*angle_deg, current_force.ox, current_force.oy);
         $('#status').html(angle_deg);
-        enableHolderClick = true; 
     });
 
     draw();
@@ -281,15 +283,18 @@ function FBD() {
   };
 
   var clearForces = function() {
-    if (current_force != null) current_force.obj.remove();
+    if ("obj" in current_force) current_force.obj.remove();
+
+    current_force = new Object();
 
     for (var i=0; i < forces.length; i++) {
       forces[i].obj.remove();
     }
     forces = [];
 
-    startForce = false;
-    startAngle = false;
+    waitingToBeginForce = true;
+    waitingToSetAngle = false;
+
     $("#forces li").each(function() { 
         $(this).find("a").unbind('click'); 
         $(this).hide();
@@ -309,14 +314,17 @@ function FBD() {
 
     for (var i=0; i < pts.length; i++) {
       selection_areas.push(paper.circle(pts[i][0], pts[i][1], selection_radius));
-      selection_areas[i].attr({ fill : "#fff"});
+      selection_areas[i].attr({ fill : "#66f" });
+      selection_areas[i].attr({ "stroke-width": 0 });
+      selection_areas[i].attr({ "fill-opacity": .5 });
       selection_areas[i].node.setAttribute("data-index",  i);
       selection_areas[i].node.setAttribute("class", "selection-area");
       selection_areas[i].click(function(event) {
-          if (!startForce) return;
-          if (startAngle) return;
+          if (!waitingToBeginForce) return;
+          if (waitingToSetAngle) return;
 
-          startAngle = true; 
+          waitingToBeginForce = false;
+          setTimeout(function() { waitingToSetAngle = true; }, 150); // allow some time for the holder click to clear
           current_force.origin_index = this.node.getAttribute("data-index");
 
           var ox = parseInt(this.attr("cx"));
@@ -404,11 +412,6 @@ function FBD() {
   var updateJSON = function() {
     $("#quiz_answer_input").val(getInputJSON());
     $("#quiz_answer_output").val(getOutputJSON());
-  };
-
-  this.addNewForce = function() {
-      current_force = new Object();
-      startForce = true;
   };
 };
 

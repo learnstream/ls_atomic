@@ -1,15 +1,12 @@
-<div id="holder" data-mode="student" data-json="<%= answer_input %>"></div>
-<div id="sidebar">
-<form id="fbd-select"> 
-<a href="#" id="add-force-begin">Add a force</a>
+<div id="fbd">
+  <div id="holder" data-mode="student" data-json="<%= answer_input %>"></div>
+
+  <p>Force angle: 
+<span id="status"></span>
+</p>
 
 <ul id="forces">
 </ul>
-
-Angle: 
-<span id="status"></span>
-<div id="pos"></div>
 </div>
-
 <%= f.hidden_field :answer %>
 

@@ -27,11 +27,13 @@
       ['Text input', 'text'], ['Free body diagram', 'fbd']]), :selected => 'self-rate' %>
   </div>
 
+  <div class="hidden" id="fbd_form"> <%= render "fbd_input" %> </div>
 
   <div class="field">
     <%= f.label :answer %><br />
     <%= f.text_field :answer %>
   </div>
+
 
   <div class="actions">
     <%= f.submit "Submit" %>
@@ -39,4 +41,3 @@
 
 <% end %>
 
-  <div class="hidden" id="fbd_form"> <%= render "fbd_input" %> </div>

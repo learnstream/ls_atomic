@@ -184,13 +184,26 @@ a.study_button {
 /* Welcome page */
 #tagline {
   font-size: 2.5em;
-  margin: 15px; }
+  text-align: center; }
   #tagline ul {
     font-size: .4em;
     list-style-type: none; }
+  #tagline ul li {
+    display: inline-block;
+    vertical-align: top; }
+  #tagline div {
+    max-width: 200px; }
   #tagline .feature-head {
     font-weight: bold;
     font-size: 1.3em; }
+  #tagline img {
+    display: inline;
+    min-width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px; }
 
 a.signup_button {
   margin-left: auto;
@@ -216,3 +229,21 @@ a.signup_button {
 /* Help/videos */
 #video-dialog {
   background: grey; }
+
+/* Force diagram */
+#fbd.teacher {
+  width: 540px; }
+#fbd #holder {
+  display: inline-block;
+  width: 360px;
+  height: 280px; }
+#fbd #sidebar {
+  display: inline-block;
+  vertical-align: top;
+  height: 200px;
+  width: 140px;
+  padding: 10px;
+  margin-left: 10px;
+  border: 1px solid #000; }
+#fbd .selected-answer {
+  background: #cfc; }
