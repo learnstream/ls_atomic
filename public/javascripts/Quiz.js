@@ -305,6 +305,7 @@ function FBD() {
       clearShape();
       clearForces();
       fb.shape = $(this).val();
+      console.log("about to draw...");
       draw();
       updateJSON();
       });
