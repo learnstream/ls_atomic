@@ -3,7 +3,7 @@
   <% if @quiz %> 
     <div id="problem"><%= @quiz.problem.statement %></div>
 
-    <% if not @quiz.steps.empty? %>
+    <% if not @quiz.steps.nil? %>
       <div class="header">Steps</div>
 
       <ol>
