@@ -247,3 +247,30 @@ a.signup_button {
 /* Help/videos */
 
 #video-dialog{ background:grey;}
+
+/* Force diagram */
+
+#fbd { 
+  &.teacher {
+    width: 540px;
+  }
+
+  #holder {
+    display: inline-block;
+    width: 360px;
+    height: 280px;
+  }
+  #sidebar {
+    display: inline-block;
+    vertical-align: top;
+    height: 200px;
+    width: 140px;
+    padding: 10px;
+    margin-left: 10px;
+    border: 1px solid #000;
+  }
+  .selected-answer {
+    background: #cfc;
+  }
+}
+

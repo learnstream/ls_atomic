@@ -39,4 +39,16 @@ describe "CreateQuizzes" do
     click_button "Submit"
     page.should have_content("Quiz edited.")
   end
+  
+  it "should support free-body-diagram quizzes", :js => true do
+    visit course_path(@course)
+    click_link "Add quiz"
+    page.evaluate_script('$("#quiz_component_tokens").val('+@component.id.to_s+')');
+    select "The first step", :from => "Steps to show"
+    fill_in "Question", :with => "What force is acting on the object"
+    select "Free body diagram", :from => "Answer type"
+    page.should have_css("#add-force-begin")
+    #fill_in "Answer", :with => "2 150"
+    #click_button "Submit"
+  end
 end

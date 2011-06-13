@@ -54,8 +54,14 @@ class ResponsesController < ApplicationController
 
   def show
     @response = Response.find(params[:id])
-    @answer_output = JSON.parse(@response.quiz.answer_output)
     @answer_type = @response.quiz.answer_type
+
+    @answer_output_view = nil
+    
+    if @answer_type == "fbd"
+      @answer_output_view = "fbd"
+    end
+  
     @course = @response.quiz.problem.course
   end
 

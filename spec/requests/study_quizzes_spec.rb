@@ -52,7 +52,7 @@ describe "StudyQuizzes" do
     describe "for text input questions" do
 
       before(:each) do
-        @quiz.answer_input = "text"
+        @quiz.answer_input = '{ "type" : "text" }'
         @quiz.save 
       end
 
@@ -62,10 +62,23 @@ describe "StudyQuizzes" do
       end
     end
 
+    describe "for force diagram questions" do
+
+      before(:each) do
+        @quiz.answer_input = '{ "type" : "fbd" }'
+        @quiz.save
+      end
+
+      it "should have a canvas for selecting the force" do
+        visit course_study_index_path(@course)
+        page.should have_css("#holder")
+      end
+    end
+
     describe "for self-rated questions" do
 
       before(:each) do
-        @quiz.answer_input = "self-rate"
+        @quiz.answer_input = '{ "type" : "self-rate" }'
         @quiz.save
       end
 
@@ -140,7 +153,7 @@ describe "StudyQuizzes" do
       describe "for self-rating" do
 
         before(:each) do
-          @quiz.answer_input = "self-rate"
+          @quiz.answer_input = '{ "type" : "self-rate" }'
           @quiz.save
         end
 

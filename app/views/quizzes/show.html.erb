@@ -21,7 +21,7 @@
     <%= form_for @response do |f| %>
 
       <% if @input_fields %>
-        <%= render :partial => @input_fields, :locals => { :f => f }, :object => f.object %>
+        <%= render :partial => @input_fields, :locals => { :f => f, :answer_input => @quiz.answer_input }, :object => f.object %>
       <% end %>
 
       <%= f.hidden_field :quiz_id, :value => @quiz.id %>
