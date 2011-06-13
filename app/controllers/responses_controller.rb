@@ -2,30 +2,41 @@ class ResponsesController < ApplicationController
   layout "study", :only => [:show]
   
   def create
-
-    # Don't allow user to create a new response if they have
-    # already responded
     @quiz = Quiz.find(params[:response][:quiz_id])
-    @course = @quiz.problem.course
-    @component = @quiz.components.first
     @user = User.find(params[:response][:user_id])
-    due = @user.memories.find_by_component_id(@component).due
+    @course = @quiz.problem.course
+
+    # Look through all the components to make sure that at least one is due,
+    # and that it has already been self-rated.
+    notdue = true
+    notrated = false
     most_recent = @quiz.responses.last
-    if(most_recent)
-      if((most_recent.status == "correct") && (due < most_recent.created_at))
+    @quiz.components.each { |component|
+      due = @user.memories.find_by_component_id(component).due
+      if((due - Time.now) <= 0)
+        notdue = false
+        if(most_recent && (most_recent.status == "correct") && (due < most_recent.created_at))
+          notdue = true
+          notrated = true
+        end
+      end
+    }
+
+    # If the above conditions are not met, flash an error and do not create a
+    # new response
+    if(notdue)
+      if(notrated)
         flash[:error] = "You have already responded to this problem. 
                          Please rate your response."
-        redirect_to most_recent
-        return
-      elsif((due - Time.now) > 0)
-        flash[:error] = "You have already responded to that problem. 
+      else
+        flash[:error] = "You have already responded to that problem
                          Please wait until it is due before answering again"
-        redirect_to most_recent
-        return
       end
+      redirect_to most_recent
+      return
     end
 
-    # Create a new response
+    # Create a new response. Finally!
     @response = Response.new(params[:response])
     @response.user = current_user
     @response.quiz = @quiz
