@@ -133,7 +133,7 @@ describe QuizzesController do
 
       it "should be able to create a quiz with no steps" do
         lambda do
-          post :create, :quiz => @attr.delete(:steps => "")
+          post :create, :quiz => @attr.merge(:steps => [])
         end.should change(Quiz, :count).by(1)
       end
     end

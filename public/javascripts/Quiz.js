@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var ff = null;
-    $("#quiz_answer_type").change(function() { 
-      $("#quiz_answer").val("");
+    
+    var updateInputForm = function() {
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
         $("#fbd_form").show();
         if (ff == null) {
@@ -15,6 +15,16 @@ $(document).ready(function () {
         $("#quiz_answer_input").val("");
         $("#quiz_answer_output").val("");
       }
+    };
+    
+
+    updateInputForm();
+
+    $("#quiz_answer_type").change(function() { 
+      $("#quiz_answer").val("");
+      $("#quiz_answer_input").val("");
+      $("#quiz_answer_output").val("");
+      updateInputForm();
   });
 
   if ($("#holder").data("mode") == "student") {
@@ -411,6 +421,8 @@ function FBD() {
   };
 
   var updateJSON = function() {
+    console.log(getInputJSON());
+    console.log($("#quiz_answer_input"));
     $("#quiz_answer_input").val(getInputJSON());
     $("#quiz_answer_output").val(getOutputJSON());
   };

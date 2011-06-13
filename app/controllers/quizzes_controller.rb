@@ -21,15 +21,9 @@ class QuizzesController < ApplicationController
      return
    end 
 
+   populate_answer_json(params[:quiz][:answer_type])
+
    @quiz = problem.quizzes.build(params[:quiz])
-
-   if params[:quiz][:answer_input].blank?
-     @quiz.answer_input = jsonify(params[:quiz][:answer_type])
-   end
-
-   if params[:quiz][:answer_output].blank?
-     @quiz.answer_output = jsonify("text")
-   end
 
    if @quiz.save
      flash[:success] = "Quiz created!"
@@ -57,6 +51,8 @@ class QuizzesController < ApplicationController
 
   def update
     @quiz = Quiz.find(params[:id])
+    
+    populate_answer_json(params[:quiz][:answer_type])
     
     if @quiz.update_attributes(params[:quiz])
       flash[:success] = "Quiz edited."
@@ -117,4 +113,14 @@ class QuizzesController < ApplicationController
     def jsonify(type, options=nil)
       options ? { :type => type, :options => options }.to_json : { :type => type }.to_json
     end
+
+    def populate_answer_json(answer_type)
+      if params[:quiz][:answer_input].blank?
+        params[:quiz][:answer_input] = { :type => answer_type }.to_json 
+      end
+
+      if params[:quiz][:answer_output].blank?
+        params[:quiz][:answer_output] = { :type => "text" }.to_json
+      end
+    end 
 end

@@ -33,7 +33,8 @@ describe "CreateQuizzes" do
 
   it "should allow an authorized user to edit a quiz" do
     visit course_path(@course)
-    click_link "Quiz"
+    click_link "Quiz 1"
+    page.should have_css("#quiz_answer_input", :content => "")
     fill_in "Question", :with => "Did I change the question?"
     fill_in "Answer", :with => "Yes!"
     click_button "Submit"
@@ -47,8 +48,6 @@ describe "CreateQuizzes" do
     select "The first step", :from => "Steps to show"
     fill_in "Question", :with => "What force is acting on the object"
     select "Free body diagram", :from => "Answer type"
-    page.should have_css("#add-force-begin")
-    #fill_in "Answer", :with => "2 150"
-    #click_button "Submit"
+    page.should have_css("#fbd")
   end
 end

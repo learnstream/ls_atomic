@@ -13,7 +13,7 @@
   <div class="hidden" id="course_id"><%= @problem.course.id %></div>
   <div class="field">
     <%= f.label :steps, "Steps to show" %><br />
-    <%= f.collection_select :steps, @problem.steps, :id, :text, {}, {:size => @problem.steps.count, :multiple => true} %> 
+    <%= f.collection_select :steps, @problem.steps, :id, :text, { :selected => @quiz.steps.split(",") }, {:size => @problem.steps.count, :multiple => true} %> 
   </div>
 
   <div class="field">
@@ -24,7 +24,7 @@
   <div class="field">
     <%= f.label :answer_type, "Answer type" %><br />
     <%= f.select :answer_type, options_for_select([['Self-rating', 'self-rate'], 
-      ['Text input', 'text'], ['Free body diagram', 'fbd']]), :selected => 'self-rate' %>
+      ['Text input', 'text'], ['Free body diagram', 'fbd']], :selected => @quiz.answer_type || 'self-rate') %>
   </div>
 
   <div class="hidden" id="fbd_form"> <%= render "fbd_input" %> </div>
