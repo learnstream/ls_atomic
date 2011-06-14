@@ -1,0 +1,11 @@
+<% content_for :local_nav do %>
+<h1><%= link_to @course.name, @course %></h1>
+
+<ul id="local-nav">
+  <li class="round"><%= link_to "Students", student_status_course_path(@course) %></li>
+  <li class="round"><%= link_to "Problems", course_problems_path(@course) %></li>
+  <li class="round"><%= link_to "Components", course_components_path(@course) %></li> 
+</ul>
+<% end %>
+<%= render :file => 'layouts/application' %>
+

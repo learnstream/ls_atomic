@@ -15,12 +15,6 @@ header {
     header a#logo:visited {
       color: black; }
 
-section {
-  margin-top: 1em;
-  font-size: 120%;
-  padding: 20px;
-  background: white; }
-
 /* Common stuff */
 .hidden {
   display: none; }
@@ -32,6 +26,15 @@ section {
 
 tbody tr:nth-child(even) td, tbody tr.even td {
   background: #fff; }
+
+section {
+  margin-top: 1em;
+  font-size: 120%;
+  padding: 20px;
+  background: white;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px; }
 
 /* Links */
 a {
@@ -64,6 +67,35 @@ nav {
         color: #0099cc; }
       nav li a:hover {
         text-decoration: underline; }
+
+/* Teacher course page navigation */
+#local-nav {
+  padding: 0 0.7em;
+  white-space: nowrap; }
+  #local-nav ul {
+    margin: 0;
+    padding: 0; }
+  #local-nav li {
+    margin-right: 0.5em;
+    width: 100px;
+    text-align: center;
+    background-color: #ffbb73;
+    list-style-type: none;
+    display: inline-block;
+    padding: 0.2em 0; }
+    #local-nav li a {
+      padding: 0 5px;
+      font-weight: bold;
+      color: #a65500; }
+      #local-nav li a:visited {
+        color: #a65500; }
+      #local-nav li a:hover {
+        text-decoration: underline; }
+
+/* Student course page */
+#components li {
+  display: inline;
+  margin-right: 1em; }
 
 /* Study button */
 a.study_button {
@@ -159,7 +191,7 @@ a.study_button {
     max-width: 110px;
     margin-left: -110px; }
     #student-status td.label {
-      background: #ccf; }
+      background: #ccc; }
     #student-status td.due {
       background: red; }
     #student-status td.good {
@@ -170,7 +202,7 @@ a.study_button {
       position: fixed;
       margin-left: -116px;
       padding-right: 4px;
-      background: #ccf; }
+      background: #ccc; }
     #student-status td.unused {
       background: #fff;
       border: 0px none; }

@@ -1,27 +1,33 @@
 class ProblemsController < ApplicationController
+  layout :choose_layout
+
   before_filter :authenticate
   before_filter :only => [:create, :update, :new, :edit] do 
    check_permissions(params)
   end
+  before_filter :grab_course_from_course_id
  
   def create
-    course = Course.find(params[:problem][:course_id])
-    if course.nil? 
+
+    if @course.nil? 
       flash[:error] = "You're trying to add to a course that doesn't exist"
       redirect_to root_path
       return
     end
 
-    @problem = course.problems.build(params[:problem])
+    @problem = @course.problems.build(params[:problem])
 
     if @problem.save
       flash[:success] = "Problem created!"
       redirect_to @problem
     else
-      @course = course
       render 'new'
     end
    end
+
+  def index 
+    @problems = @course.problems.paginate(:page => params[:page], :per_page => 15)
+  end
 
   def tex_create
     course = Course.find(params[:problem][:course_id])
@@ -76,7 +82,8 @@ class ProblemsController < ApplicationController
         redirect_to @problem
       else
         flash[:success] = "Problems created! Please review the problems separately."
-        redirect_to course
+        @course = course
+        redirect_to course_problems_path(@course)
       end
     else
       @problem.statement = original_text
@@ -86,12 +93,11 @@ class ProblemsController < ApplicationController
   end
 
   def new
-    @course = Course.find(params[:course_id])
     @problem = Problem.new  
   end
 
   def new_tex
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:id])#questionable
     @problem = Problem.new
   end 
   
@@ -110,12 +116,12 @@ class ProblemsController < ApplicationController
   def edit
     @problem = Problem.find(params[:id])
     @step = Step.new
+    @course = @problem.course
   end
 
   def show
     @problem = Problem.find(params[:id])
     @steps = @problem.steps
-    @course = @problem.course
   end
 
   def show_step
@@ -153,5 +159,21 @@ class ProblemsController < ApplicationController
       statement = text.scan(/\\begin{statement}(.*?)\\end{statement}/im)
       text = statement.map{ |x| x[0]}.join
       return text.chomp
+    end
+    
+    def problems 
+      @course ? @course.problems : Problem
+    end
+
+    def choose_layout
+      if [ 'index', 'edit', 'new' ].include? action_name
+        'teacher'
+      else
+        'application'
+      end
+    end
+
+    def grab_course_from_course_id
+      @course = Course.find(params[:course_id]) if params[:course_id]
     end
 end

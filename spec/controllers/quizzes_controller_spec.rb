@@ -120,7 +120,7 @@ describe QuizzesController do
 
       it "should redirect to the course page" do
         post :create, :quiz => @attr
-        response.should redirect_to course_path(@course)
+        response.should redirect_to course_problems_path(@course)
       end
 
       it "should be able to create a free body diagram quiz" do

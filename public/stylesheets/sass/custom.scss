@@ -21,13 +21,6 @@ header {
   }    
 }
 
-section {
-  margin-top: 1em;
-  font-size: 120%;
-  padding: 20px;
-  background: $body-color;
-}
-
 /* Common stuff */ 
 
 .hidden { display: none; }
@@ -42,6 +35,14 @@ section {
 
 tbody tr:nth-child(even) td, tbody tr.even td {background:#fff;}
 
+
+section {
+  margin-top: 1em;
+  font-size: 120%;
+  padding: 20px;
+  background: $body-color;
+  @include rounded(20px);
+}
 /* Links */
 
 $link-color: #09c;
@@ -80,6 +81,40 @@ nav {
       &:hover { text-decoration: underline; }
     }
   }
+}
+
+/* Teacher course page navigation */
+
+#local-nav {
+  padding: 0 0.7em;
+  white-space: nowrap;
+
+  ul { margin: 0; padding: 0; }
+
+  li {
+    margin-right: 0.5em;
+    width: 100px;
+    text-align: center;
+    background-color: #ffbb73;
+    list-style-type: none;
+    display: inline-block;
+    padding: 0.2em 0;  
+
+    a {
+      padding: 0 5px;
+      font-weight: bold;
+      color: #a65500;
+
+      &:visited { color: #a65500; }
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+/* Student course page */
+
+#components {
+  li { display: inline; margin-right: 1em; }
 }
 
 /* Study button */
@@ -178,11 +213,11 @@ a.study_button {
   margin-left: 116px;
   td {
     padding: 0px; border: 1px solid #000; height: 40px; max-height: 40px; min-width: 110px; max-width: 110px; margin-left: -110px; 
-    &.label { background: #ccf; }
+    &.label { background: #ccc; }
     &.due { background: red; }
     &.good { background: green; }                     
     &.unviewed { background: white; }  
-    &.student-column { position:fixed; margin-left: -116px; padding-right:4px;background: #ccf; }
+    &.student-column { position:fixed; margin-left: -116px; padding-right:4px;background: #ccc; }
     &.unused { background: #fff; border: 0px none; }
   }
 }

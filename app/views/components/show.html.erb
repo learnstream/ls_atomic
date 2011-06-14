@@ -1,6 +1,6 @@
 <%= javascript_include_tag "YouTubeEmbed" %>
 <%= javascript_include_tag "ComponentsYouTube" %>
-<div class = "back"><%= link_to "Back to course", @component.course %></div>
+<div class = "back"><%= link_to "Back to component list", course_components_path(@course) %></div>
 
 <h1>
   <%= @component.name%>
@@ -10,8 +10,8 @@
   <%= @component.description %>
 </p>
 
-<% if current_user and current_user.can_edit?(@component.course) %>
-<p> <%= link_to "Edit", edit_component_path %></p>
+<% if current_user and current_user.can_edit?(@course) %>
+<p> <%= link_to "Edit", edit_course_component_path(@course, @component) %></p>
 <% end %>
 
 <% if ! @videos.empty? %>

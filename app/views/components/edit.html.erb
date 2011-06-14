@@ -1,19 +1,5 @@
-<div class ="back"><%= link_to "Back to component", @component %></div>
-<%= form_for(@component) do |f| %>
-  <%= render 'shared/error_messages', :object => f.object %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-<br />
+<div class ="back"><%= link_to "Back to component", [@course, @component] %></div>
+<%= render 'form' %>
 
 <% if ! @videos.empty? %>
 <h3>Current videos:</h3>

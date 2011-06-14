@@ -1,4 +1,4 @@
-<div class = "back"><%= link_to "Back to course", @course %></div>
+<div class = "back"><%= link_to "Back to problem list", course_problems_path(@course)  %></div>
 <h1>Problem <%= @problem.name %> </h1>
 <p><b> Problem statement: </b> <%= @problem.statement %> </p>
 <%= image_tag @problem.image.url %>

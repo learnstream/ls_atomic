@@ -8,6 +8,8 @@ LsAtomic::Application.routes.draw do
   end
 
   resources :courses do
+    resources :problems
+    resources :components
     member do
       get :users
       get :success_stats

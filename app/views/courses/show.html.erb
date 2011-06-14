@@ -1,15 +1,15 @@
 <div id="course-content">
 
   <div class = "back"><%= link_to "Back to home", home_path%></div>
-  <h1>Course: <%= @course.name %></h1>
+  <h1><%= @course.name %></h1>
 
-<p><b>Description:</b> <%= @course.description %></p>
+<p><%= @course.description %></p>
 
 <% if current_user.student?(@course) %>
 <p><%= link_to "Study", course_study_index_path(@course), :class => "study_button round" %></p>
 <% end %>
 
-  <div>
+  <div id="components">
   <h2>Components</h2>
   <% if @components.empty? %>
     Course has no components.
@@ -19,27 +19,6 @@
   </ul>
   <% end %>
   </div>
-
-  <div>
-    <h2> Problems </h2>
-  <% if @problems.empty? %>
-    Course has no problems.
-  <% else %>
-  <ul>
-    <%= render @problems %>
-  </ul>
-  <% end %>
-  </div>
-
-  <% if current_user.can_edit?(@course) %>
-    <div>
-      <h2>Course control panel</h2>
-      <%= link_to "Add component", new_component_path(:course_id => @course.id)  %><br />
-      <%= link_to "Add problem", new_problem_path(:course_id => @course.id) %><br />
-      <%= link_to "Add problem(s) with .tex", new_tex_problem_path(:course_id => @course.id) %><br /> 
-      <%= link_to "Course statistics", student_status_course_path(:course_id => @course) %>
-    </div>
-  <% end %>
 </div>
 
 <% if current_user.memory_ratings.in_course(@course).count > 0 %>

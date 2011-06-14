@@ -24,4 +24,8 @@ class Component < ActiveRecord::Base
     end
   end
 
+  def to_s
+    name
+  end
+
 end
