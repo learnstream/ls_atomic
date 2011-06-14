@@ -19,7 +19,7 @@ class ProblemsController < ApplicationController
 
     if @problem.save
       flash[:success] = "Problem created!"
-      redirect_to @problem
+      redirect_to [@course, @problem]
     else
       render 'new'
     end
@@ -79,7 +79,7 @@ class ProblemsController < ApplicationController
     if @problem.save
       if(problems.length == 1)
         flash[:success] = "Problem created!"
-        redirect_to @problem
+        redirect_to [@course, @problem]
       else
         flash[:success] = "Problems created! Please review the problems separately."
         @course = course

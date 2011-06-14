@@ -36,12 +36,6 @@ describe 'Navigation' do
       page.should have_css("h1", @course.name)
     end
 
-    it "should have back buttons on problem pages" do
-      click_link @problem.name
-      click_link "Back to course"
-      page.should have_css("h1", @course.name)
-    end
-
     it "should allow user to return from study mode" do
       click_link "Study"
       click_link "Back to course"
