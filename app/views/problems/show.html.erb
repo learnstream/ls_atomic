@@ -4,7 +4,7 @@
 <%= image_tag @problem.image.url %>
 
 <% if current_user.can_edit?(@course) %>
-<p><%= link_to "Edit", edit_problem_path %></p>
+<p><%= link_to "Edit", edit_course_problem_path(@course) %></p>
 <% end %>
 
 <h2>Steps:</h2>

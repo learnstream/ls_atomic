@@ -24,7 +24,7 @@ describe "Problem creation" do
     click_link "Edit"
     fill_in "Name", :with => "Forgotten problem"
     fill_in "Statement", :with => "What was this problem about?" 
-    click_button "Update"
+    click_button "Submit"
     page.should have_content("What was this problem about?")
   end
 
@@ -33,7 +33,7 @@ describe "Problem creation" do
     visit course_problem_path(@course, @problem)
     click_link "Edit"
     fill_in "Text", :with => "A forgotten step for a forgotten problem"
-    click_button "Submit"
+    within("#new_step") { click_button "Submit" }
     fill_in "Order number", :with => "3"
     click_button "Update"
     page.should have_css("li", :content => "A forgotten step for a forgotten problem")
@@ -68,10 +68,10 @@ describe "Problem creation" do
     visit course_problem_path(@course, @problem)
     click_link "Edit"
     fill_in "Text", :with => "An intermediate step"
-    click_button "Submit"
+    within("#new_step") { click_button "Submit" }
     click_link "Back to problem" 
     fill_in "Text", :with => "The very first step"
-    click_button "Submit"
+    within("#new_step") { click_button "Submit" }
     click_link "Back to problem"
 
     within("ol > li") { click_link("edit") }

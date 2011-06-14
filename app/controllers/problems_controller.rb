@@ -30,8 +30,8 @@ class ProblemsController < ApplicationController
   end
 
   def tex_create
-    course = Course.find(params[:problem][:course_id])
-    if course.nil? 
+    @course = Course.find(params[:problem][:course_id])
+    if @course.nil? 
       flash[:error] = "You're trying to add to a course that doesn't exist"
       redirect_to root_path
       return
@@ -42,9 +42,8 @@ class ProblemsController < ApplicationController
     problems = find_problems(original_text)
     if problems.empty?
       flash.now[:error] = "No problems found! Did you remember your \\begin{problem} and \\end{problem} tags?"
-      @problem = course.problems.build(params[:problem])
+      @problem = @course.problems.build(params[:problem])
       @problem.statement = original_text
-      @course = course
       render 'new_tex'
       return
     end
@@ -52,7 +51,7 @@ class ProblemsController < ApplicationController
     count = 0 
     problems.each { |problem|
       problemText = problem.first.chomp
-      @problem = course.problems.build(params[:problem])
+      @problem = @course.problems.build(params[:problem])
       @problem.name = find_name(problemText)   
       @problem.statement = find_statement(problemText)
       
@@ -61,7 +60,6 @@ class ProblemsController < ApplicationController
       else
         flash.now[:notice] = "Only the first " + count.to_s + " problems out of " + problems.length.to_s + " were created. Please review your TeX and correct any errors." 
         @problem.statement = original_text
-        @course = course
         render 'new_tex'
         return
       end
@@ -82,12 +80,10 @@ class ProblemsController < ApplicationController
         redirect_to [@course, @problem]
       else
         flash[:success] = "Problems created! Please review the problems separately."
-        @course = course
         redirect_to course_problems_path(@course)
       end
     else
       @problem.statement = original_text
-      @course = course
       render 'new_tex'
     end
   end
@@ -106,7 +102,7 @@ class ProblemsController < ApplicationController
 
     if @problem.update_attributes(params[:problem])
       flash[:success] = "Problem updated!"
-      redirect_to problem_path
+      redirect_to [@course, @problem]
     else
       @step = Step.new
       render 'edit' 
