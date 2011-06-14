@@ -23,6 +23,17 @@ Factory.define :course do |course|
   course.description  "CoolCourse"
 end
 
+Factory.sequence :lesson_number do |n|
+  n
+end
+
+Factory.define :lesson do |lesson|
+  lesson_number = Factory.next :lesson_number
+  lesson.name         "Lesson #{lesson_number}"
+  lesson.order_number lesson_number 
+  lesson.association  :course, :factory => :course
+end
+
 Factory.sequence :email do |n|
   "person-#{n}@example.com"
 end

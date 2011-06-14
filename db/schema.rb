@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(:version => 20110611005527) do
   add_index "enrollments", ["user_id", "course_id"], :name => "index_enrollments_on_user_id_and_course_id", :unique => true
   add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
 
+  create_table "lessons", :force => true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.integer  "order_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lessons", ["course_id"], :name => "index_lessons_on_course_id"
+
   create_table "memories", :force => true do |t|
     t.integer  "user_id"
     t.integer  "component_id"

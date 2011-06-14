@@ -6,6 +6,7 @@ class Course < ActiveRecord::Base
   has_many :problems
   has_many :enrollments, :dependent => :destroy
   has_many :users, :through => :enrollments
+  has_many :lessons
 
   validates :name, :presence => true
 
