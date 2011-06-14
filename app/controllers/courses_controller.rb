@@ -35,6 +35,15 @@ class CoursesController < ApplicationController
     end
   end
 
+  def edit
+    @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+    @course.populate_with_tex(params[:course][:document])
+  end
+
   def index
     @courses = Course.all
   end
