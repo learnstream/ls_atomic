@@ -1,9 +1,10 @@
 class CoursesController < ApplicationController
-  layout :choose_layout
 
   before_filter :authenticate
   before_filter :authorized_user, :only => [:new, :create]
   before_filter :authorized_teacher, :only => [:student_stats]
+
+  layout :choose_layout
 
   def new
     @course = Course.new
@@ -11,7 +12,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])   
+    @course = Course.find(params[:id])
     
     if current_user.can_edit?(@course)
       redirect_to student_status_course_path(@course)
@@ -139,7 +140,7 @@ class CoursesController < ApplicationController
     end
     
     def choose_layout
-      if [ 'show', 'student_status' ].include? action_name
+      if [ 'student_status' ].include? action_name
         'teacher'
       else
         'application'

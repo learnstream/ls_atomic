@@ -92,6 +92,11 @@ nav {
       #local-nav li a:hover {
         text-decoration: underline; }
 
+/* Student course page */
+#components li {
+  display: inline;
+  margin-right: 1em; }
+
 /* Study button */
 a.study_button {
   color: #fff;

@@ -8,7 +8,15 @@
       <th>Quizzes</th>
     </tr>
 
-    <%= render @components %>
+    <% @components.each do |component| %>
+      <tr>
+        <td>
+          <%= link_to component, course_component_path(component.course, component) %>
+        </td>
+        <td>
+        </td>
+      </tr>
+    <% end %>
     <%= will_paginate @components %>
   </table>
 
