@@ -1,4 +1,6 @@
 class ComponentsController < ApplicationController
+  layout :choose_layout
+
   before_filter :authenticate
   before_filter :only => [:create, :edit, :update, :new] do 
     check_permissions(params)
@@ -10,16 +12,14 @@ class ComponentsController < ApplicationController
   end
  
   def create
-    course_id = params[:component][:course_id]
-    course = Course.find(course_id)
+    @course = Course.find(params[:course_id])
 
-    @component = course.components.build(params[:component])
+    @component = @course.components.build(params[:component])
     
     if @component.save
       flash[:success] = "Knowledge component created!"
-      redirect_to course_path(course_id)
+      redirect_to course_components_path(@course)
     else
-      @course = course
       render 'new'
     end
   end
@@ -28,26 +28,29 @@ class ComponentsController < ApplicationController
   end
 
   def edit
+    #@course = Course.find(params[:course_id])
     @component = Component.find(params[:id])
+    @course = @component.course
     @video = Video.new
     @videos = @component.videos
   end
 
   def update
-    course_id = params[:component][:course_id]
     @component = Component.find(params[:id])
+    @course = @component.course #should be able to get this from params..
     @component.name = params[:component][:name]
     @component.description = params[:component][:description]
   
     if @component.save
       flash[:success] = "Knowledge component updated!"
-      redirect_to component_path
+      redirect_to course_component_path(@course, @component)
     else
       render 'edit'
     end
   end
 
   def show
+    @course = Course.find(params[:course_id])
     @component = Component.find(params[:id])
     @videos = @component.videos
     @title = @component.name
@@ -64,10 +67,15 @@ class ComponentsController < ApplicationController
   end
 
   def index
-    @components = Component.where(:course_id => params[:course_id]).where("name like ?", "%#{params[:q]}%")
+    @course = Course.find(params[:course_id])
     respond_to do |format|
-      format.html
-      format.json { render :json => @components.map(&:attributes) }
+      format.html do
+        @components = @course.components.paginate(:page => params[:page], :per_page => 15)
+      end
+
+      format.json { 
+        @components = @course.components.where("name like ?", "%#{params[:q]}%")
+        render :json => @components.map(&:attributes) }
     end
   end
 
@@ -84,4 +92,13 @@ class ComponentsController < ApplicationController
         return false
       end 
     end
+
+    def choose_layout
+      if [ 'index', 'edit', 'new' ].include? action_name
+        'teacher'
+      else
+        'application'
+      end
+    end
+
 end

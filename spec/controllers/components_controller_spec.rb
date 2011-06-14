@@ -6,12 +6,12 @@ describe ComponentsController do
   describe "access control for non-signed in users" do
 
     it "should deny access to 'create' " do
-      post :create
+      post :create, :course_id => @course 
       response.should redirect_to(signin_path)
     end
 
     it "should deny access to 'destroy'" do
-      delete :destroy, :id => 1
+      delete :destroy, :course_id => @course, :id => 1
       response.should redirect_to(signin_path)
     end
   end
@@ -25,17 +25,17 @@ describe ComponentsController do
     end
 
     it "should be successful" do
-      get :show, :id => @component
+      get :show, :course_id => @course, :id => @component
       response.should be_success
     end 
 
     it "should include the name of the component" do
-      get :show, :id => @component
+      get :show, :course_id => @course, :id => @component
       response.should have_selector("h1", :content => @component.name)
     end 
 
     it "should not have related video headers if no videos have been added" do
-      get :show, :id => @component
+      get :show, :course_id => @course, :id => @component
       response.should_not have_selector("h3", :content => "Related Videos:")
     end
 
@@ -47,8 +47,8 @@ describe ComponentsController do
 
       it "should show edit option" do
         test_sign_in(@teacher)
-        get :show, :id => @component
-        response.should have_selector("a", :content => "Edit", :href => edit_component_path)
+        get :show, :course_id => @course, :id => @component
+        response.should have_selector("a", :content => "Edit", :href => edit_course_component_path(@course))
       end
     end
 
@@ -60,7 +60,7 @@ describe ComponentsController do
 
       it "should not show edit option" do
         test_sign_in(@student)
-        get :show, :id => @component
+        get :show, :course_id => @course, :id => @component
         response.should_not have_selector("a", :content => "Edit", :href => edit_component_path(@component))
       end
     end
@@ -73,13 +73,13 @@ describe ComponentsController do
       end        
 
       it "should display a youtube video if one is associated" do
-        get :show, :id => @component
+        get :show, :course_id => @course, :id => @component
         response.should have_selector("div", :id => "video-embed-url", :content => @video.url)
       end 
 
       it "should display all  related videos" do
         @video = @component.videos.create!(:name => "Awesome example video", :url => "http://www.youtube.com/watch?v=U7mPqycQ0tQ", :start_time => 0, :end_time => 60)
-        get :show, :id => @component
+        get :show, :course_id => @course, :id => @component
         response.should have_selector("div", :content => "Awesome example video")
       end
 
@@ -98,7 +98,7 @@ describe ComponentsController do
 
       it "should not create a k-component" do
         lambda do
-          post :create, :component => @attr
+          post :create, :course_id => @course, :component => @attr
         end.should_not change(Component, :count)
       end
     end
@@ -109,12 +109,12 @@ describe ComponentsController do
       before(:each) do
         @user = test_sign_in(Factory(:user))
         @course = Factory(:course)
-        @attr = { :name => "Law of Humpty Dumpty", :description => "When Humpty Dumpty fall, All the Kings Men can't put him back together again!!!!!", :course_id => @course.id }
+        @attr = { :name => "Law of Humpty Dumpty", :description => "When Humpty Dumpty fall, All the Kings Men can't put him back together again!!!!!" }
       end
 
       it "should not create a k-component" do
         lambda do
-          post :create, :component => @attr
+          post :create, :course_id => @course, :component => @attr
         end.should_not change(Component, :count)
       end
     end
@@ -130,40 +130,33 @@ describe ComponentsController do
 
       it "should create a k-component" do
         lambda do
-          post :create, :component => @attr
+          post :create, :course_id => @course, :component => @attr
         end.should change(Component, :count).by(1)
       end
 
-      it "should redirect to the course" do
-        post :create, :component => @attr
-        response.should redirect_to(@course)
+      it "should redirect to the course components page" do
+        post :create, :course_id => @course, :component => @attr
+        response.should redirect_to course_components_path(@course)
       end
 
-      it "should flash sucess" do
-        post :create, :component => @attr
+      it "should flash success" do
+        post :create, :course_id => @course, :component => @attr
         flash[:success].should =~ /Knowledge component created/i
       end
 
-      describe "from a course page" do
 
-        it "should belong to that course" do
-          lambda do
-            post :create, :component => @attr
-          end.should change(@course.components, :count).by(1)
-        end
-
-        it "should redirect to that course" do
-          post :create, :component => @attr
-          response.should redirect_to(course_path(@course.id))
-        end
-      end 
+      it "should belong to its course" do
+        lambda do
+          post :create, :course_id => @course, :component => @attr
+        end.should change(@course.components, :count).by(1)
+      end
 
       it "should add memory for component to all students in course" do
         @student = Factory(:user)
         @student.enroll!(@course)
 
         lambda do
-          post :create, :component => @attr
+          post :create, :course_id => @course, :component => @attr
         end.should change(@student.memories, :count).by(1)
       end
     end
@@ -180,32 +173,9 @@ describe ComponentsController do
 
       it "should create a k-component" do
         lambda do
-          post :create, :component => @attr
+          post :create, :course_id => @course, :component => @attr
         end.should change(Component, :count).by(1)
       end
-
-      it "should redirect to the course" do
-        post :create, :component => @attr
-        response.should redirect_to(@course)
-      end
-
-      it "should flash sucess" do
-        post :create, :component => @attr
-        flash[:success].should =~ /Knowledge component created/i
-      end
-
-      describe "from a course page" do
-        it "should belong to that course" do
-          lambda do
-            post :create, :component => @attr.merge(:course_id => @course.id)
-          end.should change(@course.components, :count).by(1)
-        end
-
-        it "should redirect to that course" do
-          post :create, :component => @attr.merge(:course_id => @course.id)
-          response.should redirect_to(course_path(@course.id))
-        end
-      end 
     end
   end
 
@@ -219,13 +189,13 @@ describe ComponentsController do
 
     describe "generic failure" do
       it "should not update a k-component to a blank name" do
-        put :update, :id => @component, :component => { :name => "" }
+        put :update, :course_id => @course, :id => @component, :component => { :name => "" }
         @component.reload
         @component.name.should == @attr[:name]
       end
     
       it "should not update to the same name as a different component" do
-        put :update, :id => @component, :component => { :name => "aaa", :course_id => @course.id }
+        put :update, :course_id => @course, :id => @component, :component => { :name => "aaa", :course_id => @course.id }
         @component.reload
         @component.name.should == @attr[:name]
       end
@@ -241,13 +211,13 @@ describe ComponentsController do
       end
         
       it "should not update the k-component name" do
-        put :update, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
+        put :update, :course_id => @course, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
         @component.reload
         @component.name.should_not == "Calabi-Yau Manifolds"
       end
 
       it "should not update the k-component description" do
-        put :update, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
+        put :update, :course_id => @course, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
         @component.reload
         @component.description.should_not == "Calabi-Yau Manifolds are incomprehensible"
       end   
@@ -262,13 +232,13 @@ describe ComponentsController do
       end
         
       it "should update the k-component name" do
-        put :update, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
+        put :update, :course_id => @course, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
         @component.reload
         @component.name.should == "Calabi-Yau Manifolds"
       end
 
       it "should update the k-component description" do
-        put :update, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
+        put :update, :course_id => @course, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
         @component.reload
         @component.description.should == "Calabi-Yau Manifolds are incomprehensible"
       end   
@@ -282,13 +252,13 @@ describe ComponentsController do
       end
         
       it "should update the k-component name" do
-        put :update, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
+        put :update, :course_id => @course, :id => @component, :component => { :name => "Calabi-Yau Manifolds"}
         @component.reload
         @component.name.should == "Calabi-Yau Manifolds"
       end
 
       it "should update the k-component description" do
-        put :update, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
+        put :update, :course_id => @course, :id => @component, :component => {:name=> "Calabi-Yau Manifolds", :description => "Calabi-Yau Manifolds are incomprehensible"}
         @component.reload
         @component.description.should == "Calabi-Yau Manifolds are incomprehensible"
       end   
@@ -313,23 +283,23 @@ describe ComponentsController do
       end
 
       it "should render the edit view" do
-        get :edit, :id => @component
+        get :edit, :course_id => @course, :id => @component
         response.should be_success
       end
 
       it "should have a form" do
-        get :edit, :id => @component
+        get :edit, :course_id => @course, :id => @component
         response.should have_selector("form")
       end
 
       it "should display related videos" do
         @video = @component.videos.create!(:description => "Awesome example video", :url => "http://www.youtube.com/watch?v=U7mPqycQ0tQ", :start_time => 0, :end_time => 60)
-        get :edit, :id => @component
+        get :edit, :course_id => @course, :id => @component
         response.should have_selector("div", :content => "Awesome example video")
       end
 
       it "should have a form to add new videos" do
-        get :edit, :id => @component
+        get :edit, :course_id => @course, :id => @component
         response.should have_selector("label", :content => "Url")
       end
     end
@@ -343,7 +313,7 @@ describe ComponentsController do
       end
 
       it "should render the edit view" do
-        get :edit, :id => @component
+        get :edit, :course_id => @course, :id => @component
         response.should be_success
       end
     end
@@ -358,7 +328,7 @@ describe ComponentsController do
       end
 
       it "should not render the edit view" do
-        get :edit, :id => @component
+        get :edit, :course_id => @course, :id => @component
         response.should_not be_success
       end
     end
@@ -374,7 +344,7 @@ describe ComponentsController do
       @component = @course.components.create(:name => "name", :descriptions => "desc")
 
       @expected = { :text => @component.description }.to_json
-      get :describe, :id => @component, :format => :json
+      get :describe, :course_id => @course, :id => @component, :format => :json
       response.body.should == @expected
     end
   end

@@ -139,17 +139,6 @@ describe CoursesController do
         @teacher.should be_teacher(@course)
       end
 
-      it "should have a form" do
-        test_sign_in(@teacher)
-        get :show, :id => @course
-        response.should have_selector("a", :content => "Add component")
-      end
-      it "should have a problem add form" do
-        test_sign_in(@teacher)
-        get :show, :id => @course
-        response.should have_selector("a", :content => "Add problem")
-      end
-
     end 
 
     describe "for admins" do
@@ -161,38 +150,7 @@ describe CoursesController do
       it "should be a admin" do
         @admin.should be_admin
       end
-
-      it "should have a component add form" do
-        test_sign_in(@admin)
-        get :show, :id => @course
-        response.should have_selector("a", :content => "Add component")
-      end
-
-      it "should have a problem add form" do
-        test_sign_in(@admin)
-        get :show, :id => @course
-        response.should have_selector("a", :content => "Add problem")
-      end
     end 
-
-    describe "for students" do
-
-      before(:each) do
-        @user.enroll!(@course)
-      end
-
-      it "should not have a form for adding knowledge components" do
-        get :show, :id => @course
-        response.should_not have_selector("a", :content => "Add component")
-      end
-
-      it "should not have a form for adding problems" do
-        get :show, :id => @course
-        response.should_not have_selector("a", :content => "Add problem")
-      end
-
-    end
-
   end
 
 

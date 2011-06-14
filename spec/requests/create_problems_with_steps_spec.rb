@@ -10,6 +10,7 @@ describe "Problem creation" do
 
   it "should allow problems to be added from a course page" do
     visit course_path(@course) 
+    click_link "Problems"
     click_link "Add problem"
     fill_in "Name", :with => "How to read Moby Dick"
     fill_in "Statement", :with => "Does the whale exist?"
@@ -19,7 +20,7 @@ describe "Problem creation" do
 
   it "should allow the problems to be edited" do
     @problem = Factory(:problem, :course => @course)
-    visit problem_path(@problem)
+    visit course_problem_path(@course, @problem)
     click_link "Edit"
     fill_in "Name", :with => "Forgotten problem"
     fill_in "Statement", :with => "What was this problem about?" 
@@ -29,7 +30,7 @@ describe "Problem creation" do
 
   it "should allow steps to be added" do
     @problem = Factory(:problem, :course => @course)
-    visit problem_path(@problem)
+    visit course_problem_path(@course, @problem)
     click_link "Edit"
     fill_in "Text", :with => "A forgotten step for a forgotten problem"
     click_button "Submit"
@@ -42,7 +43,7 @@ describe "Problem creation" do
     @component = Factory(:component, :course => @course)
     @problem = Factory(:problem, :course => @course)
     @step = Factory(:step, :problem => @problem)
-    visit problem_path(@problem)
+    visit course_problem_path(@course, @problem)
     click_link "Edit"
     click_link "edit"
     fill_in "Components", :with => @component.id
@@ -52,8 +53,9 @@ describe "Problem creation" do
   end
 
   it "should allow steps to be edited" do
-    @step = Factory(:step)
-    visit problem_path(@step.problem)
+    @problem = Factory(:problem, :course => @course)
+    @step = Factory(:step, :problem => @problem)
+    visit course_problem_path(@course, @problem)
     click_link "Edit"
     click_link "edit"
     fill_in "Text", :with => "Forget everything you know"
@@ -63,7 +65,7 @@ describe "Problem creation" do
 
   it "should allow steps to be rearranged" do
     @problem = Factory(:problem, :course => @course)
-    visit problem_path(@problem)
+    visit course_problem_path(@course, @problem)
     click_link "Edit"
     fill_in "Text", :with => "An intermediate step"
     click_button "Submit"
@@ -83,5 +85,30 @@ describe "Problem creation" do
     click_button "Update"
 
     page.should have_css("ol > li", :content => "The very first step")
+  end
+
+  it "should have a back link from the new problem page" do
+    @problem = Factory(:problem, :course => @course)
+    visit new_course_problem_path(@course)
+    click_link "Back to problems"
+    page.should have_css("a", :content => @problem)
+  end
+
+  it "should link back to problem from problem editing form" do
+    @problem = Factory(:problem, :course => @course)
+    visit course_problem_path(@course, @problem)
+    click_link "Edit"
+    click_link "Back to problem"
+    page.should have_content(@problem.name)
+  end
+
+  it "should have a back link to the edit problem page from edit steps" do
+    @problem = Factory(:problem, :course => @course)
+    @step = Factory(:step, :problem => @problem)
+    visit course_problem_path(@course, @problem)
+    click_link "Edit"
+    click_link "edit"
+    click_link "Back to problem edit"
+    page.should have_content("Steps")
   end
 end

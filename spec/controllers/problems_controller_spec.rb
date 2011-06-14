@@ -18,7 +18,7 @@ describe ProblemsController do
 
       it "should not create a problem with a blank statement" do
         lambda do
-          post :create, :problem => @attr.merge(:statement => "")
+          post :create, :course_id => @course, :problem => @attr.merge(:statement => "")
         end.should change(Problem, :count).by(0)
       end  
     end
@@ -33,7 +33,7 @@ describe ProblemsController do
 
       it "should not create a problem" do
         lambda do
-          post :create, :problem => @attr.merge(:course_id => @course)
+          post :create, :course_id => @course, :problem => @attr.merge(:course_id => @course)
         end.should_not change(Problem, :count)
       end
     end
@@ -48,7 +48,7 @@ describe ProblemsController do
 
       it "should create a problem" do
         lambda do
-          post :create, :problem => @attr.merge(:course_id => @course)
+          post :create, :course_id => @course, :problem => @attr.merge(:course_id => @course)
         end.should change(Problem, :count).by(1)
       end
     end
@@ -62,7 +62,7 @@ describe ProblemsController do
 
       it "should create a problem" do
         lambda do
-          post :create, :problem => @attr.merge(:course_id => @course)
+          post :create, :course_id => @course, :problem => @attr.merge(:course_id => @course)
         end.should change(Problem, :count).by(1)
       end
     end
@@ -78,26 +78,26 @@ describe ProblemsController do
 
     it "should be success" do
       test_sign_in(@user)
-      get :show, :id => @problem
+      get :show, :course_id => @course, :id => @problem
       response.should be_success 
     end 
 
     it "should have an 'edit' link for admins" do
       test_sign_in(@admin)
-      get :show, :id => @problem
+      get :show, :course_id => @course, :id => @problem
       response.should have_selector("a", :content => "Edit")
     end
 
     it "should have an 'edit' link for teachers" do
       test_sign_in(@user)
       @user.enroll_as_teacher!(@course)
-      get :show, :id => @problem
+      get :show, :course_id => @course, :id => @problem
       response.should have_selector("a", :content => "Edit")
     end
 
     it "should not have an 'edit' link for students" do
       test_sign_in(@user)
-      get :show, :id => @problem
+      get :show, :course_id => @course, :id => @problem
       response.should_not have_selector("a", :content => "Edit")
     end 
   end
@@ -118,19 +118,19 @@ describe ProblemsController do
 
       it "should not update to a blank statement" do
         old_problem_statement = @problem.statement
-        put :update, :id => @problem, :problem => { :statement => "" }
+        put :update, :id => @problem, :course_id => @course, :problem => { :statement => "" }
         @problem.reload
         @problem.statement.should == old_problem_statement
       end
 
       it "should properly update the name" do
-        put :update, :id => @problem, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
+        put :update, :id => @problem, :course_id => @course, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
         @problem.reload
         @problem.name.should == "NEWNAME!!"
       end
 
       it "should properly update the problem statement" do
-        put :update, :id => @problem, :problem => {:name => @problem.name, :statement => "New statement" }
+        put :update, :id => @problem, :course_id => @course, :problem => {:name => @problem.name, :statement => "New statement" }
         @problem.reload
         @problem.statement.should == "New statement"
       end
@@ -145,7 +145,7 @@ describe ProblemsController do
       end
 
       it "should also update the changes" do
-        put :update, :id => @problem, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
+        put :update, :id => @problem, :course_id => @course, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
         @problem.reload
         @problem.name.should == "NEWNAME!!"
       end
@@ -160,7 +160,7 @@ describe ProblemsController do
       end
 
       it "should not update the changes" do
-        put :update, :id => @problem, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
+        put :update, :id => @problem, :course_id => @course, :problem => { :name => "NEWNAME!!", :statement => @problem.statement }
         @problem.reload
         @problem.name.should_not == "NEWNAME!!"
       end
@@ -199,7 +199,7 @@ describe ProblemsController do
       end
 
       it "should be successsful" do
-        get 'edit', :id => @problem
+        get 'edit', :course_id => @course, :id => @problem  
         response.should be_success
       end
     end
@@ -214,7 +214,7 @@ describe ProblemsController do
       end
 
       it "should deny access to edit" do
-        get 'edit', :id => @problem
+        get 'edit', :id => @problem, :course_id => @course
         response.should_not be_success
       end
     end

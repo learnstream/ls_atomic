@@ -1,5 +1,7 @@
-<li><a href="<%= component_path(component.id) %>">
-  <%= component.name %>
-  <!-- <%= component.description %> -->
-</a>
-</li>
+<tr>
+  <td>
+    <%= link_to component, course_component_path(component.course, component) %>
+  </td>
+  <td>
+  </td>
+</tr>

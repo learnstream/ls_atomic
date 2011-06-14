@@ -1,0 +1,16 @@
+<%= link_to "Add component", new_course_component_path(@course) %>
+<% if @components.empty? %>
+  Course has no components.
+<% else %>
+  <table>
+    <tr>
+      <th>Component</th>
+      <th>Quizzes</th>
+    </tr>
+
+    <%= render @components %>
+    <%= will_paginate @components %>
+  </table>
+
+<% end %>
+

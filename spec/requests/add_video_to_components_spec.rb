@@ -11,7 +11,7 @@ describe "AddVideoToComponents" do
   end
 
   it "should add a video to a component" do
-    visit edit_component_path(@component)
+    visit edit_course_component_path(@course, @component)
     within "#new_video" do
       fill_in "Url", :with => "http://www.youtube.com/watch?v=nIBfNsPDw1I&feature=feedrec_grec_index" 
       fill_in "Start time", :with => 0

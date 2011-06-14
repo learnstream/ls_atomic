@@ -1,9 +1,5 @@
 <li><a href="<%= problem_path(problem.id) %>">
-  <% if problem.name.blank? %>
-    <%= truncate(problem.statement.reverse, :length => 80).reverse %>
-  <% else %>
-    <%= problem.name %>
-  <% end %>
+  <%= problem %>
 
   <% if current_user.can_edit?(problem.course) %>
      | <%= link_to "Add quiz", new_quiz_path(:problem_id => problem.id) %>
