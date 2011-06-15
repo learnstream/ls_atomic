@@ -19,6 +19,7 @@ class CoursesController < ApplicationController
       return 
     end
 
+    @lessons = @course.lessons
     @components = @course.components
   end
 

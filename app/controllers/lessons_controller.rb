@@ -1,12 +1,16 @@
 class LessonsController < ApplicationController
-  layout 'teacher'
+  layout :choose_layout
 
   before_filter :grab_course_from_course_id 
   before_filter :authenticate
-  before_filter :authorized_teacher 
+  before_filter :authorized_teacher, :except => :show 
 
   def index
     @lessons = @course.lessons
+  end
+
+  def show
+    @lesson = Lesson.find(params[:id])
   end
 
   def new
@@ -48,6 +52,14 @@ class LessonsController < ApplicationController
 
   def grab_course_from_course_id
     @course = Course.find(params[:course_id]) if params[:course_id]
+  end
+
+  def choose_layout 
+    if [ 'show' ].include? action_name
+      'application'
+    else
+      'teacher'
+    end
   end
   
   def authorized_teacher
