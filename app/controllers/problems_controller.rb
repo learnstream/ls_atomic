@@ -76,23 +76,7 @@ class ProblemsController < ApplicationController
         return false
       end 
     end
-    
-    def find_problems(text)
-      return text.scan(/\\begin{problem}(.*?)\\end{problem}/im)
-    end
-
-    def find_name(text)
-      statement = text.scan(/\\begin{name}(.*?)\\end{name}/im)
-      text = statement.map{ |x| x[0]}.join
-      return text.chomp
-    end
-
-    def find_statement(text)
-      statement = text.scan(/\\begin{statement}(.*?)\\end{statement}/im)
-      text = statement.map{ |x| x[0]}.join
-      return text.chomp
-    end
-    
+       
     def problems 
       @course ? @course.problems : Problem
     end
