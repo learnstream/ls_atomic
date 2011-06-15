@@ -8,6 +8,7 @@ LsAtomic::Application.routes.draw do
   end
 
   resources :courses do
+    resources :lessons
     resources :problems
     resources :components
     member do
