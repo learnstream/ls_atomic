@@ -36,13 +36,18 @@ class Course < ActiveRecord::Base
       problemText = problem.first.chomp
       name = find_name(problemText)   
       statement = find_statement(problemText)
+
+      if statement.empty?
+        errors.add("TeX Parser", ": missing problem statement")
+      end
+
       @problem = problems.create(:name => name, :statement => statement)
 
 
       if @problem.save
       else
-        errors.add("TeX Parsing", ": only the first " + problemCount.to_s + " problems out of " + problemtexts.length.to_s + " were created.")
-        return false
+        errors.add("TeX Parser", ": only the first " + problemCount.to_s + " problems out of " + problemtexts.length.to_s + " were created.")
+        return {:success => false, :problems_added => problemtexts.first(problemCount)}
       end
 
       array = problemText.scan(/\\begin{step}(.*?)\\end{step}/im)
@@ -64,11 +69,13 @@ class Course < ActiveRecord::Base
 
       if @component.save
       else
-        errors.add("TeX Parsing", ": only the first " + cmpCount.to_s + " components out of " + cmpTexts.length.to_s + " were created")
-        return false
+        errors.add("TeX Parser", ": only the first " + cmpCount.to_s + " components out of " + cmpTexts.length.to_s + " were created")
+        return {:success => false, :problems_added => nil} 
       end
       cmpCount += 1
     }
+
+    return {:success => true, :problems_added => nil} 
     
 
   end

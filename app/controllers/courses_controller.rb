@@ -41,21 +41,32 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    
-    if @course.populate_with_tex(params[:course][:document])
-      flash[:success] = "Problem(s) created!"
+    @latex_on = false
+
+    if(@course.update_attributes(params[:course]))
+      flash[:success] = "Course info saved!"
+      if(params[:course][:document].nil?)
+        redirect_to course_problems_path(@course)
+      end
     else
       @course.document = params[:course][:document]
-      render 'edit', :document => params[:course][:document]
+      @latex_on = true
+      render 'edit'
       return
     end
 
-    if(@course.update_attributes(params[:course]))
-      flash[:success] = "Course saved!"
+    result = @course.populate_with_tex(params[:course][:document])
+    if result[:success]
+      flash[:success] = "Problems and Components added!"
       redirect_to course_problems_path(@course)
     else
-      @course.document = params[:course][:document]
-      render 'edit'
+      document = params[:course][:document]
+      result[:problems_added].each { |problem|
+        document.gsub!("\\begin{problem}" + problem.first + "\\end{problem}", "")
+      }
+      @course.document = document
+      @latex_on = true;
+      render 'edit', :document => params[:course][:document]
     end
   end
 
