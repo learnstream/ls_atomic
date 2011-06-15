@@ -41,7 +41,22 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    @course.populate_with_tex(params[:course][:document])
+    
+    if @course.populate_with_tex(params[:course][:document])
+      flash[:success] = "Problem(s) created!"
+    else
+      @course.document = params[:course][:document]
+      render 'edit', :document => params[:course][:document]
+      return
+    end
+
+    if(@course.update_attributes(params[:course]))
+      flash[:success] = "Course saved!"
+      redirect_to course_problems_path(@course)
+    else
+      @course.document = params[:course][:document]
+      render 'edit'
+    end
   end
 
   def index

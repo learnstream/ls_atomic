@@ -25,46 +25,58 @@ class Course < ActiveRecord::Base
   def teachers
     teacher_enrollments.map { |e| e.user }
   end
+  
+  #def document
+  #end
+
+  #def document=
+  #end
 
   def populate_with_tex(document)
+
+    # Find Problems
     problemtexts = find_problems(document)
-   
-    count = 0 
+
+    problemCount = 0 
     problemtexts.each { |problem|
       problemText = problem.first.chomp
       name = find_name(problemText)   
       statement = find_statement(problemText)
       @problem = problems.create(:name => name, :statement => statement)
-      
-   
+
+
       if @problem.save
       else
-        flash.now[:notice] = "Only the first " + count.to_s + " problems out of " + problems.length.to_s + " were created. Please review your TeX and correct any errors." 
-        render 'edit'
-        return
+        errors.add("TeX Parsing", ": only the first " + problemCount.to_s + " problems out of " + problemtexts.length.to_s + " were created.")
+        return false
       end
- 
-      array = problemText.scan(/\\begin{step}(.*?)\\end{step}/im)
-        array.each {|step|
-          stepText = step.first.chomp 
-          @problem.steps.create!(:text => stepText, :order_number => 1)
-        }
 
-        document = document.sub(/\\begin{problem}.*?\\end{problem}/im,  "")
-        count += 1
+      array = problemText.scan(/\\begin{step}(.*?)\\end{step}/im)
+      array.each {|step|
+        stepText = step.first.chomp 
+        @problem.steps.create!(:text => stepText, :order_number => 1)
       }
 
-    if @problem.save
-      if(problemtexts.length == 1)
-        flash[:success] = "Problem created!"
-        redirect_to [@course, @problem]
+      document = document.sub(/\\begin{problem}.*?\\end{problem}/im,  "")
+      problemCount += 1
+    }
+
+    # Find Components
+    cmpTexts = find_components(document)
+
+    cmpCount = 0
+    cmpTexts.each { |cmp|
+      @component = components.create(:name => cmp)
+
+      if @component.save
       else
-        flash[:success] = "Problems created! Please review the problems separately."
-        redirect_to course_problems_path(@course)
+        errors.add("TeX Parsing", ": only the first " + cmpCount.to_s + " components out of " + cmpTexts.length.to_s + " were created")
+        return false
       end
-    else
-      render 'edit'
-    end
+      cmpCount += 1
+    }
+    
+
   end
 
   private
@@ -83,5 +95,13 @@ class Course < ActiveRecord::Base
       text = statement.map{ |x| x[0]}.join
       return text.chomp
     end
+
+    def find_components(text)
+      text = text.split('\section{components}').drop(1)[0]
+      block =  text.scan(/\\begin{itemize}(.*?)\\end{itemize}/im)
+      component_block = block.flatten[0]
+      return component_block.split('\item ').drop(1).map{|x| x.chomp}
+    end
+
 
 end
