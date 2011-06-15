@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615163743) do
+ActiveRecord::Schema.define(:version => 20110615164836) do
 
   create_table "component_tests", :force => true do |t|
     t.integer  "component_id"
@@ -105,6 +105,12 @@ ActiveRecord::Schema.define(:version => 20110615163743) do
   end
 
   add_index "memory_ratings", ["memory_id"], :name => "index_memory_ratings_on_memory_id"
+
+  create_table "notes", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "problems", :force => true do |t|
     t.string   "name"
