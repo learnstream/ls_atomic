@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110611005527) do
+ActiveRecord::Schema.define(:version => 20110615163743) do
+
+  create_table "component_tests", :force => true do |t|
+    t.integer  "component_id"
+    t.integer  "test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "component_tests", ["component_id"], :name => "index_component_tests_on_component_id"
+  add_index "component_tests", ["test_id", "component_id"], :name => "index_component_tests_on_test_id_and_component_id", :unique => true
+  add_index "component_tests", ["test_id"], :name => "index_component_tests_on_test_id"
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -40,6 +51,21 @@ ActiveRecord::Schema.define(:version => 20110611005527) do
   add_index "enrollments", ["course_id"], :name => "index_enrollments_on_course_id"
   add_index "enrollments", ["user_id", "course_id"], :name => "index_enrollments_on_user_id_and_course_id", :unique => true
   add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
+
+  create_table "events", :force => true do |t|
+    t.integer  "lesson_id"
+    t.integer  "playable_id"
+    t.string   "playable_type"
+    t.string   "video_url"
+    t.integer  "start_time"
+    t.integer  "end_time"
+    t.integer  "order_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["lesson_id"], :name => "index_events_on_lesson_id"
+  add_index "events", ["playable_type", "playable_id"], :name => "index_events_on_playable_type_and_playable_id"
 
   create_table "lessons", :force => true do |t|
     t.string   "name"
@@ -147,6 +173,19 @@ ActiveRecord::Schema.define(:version => 20110611005527) do
     t.integer  "order_number"
     t.integer  "problem_id"
   end
+
+  create_table "tests", :force => true do |t|
+    t.integer  "problem_id"
+    t.string   "steps"
+    t.string   "question"
+    t.text     "answer_input"
+    t.string   "answer"
+    t.text     "answer_output"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tests", ["problem_id"], :name => "index_tests_on_problem_id"
 
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"
