@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "StudyQuizzes" do
+describe "Doing exercises" do
 
   before(:each) do
     @user = Factory(:user)
@@ -8,14 +8,7 @@ describe "StudyQuizzes" do
     @user.enroll!(@course)
 
     @component = Factory(:component, :course => @course)
-
-    @problem = Factory(:problem, :course => @course)
-    @step1 = @problem.steps.create(:text => "do this first", :order_number => 1)
-    @step2 = @problem.steps.create(:text => "do this next", :order_number => 2) 
-    @step3 = @problem.steps.create(:text => "finally do this", :order_number => 3)
-
-    @quiz = Factory(:quiz, :problem => @problem)
-    @quiz.steps = ["1", "2"]
+    @quiz = Factory(:quiz, :course => @course)
     @quiz.components << @component
 
     integration_sign_in(@user) 
@@ -34,15 +27,6 @@ describe "StudyQuizzes" do
 
     it "should show the question" do
       page.should have_css("div", :content => @quiz.question)
-    end
-
-    it "should show the appropriate steps" do
-      page.should have_css("li", :content => @step1.text)
-      page.should have_css("li", :content => @step2.text)
-    end
-
-    it "should show the problem" do
-      page.should have_css("div", :content => @problem.statement)
     end
 
     it "should have a Check Answer button" do

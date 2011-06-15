@@ -59,4 +59,19 @@ describe Course do
       @course.lessons.should include @lesson
     end
   end
+
+  describe "quizzes" do
+
+    before(:each) do
+      @quiz = Factory(:quiz, :course => @course)
+    end
+
+    it "should respond to quizzes" do
+      @course.should respond_to(:quizzes)
+    end
+
+    it "should have the right quiz" do
+      @course.quizzes.should include @quiz
+    end
+  end
 end

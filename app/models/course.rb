@@ -3,10 +3,10 @@ class Course < ActiveRecord::Base
   attr_accessible :name, :description
 
   has_many :components
-  has_many :problems
   has_many :enrollments, :dependent => :destroy
   has_many :users, :through => :enrollments
   has_many :lessons
+  has_many :quizzes
 
   validates :name, :presence => true
 

@@ -4,7 +4,7 @@ class ResponsesController < ApplicationController
   def create
     @quiz = Quiz.find(params[:response][:quiz_id])
     @user = User.find(params[:response][:user_id])
-    @course = @quiz.problem.course
+    @course = @quiz.course
 
     # Look through all the components to make sure that at least one is due,
     # and that it has already been self-rated.
@@ -62,7 +62,7 @@ class ResponsesController < ApplicationController
       @answer_output_view = "fbd"
     end
   
-    @course = @response.quiz.problem.course
+    @course = @response.quiz.course
   end
 
   def index

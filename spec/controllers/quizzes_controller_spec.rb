@@ -51,13 +51,13 @@ describe QuizzesController do
 
       it "should not allow quiz to be created with a blank question"  do
         lambda do
-          post :create, :quiz => @attr.merge(:question => "")
+          post :create, :course_id => @course, :quiz => @attr.merge(:question => "")
         end.should_not change(Quiz, :count)
       end
 
       it "should not allow quiz to be created with a blank answer_type"  do
         lambda do
-          post :create, :quiz => @attr.merge(:answer_type => "")
+          post :create, :course_id => @course, :quiz => @attr.merge(:answer_type => "")
         end.should_not change(Quiz, :count)
       end
     end
@@ -71,24 +71,18 @@ describe QuizzesController do
 
       it "should create a quiz" do
         lambda do
-          post :create, :quiz => @attr
+          post :create, :course_id => @course, :quiz => @attr
         end.should change(Quiz, :count).by(1)
       end
 
       it "should create a quiz with the correct components" do
-        post :create, :quiz => @attr
+        post :create, :course_id => @course, :quiz => @attr
         quiz = Quiz.first
         quiz.components.should == [ @component, @component2 ]
       end
 
-      it "should create a quiz with the correct steps" do
-        post :create, :quiz => @attr
-        quiz = Quiz.first
-        quiz.steps.should == "1,2"
-      end
-
       it "should create a quiz with the correct answer input" do
-        post :create, :quiz => @attr
+        post :create, :course_id => @course, :quiz => @attr
         quiz = Quiz.first
         @expected = { "type" => "text" }
         parsed_answer_input = JSON.parse(quiz.answer_input)
@@ -96,7 +90,7 @@ describe QuizzesController do
       end
 
       it "should create a quiz with the correct answer output" do
-        post :create, :quiz => @attr
+        post :create, :course_id => @course, :quiz => @attr
         quiz = Quiz.first
         @expected = { "type" => "text" }
         parsed_answer_output = JSON.parse(quiz.answer_output)
@@ -104,13 +98,13 @@ describe QuizzesController do
       end
 
       it "should redirect to the course page" do
-        post :create, :quiz => @attr
+        post :create, :course_id => @course, :quiz => @attr
         response.should redirect_to course_quizzes_path(@course)
       end
 
       it "should be able to create a free body diagram quiz" do
         lambda do
-          post :create, :quiz => @attr.merge(:answer_type => "fbd", 
+          post :create, :course_id => @course, :quiz => @attr.merge(:answer_type => "fbd", 
                                            :answer_input => "{ \"type\" : \"fbd\", \"fb\" : {\"shape\" : \"rect-line\", \"top\" : 80, \"left\" : 80, \"width\" : 162, \"height\" : 100, \"radius\" : 60, \"rotation\" : -15, \"cinterval\" : 30}}",
                                            :answer_output =>"{ \"type\" : \"fbd\", \"fb\" : {\"shape\" : \"rect-line\", \"top\" : 80, \"left\" : 80, \"width\" : 162, \"height\" : 100, \"radius\" : 60, \"rotation\" : -15, \"cinterval\" : 30}, \"forces\" : [{\"origin_index\" : \"8\", \"ox\" : 161, \"oy\" : 130, \"angle\" : -90}]}" )
         end.should change(Quiz, :count).by(1)
@@ -118,7 +112,7 @@ describe QuizzesController do
 
       it "should be able to create a quiz with no steps" do
         lambda do
-          post :create, :quiz => @attr.merge(:steps => [])
+          post :create, :course_id => @course, :quiz => @attr.merge(:steps => [])
         end.should change(Quiz, :count).by(1)
       end
     end
@@ -133,7 +127,7 @@ describe QuizzesController do
 
       it "should not create a quiz" do
         lambda do
-          post :create, :quiz => @attr
+          post :create, :course_id => @course, :quiz => @attr
         end.should_not change(Quiz, :count)
       end
     end

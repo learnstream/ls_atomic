@@ -11,9 +11,7 @@ describe 'Navigation' do
     @admin = Factory(:admin)
     @course = Factory(:course, :name => "Integration")
     @component = Factory(:component, :course => @course)
-    @problem = Factory(:problem, :course => @course)
-    @step = Factory(:step, :problem => @problem)
-    @quiz = Factory(:quiz, :problem => @problem, :component_tokens => "#{@component.id}") 
+    @quiz = Factory(:quiz, :course => @course, :component_tokens => "#{@component.id}") 
     @user.enroll!(@course)
     integration_sign_in(@user)
   end
@@ -63,14 +61,6 @@ describe 'Navigation' do
         click_link "Back to component"
         page.should have_css("h1", :content => @component.name)
       end
-
-      it "should have a back link from the new problem(s) with tex page" do
-        click_link "Problems"
-        click_link "Add problem(s) with TeX"
-        click_link "Back to course"
-        page.should have_css("h1", @course.name)
-      end
-
 
       it "should have a back link from the new component page" do
         click_link "Components"

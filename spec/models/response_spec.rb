@@ -3,9 +3,8 @@ require 'spec_helper'
 describe Response do
 
   before(:each) do
-    @problem = Factory(:problem)
     @user = Factory(:user)
-    @quiz = Factory(:text_quiz, :problem => @problem)
+    @quiz = Factory(:text_quiz)
     @response = Factory(:response, :user => @user, :quiz => @quiz)
   end
 

@@ -20,7 +20,6 @@ class CoursesController < ApplicationController
     end
 
     @components = @course.components
-    @problems = @course.problems
   end
 
   def create

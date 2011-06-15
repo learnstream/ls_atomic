@@ -3,9 +3,9 @@ require 'spec_helper'
 describe QuizComponent do
 
   before(:each) do
-    @problem = Factory(:problem)
-    @quiz = Factory(:quiz, :problem_id => @problem)
-    @component = Factory(:component)
+    @course = Factory(:course)
+    @quiz = Factory(:quiz, :course => @course)
+    @component = Factory(:component, :course => @course)
     @quiz_component = QuizComponent.create!(:quiz_id => @quiz, 
                                             :component_id => @component)
   end

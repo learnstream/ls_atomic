@@ -1,36 +1,27 @@
 class QuizzesController < ApplicationController
   layout :choose_layout 
 
+  before_filter :grab_course_from_course_id 
   before_filter :authenticate
-  before_filter :only => [:create, :update, :new, :edit] do
-    check_permissions(params)
+  before_filter :authorized_teacher, :only => [:create, :update, :new, :edit, :index] 
+
+  def index
+    @quizzes = @course.quizzes
   end
 
   def new 
-    @problem = Problem.find(params[:problem_id])
-    @course = @problem.course
     @quiz = Quiz.new
   end
 
   def create 
-    problem = Problem.find(params[:quiz][:problem_id])
-    @course = problem.course
-
-    if problem.nil?
-      flash[:error] = "You're trying to add a quiz to a problem that doesn't exist"
-      redirect_to root_path
-      return
-    end 
-
     populate_answer_json(params[:quiz][:answer_type])
 
-    @quiz = problem.quizzes.build(params[:quiz])
+    @quiz = @course.quizzes.build(params[:quiz])
 
     if @quiz.save
       flash[:success] = "Quiz created!"
-      redirect_to course_problems_path(@course)
+      redirect_to course_quizzes_path(@course)
     else
-      @problem = problem
       render 'new'
     end
   end
@@ -38,7 +29,7 @@ class QuizzesController < ApplicationController
   def show
     @quiz = Quiz.find(params[:id])
     @user = current_user
-    @course = @quiz.problem.course
+    @course = @quiz.course
     @response = Response.new
 
     if @quiz.answer_type == "text"
@@ -57,7 +48,7 @@ class QuizzesController < ApplicationController
 
     if @quiz.update_attributes(params[:quiz])
       flash[:success] = "Quiz edited."
-      redirect_to course_problems_path(@quiz.course)
+      redirect_to course_quizzes_path(@quiz.course)
     else
       render :action => 'edit'
     end
@@ -65,7 +56,6 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.find(params[:id])
-    @problem = @quiz.problem
   end
 
   def rate_components
@@ -79,33 +69,26 @@ class QuizzesController < ApplicationController
       @quiz.rate_components!(current_user, Integer(params[:quality]))
     end
 
-    redirect_to course_study_index_path(@quiz.problem.course)
+    redirect_to course_study_index_path(@quiz.course)
   end
 
   private 
+  
+  def grab_course_from_course_id
+    @course = Course.find(params[:course_id]) if params[:course_id]
+  end
 
-  def check_permissions(params)
-
-    course = Quiz.find(params[:id]).course unless params[:id].nil?
-    course ||= Problem.find(params[:problem_id]).course unless params[:problem_id].nil?
-    course ||= Problem.find(params[:quiz][:problem_id]).course unless params[:quiz].nil? or params[:quiz][:problem_id].nil?
-
-    if course.nil? 
-      flash[:error] = "Try going to the course page to create a quiz"
+  def authorized_teacher
+    if current_user.perm != "admin" and !current_user.teacher?(@course)
       redirect_to root_path
-      return false
-    end
-
-    unless current_user.can_edit?(course)
-      flash[:error] = "You don't have permission to edit this course"
-      redirect_to root_path
-      return false
     end
   end
 
   def choose_layout
     if [ 'show' ].include? action_name
       'study'
+    elsif [ 'new', 'edit', 'index' ].include? action_name
+      'teacher'
     else
       'application'
     end
