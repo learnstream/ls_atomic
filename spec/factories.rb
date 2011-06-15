@@ -71,31 +71,34 @@ Factory.define :video do |video|
 end
 
 Factory.define :quiz do |quiz|
-  quiz.steps              []
   quiz.question           "What is the answer"
   quiz.answer_type        "text"
   quiz.answer_input       '{ "type" : "text" }'
   quiz.answer             "42"
   quiz.answer_output      '{ "type" : "text" }'
-  quiz.association        :problem, :factory => :problem
+  quiz.explanation        "I said so"
+  quiz.in_lesson          0
+  quiz.association        :course, :factory => :course
 end
 
 Factory.define :text_quiz, :class => Quiz do |quiz|
-  quiz.steps              []
   quiz.question           "What is the answer?"
   quiz.answer_type        "text"
   quiz.answer_input       '{ "type" : "text" }'
   quiz.answer             "42"
   quiz.answer_output      '{ "type" : "text" }'
+  quiz.explanation        "I said so"
+  quiz.in_lesson          0
 end
 
 Factory.define :self_rate_quiz, :class => Quiz do |quiz|
-  quiz.steps              []
   quiz.question           "What is the answer?"
   quiz.answer_type        "self-rate"
   quiz.answer_input       '{ "type" : "self-rate" }'
   quiz.answer             "42"
   quiz.answer_output      '{ "type" : "text" }'
+  quiz.explanation        "I said so"
+  quiz.in_lesson          0
 end
 
 Factory.define :response do |r|
@@ -103,4 +106,16 @@ Factory.define :response do |r|
   r.status         "incorrect"
   r.association    :user, :factory => :user
   r.association    :quiz, :factory => :quiz
+end
+
+Factory.define :note do |note|
+  note.content "I am a note"
+end
+
+Factory.define :event do |event|
+  event.association  :lesson, :factory => :lesson
+  event.video_url    "http://www.youtube.com/watch?v=ZwgNbpy9-qU"
+  event.start_time   10
+  event.end_time     20
+  event.order_number 1
 end
