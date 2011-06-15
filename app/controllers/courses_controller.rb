@@ -164,7 +164,7 @@ class CoursesController < ApplicationController
     end
     
     def choose_layout
-      if [ 'student_status' ].include? action_name
+      if [ 'student_status', 'edit' ].include? action_name
         'teacher'
       else
         'application'

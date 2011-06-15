@@ -98,9 +98,13 @@ class Course < ActiveRecord::Base
 
     def find_components(text)
       text = text.split('\section{components}').drop(1)[0]
-      block =  text.scan(/\\begin{itemize}(.*?)\\end{itemize}/im)
-      component_block = block.flatten[0]
-      return component_block.split('\item ').drop(1).map{|x| x.chomp}
+      if(text)
+        block =  text.scan(/\\begin{itemize}(.*?)\\end{itemize}/im)
+        component_block = block.flatten[0]
+        return component_block.split('\item ').drop(1).map{|x| x.chomp}
+      else
+        return []
+      end
     end
 
 

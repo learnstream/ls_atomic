@@ -64,13 +64,6 @@ describe 'Navigation' do
         page.should have_css("h1", :content => @component.name)
       end
 
-      it "should have a back link from the new problem(s) with tex page" do
-        click_link "Problems"
-        click_link "Add problem(s) with TeX"
-        click_link "Back to course"
-        page.should have_css("h1", @course.name)
-      end
-
 
       it "should have a back link from the new component page" do
         click_link "Components"

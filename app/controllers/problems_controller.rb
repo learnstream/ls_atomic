@@ -29,74 +29,10 @@ class ProblemsController < ApplicationController
     @problems = @course.problems.paginate(:page => params[:page], :per_page => 15)
   end
 
-  def tex_create
-    @course = Course.find(params[:problem][:course_id])
-    if @course.nil? 
-      flash[:error] = "You're trying to add to a course that doesn't exist"
-      redirect_to root_path
-      return
-    end
-  
-    # Hack! We used the statement field of the form to the entire TeX input, and now we extract the problems.  
-    original_text = params[:problem][:statement]
-    problems = find_problems(original_text)
-    if problems.empty?
-      flash.now[:error] = "No problems found! Did you remember your \\begin{problem} and \\end{problem} tags?"
-      @problem = @course.problems.build(params[:problem])
-      @problem.statement = original_text
-      render 'new_tex'
-      return
-    end
-   
-    count = 0 
-    problems.each { |problem|
-      problemText = problem.first.chomp
-      @problem = @course.problems.build(params[:problem])
-      @problem.name = find_name(problemText)   
-      @problem.statement = find_statement(problemText)
-      
-   
-      if @problem.save
-      else
-        flash.now[:notice] = "Only the first " + count.to_s + " problems out of " + problems.length.to_s + " were created. Please review your TeX and correct any errors." 
-        @problem.statement = original_text
-        render 'new_tex'
-        return
-      end
- 
-      array = problemText.scan(/\\begin{step}(.*?)\\end{step}/im)
-        array.each {|step|
-          stepText = step.first.chomp 
-          @problem.steps.create!(:text => stepText, :order_number => 1)
-        }
-
-        original_text = original_text.sub(/\\begin{problem}.*?\\end{problem}/im,  "")
-        count += 1
-      }
-
-    if @problem.save
-      if(problems.length == 1)
-        flash[:success] = "Problem created!"
-        redirect_to [@course, @problem]
-      else
-        flash[:success] = "Problems created! Please review the problems separately."
-        redirect_to course_problems_path(@course)
-      end
-    else
-      @problem.statement = original_text
-      render 'new_tex'
-    end
-  end
-
   def new
     @problem = Problem.new  
   end
 
-  def new_tex
-    @course = Course.find(params[:id])#questionable
-    @problem = Problem.new
-  end 
-  
   def update
     @problem = Problem.find(params[:id])
 
