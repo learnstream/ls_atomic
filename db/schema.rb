@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615180737) do
+ActiveRecord::Schema.define(:version => 20110615181917) do
 
   create_table "component_tests", :force => true do |t|
     t.integer  "component_id"
@@ -112,18 +112,6 @@ ActiveRecord::Schema.define(:version => 20110615180737) do
     t.datetime "updated_at"
   end
 
-  create_table "problems", :force => true do |t|
-    t.string   "name"
-    t.string   "statement"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "course_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-  end
-
   create_table "quiz_components", :force => true do |t|
     t.integer  "quiz_id"
     t.integer  "component_id"
@@ -160,26 +148,6 @@ ActiveRecord::Schema.define(:version => 20110615180737) do
 
   add_index "responses", ["quiz_id"], :name => "index_responses_on_quiz_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
-
-  create_table "step_components", :force => true do |t|
-    t.integer  "step_id"
-    t.integer  "component_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "step_components", ["component_id"], :name => "index_step_components_on_component_id"
-  add_index "step_components", ["step_id", "component_id"], :name => "index_step_components_on_step_id_and_component_id", :unique => true
-  add_index "step_components", ["step_id"], :name => "index_step_components_on_step_id"
-
-  create_table "steps", :force => true do |t|
-    t.string   "name"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "order_number"
-    t.integer  "problem_id"
-  end
 
   create_table "tests", :force => true do |t|
     t.integer  "problem_id"
