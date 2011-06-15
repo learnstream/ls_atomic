@@ -26,12 +26,6 @@ class Course < ActiveRecord::Base
     teacher_enrollments.map { |e| e.user }
   end
   
-  #def document
-  #end
-
-  #def document=
-  #end
-
   def populate_with_tex(document)
 
     # Find Problems

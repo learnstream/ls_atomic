@@ -15,12 +15,14 @@ describe "Using the quiz creation interface" do
   end
 
   it "should allow an authorized user to create quizzes" do
+    click_link "Problems"
     click_link "Add quiz"
     page.should have_css("h1", :content => "New quiz")
     page.should have_css("p", :content => @problem.statement)
   end
 
   it "should create a self-rate quiz" do
+    click_link "Problems"
     click_link "Add quiz"
     fill_in "Components", :with => @component.id
     select "The first step", :from => "Steps to show"
@@ -40,6 +42,7 @@ describe "Using the quiz creation interface" do
   end
   
   it "should support free-body-diagram quizzes", :js => true do
+    click_link "Problems"
     click_link "Add quiz"
     page.evaluate_script('$("#quiz_component_tokens").val('+@component.id.to_s+')');
     select "The first step", :from => "Steps to show"
@@ -49,6 +52,7 @@ describe "Using the quiz creation interface" do
   end
 
   it "should have a back link from the new quiz form" do
+    click_link "Problems"
     click_link "Add quiz"
     click_link "Back to problem list"
     page.should have_content(@course.name)
