@@ -9,7 +9,7 @@ LsAtomic::Application.routes.draw do
 
   resources :courses do
     resources :lessons
-    resources :problems
+    resources :quizzes
     resources :components
     member do
       get :users
@@ -27,21 +27,8 @@ LsAtomic::Application.routes.draw do
     end
   end
 
-  resources :problems do
-    member do
-      get :show_step
-      get :new_tex
-      post :tex_create
-    end
-  end
   resources :videos, :only => [:create, :update, :destroy, :edit]
   resources :enrollments, :only => [:create, :update, :destroy]
-  resources :steps do
-    member do
-      get :help
-    end
-  end
-  resources :step_components, :only => [:create, :destroy]
 
   resources :memories do
     member do
