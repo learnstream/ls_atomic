@@ -54,15 +54,18 @@ constructVideoWatchLink = function(video, index) {
 
 
 // Loads the youtube player into the div with name 'embed_area'
-loadYouTubePlayer = function(video_id, start_time, end_time, embed_area) {
+loadYouTubePlayer = function(video_id, start_time, end_time, embed_area, autoplay) {
+  if (typeof autoplay == 'undefined') autoplay = 1;
+  
   var params = { allowScriptAccess: "always" };
   var atts = { id: "ytPlayer" };
-  swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "&enablejsapi=1&playerapiid=player1&autoplay=1&start=" + start_time, embed_area, "480", "295", "8", null, null, params, atts); 
+  swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "&enablejsapi=1&playerapiid=player1&autoplay=" + autoplay+"&start=" + start_time, embed_area, "480", "295", "8", null, null, params, atts); 
 };
 
-function loadAndPlayVideo(video_id, start_time, end_time, embed_area) {
+function loadAndPlayVideo(video_id, start_time, end_time, embed_area, autoplay) {
+  if (typeof autoplay == 'undefined') autoplay = 1;
   if (ytplayer == null) 
-   loadYouTubePlayer(video_id, start_time, end_time, embed_area);
+   loadYouTubePlayer(video_id, start_time, end_time, embed_area, autoplay);
   else  {
     ytplayer.loadVideoById(video_id, start_time);
   }
