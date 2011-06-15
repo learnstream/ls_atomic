@@ -17,4 +17,5 @@ describe QuizComponent do
   it "should have a component method" do
     @quiz_component.should respond_to(:component)
   end
+
 end

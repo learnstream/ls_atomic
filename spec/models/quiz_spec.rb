@@ -4,13 +4,8 @@ describe Quiz do
   
   before(:each) do
     @course = Factory(:course)
-    @problem = Factory(:problem, :course => @course)
     @component = Factory(:component, :course => @course)
-    @quiz = Factory(:quiz, :problem => @problem)
-  end
-
-  it "should have a problem method" do
-    @quiz.should respond_to(:problem)
+    @quiz = Factory(:quiz, :course => @course)
   end
 
   it "should have a quiz components method" do
