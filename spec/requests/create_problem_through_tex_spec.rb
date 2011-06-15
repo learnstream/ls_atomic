@@ -12,7 +12,7 @@ describe "Tex problem creation" do
     visit course_path(@course)
     click_link "Problems"
     click_link "Edit Course"
-    page.should have_content("formatted components")
+    page.should have_content(".tex")
   end
 
   it "should properly add problem statement" do

@@ -1,3 +1,4 @@
+<%= javascript_include_tag "TexForm" %>
 <%= form_for @course, :html => {:multipart => true}  do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
@@ -8,13 +9,22 @@
     <%= f.label :description%><br />
     <%= f.text_field :description%>
   </div>
-  <div class="field">
-    <%= f.label "Populate course with components and/or problems written in LaTeX"%><br />
-    <%= f.text_area :document%>
-  </div>
-    <%= f.hidden_field :course_id, :value => @course.id %>
-  <div class="actions">
-    <%= f.submit "Submit" %>
-  </div>
+  <% if @latex_on %>
+    <div class="field" id="tex_input">
+      <%= f.label "Enter .tex here:"%><br />
+      <%= f.text_area :document%>
+    </div>
+  <% else %>
+    <div class="hidden" id="tex_input">
+      <%= f.label "Enter .tex here:"%><br />
+      <%= f.text_area :document%>
+   </div>
+   <div id = "tex_input_link">
+     <%= link_to_function "Use LaTeX to add components and problems", "showTexForm();" %>
+   </div>
+ <% end %>
+ <%= f.hidden_field :course_id, :value => @course.id %>
+ <div class="actions">
+   <%= f.submit "Submit" %>
+ </div>
 <% end %>
-

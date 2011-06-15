@@ -26,13 +26,32 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(params[:course])
     if @course.save
-      flash[:success] = "New course created!"
       current_user.enroll_as_teacher!(@course)
-      redirect_to @course 
+      if(params[:course][:document].nil?)
+        flash[:success] = "New course created!"
+        redirect_to @course 
+        return
+      end
     else
       @title = "New Course"
       render 'new'
+      return
     end
+
+    result = @course.populate_with_tex(params[:course][:document])
+    if result[:success]
+      flash[:success] = "Course created and problems/components added!"
+      redirect_to @course
+    else
+      document = params[:course][:document]
+      result[:problems_added].each { |problem|
+        document.gsub!("\\begin{problem}" + problem.first + "\\end{problem}", "")
+      }
+      @course.document = document
+      @latex_on = true;
+      render 'edit', :document => params[:course][:document]
+    end
+
   end
 
   def edit
