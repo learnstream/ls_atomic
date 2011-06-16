@@ -44,6 +44,10 @@ LsAtomic::Application.routes.draw do
 
   resources :responses, :only => [:create, :update, :edit, :index, :show]
 
+  resources :lessons do
+    resources :events
+  end
+
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'
   match '/signout', :to => 'user_sessions#destroy'

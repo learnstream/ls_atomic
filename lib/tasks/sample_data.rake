@@ -111,7 +111,14 @@ def make_lesson
                               :end_time => 20,
                               :order_number => 1)
 
+  event2 = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
+                               :start_time => 10,
+                               :end_time => 20,
+                               :order_number => 2)
+
   note = Note.create!(:content => "Spam that probe, spam it")
   note.events << event
 
+  quiz = Quiz.first
+  quiz.events << event2
 end
