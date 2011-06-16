@@ -306,3 +306,7 @@ a.signup_button {
 #quiz_area {
   width: 700px;
   clear: both; }
+
+/* Lessons - Teacher */
+#lesson-edit #events-area {
+  float: right; }

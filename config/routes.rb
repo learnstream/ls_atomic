@@ -1,5 +1,8 @@
 LsAtomic::Application.routes.draw do 
 
+  resources :notes, :only => [ :create, :new ]
+  resources :events
+
   resources :user_sessions
   resources :users do
     member do
