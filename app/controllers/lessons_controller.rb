@@ -26,6 +26,8 @@ class LessonsController < ApplicationController
 
   def edit
     @lesson = @course.lessons.find(params[:id])
+    @events = @lesson.events
+    @note = Note.new
   end
 
   def update

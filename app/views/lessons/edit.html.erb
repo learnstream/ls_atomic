@@ -6,15 +6,16 @@
   <div id="video-area">
     <div id="video-player"></div>
     <div id="video-url-div">
-      Youtube URL: <input type ="text" id = "video_url" /><a href="#" id="load-video">Load video</a>
+      Youtube URL: <input type ="text" id = "load_video_url" /><a href="#" id="load-video">Load video</a>
     </div>
   </div>
 
   <div id="events-area">
-
+    <%= render @events %> 
   </div>
 
   <div id="add-note">
+    <%= render :partial => 'notes/form', :locals => { :lesson => @lesson } %> 
   </div>
 
 </div>

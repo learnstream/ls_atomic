@@ -1,0 +1,8 @@
+
+<div class="event">
+  <% if event.playable_type == "Note" %>
+    <%= "Note: #{event.playable.content}" %>
+  <% else %>
+    Quiz
+  <% end %>
+</div>
