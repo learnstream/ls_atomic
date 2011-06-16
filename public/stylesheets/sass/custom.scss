@@ -43,6 +43,11 @@ section {
   background: $body-color;
   @include rounded(20px);
 }
+
+h1 {
+  font-size: 2em;
+}
+
 /* Links */
 
 $link-color: #09c;
@@ -308,4 +313,30 @@ a.signup_button {
     background: #cfc;
   }
 }
+/* Lessons page */
+#content {
+  float: left;
+  clear: right;
+  width: 400px;
+  height: 295px;
+  background: #cfc;
+  overflow-y: auto;
+  overflow-x: hidden;
 
+  .Note {
+    border: 1px solid #6c6;
+    padding: .5em;
+  }
+}
+
+
+#ytPlayer {
+  width: 480px;
+  clear: left;
+  float: left;
+}
+
+#quiz_area {
+  width: 700px;
+  clear: both;
+}
