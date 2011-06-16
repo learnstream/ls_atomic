@@ -281,3 +281,7 @@ a.signup_button {
   border: 1px solid #000; }
 #fbd .selected-answer {
   background: #cfc; }
+
+/* Lessons - Teacher */
+#lesson-edit #events-area {
+  float: right; }
