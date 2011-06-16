@@ -1,6 +1,8 @@
 <%= form_for [@course, @quiz] do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
 
+  <div id="course_id" style="display: none;"><%= @course.id %></div>
+
   <%= f.hidden_field :answer_input, :value => "" %>
   <%= f.hidden_field :answer_output, :value => "" %>
 
@@ -20,7 +22,7 @@
       ['Text input', 'text'], ['Free body diagram', 'fbd']], :selected => @quiz.answer_type || 'self-rate') %>
   </div>
 
-  <div class="hidden" id="fbd_form"> <%= render "fbd_input" %> </div>
+  <div class="hidden" id="fbd_form"> <%= render "quizzes/fbd_input" %> </div>
 
   <div class="field">
     <%= f.label :answer %><br />

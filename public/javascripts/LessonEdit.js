@@ -24,14 +24,21 @@ $(document).ready(function() {
 
     $("#new_note").submit(function(){
         var video_url = ytplayer.getVideoUrl();
-        $("#video_url").val(video_url);
-        var data = $("#new_note").serialize();
-        $.post('/notes/', data, function(data){ 
-          $(':input','#new_note')
-           .not(':button, :submit, :reset, :hidden')
-            .val('')
-          console.log(data); });
+        var lesson_id = $("#lesson_id").val();
 
+        $("#video_url").val(video_url);
+
+        var data = $("#new_note").serialize();
+
+
+        $.post('/notes/', data, function(data){ 
+          $("#note-error-message").text(data);
+          if (data == 'Error.') return false;
+          $(':input','#new_note').not(':button, :submit, :reset, :hidden').val('');
+        
+        });
+
+        $("#events-area").load('/lessons/' + lesson_id + '/events/');
         return false;
     });
 });

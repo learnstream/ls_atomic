@@ -32,6 +32,7 @@ class LessonsController < ApplicationController
     @lesson = @course.lessons.find(params[:id])
     @events = @lesson.events
     @note = Note.new
+    @quiz = Quiz.new
   end
 
   def update

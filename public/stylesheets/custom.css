@@ -308,5 +308,31 @@ a.signup_button {
   clear: both; }
 
 /* Lessons - Teacher */
+#lesson-edit #video-area {
+  width: 480px;
+  height: 330px;
+  clear: left;
+  float: left; }
+  #lesson-edit #video-area #vid-container {
+    height: 300px; }
+  #lesson-edit #video-area #video-url-div {
+    display: block;
+    margin: 5px;
+    height: 30px; }
+    #lesson-edit #video-area #video-url-div #load_video_url {
+      margin: 0px 5px; }
 #lesson-edit #events-area {
   float: right; }
+#lesson-edit #add-note {
+  clear: left;
+  width: 480px; }
+  #lesson-edit #add-note #note_content {
+    width: 470px;
+    height: 100px; }
+  #lesson-edit #add-note table {
+    width: 220px; }
+    #lesson-edit #add-note table input {
+      width: 50px; }
+    #lesson-edit #add-note table td {
+      padding: 0 5px;
+      width: auto; }

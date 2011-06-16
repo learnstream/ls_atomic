@@ -4,9 +4,11 @@
   <h1>Editing <%= @lesson.name %></h1>
   
   <div id="video-area">
-    <div id="video-player"></div>
+    <div id="vid-container">
+      <div id="video-player"></div>
+    </div>
     <div id="video-url-div">
-      Youtube URL: <input type ="text" id = "load_video_url" /><a href="#" id="load-video">Load video</a>
+      <span id="url-label">Youtube URL:</span><input type ="text" id = "load_video_url" /><a href="#" id="load-video">Load video</a>
     </div>
   </div>
 
@@ -16,6 +18,10 @@
 
   <div id="add-note">
     <%= render :partial => 'notes/form', :locals => { :lesson => @lesson } %> 
+  </div>
+
+  <div id="add-quiz">
+    <%= render :partial => 'quizzes/form' %>
   </div>
 
 </div>

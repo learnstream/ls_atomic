@@ -343,10 +343,58 @@ a.signup_button {
 
 /* Lessons - Teacher */
 
-#lesson-edit {
 
+
+#lesson-edit {
+#video-area {
+
+  width: 480px;
+  height: 330px;
+  clear: left;
+  float: left;
+  
+  #vid-container {
+    height: 300px;
+  }
+  #video-url-div { 
+    display: block;
+    margin: 5px; 
+    height: 30px;
+    #load_video_url { margin: 0px 5px; }
+
+  }
+}
+
+  
   #events-area {
     float:right;
   }
+
+  #add-note {
+    clear: left;
+    width: 480px;
+
+    #note_content {
+      width: 470px;
+      height: 100px;
+    }
+
+    table { 
+      width: 220px;
+      input { width: 50px;}
+      td { padding: 0 5px; width: auto;}
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
 

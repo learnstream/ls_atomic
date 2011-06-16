@@ -1,18 +1,27 @@
 <% form_for @note do |note_form| %>
-  <div class="field">
-    <%= note_form.label :content %>
+
+  <%= render 'shared/error_messages', :object => note_form.object %>
+  <div id="note-error-message"></div>
+<div class="field" >
+    <%= note_form.label :content %><br />
     <%= note_form.text_area :content %>
   </div>
-  <div class="field">
-    <%= label_tag :start_time, "Start time: " %>
-    <%= text_field_tag :start_time %>
-    <a href="#" id="start-sync">Sync start</a>
-  </div>
-  <div class="field">
-    <%= label_tag :end_time, "End time: " %>
-    <%= text_field_tag :end_time %>
-    <a href="#" id="end-sync">Sync end</a>
-  </div>
+  <table>
+    <tr>
+      <div class="field">
+        <td><%= label_tag :start_time, "Start time: " %></td>
+        <td><%= text_field_tag :start_time %></td>
+        <td><a href="#" id="start-sync">Sync start</a></td>
+      </div>
+    </tr>
+    <tr>
+      <div class="field">
+        <td><%= label_tag :end_time, "End time: " %></td>
+        <td><%= text_field_tag :end_time %></td>
+          <td><a href="#" id="end-sync">Sync end</a></td>
+      </div>
+    </tr>
+  </table>
   <%= hidden_field_tag :video_url %>
   <%= hidden_field_tag :lesson_id, lesson.id %>
   <%= submit_tag %>
