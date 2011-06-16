@@ -297,6 +297,12 @@ a.signup_button {
   #content .Note {
     border: 1px solid #6c6;
     padding: .5em; }
+  #content .Quiz {
+    border: 2px solid #c66;
+    border-right: 2px solid #fee;
+    border-top: 2px solid #fee;
+    padding: .5em;
+    background: #fcc; }
 
 #ytPlayer {
   width: 480px;
