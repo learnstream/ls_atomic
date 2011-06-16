@@ -2,4 +2,7 @@
 <div class="back"><%= link_to "Back to course", @problem.course %>
 <p><%= @problem.statement %></p>
 
+
+<script type="text/javascript">$(document).ready(function() { $("#holder").data("mode", "edit"); });</script>
+
 <%= render 'form' %>
