@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615181917) do
+ActiveRecord::Schema.define(:version => 20110616221128) do
 
   create_table "component_tests", :force => true do |t|
     t.integer  "component_id"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20110615181917) do
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_been_rated", :default => false
   end
 
   add_index "responses", ["quiz_id"], :name => "index_responses_on_quiz_id"

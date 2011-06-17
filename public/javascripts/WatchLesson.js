@@ -11,11 +11,18 @@ $(document).ready(function() {
 
       last_event = 0;
       afterQuizBuffer = false;
-      setInterval(function() { loadEvents(data) }, 1000);
+      setInterval(function() { loadEvents(data) }, 500);
     });
 });
 
 var prepareQuiz = function() {
+  $("#study-area").replaceWith($("#study-area").html());
+
+  console.log($(".quizbutton"));
+
+  if ($(".quizbutton").length > 0)
+    ytplayer.pauseVideo();
+
   $("#response_submit").click(function() {
     var user_id = $("#response_user_id").val();
     var quiz_id = $("#response_quiz_id").val();
@@ -41,7 +48,11 @@ var prepareResponse = function(data) {
     // update the appropriate .Quiz with response info
     var rgx_id = /quizzes\/(\d+)/;
     var quiz_id = href.match(rgx_id)[1];
-    $("#quiz" + quiz_id).removeClass("Quiz").addClass("Note").text("done");
+
+    var quiz_text = $("#question").text();
+    quiz_text += " " + $("#correct_answer").text();
+
+    $("#quiz" + quiz_id).removeClass("Quiz").addClass("Note").text(quiz_text);
     return false;
   });
 };
@@ -51,10 +62,8 @@ var loadEvents = function(events) {
   var currentId = getYoutubeID(ytplayer.getVideoUrl(), "v"); 
 
   var i = last_event + 1;
-  //console.log(waitingForTimeToEnd);
-  //console.log(waitingForTimeToSwitch);
 
-  if (time > waitingForTimeToEnd) {
+  if (hasJustEnded(waitingForTimeToEnd, time)) {
     ytplayer.pauseVideo();
     return;
   }
@@ -77,11 +86,11 @@ var loadEvents = function(events) {
 
   if (i == events.length) {
     // if we know this is the last event, get ready to end the video
-    waitingForTimeToEnd = events[last_event].endTime;
+    waitingForTimeToEnd = events[last_event].end_time;
     waitingForTimeToSwitch = Number.MAX_VALUE;
-  } else if (events[last_event+1].video_url != currentId) {
+  } else if (getYoutubeID(events[last_event+1].video_url, "v") != currentId) {
     // if we know the next event is a switch, we'll get ready for it
-    waitingForTimeToSwitch = events[last_event].endTime;
+    waitingForTimeToSwitch = events[last_event].end_time;
     waitingForTimeToEnd = Number.MAX_VALUE;
   } else {
     waitingForTimeToSwitch = Number.MAX_VALUE;
@@ -92,14 +101,17 @@ var loadEvents = function(events) {
   if (afterQuizBuffer) return;
 
   for (i = 0; i < events.length; i++) { 
-    if (events[i].type == "Quiz" && getYoutubeID(events[i].video_url, "v") == currentId && Math.abs(events[i].start_time - time) <= 1) {
-      ytplayer.pauseVideo();
+    if (events[i].type == "Quiz" && getYoutubeID(events[i].video_url, "v") == currentId && hasJustEnded(events[i].start_time, time)) {
       $("#quiz_area").load("/quizzes/" + events[i].id + "/ #study-area", prepareQuiz);
     }
   }
 
 
   //for (var top=0; events[top].start_time < time; top++) { }
+}
+
+var hasJustEnded = function(event_time, time) {
+  return time - event_time >= 0 && time - event_time < 1;
 }
 
 var loadEvent = function(next_event) {

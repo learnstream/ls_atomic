@@ -49,11 +49,4 @@ class Quiz < ActiveRecord::Base
      return false
     end
   end 
-
-  def rate_components!(user, quality)
-    components.each do |component|
-      memory = user.memories.find_by_component_id(component)
-      memory.view(quality)
-    end
-  end
 end
