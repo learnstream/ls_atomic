@@ -356,19 +356,19 @@ a.signup_button {
     -webkit-border-radius: 5px;
     border-radius: 5px; }
   #lesson-edit #events-area .quiz {
-    border-right: 2px solid #ff8080;
+    border-right: 2px solid red;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
-    border-bottom: 2px solid #ff8080;
+    border-bottom: 2px solid red;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    border-left: 2px solid red;
+    border-left: 2px solid #ff8080;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
-    border-top: 2px solid red;
+    border-top: 2px solid #ff8080;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px; }
