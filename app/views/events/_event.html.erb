@@ -9,8 +9,9 @@
     data-order_number="<%= event.order_number %>"> </div>
   <% if event.playable_type == "Note" %>
     <div class="content"><%=event.playable.content%></div>
+  <a class="edit-note" href="#">Edit</a>
   <% else %>
     <div class="question"><%=event.playable.question%></div>
+    <a class="edit-quiz" href="#">Edit</a>
   <% end %>
-  <a class="edit-event" href="#">Edit</a>
 </div>

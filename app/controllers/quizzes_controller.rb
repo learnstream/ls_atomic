@@ -11,6 +11,7 @@ class QuizzesController < ApplicationController
 
   def new 
     @quiz = Quiz.new
+    @lesson = nil
   end
 
   def create 
@@ -67,6 +68,15 @@ class QuizzesController < ApplicationController
 
   def edit
     @quiz = Quiz.find(params[:id])
+    @lesson = nil
+    if @quiz.in_lesson
+      @event = @quiz.events[0]
+      @lesson = @event.lesson
+    end
+    respond_to do |format|
+      format.html { render 'edit' }
+      format.js { render :partial => 'form' }
+    end
   end
 
   def rate_components

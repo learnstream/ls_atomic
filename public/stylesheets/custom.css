@@ -375,22 +375,22 @@ a.signup_button {
 #lesson-edit #tabs-container {
   width: 500px;
   clear: left; }
-  #lesson-edit #tabs-container .ui-tabs-nav {
-    height: 40px; }
-#lesson-edit #add-note {
-  /* clear: left;*/
-  width: 460px; }
-  #lesson-edit #add-note #note_content {
-    width: 440px;
-    height: 100px; }
-  #lesson-edit #add-note table {
-    width: 270px;
-    margin: 0px; }
-    #lesson-edit #add-note table input {
-      width: 50px; }
-    #lesson-edit #add-note table td {
-      padding: 0 5px;
-      width: auto; }
-  #lesson-edit #add-note #current_video_url {
+  #lesson-edit #tabs-container #current_video_url {
     font-size: 0.7em;
     padding: 5px; }
+  #lesson-edit #tabs-container .ui-tabs-nav {
+    height: 40px; }
+  #lesson-edit #tabs-container table {
+    width: 270px;
+    margin: 0px; }
+    #lesson-edit #tabs-container table input {
+      width: 50px; }
+    #lesson-edit #tabs-container table td {
+      padding: 0 5px;
+      width: auto; }
+  #lesson-edit #tabs-container #add-note {
+    /* clear: left;*/
+    width: 460px; }
+    #lesson-edit #tabs-container #add-note #note_content {
+      width: 440px;
+      height: 100px; }

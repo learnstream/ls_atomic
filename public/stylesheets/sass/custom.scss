@@ -414,17 +414,8 @@ a.signup_button {
 
   width: 500px;
   clear: left;
-
+  #current_video_url{ font-size: 0.7em; padding: 5px; }
   .ui-tabs-nav { height: 40px;}
-}
-  #add-note {
-   /* clear: left;*/
-    width: 460px;
-
-    #note_content {
-      width: 440px;
-      height: 100px;
-    }
 
     table { 
       width: 270px;
@@ -432,8 +423,18 @@ a.signup_button {
       input { width: 50px;}
       td { padding: 0 5px; width: auto;}
     }
-    #current_video_url{ font-size: 0.7em; padding: 5px; }
+
+  #add-note {
+   /* clear: left;*/
+      width: 460px;
+
+      #note_content {
+        width: 440px;
+        height: 100px;
+      }
   }
+}
+
 }
 
 
