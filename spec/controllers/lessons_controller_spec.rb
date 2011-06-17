@@ -69,7 +69,7 @@ describe LessonsController do
     end
   end
 
-  describe "POST 'update'" do
+  describe "PUT 'update'" do
     
     before(:each) do
       @lesson = Factory(:lesson, :course => @course)

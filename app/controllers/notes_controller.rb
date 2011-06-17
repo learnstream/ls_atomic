@@ -15,12 +15,9 @@ class NotesController < ApplicationController
       message = "Error."
     end
 
-
     respond_to do |format|
       format.html   { render :text =>  message } 
     end
-
-
   end
 
   def new
@@ -33,11 +30,8 @@ class NotesController < ApplicationController
     @note.events.first.update_attributes( :start_time => params[:start_time],  :end_time => params[:end_time], 
                                     :video_url => params[:video_url]) 
                                    
-
     respond_to do |format|
       format.html   { render :text =>  "testupdate" } 
     end
-
-
   end
 end
