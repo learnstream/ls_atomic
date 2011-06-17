@@ -85,7 +85,12 @@ var changeQuizState = function() {
   
   var quiz_id = $("#quiz-id").text();
 
-  $("#quiz" + quiz_id).removeClass("Quiz").addClass("Note").text(quiz_text);
+  var timelink = $("#quiz" + quiz_id + " a.timelink").clone();
+
+  $("#quiz" + quiz_id).removeClass("Quiz")
+                      .addClass("Note")
+                      .text(quiz_text)
+                      .prepend(timelink);
 }
 
 var scrollToEvent = function(events) {
