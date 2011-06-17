@@ -16,14 +16,21 @@ class ResponsesController < ApplicationController
   def update
     @response = Response.find(params[:id])
     @response.rate_components!(Integer(params[:quality]))
-    @response.has_been_rated = true
     @course = @response.quiz.course
 
     if @response.save
-      redirect_to course_study_index_path(@course)
+      respond_to do |format|
+        format.html { redirect_to course_study_index_path(@course) }
+        format.json  
+      end
     else
-      flash[:error] = "Your response could not be rated."
-      redirect_to course_study_index_path(@course)
+      respond_to do |format|
+        format.html {
+          flash[:error] = "Your response could not be rated."
+          redirect_to course_study_index_path(@course)
+        }
+        format.json 
+      end
     end
   end
 

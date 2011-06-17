@@ -1,4 +1,5 @@
 <div id="study-area">
+  <div id="quiz-id" class="hidden"><%= @response.quiz.id %></div>
   <p>Question: <span id="question"><%= @response.quiz.question %></span></p>
   <div id="judgement">
   <% if not @response.status.blank? %> 
@@ -22,7 +23,7 @@
 
 
   <% if @response.has_been_rated %>
-
+    <%= render :partial => "shared/next_button", :locals => { :myresponse => @response } %>
   <% else %>
     <%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
   <% end %>

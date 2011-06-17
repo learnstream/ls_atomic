@@ -33,4 +33,10 @@ describe Response do
       @response.rate_components!(4)
     end.should change(MemoryRating, :count).by(@quiz.components.count)
   end
+
+  it "should be rated when creating an incorrect response" do
+    @incorrect_response = Factory(:response, :user => @user, :quiz => @quiz)
+    @incorrect_response.reload
+    @incorrect_response.has_been_rated.should == true
+  end
 end

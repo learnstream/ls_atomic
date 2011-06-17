@@ -80,13 +80,18 @@ def enroll_users
 end
 
 def make_quizzes
-  quiz = Quiz.create!(:course_id => Course.first,
-                      :component_tokens => "2",
-                      :question => "What is the answer?",
-                      :answer_type => "text",
-                      :answer_input => '{ "type" : "text" }',
-                      :answer => "42",
-                      :answer_output => '{ "type" : "text" }')
+  course = Course.first
+
+  
+  course.components.each do |component|
+    Quiz.create!(:course_id => course,
+                 :component_tokens => component.id.to_s,
+                 :question => "What is the #{component.id}th answer?",
+                 :answer_type => "text",
+                 :answer_input => '{ "type" : "text" }',
+                 :answer => "42",
+                 :answer_output => '{ "type" : "text" }')
+  end
 end
 
 def view_memories
@@ -116,9 +121,25 @@ def make_lesson
                                :end_time => 20,
                                :order_number => 2)
 
+  event3 = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
+                               :start_time => 15,
+                               :end_time => 20,
+                               :order_number => 3)
+
+  event4 = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
+                               :start_time => 20,
+                               :end_time => 30,
+                               :order_number => 4)
+
   note = Note.create!(:content => "Spam that probe, spam it")
   note.events << event
 
   quiz = Quiz.first
   quiz.events << event2
+
+  quiz = Quiz.all[1]
+  quiz.events << event3
+
+  quiz = Quiz.all[2]
+  quiz.events << event4
 end

@@ -7,6 +7,7 @@ class Response < ActiveRecord::Base
   scope :by_user, lambda { |user_id| where(:user_id => user_id) } 
 
   def rate_components!(quality)
+    self.has_been_rated = true
     quiz.components.each do |component|
       memory = user.memories.find_by_component_id(component)
       memory.view(quality)

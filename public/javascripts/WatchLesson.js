@@ -18,10 +18,10 @@ $(document).ready(function() {
 var prepareQuiz = function() {
   $("#study-area").replaceWith($("#study-area").html());
 
-  console.log($(".quizbutton"));
-
-  if ($(".quizbutton").length > 0)
+  if ($(".quizbutton").first().text() != "Next")
     ytplayer.pauseVideo();
+  else 
+    $(".quizbutton").hide();
 
   $("#response_submit").click(function() {
     var user_id = $("#response_user_id").val();
@@ -37,20 +37,34 @@ var prepareResponse = function(data) {
   var response_html = $(data).find("#study-area").html();
   $("#quiz_area").html(response_html);
   $("#help").hide();
-  $(".quizbutton").click(function() {
-    var href = $(this).attr('href');
-    $.get(href, function() { $("#quiz_area").html(""); });
+  $(".quizbutton").each(function() {
+      $(this).data("url", $(this).attr('href'));
+      $(this).attr('href', '#');
+    });
+
+  $(".quizbutton").click(function(e) {
+    var href = $(this).data('url');
+
+    console.log(href);
+   
+    $.ajax({
+      type: "PUT", 
+      url: href, 
+      data: {},
+      success: function(data) { $("#quiz_area").html(""); }
+    });
+   
 
     afterQuizBuffer = true;
     ytplayer.playVideo();
     setTimeout(function() { afterQuizBuffer = false; }, 3000);
 
     // update the appropriate .Quiz with response info
-    var rgx_id = /quizzes\/(\d+)/;
-    var quiz_id = href.match(rgx_id)[1];
 
     var quiz_text = $("#question").text();
     quiz_text += " " + $("#correct_answer").text();
+    
+    var quiz_id = $("#quiz-id").text();
 
     $("#quiz" + quiz_id).removeClass("Quiz").addClass("Note").text(quiz_text);
     return false;
