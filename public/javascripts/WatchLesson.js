@@ -10,18 +10,31 @@ $(document).ready(function() {
       loadEvent(first);
 
       last_event = 0;
-      afterQuizBuffer = false;
-      setInterval(function() { loadEvents(data) }, 500);
+      //afterQuizBuffer = false;
+      setInterval(function() { loadEvents(data); scrollToEvent(data); }, 1000);
+    });
+
+    userScrolling = false;
+    $("#content").scroll(function() {
+      userScrolling = true;
+      setTimeout(function() { userScrolling = false; }, 5000);
     });
 });
 
-var prepareQuiz = function() {
+var prepareQuiz = function(data, status, xhr) {
+
   $("#study-area").replaceWith($("#study-area").html());
 
   if ($(".quizbutton").first().text() != "Next")
-    ytplayer.pauseVideo();
+  { 
+    //ytplayer.pauseVideo();
+  }
   else 
+  {
     $(".quizbutton").hide();
+    ytplayer.playVideo();
+    changeQuizState();
+  }
 
   $("#response_submit").click(function() {
     var user_id = $("#response_user_id").val();
@@ -33,7 +46,8 @@ var prepareQuiz = function() {
   });
 };
 
-var prepareResponse = function(data) {
+var prepareResponse = function(data, status, xhr) {
+
   var response_html = $(data).find("#study-area").html();
   $("#quiz_area").html(response_html);
   $("#help").hide();
@@ -45,31 +59,50 @@ var prepareResponse = function(data) {
   $(".quizbutton").click(function(e) {
     var href = $(this).data('url');
 
-    console.log(href);
+    if (href.indexOf("study") == -1) {
+      $.ajax({
+        type: "PUT", 
+        url: href, 
+        data: {},
+        success: function(data) { $("#quiz_area").html(""); }
+      });
+    }
    
-    $.ajax({
-      type: "PUT", 
-      url: href, 
-      data: {},
-      success: function(data) { $("#quiz_area").html(""); }
-    });
-   
-
-    afterQuizBuffer = true;
+    //afterQuizBuffer = true;
     ytplayer.playVideo();
-    setTimeout(function() { afterQuizBuffer = false; }, 3000);
+    //setTimeout(function() { afterQuizBuffer = false; }, 3000);
 
-    // update the appropriate .Quiz with response info
+    changeQuizState();
 
-    var quiz_text = $("#question").text();
-    quiz_text += " " + $("#correct_answer").text();
-    
-    var quiz_id = $("#quiz-id").text();
-
-    $("#quiz" + quiz_id).removeClass("Quiz").addClass("Note").text(quiz_text);
     return false;
   });
 };
+
+var changeQuizState = function() {
+
+  var quiz_text = $("#question").text();
+  quiz_text += " " + $("#correct_answer").text();
+  
+  var quiz_id = $("#quiz-id").text();
+
+  $("#quiz" + quiz_id).removeClass("Quiz").addClass("Note").text(quiz_text);
+}
+
+var scrollToEvent = function(events) {
+  if (userScrolling) return;
+  var time = ytplayer.getCurrentTime();
+  var here = 0;
+  for(var i=0; i < events.length-1; i++) {
+    if (events[i+1].start_time > time)
+      break;
+    here++;
+  }
+
+
+  var selector = "#content > div:eq(" + here + ")";
+    
+  $("#content").scrollTo($(selector), 500);
+}
 
 var loadEvents = function(events) {
   var time = ytplayer.getCurrentTime();
@@ -111,11 +144,16 @@ var loadEvents = function(events) {
     waitingForTimeToEnd = Number.MAX_VALUE;
   }
 
-  if (ytplayer.getPlayerState() == 2) return;
-  if (afterQuizBuffer) return;
+  //if (ytplayer.getPlayerState() == 2) return;
+  //if (afterQuizBuffer) return;
 
   for (i = 0; i < events.length; i++) { 
+    if (parseInt($("#quiz-id").text()) == events[i].id) continue;
+    if (parseInt($("#response_quiz_id").val()) == events[i].id) continue;
+
+    //console.log("For " + i + " diff is " + (ytplayer.getCurrentTime() - events[i].start_time));
     if (events[i].type == "Quiz" && getYoutubeID(events[i].video_url, "v") == currentId && hasJustEnded(events[i].start_time, time)) {
+      ytplayer.pauseVideo();
       $("#quiz_area").load("/quizzes/" + events[i].id + "/ #study-area", prepareQuiz);
     }
   }
@@ -125,20 +163,26 @@ var loadEvents = function(events) {
 }
 
 var hasJustEnded = function(event_time, time) {
-  return time - event_time >= 0 && time - event_time < 1;
+  return time - event_time >= 0 && time - event_time < 1.2;
 }
 
 var loadEvent = function(next_event) {
   var newdiv = $("<div />").addClass(next_event.type);
+  //newdiv.data("time", next_event.start_time);
   if (next_event.type == "Note") {
     newdiv.text(next_event.content)
   } else if (next_event.type == "Quiz") {
-    newdiv.text("You have an unanswered quiz!")
-          .attr("id", "quiz" + next_event.id)
-          .click(function() { 
-              afterQuizBuffer = false; 
-              ytplayer.pauseVideo();
-              ytplayer.seekTo(next_event.start_time, true); });
+    newdiv.text("You have an unanswered quiz! ")
+          .attr("id", "quiz" + next_event.id);
+
+    var quizlink = $("<a />").attr("href", "#")
+                             .text("Take quiz")
+                             .click(function() { 
+                                 //afterQuizBuffer = false; 
+                                 ytplayer.pauseVideo();
+                                 ytplayer.seekTo(next_event.start_time, true); 
+                             })
+                             .appendTo(newdiv);
   }
   $("#content").append(newdiv);
 }

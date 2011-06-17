@@ -291,16 +291,15 @@ a.signup_button {
   clear: right;
   width: 400px;
   height: 295px;
-  background: #cfc;
+  background: #fff;
   overflow-y: auto;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  border: 1px solid black; }
   #content .Note {
-    border: 1px solid #6c6;
+    border-bottom: 1px solid #6c6;
     padding: .5em; }
   #content .Quiz {
-    border: 2px solid #c66;
-    border-right: 2px solid #fee;
-    border-top: 2px solid #fee;
+    border-bottom: 1px solid #c66;
     padding: .5em;
     background: #fcc; }
 

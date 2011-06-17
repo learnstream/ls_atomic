@@ -111,35 +111,29 @@ def make_lesson
   course = Course.first
   lesson = Lesson.create!(:course_id => course,
                           :name => "Newton's Laws")
-  event = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
-                              :start_time => 0,
-                              :end_time => 20,
-                              :order_number => 1)
 
-  event2 = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
-                               :start_time => 10,
-                               :end_time => 20,
-                               :order_number => 2)
-
-  event3 = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
-                               :start_time => 15,
-                               :end_time => 20,
-                               :order_number => 3)
-
-  event4 = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
-                               :start_time => 20,
-                               :end_time => 30,
-                               :order_number => 4)
+  events = []
+  20.times do |n| 
+    events << lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
+                                  :start_time => n*5,
+                                  :end_time => (n+1)*5,
+                                  :order_number => n+1)
+  end
 
   note = Note.create!(:content => "Spam that probe, spam it")
-  note.events << event
+  note.events << events[0]
 
   quiz = Quiz.first
-  quiz.events << event2
+  quiz.events << events[1]
 
   quiz = Quiz.all[1]
-  quiz.events << event3
+  quiz.events << events[2]
 
   quiz = Quiz.all[2]
-  quiz.events << event4
+  quiz.events << events[3]
+  
+  16.times do |n| 
+    note = Note.create!(:content => "Spam the nexus")
+    note.events << events[n+4]
+  end
 end
