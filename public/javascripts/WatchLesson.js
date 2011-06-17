@@ -166,9 +166,27 @@ var hasJustEnded = function(event_time, time) {
   return time - event_time >= 0 && time - event_time < 1.2;
 }
 
+var formatTime = function(time) {
+  var str = "";
+  str += Math.floor(time/60);
+  str += ":";
+  if (time % 60 < 10)
+    str += "0" + time % 60;
+  else 
+    str += time % 60;
+  console.log(str);
+  return str;
+};
+
 var loadEvent = function(next_event) {
   var newdiv = $("<div />").addClass(next_event.type);
   //newdiv.data("time", next_event.start_time);
+  var timelink = $("<a />").addClass("timelink")
+                           .text(formatTime(next_event.start_time))
+                           .attr("href", "#")
+                           .click(function() {
+                               ytplayer.seekTo(next_event.start_time, true); });
+
   if (next_event.type == "Note") {
     newdiv.text(next_event.content)
   } else if (next_event.type == "Quiz") {
@@ -184,6 +202,7 @@ var loadEvent = function(next_event) {
                              })
                              .appendTo(newdiv);
   }
+  newdiv.prepend(timelink);
   $("#content").append(newdiv);
 }
 
