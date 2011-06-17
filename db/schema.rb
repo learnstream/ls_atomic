@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110611005527) do
+ActiveRecord::Schema.define(:version => 20110615181917) do
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,31 @@ ActiveRecord::Schema.define(:version => 20110611005527) do
   add_index "enrollments", ["user_id", "course_id"], :name => "index_enrollments_on_user_id_and_course_id", :unique => true
   add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
 
+  create_table "events", :force => true do |t|
+    t.integer  "lesson_id"
+    t.integer  "playable_id"
+    t.string   "playable_type"
+    t.string   "video_url"
+    t.integer  "start_time"
+    t.integer  "end_time"
+    t.integer  "order_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["lesson_id"], :name => "index_events_on_lesson_id"
+  add_index "events", ["playable_type", "playable_id"], :name => "index_events_on_playable_type_and_playable_id"
+
+  create_table "lessons", :force => true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.integer  "order_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lessons", ["course_id"], :name => "index_lessons_on_course_id"
+
   create_table "memories", :force => true do |t|
     t.integer  "user_id"
     t.integer  "component_id"
@@ -70,16 +95,10 @@ ActiveRecord::Schema.define(:version => 20110611005527) do
 
   add_index "memory_ratings", ["memory_id"], :name => "index_memory_ratings_on_memory_id"
 
-  create_table "problems", :force => true do |t|
-    t.string   "name"
-    t.string   "statement"
+  create_table "notes", :force => true do |t|
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "course_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
   end
 
   create_table "quiz_components", :force => true do |t|
@@ -94,17 +113,18 @@ ActiveRecord::Schema.define(:version => 20110611005527) do
   add_index "quiz_components", ["quiz_id"], :name => "index_quiz_components_on_quiz_id"
 
   create_table "quizzes", :force => true do |t|
-    t.integer  "problem_id"
-    t.string   "steps",         :default => ""
-    t.string   "question"
+    t.text     "question",      :limit => 65536
     t.text     "answer_input"
     t.string   "answer"
     t.text     "answer_output"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
+    t.boolean  "in_lesson",                      :default => false
+    t.text     "explanation"
   end
 
-  add_index "quizzes", ["problem_id"], :name => "index_quizzes_on_problem_id"
+  add_index "quizzes", ["course_id"], :name => "index_quizzes_on_course_id"
 
   create_table "responses", :force => true do |t|
     t.string   "answer"
@@ -117,26 +137,6 @@ ActiveRecord::Schema.define(:version => 20110611005527) do
 
   add_index "responses", ["quiz_id"], :name => "index_responses_on_quiz_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
-
-  create_table "step_components", :force => true do |t|
-    t.integer  "step_id"
-    t.integer  "component_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "step_components", ["component_id"], :name => "index_step_components_on_component_id"
-  add_index "step_components", ["step_id", "component_id"], :name => "index_step_components_on_step_id_and_component_id", :unique => true
-  add_index "step_components", ["step_id"], :name => "index_step_components_on_step_id"
-
-  create_table "steps", :force => true do |t|
-    t.string   "name"
-    t.string   "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "order_number"
-    t.integer  "problem_id"
-  end
 
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"

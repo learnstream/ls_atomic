@@ -36,6 +36,9 @@ section {
   -webkit-border-radius: 20px;
   border-radius: 20px; }
 
+h1 {
+  font-size: 2em; }
+
 /* Links */
 a {
   color: #0099cc;
@@ -281,3 +284,29 @@ a.signup_button {
   border: 1px solid #000; }
 #fbd .selected-answer {
   background: #cfc; }
+
+/* Lessons page */
+#content {
+  float: left;
+  clear: right;
+  width: 400px;
+  height: 295px;
+  background: #cfc;
+  overflow-y: auto;
+  overflow-x: hidden; }
+  #content .Note {
+    border: 1px solid #6c6;
+    padding: .5em; }
+
+#ytPlayer {
+  width: 480px;
+  clear: left;
+  float: left; }
+
+#quiz_area {
+  width: 700px;
+  clear: both; }
+
+/* Lessons - Teacher */
+#lesson-edit #events-area {
+  float: right; }

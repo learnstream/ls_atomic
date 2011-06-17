@@ -13,8 +13,7 @@ describe ResponsesController do
         @student.enroll!(@course)
         @component = Factory(:component, :course => @course)
 
-        @problem = Factory(:problem, :course => @course)
-        @quiz = Factory(:quiz, :problem => @problem)
+        @quiz = Factory(:quiz, :course => @course)
         @quiz.components << @component
         @attr = { :quiz_id => @quiz, :answer => @quiz.answer, :user_id => @student }
       end
@@ -72,8 +71,7 @@ describe ResponsesController do
       test_sign_in(@student)
       @course = Factory(:course)
       @student.enroll!(@course)
-      @problem = Factory(:problem, :course => @course)
-      @quiz = Factory(:quiz, :problem => @problem, :answer => "42")
+      @quiz = Factory(:quiz, :course => @course, :answer => "42")
       @myresponse = Factory(:response, :quiz => @quiz, :user => @student)
     end
 

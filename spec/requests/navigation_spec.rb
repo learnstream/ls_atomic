@@ -11,9 +11,7 @@ describe 'Navigation' do
     @admin = Factory(:admin)
     @course = Factory(:course, :name => "Integration")
     @component = Factory(:component, :course => @course)
-    @problem = Factory(:problem, :course => @course)
-    @step = Factory(:step, :problem => @problem)
-    @quiz = Factory(:quiz, :problem => @problem, :component_tokens => "#{@component.id}") 
+    @quiz = Factory(:quiz, :course => @course, :component_tokens => "#{@component.id}") 
     @user.enroll!(@course)
     integration_sign_in(@user)
   end

@@ -13,7 +13,7 @@
     <%= link_to "Good", rate_components_quiz_path(myresponse.quiz, :quality => 4), :id => "rate-good", :class => "round quizbutton", :method => :get %>
     <%= link_to "Easy", rate_components_quiz_path(myresponse.quiz, :quality => 5), :id => "rate-easy", :class => "round quizbutton", :method => :get %>
   <% else %>
-    <%= link_to "Next", course_study_index_path(myresponse.quiz.problem.course), :class => "round quizbutton"  %>
+    <%= link_to "Next", course_study_index_path(myresponse.quiz.course), :class => "round quizbutton"  %>
   <% end %>
 </div>
 </div>

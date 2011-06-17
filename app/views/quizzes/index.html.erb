@@ -1,0 +1,7 @@
+<%= link_to "Add exercise", new_course_quiz_path(@course) %>
+
+<ul>
+<% @quizzes.each do |quiz| %>
+  <li><%= quiz.question %></li>
+<% end %>
+</ul>
