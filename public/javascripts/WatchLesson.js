@@ -104,9 +104,12 @@ var scrollToEvent = function(events) {
   }
 
 
-  var selector = "#content > div:eq(" + here + ")";
+  var element = $("#content > div:eq(" + here + ")");
+  var offset = -1*($("#content").height() - element.outerHeight())/2;
+  if (offset > 0) offset = 0;
+
     
-  $("#content").scrollTo($(selector), 500);
+  $("#content").scrollTo(element, 500, { offset: offset });
 }
 
 var loadEvents = function(events) {
@@ -190,7 +193,7 @@ var loadEvent = function(next_event) {
                            .text(formatTime(next_event.start_time))
                            .attr("href", "#")
                            .click(function() {
-                               ytplayer.seekTo(next_event.start_time, true); });
+                               ytplayer.seekTo(next_event.start_time - .6, true); });
 
   if (next_event.type == "Note") {
     newdiv.text(next_event.content)
