@@ -27,4 +27,17 @@ class NotesController < ApplicationController
     @note = Note.new
   end
 
+  def update
+    @note = Note.find(params[:id])
+    @note.update_attributes(params[:note])
+    @note.events.first.update_attributes( :start_time => params[:start_time],  :end_time => params[:end_time], 
+                                    :video_url => params[:video_url]) 
+                                   
+
+    respond_to do |format|
+      format.html   { render :text =>  "testupdate" } 
+    end
+
+
+  end
 end

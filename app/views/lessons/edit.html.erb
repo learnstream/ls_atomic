@@ -15,13 +15,19 @@
   <div id="events-area">
     <%= render @events %> 
   </div>
+  <div id="tabs-container">
+    <div id="lesson-edit-tabs">
+      <ul>
+        <li><a href="#add-note">Add Note</a></li>
+        <li><a href="#add-quiz">Add Quiz</a></li>
+      </ul>
+      <div id="add-note">
+        <%= render :partial => 'notes/form', :locals => { :lesson => @lesson } %> 
+      </div>
 
-  <div id="add-note">
-    <%= render :partial => 'notes/form', :locals => { :lesson => @lesson } %> 
-  </div>
-
-  <div id="add-quiz">
-    <%= render :partial => 'quizzes/form' %>
-  </div>
-
+      <div id="add-quiz">
+        <%= render :partial => 'quizzes/form', :locals => { :lesson => @lesson } %>
+      </div>
+    </div>
+</div>
 </div>

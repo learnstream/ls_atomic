@@ -2,6 +2,7 @@
   <%= render 'shared/error_messages', :object => f.object %>
 
   <div id="course_id" style="display: none;"><%= @course.id %></div>
+  <%= hidden_field_tag :lesson_id, lesson.id unless lesson.nil? %>
 
   <%= f.hidden_field :answer_input, :value => "" %>
   <%= f.hidden_field :answer_output, :value => "" %>

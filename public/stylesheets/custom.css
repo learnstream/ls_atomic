@@ -322,17 +322,72 @@ a.signup_button {
     #lesson-edit #video-area #video-url-div #load_video_url {
       margin: 0px 5px; }
 #lesson-edit #events-area {
-  float: right; }
+  float: right;
+  width: 400px;
+  height: 480px;
+  overflow-y: auto;
+  background-color: #EEEEEE;
+  border: 1px solid #bbbbbb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+  #lesson-edit #events-area .event {
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 1px; }
+  #lesson-edit #events-area .note {
+    border-right: 2px solid #4d4d4d;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    border-bottom: 2px solid #4d4d4d;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border-left: 2px solid #999999;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    border-top: 2px solid #999999;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
+  #lesson-edit #events-area .quiz {
+    border-right: 2px solid red;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    border-bottom: 2px solid red;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border-left: 2px solid #ff8080;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    border-top: 2px solid #ff8080;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
+#lesson-edit #tabs-container {
+  width: 500px;
+  clear: left; }
+  #lesson-edit #tabs-container .ui-tabs-nav {
+    height: 40px; }
 #lesson-edit #add-note {
-  clear: left;
-  width: 480px; }
+  /* clear: left;*/
+  width: 460px; }
   #lesson-edit #add-note #note_content {
-    width: 470px;
+    width: 440px;
     height: 100px; }
   #lesson-edit #add-note table {
-    width: 220px; }
+    width: 270px;
+    margin: 0px; }
     #lesson-edit #add-note table input {
       width: 50px; }
     #lesson-edit #add-note table td {
       padding: 0 5px;
       width: auto; }
+  #lesson-edit #add-note #current_video_url {
+    font-size: 0.7em;
+    padding: 5px; }

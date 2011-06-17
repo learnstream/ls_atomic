@@ -21,7 +21,7 @@
 </table>
 <% end %>
 
-<% if not @taught_courses.empty? %>
+<% if not @taught_courses.nil? %>
 <h2>Courses you are teaching</h2>
 <table>
   <% @taught_courses.each do |course| %>

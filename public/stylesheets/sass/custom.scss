@@ -368,22 +368,65 @@ a.signup_button {
   
   #events-area {
     float:right;
-  }
+    width: 400px; 
+    height: 480px;
+    overflow-y: auto;
+    background-color: #EEEEEE;
+    border: 1px solid darken(#EEEEEE, 20%);
+    @include rounded(5px);
+  
+    .event {
+       background-color: lighten(#EEEEEE, 15%);
+       padding: 5px;
+       margin-bottom: 1px;
+     }
 
+     .note { 
+         border-right: 2px solid lighten(black, 30%);
+         @include rounded(15px);
+         border-bottom: 2px solid lighten(black, 30%);
+         @include rounded(5px);
+         border-left: 2px solid lighten(black, 60%);
+         @include rounded(15px);
+         border-top: 2px solid lighten(black, 60%);
+         @include rounded(5px);
+        }
+
+       .quiz { 
+         border-right: 2px solid lighten(red, 0%);
+         @include rounded(15px);
+         border-bottom: 2px solid lighten(red, 0%);
+         @include rounded(5px);
+         border-left: 2px solid lighten(red, 25%);
+         @include rounded(15px);
+         border-top: 2px solid lighten(red, 25%);
+         @include rounded(5px);
+       }
+}
+  
+#tabs-container {
+
+  width: 500px;
+  clear: left;
+
+  .ui-tabs-nav { height: 40px;}
+}
   #add-note {
-    clear: left;
-    width: 480px;
+   /* clear: left;*/
+    width: 460px;
 
     #note_content {
-      width: 470px;
+      width: 440px;
       height: 100px;
     }
 
     table { 
-      width: 220px;
+      width: 270px;
+      margin: 0px;
       input { width: 50px;}
       td { padding: 0 5px; width: auto;}
     }
+    #current_video_url{ font-size: 0.7em; padding: 5px; }
   }
 }
 
