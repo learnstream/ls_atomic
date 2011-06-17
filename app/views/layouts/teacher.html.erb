@@ -2,10 +2,10 @@
 <h1><%= link_to @course.name, @course %></h1>
 
 <ul id="local-nav">
-  <li class="round"><%= link_to "Students", student_status_course_path(@course) %></li>
-  <li class="round"><%= link_to "Lessons", course_lessons_path(@course) %></li>
-  <li class="round"><%= link_to "Components", course_components_path(@course) %></li> 
-  <li class="round"><%= link_to "Exercises", course_quizzes_path(@course) %></li>
+  <li class="round ui-widget-header"><%= link_to "Students", student_status_course_path(@course) %></li>
+  <li class="round ui-widget-header"><%= link_to "Lessons", course_lessons_path(@course) %></li>
+  <li class="round ui-widget-header"><%= link_to "Components", course_components_path(@course) %></li> 
+  <li class="round ui-widget-header"><%= link_to "Exercises", course_quizzes_path(@course) %></li>
 </ul>
 <% end %>
 <%= render :file => 'layouts/application' %>

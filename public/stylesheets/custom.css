@@ -20,9 +20,9 @@ header {
   display: none; }
 
 .round {
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px; }
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
 
 tbody tr:nth-child(even) td, tbody tr.even td {
   background: #fff; }
@@ -82,7 +82,7 @@ nav {
     margin-right: 0.5em;
     width: 100px;
     text-align: center;
-    background-color: #ffbb73;
+    background-color: #E78F08;
     list-style-type: none;
     display: inline-block;
     padding: 0.2em 0; }
@@ -308,6 +308,9 @@ a.signup_button {
   clear: both; }
 
 /* Lessons - Teacher */
+#lesson-edit h1 {
+  padding: 0.2em;
+  border-bottom: 2px solid black; }
 #lesson-edit #video-area {
   width: 480px;
   height: 330px;
@@ -353,19 +356,19 @@ a.signup_button {
     -webkit-border-radius: 5px;
     border-radius: 5px; }
   #lesson-edit #events-area .quiz {
-    border-right: 2px solid red;
+    border-right: 2px solid #ff8080;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid #ff8080;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    border-left: 2px solid #ff8080;
+    border-left: 2px solid red;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
-    border-top: 2px solid #ff8080;
+    border-top: 2px solid red;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px; }
