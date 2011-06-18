@@ -20,10 +20,7 @@ class QuizzesController < ApplicationController
 
     @lesson = Lesson.find(params[:quiz][:new_event_attributes][:lesson_id]) if params[:quiz].has_key?("new_event_attributes")
     if @lesson
-      last_event = @lesson.events.last
-      next_event = last_event.nil? ?  0 : last_event.order_number + 1
       params[:quiz][:in_lesson] = true
-      params[:quiz][:new_event_attributes][:order_number] = next_event
     end
 
     @quiz = @course.quizzes.build(params[:quiz])
