@@ -1,4 +1,6 @@
 class Quiz < ActiveRecord::Base
+  include Playable
+  
   attr_reader :component_tokens
 
   belongs_to :course
@@ -9,20 +11,12 @@ class Quiz < ActiveRecord::Base
 
   validates :question, :presence => true 
   validate :answer_type_present
+  validates_associated :events
+
+  after_update :save_event
 
   def component_tokens=(ids)
     self.component_ids = ids.split(",")
-  end
-
-  def steps
-    read_attribute(:steps)
-  end
-
-  def steps=(steps)
-    steps_string = ""
-    steps.map{|step| steps_string << step << ","}
-    steps_string.slice!(-1) unless steps_string.empty?
-    write_attribute(:steps, steps_string)
   end
 
   def answer_type

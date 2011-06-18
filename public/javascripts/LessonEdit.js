@@ -13,14 +13,14 @@ $(document).ready(function() {
     $(".start-sync").click(function(){
         var time = parseInt(ytplayer.getCurrentTime());
         var parent_node = $(this).parentsUntil('table')[1];
-        $(parent_node).children('td').children("#start_time").val(time);
+        $(parent_node).children('td').children("input").val(time);
         return false;
     });
 
     $(".end-sync").click(function(){
         var time = parseInt(ytplayer.getCurrentTime());
         var parent_node = $(this).parentsUntil('table')[1];
-        $(parent_node).children('td').children("#end_time").val(time);
+        $(parent_node).children('td').children("input").val(time);
         return false;
     });
 
@@ -34,14 +34,15 @@ $(document).ready(function() {
 // Binds an ajax submit to the note form
 var newNoteSubmit = function() {
    $("#new_note").unbind('submit');
-   $("#new_note").submit(function(){
+   $("#new_note").submit(function(e){
+        e.preventDefault();
         var video_url = ytplayer.getVideoUrl();
-        var lesson_id = $("#lesson_id").val();
+        var lesson_id = $("#lesson_id").text();
 
-        $("#video_url").val(video_url);
+        $("#note_new_event_attributes_video_url").val(video_url);
+        $("#note_new_event_attributes_lesson_id").val(lesson_id);
 
         var data = $("#new_note").serialize();
-
 
         $.post('/notes/', data, function(data){ 
           $("#note-error-message").text(data);
@@ -58,9 +59,11 @@ var newQuizSubmit = function() {
    $("#new_quiz").unbind('submit');
    $("#new_quiz").submit(function(){
         var video_url = ytplayer.getVideoUrl();
-        var lesson_id = $("#lesson_id").val();
+        var lesson_id = $("#lesson_id").text();
         var course_id = $("#course_id").text();
-        $("#video_url").val(video_url);
+
+        $("#quiz_new_event_attributes_video_url").val(video_url);
+        $("#quiz_new_event_attributes_lesson_id").val(lesson_id);
 
         var data = $("#new_quiz").serialize();
         $.post('/courses/' + course_id + '/quizzes/', data, function(data){ 

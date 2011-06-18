@@ -1,0 +1,24 @@
+<% new_or_existing = event.new_record? ? 'new' : 'existing' %>
+<% prefix = "#{parent_type}[#{new_or_existing}_event_attributes]" %>
+
+<%= fields_for prefix, event do |event_form| %>
+<table>
+  <tr>
+    <div class="field">
+      <td><%= event_form.label :start_time, "Start time: " %></td>
+      <td><%= event_form.text_field :start_time %></td>
+      <td><a href="#" class="start-sync">Sync start</a></td>
+    </div>
+  </tr>
+  <tr>
+    <div class="field">
+      <td><%= event_form.label :end_time, "End time: " %></td>
+      <td><%= event_form.text_field :end_time %></td>
+        <td><a href="#" class="end-sync">Sync end</a></td>
+    </div>
+  </tr>
+</table>
+<div id="current_video_url"></div>
+<%= event_form.hidden_field :video_url %>
+<%= event_form.hidden_field :lesson_id %>
+<% end %>

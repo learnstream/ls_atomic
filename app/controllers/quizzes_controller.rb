@@ -18,17 +18,15 @@ class QuizzesController < ApplicationController
     populate_answer_json(params[:quiz][:answer_type])
 
 
-    @quiz = @course.quizzes.build(params[:quiz])
-
-    @lesson = Lesson.find(params[:lesson_id]) unless params[:lesson_id].nil?
+    @lesson = Lesson.find(params[:quiz][:new_event_attributes][:lesson_id]) if params[:quiz].has_key?("new_event_attributes")
     if @lesson
-      last_event = @lesson.events[-1]
+      last_event = @lesson.events.last
       next_event = last_event.nil? ?  0 : last_event.order_number + 1
-      @quiz.in_lesson = true
-      @quiz.events.build(:start_time => params[:start_time], :end_time => params[:end_time], 
-                         :video_url => params[:video_url], :lesson_id => params[:lesson_id], 
-                         :order_number => next_event)
+      params[:quiz][:in_lesson] = true
+      params[:quiz][:new_event_attributes][:order_number] = next_event
     end
+
+    @quiz = @course.quizzes.build(params[:quiz])
 
     if @quiz.save
       flash[:success] = "Quiz created!"
@@ -54,6 +52,7 @@ class QuizzesController < ApplicationController
   end
 
   def update
+    params[:quiz][:existing_event_attributes] ||= {}
     @quiz = Quiz.find(params[:id])
 
     populate_answer_json(params[:quiz][:answer_type])
