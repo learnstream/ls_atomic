@@ -15,18 +15,11 @@ describe ResponsesController do
 
         @quiz = Factory(:quiz, :course => @course)
         @quiz.components << @component
-        @attr = { :quiz_id => @quiz, :answer => @quiz.answer, :user_id => @student }
+        @attr = { :quiz => @quiz, :answer => @quiz.answer }
       end
 
       it "should create a new response object" do
         lambda do
-          post :create, :response => @attr
-        end.should change(Response, :count).by(1)
-      end
-
-      it "should not create multiple responses in quick succession" do
-        lambda do
-          post :create, :response => @attr
           post :create, :response => @attr
         end.should change(Response, :count).by(1)
       end
@@ -61,6 +54,30 @@ describe ResponsesController do
         post :create, :response => @attr
         response.should redirect_to Response.first
       end
+    end
+  end
+
+  describe "PUT 'update'" do
+
+    before(:each) do
+      @student = Factory(:user)
+      test_sign_in(@student)
+      @course = Factory(:course)
+      @student.enroll!(@course)
+      @quiz = Factory(:quiz, :course => @course, :answer => "42")
+      @myresponse = Factory(:response, :quiz => @quiz, :user => @student)
+    end
+
+    it "should rate the quiz components with the given quality" do
+      lambda do
+        put :update, :id => @myresponse, :quality => "4"
+      end.should change(MemoryRating, :count).by(@quiz.components.count)
+    end
+
+    it "should change the response to have been rated" do
+      put :update, :id => @myresponse, :quality => "4"
+      @myresponse.reload
+      @myresponse.has_been_rated.should == true
     end
   end
 

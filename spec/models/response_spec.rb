@@ -3,9 +3,13 @@ require 'spec_helper'
 describe Response do
 
   before(:each) do
+    @course = Factory(:course)
     @user = Factory(:user)
-    @quiz = Factory(:text_quiz)
-    @response = Factory(:response, :user => @user, :quiz => @quiz)
+    @quiz = Factory(:text_quiz, :course => @course)
+    @component = Factory(:component, :course => @course)
+    @quiz.components << @component
+    @user.enroll!(@course)
+    @response = Factory(:correct_response, :user => @user, :quiz => @quiz)
   end
 
   it "should have a user attribute" do
@@ -24,4 +28,15 @@ describe Response do
     @response.quiz.should == @quiz
   end
 
+  it "should be able to rate components for a quiz" do
+    lambda do 
+      @response.rate_components!(4)
+    end.should change(MemoryRating, :count).by(@quiz.components.count)
+  end
+
+  it "should be rated when creating an incorrect response" do
+    @incorrect_response = Factory(:response, :user => @user, :quiz => @quiz)
+    @incorrect_response.reload
+    @incorrect_response.has_been_rated.should == true
+  end
 end

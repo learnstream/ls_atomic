@@ -291,12 +291,20 @@ a.signup_button {
   clear: right;
   width: 400px;
   height: 295px;
-  background: #cfc;
+  background: #fff;
   overflow-y: auto;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  border: 1px solid black; }
   #content .Note {
-    border: 1px solid #6c6;
+    border-bottom: 1px solid #6c6;
     padding: .5em; }
+  #content .Quiz {
+    border-bottom: 1px solid #c66;
+    padding: .5em;
+    background: #fcc; }
+  #content .timelink {
+    font-size: .7em;
+    margin-right: .5em; }
 
 #ytPlayer {
   width: 480px;

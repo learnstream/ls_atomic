@@ -80,13 +80,18 @@ def enroll_users
 end
 
 def make_quizzes
-  quiz = Quiz.create!(:course_id => Course.first,
-                      :component_tokens => "2",
-                      :question => "What is the answer?",
-                      :answer_type => "text",
-                      :answer_input => '{ "type" : "text" }',
-                      :answer => "42",
-                      :answer_output => '{ "type" : "text" }')
+  course = Course.first
+
+  
+  course.components.each do |component|
+    Quiz.create!(:course_id => course,
+                 :component_tokens => component.id.to_s,
+                 :question => "What is the #{component.id}th answer?",
+                 :answer_type => "text",
+                 :answer_input => '{ "type" : "text" }',
+                 :answer => "42",
+                 :answer_output => '{ "type" : "text" }')
+  end
 end
 
 def view_memories
@@ -106,19 +111,29 @@ def make_lesson
   course = Course.first
   lesson = Lesson.create!(:course_id => course,
                           :name => "Newton's Laws")
-  event = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
-                              :start_time => 0,
-                              :end_time => 20,
-                              :order_number => 1)
 
-  event2 = lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
-                               :start_time => 10,
-                               :end_time => 20,
-                               :order_number => 2)
+  events = []
+  20.times do |n| 
+    events << lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
+                                  :start_time => n*5,
+                                  :end_time => (n+1)*5,
+                                  :order_number => n+1)
+  end
 
   note = Note.create!(:content => "Spam that probe, spam it")
-  note.events << event
+  note.events << events[0]
 
   quiz = Quiz.first
-  quiz.events << event2
+  quiz.events << events[1]
+
+  quiz = Quiz.all[1]
+  quiz.events << events[2]
+
+  quiz = Quiz.all[2]
+  quiz.events << events[3]
+  
+  16.times do |n| 
+    note = Note.create!(:content => "Spam the nexus")
+    note.events << events[n+4]
+  end
 end
