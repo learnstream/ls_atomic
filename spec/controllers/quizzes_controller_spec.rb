@@ -78,7 +78,7 @@ describe QuizzesController do
         @attr = @attr.merge({ :new_event_attributes => { :start_time => 10,
                                                          :end_time   => 20,
                                                          :video_url  => "http://www.youtube.com/watch?v=-O8gbdt5BLc",
-                                                         :lesson_id  => @lesson,
+                                                         :lesson_id  => @lesson.id,
                                                          :order_number => 1 }})
       end
 

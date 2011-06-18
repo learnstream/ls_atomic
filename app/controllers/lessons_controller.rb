@@ -41,6 +41,8 @@ class LessonsController < ApplicationController
       flash[:success] = "Lesson updated!"
       redirect_to course_lessons_path(@course)
     else
+      @note = Note.new
+      @quiz = Quiz.new
       render 'edit'
     end
   end
