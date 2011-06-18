@@ -34,7 +34,7 @@ $(document).ready(function() {
 // Binds an ajax submit to the note form
 var newNoteSubmit = function() {
    $("#new_note").unbind('submit');
-   $("#new_note").submit(function(){
+   $("#new_note").submit(function(e){
         var video_url = ytplayer.getVideoUrl();
         var lesson_id = $("#lesson_id").val();
 
@@ -49,7 +49,7 @@ var newNoteSubmit = function() {
           $(':input','#new_note').not(':button, :submit, :reset, :hidden').val('');   
         });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterNoteLoad);
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }
@@ -69,7 +69,7 @@ var newQuizSubmit = function() {
           $(':input','#new_quiz').not(':button, :submit, :reset, :hidden').val('');
         });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/');
+        $("#events-area").load('/lessons/' + lesson_id + '/events/',afterEventLoad);
         return false;
     });
 }
@@ -129,8 +129,6 @@ var afterEventLoad = function() {
         crossDomain: false,
         prePopulate: $('#quiz_component_tokens').data('pre')
       });
-      console.log(event_video_start_time);
-      console.log( $(".edit_quiz #start_time"));
       $(".edit_quiz #start_time").val(event_video_start_time);
       $(".edit_quiz #end_time").val(event_video_end_time);
          }); 
@@ -156,22 +154,21 @@ var editQuizSubmit = function(quiz_id) {
                 data:  data ,
                 dataType: 'html',
                 success: function(msg) {
-                  $("a[href=#add-note]").text('Add note');
-                  $("#lesson-edit-tabs").tabs('enable', 1);
+                  $("a[href=#add-quiz]").text('Add note');
+                  $("#lesson-edit-tabs").tabs('enable', 0);
                   $(':input','#new_quiz').not(':button, :submit, :reset, :hidden').val('');
-                  newQuizSubmit();
                 },
                 error: function(msg){ alert(msg); } 
               });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterNoteLoad);
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }
 
 var editNoteSubmit = function(note_id) {
   $("#new_note").unbind('submit');
-  $("#new_note").submit(function(){
+  $("#new_note").submit(function(e){
         var video_url = ytplayer.getVideoUrl();
         var lesson_id = $("#lesson_id").val();
 
@@ -188,12 +185,11 @@ var editNoteSubmit = function(note_id) {
                   $("a[href=#add-note]").text('Add note');
                   $("#lesson-edit-tabs").tabs('enable', 1);
                   $(':input','#new_note').not(':button, :submit, :reset, :hidden').val('');
-                  newNoteSubmit();
                 },
                 error: function(msg){ alert(msg); } 
               });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterNoteLoad);
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }

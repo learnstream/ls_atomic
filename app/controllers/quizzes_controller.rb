@@ -58,12 +58,25 @@ class QuizzesController < ApplicationController
 
     populate_answer_json(params[:quiz][:answer_type])
 
+    if @quiz.in_lesson 
+      @quiz.events.first.update_attributes(:start_time => params[:start_time], :end_time => params[:end_time], :video_url => params[:video_url])
+    end
+
     if @quiz.update_attributes(params[:quiz])
       flash[:success] = "Quiz edited."
       redirect_to course_quizzes_path(@quiz.course)
     else
       render :action => 'edit'
     end
+
+    #if @quiz.update_attributes(params[:quiz])
+    #  message = "Updated!"
+    #else
+    #  message = "Error."
+    #end
+    #respond_to do |format|
+    #  format.html { render :text => message}
+    #end
   end
 
   def edit
