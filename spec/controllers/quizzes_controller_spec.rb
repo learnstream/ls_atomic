@@ -64,6 +64,19 @@ describe QuizzesController do
     end
   end
 
+  describe "GET 'edit'" do
+
+    before(:each) do
+      @admin = Factory(:admin)
+      test_sign_in(@admin)
+    end
+
+    it "should be successful" do
+      get :edit, :course_id => @course, :id => @quiz
+      response.should be_success
+    end
+  end
+
   describe "POST 'create'" do
     
     before(:each) do
@@ -176,41 +189,6 @@ describe QuizzesController do
     it "should be successful" do
       get :show, :id => @quiz
       response.should be_success
-    end
-  end
-
-  describe "GET 'rate_components'" do
-    before(:each) do
-      @student = Factory(:user)
-      test_sign_in(@student)
-      @student.enroll!(@course)
-      @memory = @student.memories.find_by_component_id(@component)
-    end
-
-    it "should rate each component" do
-      lambda do
-        get :rate_components, :id => @quiz, :quality => 3
-      end.should change(MemoryRating, :count).by(1)
-    end
-
-    it "should give the correct rating to the components" do
-      get :rate_components, :id => @quiz, :quality => 3
-      @student.memories.last.memory_ratings.last.quality.should == 3
-    end
-
-    it "should not allow student to rate components that have been rated recently" do
-      get :rate_components, :id => @quiz, :quality => 3
-      get :rate_components, :id => @quiz, :quality => 4
-      @student.memories.last.memory_ratings.last.quality.should == 3
-    end
-
-    it "should allow student to rate components again once they are due" do
-      get :rate_components, :id => @quiz, :quality => 3
-      @memory = @student.memories.last
-      @memory.due = Date.today.prev_day.to_datetime
-      @memory.save
-      get :rate_components, :id => @quiz, :quality => 4
-      @memory.memory_ratings.last.quality.should == 4
     end
   end
 end

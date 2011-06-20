@@ -97,14 +97,12 @@ class QuizzesController < ApplicationController
       message = "Quiz saved!"
       if !@quiz.in_lesson 
         redirect_to course_quizzes_path(@quiz.course)
+      else
+        redirect_to course_quizzes_path(@quiz.course)
       end
     else
       render :action => 'edit'
     end
-    respond_to do |format|
-      format.html { redirect_to 'root'}
-    end
-
   end
 
   def edit
@@ -113,10 +111,6 @@ class QuizzesController < ApplicationController
     if @quiz.in_lesson
       @event = @quiz.events[0]
       @lesson = @event.lesson
-    end
-    respond_to do |format|
-      format.html { render 'edit' }
-      format.js { render :partial => 'form' }
     end
   end
 

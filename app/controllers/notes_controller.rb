@@ -18,6 +18,10 @@ class NotesController < ApplicationController
     @note.events.build
   end
 
+  def edit
+    @note = Note.find(params[:id])
+  end
+
   def update
     params[:note][:existing_event_attributes] ||= {}
 
