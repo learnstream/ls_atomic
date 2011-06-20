@@ -36,6 +36,7 @@ var newNoteSubmit = function() {
    $("#new_note").unbind('submit');
    $("#new_note").submit(function(e){
         var video_url = ytplayer.getVideoUrl();
+   console.log('submitted new note');
         var lesson_id = $("#lesson_id").val();
 
         $("#video_url").val(video_url);
@@ -69,7 +70,7 @@ var newQuizSubmit = function() {
           $(':input','#new_quiz').not(':button, :submit, :reset, :hidden').val('');
         });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/',afterEventLoad);
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }
@@ -157,7 +158,11 @@ var editQuizSubmit = function(quiz_id) {
                 data:  data ,
                 dataType: 'html',
                 success: function(msg) {
+<<<<<<< HEAD
                   $("a[href=#add-quiz]").text('Add note');
+=======
+                  $("a[href=#add-quiz]").text('Add Quiz');
+>>>>>>> 3f6f4c61a950cc6ed81ec2b1807a379a9da11ec3
                   $("#lesson-edit-tabs").tabs('enable', 0);
                   $(':input','#new_quiz').not(':button, :submit, :reset, :hidden').val('');
                 },
@@ -185,7 +190,7 @@ var editNoteSubmit = function(note_id) {
                 data:  data ,
                 dataType: 'html',
                 success: function(msg) {
-                  $("a[href=#add-note]").text('Add note');
+                  $("a[href=#add-note]").text('Add Note');
                   $("#lesson-edit-tabs").tabs('enable', 1);
                   $(':input','#new_note').not(':button, :submit, :reset, :hidden').val('');
                 },

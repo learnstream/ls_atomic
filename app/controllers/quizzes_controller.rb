@@ -55,6 +55,7 @@ class QuizzesController < ApplicationController
 
   def update
     @quiz = Quiz.find(params[:id])
+    @lesson = Lesson.find(params[:lesson_id]) unless params[:lesson_id].nil?
 
     populate_answer_json(params[:quiz][:answer_type])
 
@@ -64,19 +65,18 @@ class QuizzesController < ApplicationController
 
     if @quiz.update_attributes(params[:quiz])
       flash[:success] = "Quiz edited."
-      redirect_to course_quizzes_path(@quiz.course)
+      message = "Quiz saved!"
+      if !@quiz.in_lesson 
+        redirect_to course_quizzes_path(@quiz.course)
+      end
     else
       render :action => 'edit'
     end
 
-    #if @quiz.update_attributes(params[:quiz])
-    #  message = "Updated!"
-    #else
-    #  message = "Error."
-    #end
-    #respond_to do |format|
-    #  format.html { render :text => message}
-    #end
+    respond_to do |format|
+      format.html { redirect_to 'root'}
+    end
+
   end
 
   def edit
