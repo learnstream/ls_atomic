@@ -36,6 +36,7 @@ var newNoteSubmit = function() {
    $("#new_note").unbind('submit');
    $("#new_note").submit(function(){
         var video_url = ytplayer.getVideoUrl();
+   console.log('submitted new note');
         var lesson_id = $("#lesson_id").val();
 
         $("#video_url").val(video_url);
