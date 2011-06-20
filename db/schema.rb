@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20110616221128) do
     t.integer  "views",        :default => 0
     t.integer  "streak",       :default => 0
     t.datetime "last_viewed"
-    t.datetime "due",          :default => '2011-05-27 23:13:53'
+    t.datetime "due",          :default => '2011-05-28 02:09:35'
     t.datetime "created_at"
     t.datetime "updated_at"
   end

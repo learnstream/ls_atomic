@@ -35,7 +35,6 @@ $(document).ready(function() {
 var newNoteSubmit = function() {
    $("#new_note").unbind('submit');
    $("#new_note").submit(function(e){
-        e.preventDefault();
         var video_url = ytplayer.getVideoUrl();
         var lesson_id = $("#lesson_id").text();
 
@@ -124,6 +123,9 @@ var afterEventLoad = function() {
        loadAndPlayVideo( event_video_id, event_video_start_time, 0, "video-player", 1);
        } 
        $("#load_video_url").val(data_div.attr("data-video"));
+       // FIXME:Using this load function pulls a whole different form into here, which
+       // may not be what we want. There might be a better way to do it with
+       // this function, or with something else.
        $("#add-quiz").load('/courses/' + course_id + '/quizzes/' + quiz_id + '/edit.js/', 
          function(){
           $('#quiz_component_tokens').unbind();
@@ -132,8 +134,6 @@ var afterEventLoad = function() {
         crossDomain: false,
         prePopulate: $('#quiz_component_tokens').data('pre')
       });
-      console.log(event_video_start_time);
-      console.log( $(".edit_quiz #start_time"));
       $(".edit_quiz #start_time").val(event_video_start_time);
       $(".edit_quiz #end_time").val(event_video_end_time);
          }); 
@@ -162,7 +162,6 @@ var editQuizSubmit = function(quiz_id) {
                   $("a[href=#add-quiz]").text('Add Quiz');
                   $("#lesson-edit-tabs").tabs('enable', 0);
                   $(':input','#new_quiz').not(':button, :submit, :reset, :hidden').val('');
-                  newQuizSubmit();
                 },
                 error: function(msg){ alert(msg); } 
               });
@@ -174,7 +173,7 @@ var editQuizSubmit = function(quiz_id) {
 
 var editNoteSubmit = function(note_id) {
   $("#new_note").unbind('submit');
-  $("#new_note").submit(function(){
+  $("#new_note").submit(function(e){
         var video_url = ytplayer.getVideoUrl();
         var lesson_id = $("#lesson_id").val();
 
@@ -191,7 +190,6 @@ var editNoteSubmit = function(note_id) {
                   $("a[href=#add-note]").text('Add Note');
                   $("#lesson-edit-tabs").tabs('enable', 1);
                   $(':input','#new_note').not(':button, :submit, :reset, :hidden').val('');
-                  newNoteSubmit();
                 },
                 error: function(msg){ alert(msg); } 
               });

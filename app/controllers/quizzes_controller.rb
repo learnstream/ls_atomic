@@ -92,6 +92,10 @@ class QuizzesController < ApplicationController
 
     populate_answer_json(params[:quiz][:answer_type])
 
+    if @quiz.in_lesson 
+      @quiz.events.first.update_attributes(:start_time => params[:start_time], :end_time => params[:end_time], :video_url => params[:video_url])
+    end
+
     if @quiz.update_attributes(params[:quiz])
       flash[:success] = "Quiz edited."
       message = "Quiz saved!"
@@ -103,6 +107,11 @@ class QuizzesController < ApplicationController
     else
       render :action => 'edit'
     end
+
+    respond_to do |format|
+      format.html { redirect_to 'root'}
+    end
+
   end
 
   def edit
