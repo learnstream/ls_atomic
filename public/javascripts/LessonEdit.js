@@ -121,6 +121,9 @@ var afterEventLoad = function() {
        loadAndPlayVideo( event_video_id, event_video_start_time, 0, "video-player", 1);
        } 
        $("#load_video_url").val(data_div.attr("data-video"));
+       // FIXME:Using this load function pulls a whole different form into here, which
+       // may not be what we want. There might be a better way to do it with
+       // this function, or with something else.
        $("#add-quiz").load('/courses/' + course_id + '/quizzes/' + quiz_id + '/edit.js/', 
          function(){
           $('#quiz_component_tokens').unbind();

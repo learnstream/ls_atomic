@@ -42,6 +42,7 @@ class LessonsController < ApplicationController
       flash[:success] = "Lesson updated!"
       redirect_to course_lessons_path(@course)
     else
+      @events = @lesson.events
       render 'edit'
     end
   end
