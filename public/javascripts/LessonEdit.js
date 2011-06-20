@@ -50,7 +50,7 @@ var newNoteSubmit = function() {
           $(':input','#new_note').not(':button, :submit, :reset, :hidden').val('');   
         });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterNoteLoad);
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }
@@ -72,7 +72,7 @@ var newQuizSubmit = function() {
           $(':input','#new_quiz').not(':button, :submit, :reset, :hidden').val('');
         });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/');
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }
@@ -159,15 +159,15 @@ var editQuizSubmit = function(quiz_id) {
                 data:  data ,
                 dataType: 'html',
                 success: function(msg) {
-                  $("a[href=#add-note]").text('Add note');
-                  $("#lesson-edit-tabs").tabs('enable', 1);
+                  $("a[href=#add-quiz]").text('Add Quiz');
+                  $("#lesson-edit-tabs").tabs('enable', 0);
                   $(':input','#new_quiz').not(':button, :submit, :reset, :hidden').val('');
                   newQuizSubmit();
                 },
                 error: function(msg){ alert(msg); } 
               });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterNoteLoad);
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }
@@ -188,7 +188,7 @@ var editNoteSubmit = function(note_id) {
                 data:  data ,
                 dataType: 'html',
                 success: function(msg) {
-                  $("a[href=#add-note]").text('Add note');
+                  $("a[href=#add-note]").text('Add Note');
                   $("#lesson-edit-tabs").tabs('enable', 1);
                   $(':input','#new_note').not(':button, :submit, :reset, :hidden').val('');
                   newNoteSubmit();
@@ -196,7 +196,7 @@ var editNoteSubmit = function(note_id) {
                 error: function(msg){ alert(msg); } 
               });
 
-        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterNoteLoad);
+        $("#events-area").load('/lessons/' + lesson_id + '/events/', afterEventLoad);
         return false;
     });
 }
