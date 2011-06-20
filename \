@@ -1,2 +1,0 @@
-$("#add-quiz").html("<%= escape_javascript(render :partial => 'form') %>");
-$("#edit_quiz_<%= @quiz.id %>").data('remote', 'true')
