@@ -94,7 +94,7 @@ var changeQuizState = function() {
 }
 
 var scrollToEvent = function(events) {
-  if (userScrolling) return;
+  if (userScrolling || (ytplayer.getPlayerState() == 2)) return;
   var time = ytplayer.getCurrentTime();
   var here = 0;
   for(var i=0; i < events.length-1; i++) {
