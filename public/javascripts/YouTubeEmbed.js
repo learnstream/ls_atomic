@@ -63,7 +63,6 @@ loadYouTubePlayer = function(video_id, start_time, end_time, embed_area, autopla
 };
 
 function loadAndPlayVideo(video_id, start_time, end_time, embed_area, autoplay) {
-  console.log('autoplay is' + autoplay);
   if (typeof autoplay == 'undefined') autoplay = 1;
   if (ytplayer == null) 
    loadYouTubePlayer(video_id, start_time, end_time, embed_area, autoplay);

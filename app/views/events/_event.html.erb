@@ -1,6 +1,6 @@
 
-<div title="Time: <%= event.start_time %> s" class="event <%= event.playable_type.downcase  %>">
-  <div class="hidden data" id="event-<%= event.id %>"
+<div id="<%= event.playable_type.downcase %>-<%= event.playable.id %>" title="Time: <%= event.start_time %> s" class="event <%= event.playable_type.downcase  %>">
+  <div class="hidden data" 
     data-id="<%= event.playable.id %>"
     data-video="<%= event.video_url %>"
     data-start_time="<%= event.start_time %>"
@@ -9,9 +9,9 @@
     data-order_number="<%= event.order_number %>"> </div>
   <% if event.playable_type == "Note" %>
     <div class="content"><%=event.playable.content%></div>
-  <a class="edit-note" href="#">Edit</a>
+    <%= link_to "Edit", edit_note_path(event.playable_id), :remote => true %>
   <% else %>
     <div class="question"><%=event.playable.question%></div>
-    <a class="edit-quiz" href="#">Edit</a>
+    <%= link_to "Edit", edit_course_quiz_path(event.lesson.course, event.playable_id), :remote => true %>
   <% end %>
 </div>

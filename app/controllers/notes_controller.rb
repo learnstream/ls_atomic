@@ -3,13 +3,11 @@ class NotesController < ApplicationController
     @note = Note.new(params[:note])
 
     if @note.save
-      message = "Note saved!"
-    else
-      message = "Error."
-    end
-
-    respond_to do |format|
-      format.html   { render :text =>  message } 
+      @event = @note.events[0]
+      @note = Note.new
+      respond_to do |format|
+        format.js   
+      end
     end
   end
 
@@ -20,16 +18,23 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
     params[:note][:existing_event_attributes] ||= {}
 
-    @note = Note.find(params[:id])
-    @note.update_attributes(params[:note])
+    @updated_note = Note.find(params[:id])
+    @event = @updated_note.events[0]
+    @updated_note.update_attributes(params[:note])
+    @note = Note.new
                                    
     respond_to do |format|
-      format.html   { render :text =>  "testupdate" } 
+      #format.html   { render :text =>  "testupdate" } 
+      format.js   
     end
   end
 end

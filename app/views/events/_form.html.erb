@@ -6,14 +6,14 @@
   <tr>
     <div class="field">
       <td><%= event_form.label :start_time, "Start time: " %></td>
-      <td><%= event_form.text_field :start_time %></td>
+      <td><%= event_form.text_field :start_time, :class => 'start_time' %></td>
       <td><a href="#" class="start-sync">Sync start</a></td>
     </div>
   </tr>
   <tr>
     <div class="field">
       <td><%= event_form.label :end_time, "End time: " %></td>
-      <td><%= event_form.text_field :end_time %></td>
+      <td><%= event_form.text_field :end_time, :class => 'end_time' %></td>
         <td><a href="#" class="end-sync">Sync end</a></td>
     </div>
   </tr>

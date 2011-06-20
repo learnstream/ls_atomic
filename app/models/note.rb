@@ -25,4 +25,8 @@ class Note < ActiveRecord::Base
   validates_associated :events
 
   after_update :save_event
+
+  def as_json(options = {})
+    super["note"].merge({ "existing_event_attributes" => self.events[0].as_json["event"] })
+  end
 end

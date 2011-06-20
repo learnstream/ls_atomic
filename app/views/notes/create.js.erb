@@ -1,0 +1,3 @@
+$("#events-area").append("<%= escape_javascript(render(@event)) %>");
+$("#add-note").html("<%= escape_javascript(render :partial => 'form') %>");
+prepareNoteNew();

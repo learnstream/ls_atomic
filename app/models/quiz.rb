@@ -33,6 +33,16 @@ class Quiz < ActiveRecord::Base
 
   after_update :save_event
 
+  def to_json(options = {})
+    super 
+  end
+
+  def as_json(options = {})
+    super["quiz"].merge({ "components_tokens" => self.component_ids.join(","),
+                          "existing_event_attributes" => self.events[0].as_json["event"] })
+     
+  end
+
   def component_tokens=(ids)
     self.component_ids = ids.split(",")
   end

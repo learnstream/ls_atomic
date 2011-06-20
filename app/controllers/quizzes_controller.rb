@@ -24,10 +24,17 @@ class QuizzesController < ApplicationController
     end
 
     @quiz = @course.quizzes.build(params[:quiz])
-
     if @quiz.save
-      flash[:success] = "Quiz created!"
-      redirect_to course_quizzes_path(@course)
+      respond_to do |format|
+        format.html {
+          flash[:success] = "Quiz created!"
+          redirect_to course_quizzes_path(@course)
+        }
+        format.js {
+          @event = @quiz.events[0]
+          @quiz = @course.quizzes.new
+        }
+      end
     else
       render 'new'
     end
@@ -88,29 +95,39 @@ class QuizzesController < ApplicationController
   def update
     params[:quiz][:existing_event_attributes] ||= {}
     @quiz = Quiz.find(params[:id])
-    @lesson = Lesson.find(params[:lesson_id]) unless params[:lesson_id].nil?
+    @lesson = Lesson.find(params[:quiz][:existing_event_attributes][:lesson_id]) if params[:quiz][:existing_event_attributes].has_key?("lesson_id")
 
     populate_answer_json(params[:quiz][:answer_type])
 
     if @quiz.update_attributes(params[:quiz])
-      flash[:success] = "Quiz edited."
-      message = "Quiz saved!"
-      if !@quiz.in_lesson 
-        redirect_to course_quizzes_path(@quiz.course)
-      else
-        redirect_to course_quizzes_path(@quiz.course)
+      respond_to do |format|
+        format.html   {
+          flash[:success] = "Quiz edited."
+          redirect_to course_quizzes_path(@quiz.course)
+        }
+        format.js {
+          @updated_quiz = @quiz
+          @event = @updated_quiz.events[0]
+          @quiz = @course.quizzes.new
+          render 'update'
+        }
       end
     else
-      render :action => 'edit'
+      respond_to do |format| 
+        format.html { render :action => 'edit' }
+      end
     end
   end
 
   def edit
     @quiz = Quiz.find(params[:id])
     @lesson = nil
-    if @quiz.in_lesson
-      @event = @quiz.events[0]
-      @lesson = @event.lesson
+    respond_to do |format|
+      format.html
+      format.js {
+        @event = @quiz.events[0]
+        @lesson = @event.lesson
+      }
     end
   end
 
