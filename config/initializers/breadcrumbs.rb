@@ -26,10 +26,26 @@ Gretel::Crumbs.layout do
     parent :course, course
   end
 
+  crumb :study do |course|
+    link "Study", course_study_index_path(course)
+    parent :course, course
+  end
+
+
   # Lessons
   crumb :lessons do |course|
     link "Lessons", course_lessons_path(course)
     parent :course, course
+  end
+
+  crumb :lesson do |lesson|
+    link lambda {|lesson| "#{lesson.name}"}, course_lesson_path(lesson.course, lesson)
+    parent :lessons, lesson.course
+  end
+
+  crumb :lesson_student do |lesson|
+    link lambda {|lesson| "Lesson: #{lesson.name}"}, course_lesson_path(lesson.course, lesson)
+    parent :course, lesson.course
   end
 
   crumb :new_lesson do |course|
@@ -53,6 +69,11 @@ Gretel::Crumbs.layout do
     parent :components, component.course
   end
 
+  crumb :component_student do |component|
+    link lambda {|component| "Component: #{component.name}"}, course_component_path(component.course,component)
+    parent :course, component.course
+  end
+
   crumb :new_component do |course|
     link "New Lesson", new_course_component_path(course)
     parent :components, course
@@ -69,9 +90,25 @@ Gretel::Crumbs.layout do
     parent :course, course
   end
 
+  crumb :quiz do |quiz|
+    link lambda {|quiz| "Quiz #{quiz.id}"}, course_quiz_path(quiz.course, quiz)
+    parent :course, quiz.course
+  end
+
   crumb :new_quiz do |course|
     link "New Exercise", new_course_quiz_path(course)
     parent :quizzes, course
+  end
+
+  #Users
+  
+  crumb :users do
+    link "Users", users_path
+  end
+
+  crumb :user do |user|
+    link lambda {|user| "#{user.email}"}, user_path(user)
+    parent :users
   end
  
 end

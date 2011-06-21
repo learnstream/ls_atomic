@@ -21,15 +21,15 @@
 </table>
 <% end %>
 
-<% if not @taught_courses.nil? %>
+<% if not @taught_courses.empty? %>
 <h2>Courses you are teaching</h2>
 <table>
   <% @taught_courses.each do |course| %>
-  <tr>
-    <td class="course-name"><%= link_to course.name, course_path(course.id) %></td>
-    <td>You currently have <%=course.enrollments.count%> students in your course...Shape up! </td>
-  </tr>
-<% end %>
+    <tr>
+      <td class="course-name"><%= link_to course.name, course_path(course.id) %></td>
+      <td>You currently have <%=course.enrollments.count%> students in your course. </td>
+    </tr>
+  <% end %>
 </table>
 <%end%>
 </div>

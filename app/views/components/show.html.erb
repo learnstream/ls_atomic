@@ -1,6 +1,10 @@
 <%= javascript_include_tag "YouTubeEmbed" %>
 <%= javascript_include_tag "ComponentsYouTube" %>
-<% breadcrumb :component, @component %>
+<% if current_user.can_edit?(@course) %>
+  <% breadcrumb :component, @component %>
+<% else %>
+  <% breadcrumb :component_student, @component %>
+<% end %>
 
 <h1>
   <%= @component.name%>
