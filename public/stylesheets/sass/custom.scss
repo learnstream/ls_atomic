@@ -1,4 +1,6 @@
 $body-color: #fff;
+$yt-width: 480px;
+$yt-height: 295px;
 
 body {
   background: $body-color; 
@@ -203,8 +205,50 @@ a.study_button {
 /* Home page */
 
 #course-overview { 
-  td.course-name { width: 150px; }
+  .course-listing {
+    margin-bottom: 15px;
+
+    .course-name {
+      font-size: 2em;
+    }
+
+    .study-info {
+      display: inline;
+      font-size: .8em;
+    }
+
+    ul.course-actions {
+      margin: 0px;
+      padding: 0px;
+      
+      & > li { 
+        vertical-align: top;
+        margin: 0px;
+        margin-right: 10px;
+        background: #eee;
+        text-align: center;
+        padding: 10px;
+        display: inline-block;
+        width: 240px;
+        height: 60px;
+
+        &.items-for-review { 
+        }
+
+        &.other-actions {
+          text-align: left;
+          background: #fff;
+        }
+      }
+
+      a { 
+        font-size: 1.5em;
+      }
+    }
+  }
 }
+
+
 
 /* Course Show page */
 
@@ -378,7 +422,7 @@ a.signup_button {
   float: left;
   clear: right;
   width: 400px;
-  height: 295px;
+  height: $yt-height - 20px - 2px;
   overflow-y: auto;
   overflow-x: hidden;
 }

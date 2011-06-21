@@ -4,6 +4,7 @@ class PagesController < ApplicationController
       redirect_to root_path
       return
     end
+    @courses = current_user.courses
     @taught_courses = current_user.taught_courses
     @studied_courses = current_user.studied_courses
   end
