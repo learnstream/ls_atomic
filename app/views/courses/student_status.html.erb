@@ -4,7 +4,7 @@
     <tr>
       <td class="unused student-column"></td>
       <% @course.components.each { |component| %>
-        <td class="label"><%= link_to component.name, component %></td>
+        <td class="label"><%= link_to component.name,[@course, component] %></td>
       <% } %>
     </tr>
     <% @course.student_enrollments.each { |enrollment| %>
