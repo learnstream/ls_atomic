@@ -85,9 +85,9 @@ describe NotesController do
   end
 
   describe "GET 'edit'" do
-    it "should render a json representation" do
-      get :edit, :id => @note, :format => :json
-      response.body.should == @note.as_json.to_json
+    it "should be successful" do
+      get :edit, :id => @note, :format => :js
+      response.should be_success
     end
   end
 end

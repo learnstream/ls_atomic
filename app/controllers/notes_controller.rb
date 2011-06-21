@@ -33,7 +33,6 @@ class NotesController < ApplicationController
     @note = Note.new
                                    
     respond_to do |format|
-      #format.html   { render :text =>  "testupdate" } 
       format.js   
     end
   end
