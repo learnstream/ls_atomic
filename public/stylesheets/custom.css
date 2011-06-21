@@ -289,28 +289,32 @@ a.signup_button {
 .events-area {
   background-color: #EEEEEE;
   border: 1px solid #ddd;
-  padding: 4px;
+  padding: 10px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px; }
   .events-area .event {
     background-color: white;
-    padding: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    border-left: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    border-radius: 5px;
-    margin-bottom: 4px; }
-  .events-area .note {
+    border-radius: 5px; }
+  .events-area .note-old {
     border-right: 1px solid #4d4d4d;
     border-bottom: 1px solid #4d4d4d;
     border-left: 1px solid #999999;
     border-top: 1px solid #999999; }
-  .events-area .quiz {
+  .events-area .quiz-old {
     border-right: 1px solid red;
     border-bottom: 1px solid red;
     border-left: 1px solid #ff4d4d;
     border-top: 1px solid #ff4d4d; }
-    .events-area .quiz.answered {
+    .events-area .quiz-old.answered-old {
       border-right: 1px solid #00b300;
       border-bottom: 1px solid #00b300;
       border-left: 1px solid #1aff1a;
@@ -320,9 +324,9 @@ a.signup_button {
     margin-right: .5em; }
 
 #ytPlayer {
-  width: 480px;
   clear: left;
-  float: left; }
+  float: left;
+  margin: auto; }
 
 #quiz_area {
   width: 700px;
@@ -341,22 +345,20 @@ a.signup_button {
 #lesson-edit #video-area {
   clear: left;
   float: left;
-  margin-bottom: 18px; }
+  margin-bottom: 5px;
+  width: 500px;
+  background: #eee;
+  border: 1px solid #ddd;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
   #lesson-edit #video-area #vid-container {
-    height: 350px;
-    width: 500px;
-    background: #eee;
-    border: 1px solid #ddd;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }
-  #lesson-edit #video-area #ytPlayer {
-    margin: auto;
+    width: 480px;
+    margin: 0px auto;
     padding: 10px; }
   #lesson-edit #video-area #video-url-div {
-    display: block;
-    margin: 5px;
-    height: 30px; }
+    clear: both;
+    padding-top: 10px; }
     #lesson-edit #video-area #video-url-div #load_video_url {
       margin: 0px 5px; }
 #lesson-edit #events-area-teacher {
@@ -367,13 +369,16 @@ a.signup_button {
   margin-left: 5px; }
 
 #tabs-container {
-  width: 500px;
-  clear: left; }
+  width: 502px;
+  clear: left;
+  float: left; }
   #tabs-container .current_video_url {
     font-size: 0.7em;
     padding: 5px; }
-  #tabs-container .ui-tabs-nav {
-    height: 40px; }
+  #tabs-container #lesson-edit-tabs {
+    clear: both; }
+  #tabs-container ul {
+    display: block; }
   #tabs-container table {
     width: 270px;
     margin: 0px; }
@@ -383,7 +388,6 @@ a.signup_button {
       padding: 0 5px;
       width: auto; }
   #tabs-container #add-note {
-    /* clear: left;*/
     width: 460px; }
     #tabs-container #add-note #note_content {
       width: 440px;
