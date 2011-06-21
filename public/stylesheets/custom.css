@@ -343,9 +343,6 @@ a.signup_button {
   overflow-x: hidden; }
 
 /* Lessons - Teacher */
-#lesson-edit h1 {
-  padding: 0.2em;
-  border-bottom: 2px solid black; }
 #lesson-edit #video-area {
   width: 480px;
   height: 330px;
