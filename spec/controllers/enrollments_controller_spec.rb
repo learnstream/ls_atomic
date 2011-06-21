@@ -31,7 +31,7 @@ describe EnrollmentsController do
 
     it "should redirect to the course page" do
       post :create, :enrollment => { :course_id => @course }
-      response.should redirect_to @course
+      response.should redirect_to course_path(@course)
     end
   end
 

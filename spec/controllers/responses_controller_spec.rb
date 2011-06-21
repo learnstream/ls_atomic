@@ -52,7 +52,7 @@ describe ResponsesController do
 
       it "should redirect to the response" do
         post :create, :response => @attr
-        response.should redirect_to Response.first
+        response.should redirect_to response_path(Response.first)
       end
     end
   end

@@ -1,0 +1,120 @@
+                       notes GET    /notes(.:format)                                  {:action=>"index", :controller=>"notes"}
+                             POST   /notes(.:format)                                  {:action=>"create", :controller=>"notes"}
+                    new_note GET    /notes/new(.:format)                              {:action=>"new", :controller=>"notes"}
+                   edit_note GET    /notes/:id/edit(.:format)                         {:action=>"edit", :controller=>"notes"}
+                        note GET    /notes/:id(.:format)                              {:action=>"show", :controller=>"notes"}
+                             PUT    /notes/:id(.:format)                              {:action=>"update", :controller=>"notes"}
+                             DELETE /notes/:id(.:format)                              {:action=>"destroy", :controller=>"notes"}
+                      events GET    /events(.:format)                                 {:action=>"index", :controller=>"events"}
+                             POST   /events(.:format)                                 {:action=>"create", :controller=>"events"}
+                   new_event GET    /events/new(.:format)                             {:action=>"new", :controller=>"events"}
+                  edit_event GET    /events/:id/edit(.:format)                        {:action=>"edit", :controller=>"events"}
+                       event GET    /events/:id(.:format)                             {:action=>"show", :controller=>"events"}
+                             PUT    /events/:id(.:format)                             {:action=>"update", :controller=>"events"}
+                             DELETE /events/:id(.:format)                             {:action=>"destroy", :controller=>"events"}
+               user_sessions GET    /user_sessions(.:format)                          {:action=>"index", :controller=>"user_sessions"}
+                             POST   /user_sessions(.:format)                          {:action=>"create", :controller=>"user_sessions"}
+            new_user_session GET    /user_sessions/new(.:format)                      {:action=>"new", :controller=>"user_sessions"}
+           edit_user_session GET    /user_sessions/:id/edit(.:format)                 {:action=>"edit", :controller=>"user_sessions"}
+                user_session GET    /user_sessions/:id(.:format)                      {:action=>"show", :controller=>"user_sessions"}
+                             PUT    /user_sessions/:id(.:format)                      {:action=>"update", :controller=>"user_sessions"}
+                             DELETE /user_sessions/:id(.:format)                      {:action=>"destroy", :controller=>"user_sessions"}
+                courses_user GET    /users/:id/courses(.:format)                      {:action=>"courses", :controller=>"users"}
+                       users GET    /users(.:format)                                  {:action=>"index", :controller=>"users"}
+                             POST   /users(.:format)                                  {:action=>"create", :controller=>"users"}
+                    new_user GET    /users/new(.:format)                              {:action=>"new", :controller=>"users"}
+                   edit_user GET    /users/:id/edit(.:format)                         {:action=>"edit", :controller=>"users"}
+                        user GET    /users/:id(.:format)                              {:action=>"show", :controller=>"users"}
+                             PUT    /users/:id(.:format)                              {:action=>"update", :controller=>"users"}
+                             DELETE /users/:id(.:format)                              {:action=>"destroy", :controller=>"users"}
+              course_lessons GET    /courses/:course_id/lessons(.:format)             {:action=>"index", :controller=>"lessons"}
+                             POST   /courses/:course_id/lessons(.:format)             {:action=>"create", :controller=>"lessons"}
+           new_course_lesson GET    /courses/:course_id/lessons/new(.:format)         {:action=>"new", :controller=>"lessons"}
+          edit_course_lesson GET    /courses/:course_id/lessons/:id/edit(.:format)    {:action=>"edit", :controller=>"lessons"}
+               course_lesson GET    /courses/:course_id/lessons/:id(.:format)         {:action=>"show", :controller=>"lessons"}
+                             PUT    /courses/:course_id/lessons/:id(.:format)         {:action=>"update", :controller=>"lessons"}
+                             DELETE /courses/:course_id/lessons/:id(.:format)         {:action=>"destroy", :controller=>"lessons"}
+              course_quizzes GET    /courses/:course_id/quizzes(.:format)             {:action=>"index", :controller=>"quizzes"}
+                             POST   /courses/:course_id/quizzes(.:format)             {:action=>"create", :controller=>"quizzes"}
+             new_course_quiz GET    /courses/:course_id/quizzes/new(.:format)         {:action=>"new", :controller=>"quizzes"}
+            edit_course_quiz GET    /courses/:course_id/quizzes/:id/edit(.:format)    {:action=>"edit", :controller=>"quizzes"}
+                 course_quiz GET    /courses/:course_id/quizzes/:id(.:format)         {:action=>"show", :controller=>"quizzes"}
+                             PUT    /courses/:course_id/quizzes/:id(.:format)         {:action=>"update", :controller=>"quizzes"}
+                             DELETE /courses/:course_id/quizzes/:id(.:format)         {:action=>"destroy", :controller=>"quizzes"}
+           course_components GET    /courses/:course_id/components(.:format)          {:action=>"index", :controller=>"components"}
+                             POST   /courses/:course_id/components(.:format)          {:action=>"create", :controller=>"components"}
+        new_course_component GET    /courses/:course_id/components/new(.:format)      {:action=>"new", :controller=>"components"}
+       edit_course_component GET    /courses/:course_id/components/:id/edit(.:format) {:action=>"edit", :controller=>"components"}
+            course_component GET    /courses/:course_id/components/:id(.:format)      {:action=>"show", :controller=>"components"}
+                             PUT    /courses/:course_id/components/:id(.:format)      {:action=>"update", :controller=>"components"}
+                             DELETE /courses/:course_id/components/:id(.:format)      {:action=>"destroy", :controller=>"components"}
+                users_course GET    /courses/:id/users(.:format)                      {:action=>"users", :controller=>"courses"}
+        success_stats_course GET    /courses/:id/success_stats(.:format)              {:action=>"success_stats", :controller=>"courses"}
+      cards_due_stats_course GET    /courses/:id/cards_due_stats(.:format)            {:action=>"cards_due_stats", :controller=>"courses"}
+course_achieved_stats_course GET    /courses/:id/course_achieved_stats(.:format)      {:action=>"course_achieved_stats", :controller=>"courses"}
+       student_status_course GET    /courses/:id/student_status(.:format)             {:action=>"student_status", :controller=>"courses"}
+          course_study_index GET    /courses/:course_id/study(.:format)               {:action=>"index", :controller=>"study"}
+                     courses GET    /courses(.:format)                                {:action=>"index", :controller=>"courses"}
+                             POST   /courses(.:format)                                {:action=>"create", :controller=>"courses"}
+                  new_course GET    /courses/new(.:format)                            {:action=>"new", :controller=>"courses"}
+                 edit_course GET    /courses/:id/edit(.:format)                       {:action=>"edit", :controller=>"courses"}
+                      course GET    /courses/:id(.:format)                            {:action=>"show", :controller=>"courses"}
+                             PUT    /courses/:id(.:format)                            {:action=>"update", :controller=>"courses"}
+                             DELETE /courses/:id(.:format)                            {:action=>"destroy", :controller=>"courses"}
+          describe_component GET    /components/:id/describe(.:format)                {:action=>"describe", :controller=>"components"}
+                  components GET    /components(.:format)                             {:action=>"index", :controller=>"components"}
+                             POST   /components(.:format)                             {:action=>"create", :controller=>"components"}
+               new_component GET    /components/new(.:format)                         {:action=>"new", :controller=>"components"}
+              edit_component GET    /components/:id/edit(.:format)                    {:action=>"edit", :controller=>"components"}
+                   component GET    /components/:id(.:format)                         {:action=>"show", :controller=>"components"}
+                             PUT    /components/:id(.:format)                         {:action=>"update", :controller=>"components"}
+                             DELETE /components/:id(.:format)                         {:action=>"destroy", :controller=>"components"}
+                      videos POST   /videos(.:format)                                 {:action=>"create", :controller=>"videos"}
+                  edit_video GET    /videos/:id/edit(.:format)                        {:action=>"edit", :controller=>"videos"}
+                       video PUT    /videos/:id(.:format)                             {:action=>"update", :controller=>"videos"}
+                             DELETE /videos/:id(.:format)                             {:action=>"destroy", :controller=>"videos"}
+                 enrollments POST   /enrollments(.:format)                            {:action=>"create", :controller=>"enrollments"}
+                  enrollment PUT    /enrollments/:id(.:format)                        {:action=>"update", :controller=>"enrollments"}
+                             DELETE /enrollments/:id(.:format)                        {:action=>"destroy", :controller=>"enrollments"}
+                 rate_memory GET    /memories/:id/rate(.:format)                      {:action=>"rate", :controller=>"memories"}
+                    memories GET    /memories(.:format)                               {:action=>"index", :controller=>"memories"}
+                             POST   /memories(.:format)                               {:action=>"create", :controller=>"memories"}
+                  new_memory GET    /memories/new(.:format)                           {:action=>"new", :controller=>"memories"}
+                 edit_memory GET    /memories/:id/edit(.:format)                      {:action=>"edit", :controller=>"memories"}
+                      memory GET    /memories/:id(.:format)                           {:action=>"show", :controller=>"memories"}
+                             PUT    /memories/:id(.:format)                           {:action=>"update", :controller=>"memories"}
+                             DELETE /memories/:id(.:format)                           {:action=>"destroy", :controller=>"memories"}
+        rate_components_quiz GET    /quizzes/:id/rate_components(.:format)            {:action=>"rate_components", :controller=>"quizzes"}
+                     quizzes GET    /quizzes(.:format)                                {:action=>"index", :controller=>"quizzes"}
+                             POST   /quizzes(.:format)                                {:action=>"create", :controller=>"quizzes"}
+                    new_quiz GET    /quizzes/new(.:format)                            {:action=>"new", :controller=>"quizzes"}
+                   edit_quiz GET    /quizzes/:id/edit(.:format)                       {:action=>"edit", :controller=>"quizzes"}
+                        quiz GET    /quizzes/:id(.:format)                            {:action=>"show", :controller=>"quizzes"}
+                             PUT    /quizzes/:id(.:format)                            {:action=>"update", :controller=>"quizzes"}
+                             DELETE /quizzes/:id(.:format)                            {:action=>"destroy", :controller=>"quizzes"}
+                   responses GET    /responses(.:format)                              {:action=>"index", :controller=>"responses"}
+                             POST   /responses(.:format)                              {:action=>"create", :controller=>"responses"}
+               edit_response GET    /responses/:id/edit(.:format)                     {:action=>"edit", :controller=>"responses"}
+                    response GET    /responses/:id(.:format)                          {:action=>"show", :controller=>"responses"}
+                             PUT    /responses/:id(.:format)                          {:action=>"update", :controller=>"responses"}
+               lesson_events GET    /lessons/:lesson_id/events(.:format)              {:action=>"index", :controller=>"events"}
+                             POST   /lessons/:lesson_id/events(.:format)              {:action=>"create", :controller=>"events"}
+            new_lesson_event GET    /lessons/:lesson_id/events/new(.:format)          {:action=>"new", :controller=>"events"}
+           edit_lesson_event GET    /lessons/:lesson_id/events/:id/edit(.:format)     {:action=>"edit", :controller=>"events"}
+                lesson_event GET    /lessons/:lesson_id/events/:id(.:format)          {:action=>"show", :controller=>"events"}
+                             PUT    /lessons/:lesson_id/events/:id(.:format)          {:action=>"update", :controller=>"events"}
+                             DELETE /lessons/:lesson_id/events/:id(.:format)          {:action=>"destroy", :controller=>"events"}
+                     lessons GET    /lessons(.:format)                                {:action=>"index", :controller=>"lessons"}
+                             POST   /lessons(.:format)                                {:action=>"create", :controller=>"lessons"}
+                  new_lesson GET    /lessons/new(.:format)                            {:action=>"new", :controller=>"lessons"}
+                 edit_lesson GET    /lessons/:id/edit(.:format)                       {:action=>"edit", :controller=>"lessons"}
+                      lesson GET    /lessons/:id(.:format)                            {:action=>"show", :controller=>"lessons"}
+                             PUT    /lessons/:id(.:format)                            {:action=>"update", :controller=>"lessons"}
+                             DELETE /lessons/:id(.:format)                            {:action=>"destroy", :controller=>"lessons"}
+                      signup        /signup(.:format)                                 {:controller=>"users", :action=>"new"}
+                      signin        /signin(.:format)                                 {:controller=>"user_sessions", :action=>"new"}
+                     signout        /signout(.:format)                                {:controller=>"user_sessions", :action=>"destroy"}
+                       about        /about(.:format)                                  {:controller=>"pages", :action=>"about"}
+                        help        /help(.:format)                                   {:controller=>"pages", :action=>"help"}
+                        home        /home(.:format)                                   {:controller=>"pages", :action=>"home"}
+                        root        /(.:format)                                       {:controller=>"pages", :action=>"welcome"}

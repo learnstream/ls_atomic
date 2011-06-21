@@ -7,7 +7,7 @@
     <% @taught_courses.each do |course| %>
       <div class="course-listing">
         <h2><%= link_to course.name, course %></h2>
-        <p>You currently have <%=course.enrollments.count%> students in your course...Shape up! </p>
+        <p>You currently have <%=course.enrollments.count%> students in your course. </p>
       </div>
     <% end %>
     <% @studied_courses.each do |course| %>

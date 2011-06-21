@@ -1,4 +1,5 @@
-<div class="back"> <%= link_to "Back to course", @course %> </div>
+<% breadcrumb :study, @quiz.course %>
+
 <div id="study-area">
   <% if @quiz %> 
 
