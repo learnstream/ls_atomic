@@ -316,36 +316,36 @@ a.signup_button {
 /* Lessons page */
 .events-area {
     background-color: #EEEEEE;
-    border: 1px solid darken(#EEEEEE, 20%);
+    border: 1px solid #ddd;
+    padding: 4px;
     @include rounded(5px);
 
   .event {
      background-color: lighten(#EEEEEE, 15%);
      padding: 5px;
-     margin-bottom: 1px;
+     @include rounded(5px);
+     
+     margin-bottom: 4px;
    }
 
   .note { 
-     border-right: 2px solid lighten(black, 30%);
-     border-bottom: 2px solid lighten(black, 30%);
-     border-left: 2px solid lighten(black, 60%);
-     border-top: 2px solid lighten(black, 60%);
-     @include rounded(5px);
-  }
+     border-right: 1px solid lighten(black, 30%);
+   border-bottom: 1px solid lighten(black, 30%);
+     border-left: 1px solid lighten(black, 60%);
+   border-top: 1px solid lighten(black, 60%);
+}
 
-  .quiz { 
-     border-right: 2px solid lighten(red, 0%);
-     border-bottom: 2px solid lighten(red, 0%);
-     border-left: 2px solid lighten(red, 25%);
-     border-top: 2px solid lighten(red, 25%);
-     @include rounded(5px);
+.quiz { 
+     border-right: 1px solid lighten(red, 0%);
+   border-bottom: 1px solid lighten(red, 0%);
+     border-left: 1px solid lighten(red, 15%);
+   border-top: 1px solid lighten(red, 15%);
 
-     &.answered {
-         border-right: 2px solid lighten(green, 10%);
-         border-bottom: 2px solid lighten(green, 10%);
-         border-left: 2px solid lighten(green, 30%);
-         border-top: 2px solid lighten(green, 30%);
-         @include rounded(5px);
+   &.answered {
+         border-right: 1px solid lighten(green, 10%);
+       border-bottom: 1px solid lighten(green, 10%);
+         border-left: 1px solid lighten(green, 30%);
+         border-top: 1px solid lighten(green, 30%);
       }
     } 
 
@@ -386,14 +386,23 @@ a.signup_button {
 
   #video-area {
 
-  width: 480px;
-  height: 330px;
   clear: left;
   float: left;
-  
+  margin-bottom: 18px;
+ 
   #vid-container {
-    height: 300px;
+    height: 320px + 30px;
+    width: 500px;
+    background: #eee;
+    border: 1px solid #ddd;
+    @include rounded(5px);
   }
+
+  #ytPlayer {
+    margin: auto;
+    padding: 10px;
+  }
+
   #video-url-div { 
     display: block;
     margin: 5px; 
@@ -406,9 +415,10 @@ a.signup_button {
   
   #events-area-teacher {
     float:right;
-    width: 400px; 
+    width: 380px; 
     height: 480px;
     overflow-y: auto;
+    margin-left: 5px;
   }  
   
 }
