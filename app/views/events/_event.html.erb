@@ -1,6 +1,5 @@
-
 <div id="<%= event.playable_type.downcase %>-<%= event.playable.id %>" title="Time: <%= event.start_time %> s" class="event <%= event.playable_type.downcase  %>">
-  <div class="hidden data" 
+  <div class="hidden data" id="event-<%= event.id %>"
     data-id="<%= event.playable.id %>"
     data-video="<%= event.video_url %>"
     data-start_time="<%= event.start_time %>"

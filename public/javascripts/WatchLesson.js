@@ -15,7 +15,7 @@ $(document).ready(function() {
     });
 
     userScrolling = false;
-    $("#content").scroll(function() {
+    $("#events-area-student").scroll(function() {
       userScrolling = true;
       setTimeout(function() { userScrolling = false; }, 5000);
     });
@@ -87,14 +87,13 @@ var changeQuizState = function() {
 
   var timelink = $("#quiz" + quiz_id + " a.timelink").clone();
 
-  $("#quiz" + quiz_id).removeClass("Quiz")
-                      .addClass("Note")
+  $("#quiz" + quiz_id).addClass("answered")
                       .text(quiz_text)
                       .prepend(timelink);
 }
 
 var scrollToEvent = function(events) {
-  if (userScrolling) return;
+  if (userScrolling || (ytplayer.getPlayerState() == 2)) return;
   var time = ytplayer.getCurrentTime();
   var here = 0;
   for(var i=0; i < events.length-1; i++) {
@@ -104,12 +103,12 @@ var scrollToEvent = function(events) {
   }
 
 
-  var element = $("#content > div:eq(" + here + ")");
+  var element = $("#events-area-student > div:eq(" + here + ")");
   var offset = -1*($("#content").height() - element.outerHeight())/2;
   if (offset > 0) offset = 0;
 
     
-  $("#content").scrollTo(element, 500, { offset: offset });
+  $("#events-area-student").scrollTo(element, 500, { offset: offset });
 }
 
 var loadEvents = function(events) {
@@ -187,7 +186,8 @@ var formatTime = function(time) {
 };
 
 var loadEvent = function(next_event) {
-  var newdiv = $("<div />").addClass(next_event.type);
+  var newdiv = $("<div />").addClass(next_event.type.toLowerCase())
+                           .addClass("event");
   //newdiv.data("time", next_event.start_time);
   var timelink = $("<a />").addClass("timelink")
                            .text(formatTime(next_event.start_time))
@@ -211,7 +211,7 @@ var loadEvent = function(next_event) {
                              .appendTo(newdiv);
   }
   newdiv.prepend(timelink);
-  $("#content").append(newdiv);
+  $("#events-area-student").append(newdiv);
 }
 
 

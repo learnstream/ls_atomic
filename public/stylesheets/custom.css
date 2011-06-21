@@ -286,23 +286,41 @@ a.signup_button {
   background: #cfc; }
 
 /* Lessons page */
-#content {
-  float: left;
-  clear: right;
-  width: 400px;
-  height: 295px;
-  background: #fff;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border: 1px solid black; }
-  #content .Note {
-    border-bottom: 1px solid #6c6;
-    padding: .5em; }
-  #content .Quiz {
-    border-bottom: 1px solid #c66;
-    padding: .5em;
-    background: #fcc; }
-  #content .timelink {
+.events-area {
+  background-color: #EEEEEE;
+  border: 1px solid #bbbbbb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+  .events-area .event {
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 1px; }
+  .events-area .note {
+    border-right: 2px solid #4d4d4d;
+    border-bottom: 2px solid #4d4d4d;
+    border-left: 2px solid #999999;
+    border-top: 2px solid #999999;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
+  .events-area .quiz {
+    border-right: 2px solid red;
+    border-bottom: 2px solid red;
+    border-left: 2px solid #ff8080;
+    border-top: 2px solid #ff8080;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
+    .events-area .quiz.answered {
+      border-right: 2px solid #00b300;
+      border-bottom: 2px solid #00b300;
+      border-left: 2px solid #1aff1a;
+      border-top: 2px solid #1aff1a;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px; }
+  .events-area .timelink {
     font-size: .7em;
     margin-right: .5em; }
 
@@ -314,6 +332,15 @@ a.signup_button {
 #quiz_area {
   width: 700px;
   clear: both; }
+
+/* Lessons - Student */
+#events-area-student {
+  float: left;
+  clear: right;
+  width: 400px;
+  height: 295px;
+  overflow-y: auto;
+  overflow-x: hidden; }
 
 /* Lessons - Teacher */
 #lesson-edit h1 {
@@ -332,73 +359,31 @@ a.signup_button {
     height: 30px; }
     #lesson-edit #video-area #video-url-div #load_video_url {
       margin: 0px 5px; }
-#lesson-edit #events-area {
+#lesson-edit #events-area-teacher {
   float: right;
   width: 400px;
   height: 480px;
-  overflow-y: auto;
-  background-color: #EEEEEE;
-  border: 1px solid #bbbbbb;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px; }
-  #lesson-edit #events-area .event {
-    background-color: white;
-    padding: 5px;
-    margin-bottom: 1px; }
-  #lesson-edit #events-area .note {
-    border-right: 2px solid #4d4d4d;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-    border-bottom: 2px solid #4d4d4d;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border-left: 2px solid #999999;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-    border-top: 2px solid #999999;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }
-  #lesson-edit #events-area .quiz {
-    border-right: 2px solid red;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-    border-bottom: 2px solid red;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border-left: 2px solid #ff8080;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-    border-top: 2px solid #ff8080;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }
-#lesson-edit #tabs-container {
+  overflow-y: auto; }
+
+#tabs-container {
   width: 500px;
   clear: left; }
-  #lesson-edit #tabs-container #current_video_url {
+  #tabs-container #current_video_url {
     font-size: 0.7em;
     padding: 5px; }
-  #lesson-edit #tabs-container .ui-tabs-nav {
+  #tabs-container .ui-tabs-nav {
     height: 40px; }
-  #lesson-edit #tabs-container table {
+  #tabs-container table {
     width: 270px;
     margin: 0px; }
-    #lesson-edit #tabs-container table input {
+    #tabs-container table input {
       width: 50px; }
-    #lesson-edit #tabs-container table td {
+    #tabs-container table td {
       padding: 0 5px;
       width: auto; }
-  #lesson-edit #tabs-container #add-note {
+  #tabs-container #add-note {
     /* clear: left;*/
     width: 460px; }
-    #lesson-edit #tabs-container #add-note #note_content {
+    #tabs-container #add-note #note_content {
       width: 440px;
       height: 100px; }
