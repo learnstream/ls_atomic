@@ -104,7 +104,7 @@ var scrollToEvent = function(events) {
 
 
   var element = $("#events-area-student > div:eq(" + here + ")");
-  var offset = -1*($("#content").height() - element.outerHeight())/2;
+  var offset = -1*($("#events-area-student").height() - element.outerHeight())/2;
   if (offset > 0) offset = 0;
 
     
