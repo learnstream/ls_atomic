@@ -108,10 +108,6 @@ class QuizzesController < ApplicationController
       render :action => 'edit'
     end
 
-    respond_to do |format|
-      format.html { redirect_to 'root'}
-    end
-
   end
 
   def edit

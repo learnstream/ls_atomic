@@ -30,6 +30,7 @@ class LessonsController < ApplicationController
 
   def edit
     @lesson = @course.lessons.find(params[:id])
+    #@events = @lesson.events
     @note = Note.new
     @quiz = Quiz.new
   end
@@ -41,8 +42,8 @@ class LessonsController < ApplicationController
       flash[:success] = "Lesson updated!"
       redirect_to course_lessons_path(@course)
     else
-      #@note = Note.new
-      #@quiz = Quiz.new
+      @note = Note.new
+      @quiz = Quiz.new
       @events = @lesson.events
       render 'edit'
     end
