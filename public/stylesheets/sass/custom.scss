@@ -317,31 +317,37 @@ a.signup_button {
 .events-area {
     background-color: #EEEEEE;
     border: 1px solid #ddd;
-    padding: 4px;
+    padding: 10px;
     @include rounded(5px);
 
   .event {
      background-color: lighten(#EEEEEE, 15%);
-     padding: 5px;
-     @include rounded(5px);
+     padding: 10px;
+     margin-bottom: 10px;
      
-     margin-bottom: 4px;
+     
+    border-right: 1px solid lighten(black, 60%);
+    border-bottom: 1px solid lighten(black, 60%);
+    border-left: 1px solid lighten(black, 80%);
+    border-top: 1px solid lighten(black, 80%);
+    
+    @include rounded(5px);
    }
 
-  .note { 
-     border-right: 1px solid lighten(black, 30%);
-   border-bottom: 1px solid lighten(black, 30%);
-     border-left: 1px solid lighten(black, 60%);
-   border-top: 1px solid lighten(black, 60%);
-}
+  .note-old { 
+    border-right: 1px solid lighten(black, 30%);
+    border-bottom: 1px solid lighten(black, 30%);
+    border-left: 1px solid lighten(black, 60%);
+    border-top: 1px solid lighten(black, 60%);
+  }
 
-.quiz { 
+.quiz-old { 
      border-right: 1px solid lighten(red, 0%);
    border-bottom: 1px solid lighten(red, 0%);
      border-left: 1px solid lighten(red, 15%);
    border-top: 1px solid lighten(red, 15%);
 
-   &.answered {
+   &.answered-old {
          border-right: 1px solid lighten(green, 10%);
        border-bottom: 1px solid lighten(green, 10%);
          border-left: 1px solid lighten(green, 30%);
@@ -357,9 +363,9 @@ a.signup_button {
 
 
 #ytPlayer {
-  width: 480px;
   clear: left;
   float: left;
+  margin: auto;
 }
 
 #quiz_area {
@@ -388,29 +394,25 @@ a.signup_button {
 
   clear: left;
   float: left;
-  margin-bottom: 18px;
+  margin-bottom: 5px;
+  width: 500px;
+  background: #eee;
+  border: 1px solid #ddd;
+  @include rounded(5px);
  
   #vid-container {
-    height: 320px + 30px;
-    width: 500px;
-    background: #eee;
-    border: 1px solid #ddd;
-    @include rounded(5px);
-  }
-
-  #ytPlayer {
-    margin: auto;
+    width: 480px;
+    margin: 0px auto;
     padding: 10px;
   }
 
   #video-url-div { 
-    display: block;
-    margin: 5px; 
-    height: 30px;
-    #load_video_url { margin: 0px 5px; }
+    clear: both;
+    padding-top: 10px;
 
+    #load_video_url { margin: 0px 5px; }
   }
-}
+  }
 
   
   #events-area-teacher {
@@ -425,26 +427,33 @@ a.signup_button {
   
 #tabs-container {
 
-  width: 500px;
+  width: 502px;
   clear: left;
+  float: left;
   .current_video_url{ font-size: 0.7em; padding: 5px; }
-  .ui-tabs-nav { height: 40px;}
 
-    table { 
-      width: 270px;
-      margin: 0px;
-      input { width: 50px;}
-      td { padding: 0 5px; width: auto;}
-    }
+  #lesson-edit-tabs {
+    clear: both;
+  }
+
+  ul {
+    display: block;
+  }
+
+  table { 
+    width: 270px;
+    margin: 0px;
+    input { width: 50px;}
+    td { padding: 0 5px; width: auto;}
+  }
 
   #add-note {
-   /* clear: left;*/
-      width: 460px;
+    width: 460px;
 
-      #note_content {
-        width: 440px;
-        height: 100px;
-      }
+    #note_content {
+      width: 440px;
+      height: 100px;
+    }
   }
 }
 
