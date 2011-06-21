@@ -369,7 +369,7 @@ a.signup_button {
 #tabs-container {
   width: 500px;
   clear: left; }
-  #tabs-container #current_video_url {
+  #tabs-container .current_video_url {
     font-size: 0.7em;
     padding: 5px; }
   #tabs-container .ui-tabs-nav {
