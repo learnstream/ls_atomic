@@ -169,8 +169,31 @@ a.study_button {
     font-size: 0.75em; }
 
 /* Home page */
-#course-overview td.course-name {
-  width: 150px; }
+#course-overview .course-listing {
+  margin-bottom: 15px; }
+  #course-overview .course-listing .course-name {
+    font-size: 2em; }
+  #course-overview .course-listing .study-info {
+    display: inline;
+    font-size: .8em; }
+  #course-overview .course-listing ul.course-actions {
+    margin: 0px;
+    padding: 0px; }
+    #course-overview .course-listing ul.course-actions > li {
+      vertical-align: top;
+      margin: 0px;
+      margin-right: 10px;
+      background: #eee;
+      text-align: center;
+      padding: 10px;
+      display: inline-block;
+      width: 240px;
+      height: 60px; }
+      #course-overview .course-listing ul.course-actions > li.other-actions {
+        text-align: left;
+        background: #fff; }
+    #course-overview .course-listing ul.course-actions a {
+      font-size: 1.5em; }
 
 /* Course Show page */
 #stats-sidebar {
@@ -337,7 +360,7 @@ a.signup_button {
   float: left;
   clear: right;
   width: 400px;
-  height: 295px;
+  height: 273px;
   overflow-y: auto;
   overflow-x: hidden; }
 
