@@ -1,5 +1,5 @@
 <% @note.events.build if @note.events.empty? %>
-<%= form_for @note do |note_form| %>
+<%= form_for @note, :remote => true do |note_form| %>
   <%= render 'shared/error_messages', :object => note_form.object %>
   <div id="note-error-message"></div>
   <div class="field" >
@@ -9,5 +9,8 @@
   <%= render :partial => 'events/form', 
              :locals => { :parent_type => "note", 
                           :event => @note.events[0] } %>
-  <%= submit_tag %>
+  <div class="actions">
+  <%= note_form.submit "Submit"  %>
+  </div>
 <% end %>
+

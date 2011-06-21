@@ -296,7 +296,7 @@ a.signup_button {
     background-color: white;
     padding: 5px;
     margin-bottom: 1px; }
-  .events-area .Note {
+  .events-area .note {
     border-right: 2px solid #4d4d4d;
     border-bottom: 2px solid #4d4d4d;
     border-left: 2px solid #999999;
@@ -304,7 +304,7 @@ a.signup_button {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px; }
-  .events-area .Quiz {
+  .events-area .quiz {
     border-right: 2px solid red;
     border-bottom: 2px solid red;
     border-left: 2px solid #ff8080;
@@ -312,14 +312,14 @@ a.signup_button {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px; }
-  .events-area .Answered {
-    border-right: 2px solid #00b300;
-    border-bottom: 2px solid #00b300;
-    border-left: 2px solid #1aff1a;
-    border-top: 2px solid #1aff1a;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }
+    .events-area .quiz.answered {
+      border-right: 2px solid #00b300;
+      border-bottom: 2px solid #00b300;
+      border-left: 2px solid #1aff1a;
+      border-top: 2px solid #1aff1a;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px; }
   .events-area .timelink {
     font-size: .7em;
     margin-right: .5em; }

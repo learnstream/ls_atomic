@@ -83,4 +83,11 @@ describe NotesController do
       response.should be_success
     end
   end
+
+  describe "GET 'edit'" do
+    it "should be successful" do
+      get :edit, :id => @note, :format => :js
+      response.should be_success
+    end
+  end
 end

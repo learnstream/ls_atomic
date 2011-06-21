@@ -87,8 +87,7 @@ var changeQuizState = function() {
 
   var timelink = $("#quiz" + quiz_id + " a.timelink").clone();
 
-  $("#quiz" + quiz_id).removeClass("Quiz")
-                      .addClass("Answered")
+  $("#quiz" + quiz_id).addClass("answered")
                       .text(quiz_text)
                       .prepend(timelink);
 }
@@ -187,7 +186,7 @@ var formatTime = function(time) {
 };
 
 var loadEvent = function(next_event) {
-  var newdiv = $("<div />").addClass(next_event.type)
+  var newdiv = $("<div />").addClass(next_event.type.toLowerCase())
                            .addClass("event");
   //newdiv.data("time", next_event.start_time);
   var timelink = $("<a />").addClass("timelink")
