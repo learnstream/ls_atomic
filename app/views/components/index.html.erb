@@ -1,3 +1,5 @@
+<% breadcrumb :components, @course %>
+
 <%= link_to "Add component", new_course_component_path(@course) %>
 <% if @components.empty? %>
   Course has no components.

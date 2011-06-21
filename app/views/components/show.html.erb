@@ -1,6 +1,6 @@
 <%= javascript_include_tag "YouTubeEmbed" %>
 <%= javascript_include_tag "ComponentsYouTube" %>
-<div class = "back"><%= link_to "Back to component list", course_components_path(@course) %></div>
+<% breadcrumb :component, @component %>
 
 <h1>
   <%= @component.name%>
