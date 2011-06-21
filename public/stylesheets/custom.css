@@ -288,38 +288,33 @@ a.signup_button {
 /* Lessons page */
 .events-area {
   background-color: #EEEEEE;
-  border: 1px solid #bbbbbb;
+  border: 1px solid #ddd;
+  padding: 4px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px; }
   .events-area .event {
     background-color: white;
     padding: 5px;
-    margin-bottom: 1px; }
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 4px; }
   .events-area .note {
-    border-right: 2px solid #4d4d4d;
-    border-bottom: 2px solid #4d4d4d;
-    border-left: 2px solid #999999;
-    border-top: 2px solid #999999;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }
+    border-right: 1px solid #4d4d4d;
+    border-bottom: 1px solid #4d4d4d;
+    border-left: 1px solid #999999;
+    border-top: 1px solid #999999; }
   .events-area .quiz {
-    border-right: 2px solid red;
-    border-bottom: 2px solid red;
-    border-left: 2px solid #ff8080;
-    border-top: 2px solid #ff8080;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }
+    border-right: 1px solid red;
+    border-bottom: 1px solid red;
+    border-left: 1px solid #ff4d4d;
+    border-top: 1px solid #ff4d4d; }
     .events-area .quiz.answered {
-      border-right: 2px solid #00b300;
-      border-bottom: 2px solid #00b300;
-      border-left: 2px solid #1aff1a;
-      border-top: 2px solid #1aff1a;
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      border-radius: 5px; }
+      border-right: 1px solid #00b300;
+      border-bottom: 1px solid #00b300;
+      border-left: 1px solid #1aff1a;
+      border-top: 1px solid #1aff1a; }
   .events-area .timelink {
     font-size: .7em;
     margin-right: .5em; }
@@ -343,16 +338,21 @@ a.signup_button {
   overflow-x: hidden; }
 
 /* Lessons - Teacher */
-#lesson-edit h1 {
-  padding: 0.2em;
-  border-bottom: 2px solid black; }
 #lesson-edit #video-area {
-  width: 480px;
-  height: 330px;
   clear: left;
-  float: left; }
+  float: left;
+  margin-bottom: 18px; }
   #lesson-edit #video-area #vid-container {
-    height: 300px; }
+    height: 350px;
+    width: 500px;
+    background: #eee;
+    border: 1px solid #ddd;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
+  #lesson-edit #video-area #ytPlayer {
+    margin: auto;
+    padding: 10px; }
   #lesson-edit #video-area #video-url-div {
     display: block;
     margin: 5px;
@@ -361,14 +361,15 @@ a.signup_button {
       margin: 0px 5px; }
 #lesson-edit #events-area-teacher {
   float: right;
-  width: 400px;
+  width: 380px;
   height: 480px;
-  overflow-y: auto; }
+  overflow-y: auto;
+  margin-left: 5px; }
 
 #tabs-container {
   width: 500px;
   clear: left; }
-  #tabs-container #current_video_url {
+  #tabs-container .current_video_url {
     font-size: 0.7em;
     padding: 5px; }
   #tabs-container .ui-tabs-nav {
