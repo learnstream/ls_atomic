@@ -33,4 +33,5 @@ describe Lesson do
     @note.events << @event
     @lesson.events.should include(@event)
   end
+
 end

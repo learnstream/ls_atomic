@@ -126,3 +126,4 @@ Factory.define :event do |event|
   event.end_time     20
   event.order_number 1
 end
+
