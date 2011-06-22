@@ -413,8 +413,28 @@ a.signup_button {
 }
 
 #quiz_area {
-  width: 700px;
+  $box-width:  900px;
+  $box-height: 400px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  @include rounded(5px);
+  width: $box-width;
+  height: $box-height;
   clear: both;
+
+  #innards {
+    background-color: #fff;
+    padding: 10px;
+    width: $box-width - 30px;
+    height: $box-height - 30px;
+    margin: 5px 5px 5px 5px;
+    border-right: 1px solid lighten(black, 60%);
+    border-bottom: 1px solid lighten(black, 60%);
+    border-left: 1px solid lighten(black, 80%);
+    border-top: 1px solid lighten(black, 80%);
+    
+    @include rounded(5px);
+  }
 }
 
 /* Lessons - Student */

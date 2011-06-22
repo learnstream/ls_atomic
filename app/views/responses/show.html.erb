@@ -1,5 +1,6 @@
 <% breadcrumb :study, @response.quiz.course %>
 <div id="study-area">
+  <div id="innards">
   <div id="quiz-id" class="hidden"><%= @response.quiz.id %></div>
   <p>Question: <span id="question"><%= @response.quiz.question %></span></p>
   <div id="judgement">
@@ -30,4 +31,5 @@
   <% end %>
 
   <%= render :partial => 'components/help' %>
+</div>
 </div>
