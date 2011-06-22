@@ -1,20 +1,7 @@
-<div class="back"> <%= link_to "Back to course", @course %> </div>
+<% breadcrumb :study, @quiz.course %>
+
 <div id="study-area">
   <% if @quiz %> 
-    <div id="problem"><%= @quiz.problem.statement %></div>
-
-    <% if not @quiz.steps.nil? %>
-      <div class="header">Solution steps:</div>
-
-      <ol>
-        <% @quiz.problem.steps.each_with_index do |step, index| %>
-          <% if @quiz.steps.split(",").include?(step.id.to_s) %>
-            <%= render :partial => 'steps/step', :locals => { :step => step } %>
-          <% end %>
-        <% end %>
-        <li><p id="answer">...</p></li>
-      </ol>
-    <% end %>
 
     <div class="header"><%= @quiz.question %></div>
 
@@ -25,7 +12,6 @@
       <% end %>
 
       <%= f.hidden_field :quiz_id, :value => @quiz.id %>
-      <%= f.hidden_field :user_id, :value => @user.id %>
 
       <div id="check-answer">
         <div class="actions">

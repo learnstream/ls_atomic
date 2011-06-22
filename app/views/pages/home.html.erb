@@ -1,37 +1,47 @@
 
-<h2>Courses you are taking</h2>
 
 <div id="course-overview">
-<% if @studied_courses.count == 0 %>
-  <p> You are currently not taking any courses </p>
-<% else %>
-<table>
-  <% @studied_courses.each do |course| %>
-  <tr>
-    <td class="course-name"><%= link_to course.name, course_path(course.id) %></td>
-    <td><%= link_to "You currently have " + pluralize(current_user.memories_due_with_quiz(course).count, "item") + " for review", course_study_index_path(course.id) %></td>
-    <td><% if current_user.all_memories(course).latest_studied.first and current_user.all_memories(course).latest_studied.first.last_viewed %>
-        Last studied <%= time_ago_in_words(current_user.all_memories(course).latest_studied.first.last_viewed) %> ago
-      <% else %>
-        You haven't started studying yet!
-      <% end %>
-      </td>
-  </tr>
-<% end %>
-</table>
-<% end %>
+  <% if @courses.count == 0 %>
+    <p> You are currently not taking any courses. </p>
+  <% else %>
+    <% @taught_courses.each do |course| %>
+      <div class="course-listing">
+        <h2><%= link_to course.name, course %></h2>
+        <p>You currently have <%=course.enrollments.count%> students in your course. </p>
+      </div>
+    <% end %>
+    <% @studied_courses.each do |course| %>
+      <div class="course-listing">
+        <%= link_to course.name, course, :class => 'course-name' %>
 
-<% if not @taught_courses.empty? %>
-<h2>Courses you are teaching</h2>
-<table>
-  <% @taught_courses.each do |course| %>
-  <tr>
-    <td class="course-name"><%= link_to course.name, course_path(course.id) %></td>
-    <td>You currently have <%=course.enrollments.count%> students in your course...Shape up! </td>
-  </tr>
-<% end %>
-</table>
-<%end%>
+        <div class="study-info">
+        <% if current_user.all_memories(course).latest_studied.first and current_user.all_memories(course).latest_studied.first.last_viewed %>
+          Last studied <%= time_ago_in_words(current_user.all_memories(course).latest_studied.first.last_viewed) %> ago
+        <% else %>
+          You haven't started studying yet!
+        <% end %>
+      </div>
+
+      <ul class="course-actions">
+        <li class="items-for-review">
+        <%= pluralize(current_user.memories_due_with_quiz(course).count, "item") %> for review<br />
+        <%= link_to "Study now", course_study_index_path(course.id), :class => 'study-link' %>
+        </li>
+
+        <% if course.first_lesson_for(current_user).nil? %>
+          <li class="next-lesson">Completed all lessons!</li>
+        <% else %> 
+          <% next_lesson = course.first_lesson_for(current_user) %>
+          <li class="next-lesson">Next lesson: <br/> <%= link_to next_lesson.name, next_lesson, :class => 'lesson-link' %></li>
+        <% end %>
+
+        <li>See your progress<br /><%= link_to "Course statistics", course %></li>
+      </ul>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
+
+<br/>
 Check out the rest of our <%= link_to "courses", courses_path, :id => "more-courses-link" %>!

@@ -19,8 +19,8 @@ class CoursesController < ApplicationController
       return 
     end
 
+    @lessons = @course.lessons
     @components = @course.components
-    @problems = @course.problems
   end
 
   def create

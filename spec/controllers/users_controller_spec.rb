@@ -65,7 +65,7 @@ describe UsersController do
       it "should not change permissions if user is learner or creator" do
         test_sign_in(@non_admin) 
         put :update, :id => @user, :user => { :perm => "creator" }
-        response.should redirect_to(@non_admin)
+        response.should redirect_to user_path(@non_admin)
       end 
 
       it "should change permissions if the user is an admin" do

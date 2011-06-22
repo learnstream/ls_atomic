@@ -1,22 +1,33 @@
+<% breadcrumb :study, @response.quiz.course %>
 <div id="study-area">
+  <div id="quiz-id" class="hidden"><%= @response.quiz.id %></div>
+  <p>Question: <span id="question"><%= @response.quiz.question %></span></p>
   <div id="judgement">
   <% if not @response.status.blank? %> 
+    Your answer: <span class="answer"
+      <% if @response.status == "correct" %>
+        id="correct_answer"
+      <% end %>
+      >
+      <%= @response.answer %></span><br />
     <% if @response.status == "correct" %>
-      <p class="flash success">You're correct!</p>
+      You're correct!<br />
     <% else %>
-      <p class="flash error">That's incorrect.</p>
+      That's incorrect. The answer is <span class="answer" id="correct_answer"><%= @response.quiz.answer %></span>.
     <% end %>
-
-    <p>Your answer: <span class="answer"><%= @response.answer %></span></p>
+  <% else %>
+    The answer is <span class="answer" id="correct_answer"><%= @response.quiz.answer %></span>. 
   <% end %>
-
-  <p>The correct answer: <span class="answer"><%= @response.quiz.answer %></span></p>
-
     <%= render :partial => @answer_output_view, :locals => { :answer_output => @response.quiz.answer_output }  unless @answer_output_view.nil? %>
-</div>
+    
+  </div>
 
 
-  <%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
+  <% if @response.has_been_rated %>
+    <%= render :partial => "shared/next_button", :locals => { :myresponse => @response } %>
+  <% else %>
+    <%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
+  <% end %>
 
   <%= render :partial => 'components/help' %>
 </div>

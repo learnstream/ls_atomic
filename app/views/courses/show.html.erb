@@ -1,6 +1,7 @@
+<% breadcrumb :course, @course %>
+
 <div id="course-content">
 
-  <div class = "back"><%= link_to "Back to home", home_path%></div>
   <h1><%= @course.name %></h1>
 
 <p><%= @course.description %></p>
@@ -9,18 +10,31 @@
 <p><%= link_to "Study", course_study_index_path(@course), :class => "study_button round" %></p>
 <% end %>
 
-  <div id="components">
+<div id="lessons">
+  <h2>Lessons</h2>
+  <%if @lessons.empty? %>
+    Course has no lessons.
+  <% else %>
+    <ul>
+      <% @lessons.each do |lesson| %>
+        <li><%= link_to lesson.name, [@course, lesson] %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div id="components">
   <h2>Components</h2>
   <% if @components.empty? %>
     Course has no components.
   <% else %>
-  <ul>
-    <%= render @components %>
-  </ul>
+    <ul>
+      <%= render @components %>
+    </ul>
   <% end %>
-  </div>
+</div>
 </div>
 
 <% if current_user.memory_ratings.in_course(@course).count > 0 %>
-<div id="stats-sidebar"><%= render 'stats' %></div>
+  <div id="stats-sidebar"><%= render 'stats' %></div>
 <% end %>

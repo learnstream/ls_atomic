@@ -1,4 +1,6 @@
 $body-color: #fff;
+$yt-width: 480px;
+$yt-height: 295px;
 
 body {
   background: $body-color; 
@@ -31,7 +33,7 @@ header {
   border-radius:         $radius;
 }
 
-.round { @include rounded(10px); }
+.round { @include rounded(5px); }
 
 tbody tr:nth-child(even) td, tbody tr.even td {background:#fff;}
 
@@ -43,6 +45,11 @@ section {
   background: $body-color;
   @include rounded(20px);
 }
+
+h1 {
+  font-size: 2em;
+}
+
 /* Links */
 
 $link-color: #09c;
@@ -95,7 +102,7 @@ nav {
     margin-right: 0.5em;
     width: 100px;
     text-align: center;
-    background-color: #ffbb73;
+    background-color: #E78F08;
     list-style-type: none;
     display: inline-block;
     padding: 0.2em 0;  
@@ -198,8 +205,50 @@ a.study_button {
 /* Home page */
 
 #course-overview { 
-  td.course-name { width: 150px; }
+  .course-listing {
+    margin-bottom: 15px;
+
+    .course-name {
+      font-size: 2em;
+    }
+
+    .study-info {
+      display: inline;
+      font-size: .8em;
+    }
+
+    ul.course-actions {
+      margin: 0px;
+      padding: 0px;
+      
+      & > li { 
+        vertical-align: top;
+        margin: 0px;
+        margin-right: 10px;
+        background: #eee;
+        text-align: center;
+        padding: 10px;
+        display: inline-block;
+        width: 240px;
+        height: 60px;
+
+        &.items-for-review { 
+        }
+
+        &.other-actions {
+          text-align: left;
+          background: #fff;
+        }
+      }
+
+      a { 
+        font-size: 1.5em;
+      }
+    }
+  }
 }
+
+
 
 /* Course Show page */
 
@@ -306,6 +355,149 @@ a.signup_button {
   }
   .selected-answer {
     background: #cfc;
+  }
+}
+/* Lessons page */
+.events-area {
+    background-color: #EEEEEE;
+    border: 1px solid #ddd;
+    padding: 10px;
+    @include rounded(5px);
+
+  .event {
+     background-color: lighten(#EEEEEE, 15%);
+     padding: 10px;
+     margin-bottom: 10px;
+     
+     
+    border-right: 1px solid lighten(black, 60%);
+    border-bottom: 1px solid lighten(black, 60%);
+    border-left: 1px solid lighten(black, 80%);
+    border-top: 1px solid lighten(black, 80%);
+    
+    @include rounded(5px);
+   }
+
+  .note-old { 
+    border-right: 1px solid lighten(black, 30%);
+    border-bottom: 1px solid lighten(black, 30%);
+    border-left: 1px solid lighten(black, 60%);
+    border-top: 1px solid lighten(black, 60%);
+  }
+
+.quiz-old { 
+     border-right: 1px solid lighten(red, 0%);
+   border-bottom: 1px solid lighten(red, 0%);
+     border-left: 1px solid lighten(red, 15%);
+   border-top: 1px solid lighten(red, 15%);
+
+   &.answered-old {
+         border-right: 1px solid lighten(green, 10%);
+       border-bottom: 1px solid lighten(green, 10%);
+         border-left: 1px solid lighten(green, 30%);
+         border-top: 1px solid lighten(green, 30%);
+      }
+    } 
+
+  .timelink {
+    font-size: .7em;
+    margin-right: .5em;
+  }
+}
+
+
+#ytPlayer {
+  clear: left;
+  float: left;
+  margin: auto;
+}
+
+#quiz_area {
+  width: 700px;
+  clear: both;
+}
+
+/* Lessons - Student */
+#events-area-student {
+  float: left;
+  clear: right;
+  width: 400px;
+  height: $yt-height - 20px - 2px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+/* Lessons - Teacher */
+
+
+
+#lesson-edit {
+
+  #video-area {
+
+  clear: left;
+  float: left;
+  margin-bottom: 5px;
+  width: 500px;
+  background: #eee;
+  border: 1px solid #ddd;
+  @include rounded(5px);
+ 
+  #vid-container {
+    width: 480px;
+    margin: 0px auto;
+    padding: 10px;
+  }
+
+  #video-url-div { 
+    clear: both;
+    padding-top: 10px;
+
+    #load_video_url { margin: 0px 5px; }
+  }
+  }
+
+  
+  #events-area-teacher {
+    float:right;
+    width: 380px; 
+    height: 480px;
+    overflow-y: auto;
+    margin-left: 5px;
+  }  
+  
+}
+  
+#tabs-container {
+
+  width: 502px;
+  clear: left;
+  float: left;
+  .current_video_url{ font-size: 0.7em; padding: 5px; }
+
+  #lesson-edit-tabs {
+    clear: both;
+  }
+
+  ul {
+    display: block;
+  }
+
+  table { 
+    width: 270px;
+    margin: 0px;
+    input { width: 50px;}
+    td { padding: 0 5px; width: auto;}
+  }
+
+  #add-note {
+    width: 460px;
+
+    #note_content {
+      width: 440px;
+      height: 100px;
+    }
   }
 }
 

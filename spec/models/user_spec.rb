@@ -121,8 +121,7 @@ describe User do
       @memory.save!
       @memory2.save!
 
-      @problem = Factory(:problem, :course => @course)
-      @quiz = Factory(:quiz, :problem_id => @problem) 
+      @quiz = Factory(:quiz, :course => @course)
       @quiz.components << @component
     end
 

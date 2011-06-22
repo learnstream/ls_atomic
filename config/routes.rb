@@ -1,5 +1,8 @@
 LsAtomic::Application.routes.draw do 
 
+  resources :notes
+  resources :events
+
   resources :user_sessions
   resources :users do
     member do
@@ -8,7 +11,8 @@ LsAtomic::Application.routes.draw do
   end
 
   resources :courses do
-    resources :problems
+    resources :lessons
+    resources :quizzes
     resources :components
     member do
       get :users
@@ -26,21 +30,8 @@ LsAtomic::Application.routes.draw do
     end
   end
 
-  resources :problems do
-    member do
-      get :show_step
-      get :new_tex
-      post :tex_create
-    end
-  end
   resources :videos, :only => [:create, :update, :destroy, :edit]
   resources :enrollments, :only => [:create, :update, :destroy]
-  resources :steps do
-    member do
-      get :help
-    end
-  end
-  resources :step_components, :only => [:create, :destroy]
 
   resources :memories do
     member do
@@ -55,6 +46,10 @@ LsAtomic::Application.routes.draw do
   end
 
   resources :responses, :only => [:create, :update, :edit, :index, :show]
+
+  resources :lessons do
+    resources :events
+  end
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'

@@ -5,8 +5,6 @@ describe VideosController do
   before(:each) do
     @course = Factory(:course)
     @component = Factory(:component, :course => @course)
-    @problem = Factory(:problem, :course => @course)
-    @step = Factory(:step, :problem => @problem)
     @attr = { :url => "http://www.youtube.com/watch?v=U7mPqycQ0tQ", :start_time => 0, :end_time => 25 }
   end
 
@@ -24,12 +22,6 @@ describe VideosController do
         @component.reload
         @component.videos[0].url.should == @attr[:url]
       end
-
-      it "should create a video associated with the right step" do
-        post :create, :video => @attr.merge(:step_id => @step.id)
-        @step.reload
-        @step.videos[0].url.should == @attr[:url]
-      end 
     end
 
 
@@ -46,15 +38,7 @@ describe VideosController do
         @component.reload
         @component.videos[0].url.should == @attr[:url]
       end
-
-      it "should create a video associated with the right step" do
-        post :create, :video => @attr.merge(:step_id => @step.id)
-        @step.reload
-        @step.videos[0].url.should == @attr[:url]
-      end 
-
     end
-
 
     describe "for students" do
       it "should not create a video" do

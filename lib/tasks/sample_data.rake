@@ -6,9 +6,9 @@ namespace :db do
       make_users
       make_courses_and_components
       enroll_users
-      make_problems_and_steps
       make_quizzes
       create_many_components
+      make_lesson
     end
 
     view_memories
@@ -79,42 +79,19 @@ def enroll_users
   normal_users[6..8].each { |u| u.enroll!(courses[2]) }
 end
 
-def make_problems_and_steps
-  course = Course.first
-  c1 = course.components.find_by_name("Newton's first law")
-  c2 = course.components.find_by_name("Newton's second law")
-  c3 = course.components.find_by_name("Newton's third law")
-  
-  problem1 = course.problems.create!(:name => "Problem 1", :statement => "What is newton's second law?")
-  problem2 = course.problems.create!(:name => "Problem 2", :statement => "What is newton's third law?")
-
-  step11 = problem1.steps.create!(:text => "Think about it", :order_number => 1)
-  step12 = problem1.steps.create!(:text => "The second law relates force to mass and acceleration", :order_number => 2)
-  step13 = problem1.steps.create!(:text => "The answer is \\( \\vec{F} = m\\vec{a} \\) !", :order_number => 3)
-  
-  step12.videos.create!(:name => "Cats", :url => "http://www.youtube.com/watch?v=nTasT5h0LEg", :start_time => 20, :end_time => 30, :description => "Funny cats")
-
-  step21 = problem2.steps.create!(:text => "Think about it...", :order_number => 1)
-  step22 = problem2.steps.create!(:text => "Every action has an equal and opposite reaction!", :order_number => 2)
-  step23 = problem2.steps.create!(:text => "This means that anything exerting a force on something else has an equal force exerted back on itself!", :order_number => 3)
-
-  step12.relate!(c2)
-  step13.relate!(c2)
-
-  step22.relate!(c3)
-  step23.relate!(c3)
-end  
-
 def make_quizzes
-  problem = Problem.find_by_name("Problem 1")
-  quiz = Quiz.create!(:problem_id => problem, 
-                      :component_tokens => "2",
-                      :steps => ["1"],
-                      :question => "What is the answer?",
-                      :answer_type => "text",
-                      :answer_input => "text",
-                      :answer => "42",
-                      :answer_output => "text")
+  course = Course.first
+
+  
+  course.components.each do |component|
+    Quiz.create!(:course_id => course,
+                 :component_tokens => component.id.to_s,
+                 :question => "What is the #{component.id}th answer?",
+                 :answer_type => "text",
+                 :answer_input => '{ "type" : "text" }',
+                 :answer => "42",
+                 :answer_output => '{ "type" : "text" }')
+  end
 end
 
 def view_memories
@@ -127,5 +104,36 @@ def view_memories
     Timecop.travel(DateTime.now - 10.days) { memory.view(4) }
     Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
     Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
+  end
+end
+
+def make_lesson
+  course = Course.first
+  lesson = Lesson.create!(:course_id => course,
+                          :name => "Newton's Laws")
+
+  events = []
+  20.times do |n| 
+    events << lesson.events.build(:video_url => "http://www.youtube.com/watch?v=us2LKeZnhn0", 
+                                  :start_time => n*5,
+                                  :end_time => (n+1)*5,
+                                  :order_number => n+1)
+  end
+
+  note = Note.create!(:content => "Spam that probe, spam it")
+  note.events << events[0]
+
+  quiz = Quiz.first
+  quiz.events << events[1]
+
+  quiz = Quiz.all[1]
+  quiz.events << events[2]
+
+  quiz = Quiz.all[2]
+  quiz.events << events[3]
+  
+  16.times do |n| 
+    note = Note.create!(:content => "Spam the nexus")
+    note.events << events[n+4]
   end
 end

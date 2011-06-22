@@ -44,4 +44,60 @@ describe Course do
       @course.users.should include(@user)
     end
   end
+
+  describe "lessons" do
+
+    before(:each) do
+      @lesson = Factory(:lesson, :course => @course)
+    end
+
+    it "should respond to lessons" do
+      @course.should respond_to(:lessons)
+    end
+
+    it "should have the right lesson" do
+      @course.lessons.should include @lesson
+    end
+    
+    it "should be able to return the next lesson for a student" do
+      @lesson2 = Factory(:lesson, :name => "Second lesson", :order_number => 999, :course => @course)
+      @component1 =  Factory(:component, :name => "A", :course => @course)
+      @component2 =  Factory(:component, :name => "B", :course => @course)
+
+      @quiz1 = Factory(:quiz, :course => @course)
+      @quiz1.components << @component1
+      @event1 = Factory(:event, :lesson => @lesson)
+      @quiz1.events << @event1
+
+      @quiz2 = Factory(:quiz, :course => @course)
+      @quiz2.components << @component2
+      @event2 = Factory(:event, :lesson => @lesson2)
+      @quiz2.events << @event2
+
+      @lesson.events << @event1
+      @lesson2.events << @event2
+
+      @student = Factory(:user)
+      @student.enroll!(@course)
+
+      @student.memories.find_by_component_id(@component1).view(4)
+
+      @course.first_lesson_for(@student).should == @lesson2
+    end
+  end
+
+  describe "quizzes" do
+
+    before(:each) do
+      @quiz = Factory(:quiz, :course => @course)
+    end
+
+    it "should respond to quizzes" do
+      @course.should respond_to(:quizzes)
+    end
+
+    it "should have the right quiz" do
+      @course.quizzes.should include @quiz
+    end
+  end
 end

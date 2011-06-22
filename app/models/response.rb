@@ -4,6 +4,16 @@ class Response < ActiveRecord::Base
 
   before_create :grade_response
 
+  scope :by_user, lambda { |user_id| where(:user_id => user_id) } 
+
+  def rate_components!(quality)
+    self.has_been_rated = true
+    quiz.components.each do |component|
+      memory = user.memories.find_by_component_id(component)
+      memory.view(quality)
+    end
+  end
+
   private
 
   def grade_response
@@ -12,10 +22,11 @@ class Response < ActiveRecord::Base
         self.status = "correct"
       else
         self.status = "incorrect"
-        self.quiz.rate_components!(self.user, 0)
+        rate_components!(0)
       end
     else
       self.status = ""
     end
   end
+
 end
