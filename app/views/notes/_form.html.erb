@@ -1,19 +1,16 @@
-<% form_for @note do |note_form| %>
-  <div class="field">
-    <%= note_form.label :content %>
+<% @note.events.build if @note.events.empty? %>
+<%= form_for @note, :remote => true do |note_form| %>
+  <%= render 'shared/error_messages', :object => note_form.object %>
+  <div id="note-error-message"></div>
+  <%= render :partial => 'events/form', 
+             :locals => { :parent_type => "note", 
+                          :event => @note.events[0] } %>
+  <div class="field" >
+    <%= note_form.label :content %><br />
     <%= note_form.text_area :content %>
   </div>
-  <div class="field">
-    <%= label_tag :start_time, "Start time: " %>
-    <%= text_field_tag :start_time %>
-    <a href="#" id="start-sync">Sync start</a>
+  <div class="actions">
+  <%= note_form.submit "Submit"  %>
   </div>
-  <div class="field">
-    <%= label_tag :end_time, "End time: " %>
-    <%= text_field_tag :end_time %>
-    <a href="#" id="end-sync">Sync end</a>
-  </div>
-  <%= hidden_field_tag :video_url %>
-  <%= hidden_field_tag :lesson_id, lesson.id %>
-  <%= submit_tag %>
-<%end%>
+<% end %>
+

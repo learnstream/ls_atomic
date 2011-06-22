@@ -108,6 +108,13 @@ Factory.define :response do |r|
   r.association    :quiz, :factory => :quiz
 end
 
+Factory.define :correct_response, :class => Response do |r|
+  r.answer         "42"
+  r.status         "correct"
+  r.association    :user, :factory => :user
+  r.association    :quiz, :factory => :quiz
+end
+
 Factory.define :note do |note|
   note.content "I am a note"
 end
@@ -119,3 +126,4 @@ Factory.define :event do |event|
   event.end_time     20
   event.order_number 1
 end
+

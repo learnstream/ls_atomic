@@ -1,4 +1,24 @@
+module Playable
+  def new_event_attributes=(event_attributes)
+    events.build(event_attributes)
+  end
+
+  def existing_event_attributes=(event_attributes)
+    if event_attributes
+      events[0].attributes = event_attributes
+    else
+      events.delete(events[0]) unless events.empty?
+    end
+  end
+
+  def save_event
+    events[0].save(:validate => false) unless events.empty?
+  end
+end
+
 class Quiz < ActiveRecord::Base
+  include Playable
+  
   attr_reader :component_tokens
 
   belongs_to :course
@@ -9,20 +29,22 @@ class Quiz < ActiveRecord::Base
 
   validates :question, :presence => true 
   validate :answer_type_present
+  validates_associated :events
+
+  after_update :save_event
+
+  def to_json(options = {})
+    super 
+  end
+
+  def as_json(options = {})
+    super["quiz"].merge({ "components_tokens" => self.component_ids.join(","),
+                          "existing_event_attributes" => self.events[0].as_json["event"] })
+     
+  end
 
   def component_tokens=(ids)
     self.component_ids = ids.split(",")
-  end
-
-  def steps
-    read_attribute(:steps)
-  end
-
-  def steps=(steps)
-    steps_string = ""
-    steps.map{|step| steps_string << step << ","}
-    steps_string.slice!(-1) unless steps_string.empty?
-    write_attribute(:steps, steps_string)
   end
 
   def answer_type
@@ -49,11 +71,4 @@ class Quiz < ActiveRecord::Base
      return false
     end
   end 
-
-  def rate_components!(user, quality)
-    components.each do |component|
-      memory = user.memories.find_by_component_id(component)
-      memory.view(quality)
-    end
-  end
 end

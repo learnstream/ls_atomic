@@ -21,6 +21,8 @@
   <%= javascript_include_tag "Study" %>
   <%= javascript_include_tag "jquery.tokeninput" %> 
   <%= javascript_include_tag "jquery.flot.js" %>
+  <%= javascript_include_tag "jquery.scrollTo.min.js" %>
+  <%= javascript_include_tag "Utils" %>
   <%= javascript_include_tag "Stats" %>
   <%= javascript_include_tag "Quiz" %>
   <%= javascript_include_tag "WatchLesson" %>
@@ -45,9 +47,16 @@
   </header>
   <section>
   <%= yield(:panel) if content_for?(:panel) %>
+  
+  <div id = "breadcrumb"
+    <%= breadcrumb :separator => ">",
+      :autoroot => true,
+      :link_last => false %>
+    </div>
 
   <%= yield(:local_nav) if content_for?(:local_nav) %>
- 
+
+   
   <% flash.each do |key, value| %>
     <div class="flash <%= key %>"><%= value %></div>
   <% end %>

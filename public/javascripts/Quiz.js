@@ -25,14 +25,13 @@ $(document).ready(function () {
       $("#quiz_answer_input").val("");
       $("#quiz_answer_output").val("");
       updateInputForm();
-  });
+    });
 
-  if ($("#holder").data("mode") == "student") {
-    ff = new FBD;
+    if ($("#holder").data("mode") == "student" || $("#holder").data("mode") == "edit") {
+      ff = new FBD;
 
-    ff.loadJSONFBD($("#holder").data("json"));
-
-  } 
+      ff.loadJSONFBD($("#holder").data("json"));
+    } 
 });
 
 function Force() {

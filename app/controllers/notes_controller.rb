@@ -1,23 +1,39 @@
 class NotesController < ApplicationController
   def create
-    @lesson = Lesson.find(params[:lesson_id])
-    last_event = @lesson.events[-1]
-    next_event = last_event.nil? ?  0 : last_event.order_number + 1
-    @new_note = Note.new(params[:note])
+    @note = Note.new(params[:note])
 
-    @new_note.events.build(:start_time => params[:start_time], :end_time => params[:end_time], 
-                       :video_url => params[:video_url], :lesson_id => params[:lesson_id], 
-                       :order_number => next_event)
-
-    if @new_note.save
-      flash[:success] = "New note created!"
-    else
-      render 'new'
+    if @note.save
+      @event = @note.events[0]
+      @note = Note.new
+      respond_to do |format|
+        format.js   
+      end
     end
   end
 
   def new
     @note = Note.new
+    @note.events.build
   end
 
+  def edit
+    @note = Note.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    params[:note][:existing_event_attributes] ||= {}
+
+    @updated_note = Note.find(params[:id])
+    @event = @updated_note.events[0]
+    @updated_note.update_attributes(params[:note])
+    @note = Note.new
+                                   
+    respond_to do |format|
+      format.js   
+    end
+  end
 end

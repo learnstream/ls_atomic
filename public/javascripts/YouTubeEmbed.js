@@ -67,7 +67,11 @@ function loadAndPlayVideo(video_id, start_time, end_time, embed_area, autoplay) 
   if (ytplayer == null) 
    loadYouTubePlayer(video_id, start_time, end_time, embed_area, autoplay);
   else  {
-    ytplayer.loadVideoById(video_id, start_time);
+    if (autoplay == 1) {
+      ytplayer.loadVideoById(video_id, start_time);
+    } else {
+      ytplayer.cueVideoById(video_id, start_time);
+    }
   }
   
   if (end_time != 0) {

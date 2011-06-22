@@ -27,6 +27,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.json { render :json => events_json }
+      format.html   { render :partial => "event", :collection => @events, :as => :event, :layout => false }
     end
   end
 end
