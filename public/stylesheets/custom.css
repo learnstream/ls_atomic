@@ -113,7 +113,8 @@ nav {
       #local-nav li a:visited {
         color: #a65500; }
       #local-nav li a:hover {
-        text-decoration: underline; }
+        text-decoration: none;
+        color: #fef6e8; }
 
 .add-course-item {
   font-size: 1.2em;

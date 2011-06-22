@@ -134,7 +134,8 @@ nav {
       color: #a65500;
 
       &:visited { color: #a65500; }
-      &:hover { text-decoration: underline; }
+      &:hover { text-decoration: none; 
+        color: lighten(#f6b648, 33%); }
     }
   }
 }
