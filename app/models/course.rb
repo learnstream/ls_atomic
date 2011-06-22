@@ -26,7 +26,7 @@ class Course < ActiveRecord::Base
   def teachers
     teacher_enrollments.map { |e| e.user }
   end
-  
+
   def populate_with_tex(document)
 
     # Find Problems
@@ -77,27 +77,28 @@ class Course < ActiveRecord::Base
     }
 
     return {:success => true, :problems_added => nil} 
-    
+    end
 
-  def first_lesson_for(student)
-    
-    lessons.each do |lesson|
-      lesson.quizzes.each do |quiz|
-        quiz.components.each do |cmp|
-          mem = cmp.memories.find_by_user_id(student)
-          if !mem.viewed?
-            return lesson
+
+
+    def first_lesson_for(student)
+
+      lessons.each do |lesson|
+        lesson.quizzes.each do |quiz|
+          quiz.components.each do |cmp|
+            mem = cmp.memories.find_by_user_id(student)
+            if !mem.viewed?
+              return lesson
+            end
           end
         end
       end
+
+      return nil
     end
 
-    return nil
-  end
+    private
 
-  end
-
-  private
     def find_problems(text)
       return text.scan(/\\begin{problem}(.*?)\\end{problem}/im)
     end
