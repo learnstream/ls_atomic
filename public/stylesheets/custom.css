@@ -72,7 +72,27 @@ nav {
         text-decoration: underline; }
 
 /* Teacher course page navigation */
+#course-head {
+  background: #f4a317;
+  border-bottom: 1px solid #a65500;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding-bottom: 5px; }
+
+#course-name {
+  display: inline;
+  font-size: 1.8em;
+  color: #fff;
+  margin-left: 10px; }
+
+#breadcrumb {
+  background: #fce6c2;
+  margin: 0px 5px 30px 5px;
+  padding-left: 10px; }
+
 #local-nav {
+  display: inline;
   padding: 0 0.7em;
   white-space: nowrap; }
   #local-nav ul {
@@ -94,6 +114,20 @@ nav {
         color: #a65500; }
       #local-nav li a:hover {
         text-decoration: underline; }
+
+.add-course-item {
+  font-size: 1.2em;
+  color: #09c;
+  padding: 5px 15px 5px 15px;
+  background: #eee;
+  border: 0px none;
+  margin: auto;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+  .add-course-item:hover {
+    text-decoration: underline;
+    cursor: pointer; }
 
 /* Student course page */
 #components li {
@@ -209,8 +243,9 @@ a.study_button {
   overflow: auto;
   margin-left: 116px; }
   #student-status td {
-    padding: 0px;
-    border: 1px solid #000;
+    padding: 5px;
+    border-left: 1px solid #fff;
+    font-size: .8em;
     height: 40px;
     max-height: 40px;
     min-width: 110px;

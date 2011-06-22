@@ -92,7 +92,28 @@ nav {
 
 /* Teacher course page navigation */
 
+#course-head {
+  background: darken(#f6b648, 10%);
+  border-bottom: 1px solid #a65500;
+  @include rounded(5px);
+  padding-bottom: 5px;
+}
+
+#course-name {
+  display: inline;
+  font-size: 1.8em;
+  color: #fff;
+  margin-left: 10px;
+}
+
+#breadcrumb {
+  background: lighten(#f6b648, 25%);
+  margin: 0px 5px 30px 5px;
+  padding-left: 10px;
+}
+
 #local-nav {
+  display: inline;
   padding: 0 0.7em;
   white-space: nowrap;
 
@@ -117,6 +138,20 @@ nav {
     }
   }
 }
+
+.add-course-item
+{
+  font-size: 1.2em;
+  color: #09c;
+  padding: 5px 15px 5px 15px;
+  background: #eee;
+  border: 0px none;
+  margin: auto;
+
+  &:hover { text-decoration: underline; cursor: pointer; }
+  @include rounded(5px);
+}
+
 
 /* Student course page */
 
@@ -261,7 +296,15 @@ a.study_button {
   overflow: auto;
   margin-left: 116px;
   td {
-    padding: 0px; border: 1px solid #000; height: 40px; max-height: 40px; min-width: 110px; max-width: 110px; margin-left: -110px; 
+    padding: 5px;
+    border-left: 1px solid #fff; 
+    font-size: .8em;
+    
+    height: 40px;
+    max-height: 40px; 
+    min-width: 110px; 
+    max-width: 110px; 
+    margin-left: -110px; 
     &.label { background: #ccc; }
     &.due { background: red; }
     &.good { background: green; }                     

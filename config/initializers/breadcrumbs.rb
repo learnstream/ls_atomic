@@ -75,7 +75,7 @@ Gretel::Crumbs.layout do
   end
 
   crumb :new_component do |course|
-    link "New Lesson", new_course_component_path(course)
+    link "New Component", new_course_component_path(course)
     parent :components, course
   end
 
