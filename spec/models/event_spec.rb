@@ -25,4 +25,19 @@ describe Event do
     @event.reload
     @event.playable.should == @quiz
   end
+
+  it "should list events in the correct order" do
+    @note = Factory(:note)
+    @note.events << @event
+    @note2 = Factory(:note, :content => "2")
+    @event2 = Factory(:event, :lesson => @lesson)
+    @note2.events << @event2
+    
+    @event.order_number = 1
+    @event.save
+    @event2.order_number = 0 
+    @event2.save
+
+    @lesson.events.first.should == @event2
+  end
 end

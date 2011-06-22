@@ -2,11 +2,23 @@ class ResponsesController < ApplicationController
   layout "study", :only => [:show]
   
   def create
+
     @response = Response.new(params[:response])
     @response.user = current_user
-     
+
+    if params[:commit] == "Skip"
+      @response.status = "skipped"
+    elsif params[:commit] == "Don't Know"
+      @response.answer = "(unanswered)"
+    end
+
     if @response.save
-      redirect_to @response
+      if @response.status == "skipped"
+        @course = @response.quiz.course
+        redirect_to course_study_index_path(@course)
+      else 
+        redirect_to @response
+      end
     else
       flash[:error] = "Apologies, there was an error and your response was not saved."
       redirect_to course_study_index_path(@course)

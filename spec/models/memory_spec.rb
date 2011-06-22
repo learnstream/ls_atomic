@@ -194,6 +194,12 @@ describe Memory do
     @memory.ease.should >= 1.3
   end
 
+  it "should be skippable" do
+    @memory.skip!
+    @memory.should be_viewed
+    @memory.should_not be_due
+  end
+
   describe "after being reset" do
 
     before(:each) do

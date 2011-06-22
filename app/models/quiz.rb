@@ -71,4 +71,10 @@ class Quiz < ActiveRecord::Base
      return false
     end
   end 
+
+  def skipped_by(student)
+    components.each do |cmp|
+      student.memories.find_by_component_id(cmp).skip!
+    end
+  end
 end

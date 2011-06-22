@@ -29,6 +29,16 @@ describe "Doing exercises" do
     page.should have_css("a", :content => "Check answer")
   end
 
+  it "should be skippable" do
+    click_button "Skip"
+    page.should have_css("p", :text => "Nothing is due")
+  end
+  
+  it "should let the user say they don't know" do
+    click_button "Don't Know"
+    page.should have_css("#judgement")
+  end
+
   it "should redirect to responses for questions that aren't due" do
     fill_in :input, :with => @quiz.answer
     click_button "Check answer"

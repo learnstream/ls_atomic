@@ -72,6 +72,13 @@ class Memory < ActiveRecord::Base
     return true
   end
 
+  def skip!
+    self.views += 1
+    self.last_viewed = Time.now
+    self.due = Time.now + 1.day
+    self.save
+  end
+
   def reset
     self.views = 0
     self.streak = 0
