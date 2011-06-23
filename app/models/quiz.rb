@@ -4,7 +4,7 @@ module Playable
   end
 
   def existing_event_attributes=(event_attributes)
-    if event_attributes
+    if (event_attributes && events[0])
       events[0].attributes = event_attributes
     else
       events.delete(events[0]) unless events.empty?
@@ -25,7 +25,10 @@ class Quiz < ActiveRecord::Base
   has_many :quiz_components, :dependent => :destroy
   has_many :components, :through => :quiz_components
   has_many :responses, :dependent => :destroy
-  has_many :events, :as => :playable
+  has_many :events, :as => :playable, :dependent => :destroy
+  has_many :answers, :dependent => :destroy
+
+  accepts_nested_attributes_for :answers, :reject_if => lambda { |a| a[:text].blank? }, :allow_destroy => true
 
   validates :question, :presence => true 
   validate :answer_type_present
@@ -40,7 +43,6 @@ class Quiz < ActiveRecord::Base
   def as_json(options = {})
     super["quiz"].merge({ "components_tokens" => self.component_ids.join(","),
                           "existing_event_attributes" => self.events[0].as_json["event"] })
-     
   end
 
   def component_tokens=(ids)
@@ -64,11 +66,20 @@ class Quiz < ActiveRecord::Base
   end
 
   def check_answer(response)
-    response_answer = response.answer
-    if answer.downcase == response_answer.downcase
-     return true
-    else
-     return false
+    response_answer = response.answer.downcase
+   
+    answers.each do |answer|
+      if response_answer == answer.text.downcase
+        return true
+      end
     end
+    return false
+
   end 
+
+  def skipped_by(student)
+    components.each do |cmp|
+      student.memories.find_by_component_id(cmp).skip!
+    end
+  end
 end

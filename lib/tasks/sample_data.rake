@@ -81,16 +81,15 @@ end
 
 def make_quizzes
   course = Course.first
-
   
   course.components.each do |component|
-    Quiz.create!(:course_id => course,
+    quiz = Quiz.create!(:course_id => course,
                  :component_tokens => component.id.to_s,
                  :question => "What is the #{component.id}th answer?",
                  :answer_type => "text",
                  :answer_input => '{ "type" : "text" }',
-                 :answer => "42",
                  :answer_output => '{ "type" : "text" }')
+    quiz.answers.create!(:text => "42")
   end
 end
 

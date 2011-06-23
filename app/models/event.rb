@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
 
   validates :lesson_id, :presence => true
 
-  default_scope :order => 'events.order_number'
+  default_scope :order => 'order_number'
 
   before_create :assign_order_number
 
