@@ -10,3 +10,4 @@ $(function () {
         prePopulate: $('#quiz_component_tokens').data('pre')
       });
   });
+
