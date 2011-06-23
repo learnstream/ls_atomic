@@ -15,7 +15,7 @@ describe ResponsesController do
 
         @quiz = Factory(:quiz, :course => @course)
         @quiz.components << @component
-        @attr = { :quiz => @quiz, :answer => @quiz.answer }
+        @attr = { :quiz => @quiz, :answer => @quiz.answers.first.text }
       end
 
       it "should create a new response object" do
@@ -64,7 +64,7 @@ describe ResponsesController do
       test_sign_in(@student)
       @course = Factory(:course)
       @student.enroll!(@course)
-      @quiz = Factory(:quiz, :course => @course, :answer => "42")
+      @quiz = Factory(:quiz, :course => @course)
       @myresponse = Factory(:response, :quiz => @quiz, :user => @student)
     end
 
@@ -88,7 +88,7 @@ describe ResponsesController do
       test_sign_in(@student)
       @course = Factory(:course)
       @student.enroll!(@course)
-      @quiz = Factory(:quiz, :course => @course, :answer => "42")
+      @quiz = Factory(:quiz, :course => @course)
       @myresponse = Factory(:response, :quiz => @quiz, :user => @student)
     end
 

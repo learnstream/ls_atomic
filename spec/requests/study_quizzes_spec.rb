@@ -40,7 +40,7 @@ describe "Doing exercises" do
   end
 
   it "should redirect to responses for questions that aren't due" do
-    fill_in :input, :with => @quiz.answer
+    fill_in :input, :with => @quiz.answers.first.text
     click_button "Check answer"
     click_link "Easy"
 
@@ -117,7 +117,7 @@ describe "Doing exercises" do
 
         it "should have a self rating panel" do
           visit course_study_index_path(@course)
-          fill_in :input, :with => @quiz.answer
+          fill_in :input, :with => @quiz.answers.first.text
           click_button "Check answer"
           page.should have_css("a#rate-hard")
           page.should have_css("a#rate-good")
@@ -126,7 +126,7 @@ describe "Doing exercises" do
 
         it "should not allow the user to select a miss" do
           visit course_study_index_path(@course)
-          fill_in :input, :with => @quiz.answer
+          fill_in :input, :with => @quiz.answers.first.text
           click_button "Check answer"
           page.should_not have_css("a#rate-miss")
         end
@@ -177,7 +177,7 @@ describe "Doing exercises" do
   describe "rating panel" do
     it "should not appear for users who have already rated their response" do
       visit course_study_index_path(@course)
-      fill_in :input, :with => @quiz.answer
+      fill_in :input, :with => @quiz.answers.first.text
       click_button "Check answer"
       click_link "Good"
 
@@ -187,7 +187,7 @@ describe "Doing exercises" do
 
     it "should redirect to the study page for the course" do
       visit course_study_index_path(@course)
-      fill_in :input, :with => @quiz.answer
+      fill_in :input, :with => @quiz.answers.first.text
       click_button "Check answer"
       click_link "Good"
       page.should have_content("Studying " + @course.name)
