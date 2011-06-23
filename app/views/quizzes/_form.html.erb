@@ -31,7 +31,7 @@
 
   <div class="hidden" id="fbd_form"> <%= render "quizzes/fbd_input" %> </div>
 
-  <% f.fields_for :answers do |builder| %>
+  <%= f.fields_for :answers do |builder| %>
     <%= render 'answer_fields', :f => builder %>
   <% end %>
   <p><%= link_to_add_fields "Add answer", f, :answers %></p>

@@ -70,15 +70,19 @@ Factory.define :video do |video|
   video.association         :component, :factory => :component
 end
 
+Factory.define :answer do |answer|
+  answer.text               "42"
+end
+
 Factory.define :quiz do |quiz|
   quiz.question           "What is the answer"
   quiz.answer_type        "text"
   quiz.answer_input       '{ "type" : "text" }'
-  quiz.answer             "42"
   quiz.answer_output      '{ "type" : "text" }'
   quiz.explanation        "I said so"
   quiz.in_lesson          0
   quiz.association        :course, :factory => :course
+  quiz.after_create { |a| Factory(:answer, :quiz_id => a) }
 end
 
 Factory.define :text_quiz, :class => Quiz do |quiz|
