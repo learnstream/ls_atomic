@@ -10,6 +10,7 @@ describe "Doing exercises" do
     @component = Factory(:component, :course => @course)
     @quiz = Factory(:quiz, :course => @course)
     @quiz.components << @component
+    @answer = Factory(:answer, :quiz => @quiz)
 
     integration_sign_in(@user) 
     visit course_study_index_path(@course)
@@ -35,6 +36,7 @@ describe "Doing exercises" do
   end
   
   it "should let the user say they don't know" do
+    save_and_open_page
     click_button "Don't Know"
     page.should have_css("#judgement")
   end
