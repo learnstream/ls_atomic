@@ -50,8 +50,6 @@ function prepareQuizEdit(quiz_id) {
   $("a[href=#add-quiz]").text('Edit Quiz');   
   $("#lesson-edit-tabs").tabs('disable', 0);  
   $("#quiz_existing_event_attributes_lesson_id").val($("#lesson_id").text());
-  if (ytplayer != null)
-    $("#quiz_existing_event_attributes_video_url").val(ytplayer.getVideoUrl());
 
   $("#edit_quiz_" + quiz_id).attr('data-remote', 'true');
 
@@ -79,8 +77,6 @@ function prepareNoteEdit(note_id) {
   $("a[href=#add-note]").text('Edit Note');   
   $("#lesson-edit-tabs").tabs('disable', 1);  
   $("#note_existing_event_attributes_lesson_id").val($("#lesson_id").text());
-  if (ytplayer != null)
-    $("#note_existing_event_attributes_video_url").val(ytplayer.getVideoUrl());
   seekToEvent($("#note-" + note_id));
   createSyncLinks();
 }
