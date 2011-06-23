@@ -1,0 +1,52 @@
+@mixin rounded($radius: 10px) {
+  -moz-border-radius:    $radius;
+  -webkit-border-radius: $radius;
+  border-radius:         $radius;
+}
+
+#video-area {
+  width: 700px;
+  padding: 10px 10px 0px 10px;
+  padding-left: 110px;
+  width: 600px;
+  margin: auto;
+  background: #eee;
+
+}
+
+#ytPlayer {
+  float: none;
+  margin: auto;
+}
+
+#content {
+  clear: both;
+  width: 690px;
+  height: 250px;
+  margin: auto;
+  padding: 50px 15px 0px 15px;
+  overflow: auto;
+  background: #eee;
+
+  .event {
+    margin-bottom: 100px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    @include rounded(10px);
+  }
+
+  div.timelink {
+    width: 90px;
+    margin-bottom: 10px;
+    background: #eee;
+    
+    text-align: center;
+  }
+
+  div.nextlink {
+    width: 90px;
+    margin: 0px auto 50px auto;
+    text-align: center;
+  }
+}
