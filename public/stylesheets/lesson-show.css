@@ -1,9 +1,7 @@
 #video-area {
-  width: 700px;
   padding: 10px 10px 0px 10px;
-  padding-left: 110px;
-  width: 600px;
-  margin: auto;
+  float: left;
+  clear: left;
   background: #eee; }
 
 #ytPlayer {
@@ -11,11 +9,12 @@
   margin: auto; }
 
 #content {
-  clear: both;
-  width: 690px;
-  height: 250px;
+  clear: right;
+  float: left;
+  width: 340px;
+  height: 261px;
   margin: auto;
-  padding: 50px 15px 0px 15px;
+  padding: 50px 10px 0px 10px;
   overflow: auto;
   background: #eee; }
   #content .event {
