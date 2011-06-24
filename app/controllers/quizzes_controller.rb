@@ -12,6 +12,7 @@ class QuizzesController < ApplicationController
   def new 
     @quiz = Quiz.new
     @lesson = nil
+    answer = @quiz.answers.build
   end
 
   def create 
@@ -64,16 +65,14 @@ class QuizzesController < ApplicationController
     # If the above conditions are not met, flash an error and do not create a
     # new response
     if(notdue)
-      if(notrated)
-        flash[:error] = "You have already responded to this problem. 
-                         Please rate your response."
-      else
-        flash[:error] = "You have already responded to that problem
-                         Please wait until it is due before answering again"
-      end
-
       if(most_recent)
-        redirect_to most_recent
+        respond_to do |format|
+          format.html { redirect_to most_recent }
+          format.js { 
+            @response = most_recent
+            render 'responses/show', :format => :js
+          }
+        end
       else
         redirect_to @course
       end
@@ -83,12 +82,9 @@ class QuizzesController < ApplicationController
 
     @response = Response.new
 
-    if @quiz.answer_type == "text"
-      @input_fields = "text_input"
-    elsif @quiz.answer_type == "fbd"
-      @input_fields = "fbd_student_input"
-    else
-      @input_fields = nil
+    respond_to do |format|
+      format.html
+      format.js { render 'show', :format => :js }
     end
   end
 

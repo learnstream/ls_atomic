@@ -1,0 +1,2 @@
+$("#quiz_<%= @quiz.id %>").html("<%= escape_javascript render @quiz %>");
+$("#quiz_<%= @quiz.id %> #new_response").attr("data-remote", "true");

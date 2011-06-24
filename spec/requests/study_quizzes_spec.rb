@@ -10,6 +10,7 @@ describe "Doing exercises" do
     @component = Factory(:component, :course => @course)
     @quiz = Factory(:quiz, :course => @course)
     @quiz.components << @component
+    @answer = Factory(:answer, :quiz => @quiz)
 
     integration_sign_in(@user) 
     visit course_study_index_path(@course)
@@ -29,8 +30,18 @@ describe "Doing exercises" do
     page.should have_css("a", :content => "Check answer")
   end
 
+  it "should be skippable" do
+    click_button "Skip"
+    page.should have_css("p", :text => "Nothing is due")
+  end
+  
+  it "should let the user say they don't know" do
+    click_button "Don't know"
+    page.should have_css("#judgement")
+  end
+
   it "should redirect to responses for questions that aren't due" do
-    fill_in :input, :with => @quiz.answer
+    fill_in :input, :with => @quiz.answers.first.text
     click_button "Check answer"
     click_link "Easy"
 
@@ -107,7 +118,7 @@ describe "Doing exercises" do
 
         it "should have a self rating panel" do
           visit course_study_index_path(@course)
-          fill_in :input, :with => @quiz.answer
+          fill_in :input, :with => @quiz.answers.first.text
           click_button "Check answer"
           page.should have_css("a#rate-hard")
           page.should have_css("a#rate-good")
@@ -116,7 +127,7 @@ describe "Doing exercises" do
 
         it "should not allow the user to select a miss" do
           visit course_study_index_path(@course)
-          fill_in :input, :with => @quiz.answer
+          fill_in :input, :with => @quiz.answers.first.text
           click_button "Check answer"
           page.should_not have_css("a#rate-miss")
         end
@@ -167,7 +178,7 @@ describe "Doing exercises" do
   describe "rating panel" do
     it "should not appear for users who have already rated their response" do
       visit course_study_index_path(@course)
-      fill_in :input, :with => @quiz.answer
+      fill_in :input, :with => @quiz.answers.first.text
       click_button "Check answer"
       click_link "Good"
 
@@ -177,7 +188,7 @@ describe "Doing exercises" do
 
     it "should redirect to the study page for the course" do
       visit course_study_index_path(@course)
-      fill_in :input, :with => @quiz.answer
+      fill_in :input, :with => @quiz.answers.first.text
       click_button "Check answer"
       click_link "Good"
       page.should have_content("Studying " + @course.name)

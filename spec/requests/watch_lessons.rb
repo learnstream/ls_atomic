@@ -9,10 +9,10 @@ describe "Lessons for the student" do
     @event = Factory(:event, :lesson => @lesson)
     @note.events << @event
     @note2 = Factory(:note, :content => "some other important note stuff")
-    @event2 = Factory(:event, :lesson => @lesson, :start_time => 10, :order_number => 2)
+    @event2 = Factory(:event, :lesson => @lesson, :start_time => 10)
     @note2.events << @event2
     @quiz = Factory(:quiz, :course => @course)
-    @event3 = Factory(:event, :lesson => @lesson, :start_time => 20, :order_number => 3)
+    @event3 = Factory(:event, :lesson => @lesson, :start_time => 20)
     @quiz.events << @event3
 
     integration_sign_in(@user)
@@ -24,18 +24,8 @@ describe "Lessons for the student" do
     page.should have_css("h1", :text => @lesson.name)
   end
 
-  it "should have all the event listed", :js => true do
+  it "should have the initial event listed", :js => true do
     page.should have_content(@note.content)
-    page.should have_content(@note2.content)
   end
 
-  it "should have the quiz form", :js => true do
-    save_and_open_page
-    page.should have_css("input")
-  end
-
-  pending "should have a video player", :js => true do
-  end
-    
-    
 end

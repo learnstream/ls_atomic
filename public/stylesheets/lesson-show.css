@@ -1,0 +1,49 @@
+#video-area {
+  padding: 10px 10px 0px 10px;
+  float: left;
+  clear: left;
+  background: #eee; }
+
+#ytPlayer {
+  float: none;
+  margin: auto; }
+
+#stream-area {
+  clear: right;
+  float: left;
+  width: 340px; }
+  #stream-area #content {
+    height: 41px;
+    padding: 20px 15px 250px 15px;
+    overflow: auto;
+    background: #eee; }
+  #stream-area #control-links {
+    text-align: right;
+    margin-top: 5px; }
+    #stream-area #control-links a {
+      border-right: 1px solid #999999;
+      border-bottom: 1px solid #999999;
+      border-left: 1px solid #cccccc;
+      border-top: 1px solid #cccccc;
+      padding: 4px;
+      font-size: 1.1em;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      margin: 2px;
+      width: 50px; }
+  #stream-area .event {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; }
+  #stream-area div.timelink {
+    text-align: right;
+    font-size: .8em; }
+  #stream-area div.nextlink {
+    width: 90px;
+    margin: 0px auto 50px auto;
+    text-align: center; }

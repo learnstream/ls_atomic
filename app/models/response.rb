@@ -3,6 +3,7 @@ class Response < ActiveRecord::Base
   belongs_to :quiz
 
   before_create :grade_response
+  before_create :handle_skip
 
   scope :by_user, lambda { |user_id| where(:user_id => user_id) } 
 
@@ -17,16 +18,23 @@ class Response < ActiveRecord::Base
   private
 
   def grade_response
-    if quiz.answer_type != "self-rate" 
-      if quiz.check_answer(self) 
-        self.status = "correct"
+    if self.status != "skipped"
+      if quiz.answer_type != "self-rate" 
+        if quiz.check_answer(self) 
+          self.status = "correct"
+        else
+          self.status = "incorrect"
+          rate_components!(0)
+        end
       else
-        self.status = "incorrect"
-        rate_components!(0)
+        self.status = ""
       end
-    else
-      self.status = ""
     end
   end
 
+  def handle_skip
+    if self.status == "skipped"
+      quiz.skipped_by(user)
+    end
+  end
 end

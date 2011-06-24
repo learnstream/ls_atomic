@@ -1,0 +1,72 @@
+@mixin rounded($radius: 10px) {
+  -moz-border-radius:    $radius;
+  -webkit-border-radius: $radius;
+  border-radius:         $radius;
+}
+
+@mixin buttony() {
+    border-right: 1px solid lighten(black, 60%);
+    border-bottom: 1px solid lighten(black, 60%);
+    border-left: 1px solid lighten(black, 80%);
+    border-top: 1px solid lighten(black, 80%);
+
+    padding: 4px;
+    font-size: 1.1em;
+    @include rounded(5px);
+}
+
+#video-area {
+  padding: 10px 10px 0px 10px;
+  float: left;
+  clear: left;
+  background: #eee;
+
+}
+
+#ytPlayer {
+  float: none;
+  margin: auto;
+}
+
+#stream-area {
+  clear: right;
+  float: left;
+  width: 340px;
+
+  #content {
+    height: 41px;
+    padding: 20px 15px 250px 15px;
+    overflow: auto;
+    background: #eee;
+
+  }
+
+  #control-links {
+    text-align: right;
+    margin-top: 5px;
+    a {
+      @include buttony();
+      margin: 2px;
+      width: 50px;
+    }
+  }
+
+  .event {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    @include rounded(10px);
+  }
+
+  div.timelink {
+    text-align: right;
+    font-size: .8em;
+  }
+
+  div.nextlink {
+    width: 90px;
+    margin: 0px auto 50px auto;
+    text-align: center;
+  }
+}

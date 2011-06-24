@@ -8,7 +8,7 @@ describe QuizzesController do
     @component = Factory(:component, :course => @course)
     @component2 = Factory(:component, :name => "wooooo", :course => @course)
     @quiz.components << @component
-    @attr = { :component_tokens => "#{@component.id},#{@component2.id}", :question => "What is the color of the sky?", :answer => "blue", :answer_type => "text"}
+    @attr = { :component_tokens => "#{@component.id},#{@component2.id}", :question => "What is the color of the sky?", :answer_type => "text"}
   end
 
   describe "GET 'new'" do

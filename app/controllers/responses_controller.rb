@@ -2,11 +2,32 @@ class ResponsesController < ApplicationController
   layout "study", :only => [:show]
   
   def create
+
     @response = Response.new(params[:response])
     @response.user = current_user
-     
+    
+    @course = @response.quiz.course
+
+    if params[:commit] == "Skip"
+      @response.status = "skipped"
+    end
+
     if @response.save
-      redirect_to @response
+      if @response.status == "skipped"
+        respond_to do |format|
+          format.html do 
+            redirect_to course_study_index_path(@course)
+          end
+          format.js { render 'load_next', :format => :js }
+        end 
+      else 
+        respond_to do |format|
+          format.html { redirect_to @response }
+          format.js { 
+            render 'show', :format => :js 
+          }
+        end
+      end
     else
       flash[:error] = "Apologies, there was an error and your response was not saved."
       redirect_to course_study_index_path(@course)
@@ -22,6 +43,7 @@ class ResponsesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to course_study_index_path(@course) }
         format.json  
+        format.js { render 'update', :format => :js }
       end
     else
       respond_to do |format|
@@ -36,16 +58,12 @@ class ResponsesController < ApplicationController
 
   def show
     @response = Response.find(params[:id])
-    @quiz = @response.quiz
-    @answer_type = @quiz.answer_type
+    @course = @response.quiz.course
 
-    @answer_output_view = nil
-    
-    if @answer_type == "fbd"
-      @answer_output_view = "fbd"
+    respond_to do |format|
+      format.html { render 'show' }
+      format.js { render 'show', :format => :js }
     end
-  
-    @course = @quiz.course
   end
 
   def index

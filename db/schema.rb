@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616221128) do
+ActiveRecord::Schema.define(:version => 20110622220749) do
+
+  create_table "answers", :force => true do |t|
+    t.string   "text"
+    t.integer  "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["quiz_id"], :name => "index_answers_on_quiz_id"
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -74,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20110616221128) do
     t.integer  "views",        :default => 0
     t.integer  "streak",       :default => 0
     t.datetime "last_viewed"
-    t.datetime "due",          :default => '2011-05-27 23:13:53'
+    t.datetime "due",          :default => '2011-05-28 02:09:35'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -115,7 +124,6 @@ ActiveRecord::Schema.define(:version => 20110616221128) do
   create_table "quizzes", :force => true do |t|
     t.text     "question",      :limit => 65536
     t.text     "answer_input"
-    t.string   "answer"
     t.text     "answer_output"
     t.datetime "created_at"
     t.datetime "updated_at"
