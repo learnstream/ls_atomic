@@ -1,8 +1,9 @@
 $(document).ready(function() { 
     var lessonId = $("#lesson-id").text();
+    var lesson_status_id = $("#lesson-status-id").text();
 
     $.get('/lessons/' + lessonId + '/events.json', function(data) {
-      loadEvent(0, data);
+      loadEvent(0, data, lesson_status_id);
     });
 });
 
@@ -18,7 +19,7 @@ var formatTime = function(time) {
   return str;
 };
 
-var loadEvent = function(index, events) {
+var loadEvent = function(index, events, lesson_status_id) {
   var new_event = events[index];
   var newdiv = $("<div />").addClass(new_event.type.toLowerCase())
                            .addClass("event");
@@ -61,7 +62,9 @@ var loadEvent = function(index, events) {
   }
   
   if (new_event.type == "Note") {
-    newdiv.text(new_event.content)
+    newdiv.text(new_event.content);
+    $.post("/lesson_statuses/" + lesson_status_id, function() {});
+
   } else if (new_event.type == "Quiz") {
     $("<div />").text("Loading quiz...")
                 .attr("id", "quiz_" + new_event.id)

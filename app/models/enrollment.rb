@@ -1,34 +1,28 @@
 class Enrollment < ActiveRecord::Base
-  attr_accessible :course_id
+  attr_accessible :course_id, :user_id, :role
 
   belongs_to :user
   belongs_to :course
 
-  validates :user_id, :presence => true
   validates :course_id, :presence => true
+  validates :user_id, :presence => true
+  validates :user_id, :uniqueness => { :scope => :course_id }
   validates :role, :presence => true
 
   after_create :remember_components
+  after_create :create_lesson_statuses, :if => :student?
   before_destroy :forget_components
   
   def memories
     user.memories.in_course(course)
   end
 
-  def remember_components
-    if role == "student" 
-      course.components.each do |component|
-        user.remember(component)
-      end
-    end
+  def student?
+    role == "student"
   end
 
-  def forget_components
-    if role == "student"
-      course.components.each do |component|
-        user.forget(component)
-      end
-    end
+  def teacher?
+    role == "teacher"
   end
 
   def course_completion
@@ -43,5 +37,30 @@ class Enrollment < ActiveRecord::Base
     end
 
     return ready_components / total_components
+  end
+
+  private
+
+  def remember_components
+    if role == "student" 
+      self.course.components.each do |component|
+        self.user.remember(component)
+      end
+    end
+  end
+
+  def forget_components
+    if role == "student"
+      self.course.components.each do |component|
+        self.user.forget(component)
+      end
+    end
+  end
+
+  def create_lesson_statuses
+    course.lessons.each do |lesson|
+      new_status = lesson.lesson_statuses.build(:user_id => self.user)
+      new_status.save!
+    end
   end
 end

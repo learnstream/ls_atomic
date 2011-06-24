@@ -10,6 +10,7 @@ class EventsController < ApplicationController
       event_json = {}
       event_json["type"] = event.playable_type
       event_json["id"] = event.playable_id
+      event_json["event_id"] = event.id
       
       if event.playable_type == "Note"
         event_json["pause"] = false

@@ -110,6 +110,7 @@ describe CoursesController do
       @user = Factory(:user)
       test_sign_in(@user)
       @course = Factory(:course)
+      @user.enroll!(@course)
     end
   
     it "should be successful" do

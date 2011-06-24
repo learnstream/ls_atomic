@@ -4,6 +4,7 @@ describe Enrollment do
 
   before(:each) do
     @course = Factory(:course)
+    @lesson = Factory(:lesson, :course => @course)
     @user = Factory(:user)
     @user.enroll!(@course)
     @enrollment = @user.enrollments.find_by_course_id(@course)
@@ -75,6 +76,13 @@ describe Enrollment do
       it "should not create memories" do
         @teacher.memories.find_by_component_id(@component).should be_nil
       end
+    end
+  end
+
+  describe "lesson statuses" do
+
+    it "should be created upon enrollment" do
+      LessonStatus.count.should == 1
     end
   end
 end

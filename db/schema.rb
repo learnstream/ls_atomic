@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110622220749) do
+ActiveRecord::Schema.define(:version => 20110624181838) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(:version => 20110622220749) do
   end
 
   add_index "answers", ["quiz_id"], :name => "index_answers_on_quiz_id"
+
+  create_table "component_tests", :force => true do |t|
+    t.integer  "component_id"
+    t.integer  "test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "component_tests", ["component_id"], :name => "index_component_tests_on_component_id"
+  add_index "component_tests", ["test_id", "component_id"], :name => "index_component_tests_on_test_id_and_component_id", :unique => true
+  add_index "component_tests", ["test_id"], :name => "index_component_tests_on_test_id"
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -41,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20110622220749) do
   create_table "enrollments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "course_id"
-    t.string   "role",       :default => "student"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -65,6 +76,20 @@ ActiveRecord::Schema.define(:version => 20110622220749) do
   add_index "events", ["lesson_id"], :name => "index_events_on_lesson_id"
   add_index "events", ["playable_type", "playable_id"], :name => "index_events_on_playable_type_and_playable_id"
 
+  create_table "lesson_statuses", :force => true do |t|
+    t.integer  "lesson_id"
+    t.integer  "user_id"
+    t.integer  "event_id",   :default => -1
+    t.boolean  "completed",  :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lesson_statuses", ["event_id"], :name => "index_lesson_statuses_on_event_id"
+  add_index "lesson_statuses", ["lesson_id", "user_id"], :name => "index_lesson_statuses_on_lesson_id_and_user_id", :unique => true
+  add_index "lesson_statuses", ["lesson_id"], :name => "index_lesson_statuses_on_lesson_id"
+  add_index "lesson_statuses", ["user_id"], :name => "index_lesson_statuses_on_user_id"
+
   create_table "lessons", :force => true do |t|
     t.string   "name"
     t.integer  "course_id"
@@ -83,7 +108,7 @@ ActiveRecord::Schema.define(:version => 20110622220749) do
     t.integer  "views",        :default => 0
     t.integer  "streak",       :default => 0
     t.datetime "last_viewed"
-    t.datetime "due",          :default => '2011-05-28 02:09:35'
+    t.datetime "due",          :default => '2011-05-27 23:13:53'
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -146,6 +171,19 @@ ActiveRecord::Schema.define(:version => 20110622220749) do
 
   add_index "responses", ["quiz_id"], :name => "index_responses_on_quiz_id"
   add_index "responses", ["user_id"], :name => "index_responses_on_user_id"
+
+  create_table "tests", :force => true do |t|
+    t.integer  "problem_id"
+    t.string   "steps"
+    t.string   "question"
+    t.text     "answer_input"
+    t.string   "answer"
+    t.text     "answer_output"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tests", ["problem_id"], :name => "index_tests_on_problem_id"
 
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"

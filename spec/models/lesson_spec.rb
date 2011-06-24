@@ -34,4 +34,18 @@ describe Lesson do
     @lesson.events.should include(@event)
   end
 
+  describe "statuses" do 
+    it "should have a lesson_statuses attribute" do
+      @lesson.should respond_to(:lesson_statuses)
+    end
+
+    it "should create new lesson statuses for all enrolled students on create" do
+      @student = Factory(:user)
+      @student.enroll!(@course)
+
+      lambda do
+        @lesson2 = Factory(:lesson, :name => "Another lesson", :course => @course)
+      end.should change(LessonStatus, :count).by(1)
+    end
+  end
 end

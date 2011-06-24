@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :courses, :through => :enrollments 
   has_many :memories, :dependent => :destroy
   has_many :memory_ratings, :through => :memories
+  has_many :lesson_statuses, :dependent => :destroy
 
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def enroll!(course)
-    enrollments.create!(:course_id => course.id)
+    Enrollment.create!(:course_id => course.id, :user_id => self.id, :role => "student")
   end
 
   def unenroll!(course)
@@ -37,10 +38,9 @@ class User < ActiveRecord::Base
     if enrolled?(course)
       unenroll!(course)
     end
-    enrollments.create!(:course_id => course.id)
-    enrollment = self.enrollments.find_by_course_id(course.id)
-    enrollment.role = "teacher"
-    enrollment.save!
+    new_enrollment = enrollments.build(:course_id => course.id)
+    new_enrollment.role = "teacher"
+    new_enrollment.save!
   end
 
   def student?(course)
