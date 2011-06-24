@@ -65,7 +65,7 @@ var loadEvent = function(index, events) {
 
   var timelinkdiv = $("<div />").addClass("timelink");
   $("<a />").addClass("timelink")
-            .text("Play video")
+            .text("Replay")
             .attr("href", "#")
             .click(function() {
                 loadAndPlayVideo(getYoutubeID(new_event.video_url, "v"),
@@ -75,16 +75,30 @@ var loadEvent = function(index, events) {
                 return false;  })
             .appendTo(timelinkdiv);
 
-  var nextlinkdiv = $("<div />").addClass("nextlink");
-  $("<a />").text("Continue...")
-            .attr("href", "#")
-            .click(function() {
-                loadEvent(index + 1, events);
-                $(this).parent().remove();
-                $("#content").scrollTo($("#content .event").last(), 500);
-                return false;
-                })
-            .appendTo(nextlinkdiv);
+
+  $("#nextlink").unbind('click');
+  $("#showall").unbind('click');
+
+  if (index == events.length - 1) {
+    $("#nextlink").hide();
+    $("#showall").hide();
+  } else {
+
+    $("#nextlink").click(function() {
+                        loadEvent(index + 1, events);
+                        $("#content").scrollTo($("#content .event").last(), 500);
+                        return false;
+                      });
+
+    $("#showall").click(function() {
+      for (var i=index + 1; i < events.length; i++) {
+        loadEvent(i, events);
+      }
+      $("#nextlink").hide();
+      $("#showall").hide();
+      return false;
+    });
+  }
   
   if (new_event.type == "Note") {
     newdiv.text(new_event.content)
@@ -94,16 +108,28 @@ var loadEvent = function(index, events) {
                 .appendTo(newdiv);
   }
 
-  newdiv.prepend(timelinkdiv);
+  newdiv.append(timelinkdiv);
 
   $("#content").append(newdiv);
 
-  if (index + 1 < events.length)
-    $("#content").append(nextlinkdiv);
 
   loadAndPlayVideo(getYoutubeID(new_event.video_url, "v"),
                    new_event.start_time,
                    new_event.end_time,
                    "player", 1);
 
+  
+  if (typeof(waitingForNext) != "undefined")
+    clearInterval(waitingForNext);
+
+  if (new_event.type == "Note") {
+    console.log("Should be setting interval");
+    waitingForNext = setInterval(function() {
+        if (ytplayer.getCurrentTime() > new_event.end_time) {
+          loadEvent(index + 1, events);
+          $("#content").scrollTo($("#content .event").last(), 500);
+        }
+      }, 200);
+  }
 }
+
