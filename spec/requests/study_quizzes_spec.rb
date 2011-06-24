@@ -36,8 +36,7 @@ describe "Doing exercises" do
   end
   
   it "should let the user say they don't know" do
-    save_and_open_page
-    click_button "Don't Know"
+    click_button "Don't know"
     page.should have_css("#judgement")
   end
 

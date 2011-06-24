@@ -4,7 +4,13 @@
   <% breadcrumb :lesson_student, @lesson %>
 <% end %>
 <h1><%= @lesson.name %></h1>
-<div id="player"></div>
-<div id="events-area-student" class = "events-area"></div>
-<div id="quiz_area"></div>
+<div id="video-area">
+  <div id="player"></div>
+</div>
+<div id="stream-area">
+  <div id="content"></div>
+<div id="control-links">
+<a id="nextlink" href="#">Next</a><a id="showall" href="#">Show all</a>
+</div>
+</div>
 <div id="lesson-id" class="hidden"><%= @lesson.id %></div>

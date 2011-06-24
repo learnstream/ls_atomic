@@ -67,10 +67,15 @@ function loadAndPlayVideo(video_id, start_time, end_time, embed_area, autoplay) 
   if (ytplayer == null) 
    loadYouTubePlayer(video_id, start_time, end_time, embed_area, autoplay);
   else  {
-    if (autoplay == 1) {
-      ytplayer.loadVideoById(video_id, start_time);
+    if (video_id == getYoutubeID(ytplayer.getVideoUrl(), "v")) {
+      ytplayer.seekTo(start_time, "true");
+      if (autoplay == 1) ytplayer.playVideo();
     } else {
-      ytplayer.cueVideoById(video_id, start_time);
+      if (autoplay == 1) {
+        ytplayer.loadVideoById(video_id, start_time);
+      } else {
+        ytplayer.cueVideoById(video_id, start_time);
+      }
     }
   }
   

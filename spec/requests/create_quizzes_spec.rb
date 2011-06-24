@@ -37,7 +37,7 @@ describe "Using the quiz creation interface" do
   
   it "should support free-body-diagram quizzes", :js => true do
     click_link "Add exercise"
-    page.evaluate_script('$("#quiz_component_tokens").val('+@component.id.to_s+')');
+    page.execute_script('$("#quiz_component_tokens").val('+@component.id.to_s+')');
     fill_in "Question", :with => "What force is acting on the object"
     select "Free body diagram", :from => "Answer type"
     page.should have_css("#fbd")
