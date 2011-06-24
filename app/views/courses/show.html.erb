@@ -8,7 +8,6 @@
 
 <% if current_user.student?(@course) %>
 <p><%= link_to "Study", course_study_index_path(@course), :class => "study_button round" %></p>
-<% end %>
 
 <div id="lessons">
   <h2>Lessons</h2>
@@ -33,6 +32,13 @@
     </ul>
   <% end %>
 </div>
+
+<% else %>
+
+<%= render :partial => 'users/enroll', :locals => { :course => @course }  %>
+
+<% end %>
+
 </div>
 
 <% if current_user.memory_ratings.in_course(@course).count > 0 %>
