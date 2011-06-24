@@ -5,7 +5,7 @@ class Component < ActiveRecord::Base
   belongs_to :course
   
   validates :name, :presence => true,
-                   :length => { :maximum => 134}
+                   :length => { :maximum => 500}
   validates_uniqueness_of :name, :scope => :course_id 
   validates :course_id, :presence => true
   

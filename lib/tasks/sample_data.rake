@@ -13,6 +13,24 @@ namespace :db do
 
     view_memories
   end
+
+  desc "Add Components to course given by course_id"
+  # To call, do rake db:add_components[course_id]
+  task :add_components, :course_id do |t, args|
+    # removes old components first.
+    course = Course.find(args.course_id)
+    course.components.destroy_all
+    file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentsData.txt", "rb")
+    contents = file.read
+    components = JSON.parse(contents)
+    components.each do |c|
+      comp = course.components.build(c)
+      comp.save
+    end
+    file.close()
+  end
+  task :add_components => :environment
+
 end
 
 def make_users
