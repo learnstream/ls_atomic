@@ -10,8 +10,6 @@ class ResponsesController < ApplicationController
 
     if params[:commit] == "Skip"
       @response.status = "skipped"
-    elsif params[:commit] == "Don't Know"
-      @response.answer = "(unanswered)"
     end
 
     if @response.save

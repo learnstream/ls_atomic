@@ -1,10 +1,10 @@
 <div class="header"><%= @quiz.question %></div>
 
-<%= form_for @response || Response.new do |f| %>
 
+<%= form_for @response || Response.new do |f| %>
   <% if @quiz.answer_type == "text" %>
     <%= render :partial => "text_input", :locals => { :f => f, :answer_input => @quiz.answer_input }, :object => f.object %>
-  <% elsif @quiz.answer_type = "fbd" %>
+  <% elsif @quiz.answer_type == "fbd" %>
     <%= render :partial => "fbd_student_input", :locals => { :f => f, :answer_input => @quiz.answer_input }, :object => f.object %>
   <% end %>
 
@@ -14,7 +14,6 @@
     <div class="actions">
       <%= f.submit "Check answer", :class => "round quizbutton" %>
       <%= f.submit "Skip", :class => "round quizbutton" %>
-      <%= f.submit "Don't Know", :class => "round quizbutton" %>
     </div>
   </div>
 
