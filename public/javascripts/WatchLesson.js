@@ -6,46 +6,6 @@ $(document).ready(function() {
     });
 });
 
-var prepareQuiz = function(data, status, xhr) {
-
-  $("#study-area").replaceWith($("#study-area").html());
-
-  $("#response_submit").click(function() {
-    var user_id = $("#response_user_id").val();
-    var quiz_id = $("#response_quiz_id").val();
-    var answer = $("#response_answer").val();
-
-    $.post('/responses/', { response :  { quiz_id: quiz_id, answer: answer, user_id: user_id }}, prepareResponse);
-    return false;
-  });
-};
-
-var prepareResponse = function(data, status, xhr) {
-
-  var response_html = $(data).find("#study-area").html();
-  $("#quiz_area").html(response_html);
-  $("#help").hide();
-  $(".quizbutton").each(function() {
-      $(this).data("url", $(this).attr('href'));
-      $(this).attr('href', '#');
-    });
-
-  $(".quizbutton").click(function(e) {
-    var href = $(this).data('url');
-
-    if (href.indexOf("study") == -1) {
-      $.ajax({
-        type: "PUT", 
-        url: href, 
-        data: {},
-        success: function(data) { $("#quiz_area").html(""); }
-      });
-    }
-   
-    return false;
-  });
-};
-
 var formatTime = function(time) {
   var str = "";
   str += Math.floor(time/60);
@@ -104,8 +64,9 @@ var loadEvent = function(index, events) {
     newdiv.text(new_event.content)
   } else if (new_event.type == "Quiz") {
     $("<div />").text("Loading quiz...")
-                .load("/quizzes/" + new_event.id + "/ #study-area", prepareQuiz)
+                .attr("id", "quiz_" + new_event.id)
                 .appendTo(newdiv);
+    $.get("/quizzes/" + new_event.id + ".js #study-area");
   }
 
   newdiv.append(timelinkdiv);
