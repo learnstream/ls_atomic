@@ -3,7 +3,11 @@ require 'spec_helper'
 describe EventsController do
 
   before(:each) do
-    @lesson = Factory(:lesson)
+    @user = Factory(:user)
+    @course = Factory(:course)
+    @lesson = Factory(:lesson, :course => @course)
+    @user.enroll!(@course)
+    test_sign_in(@user)
   end
 
   describe "GET 'index' json" do
