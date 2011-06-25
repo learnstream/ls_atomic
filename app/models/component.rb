@@ -5,12 +5,10 @@ class Component < ActiveRecord::Base
   belongs_to :course
   
   validates :name, :presence => true,
-                   :length => { :maximum => 134}, 
-                   :uniqueness => true 
+                   :length => { :maximum => 500}
+  validates_uniqueness_of :name, :scope => :course_id 
   validates :course_id, :presence => true
   
-  has_many :step_components, :dependent => :destroy
-  has_many :steps, :through => :step_components
   has_many :videos
   has_many :memories, :dependent => :destroy
   has_many :quiz_components, :dependent => :destroy
