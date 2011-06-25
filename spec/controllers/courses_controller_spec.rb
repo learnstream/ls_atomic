@@ -123,12 +123,6 @@ describe CoursesController do
       response.should have_selector("h2", :content => "Components")
     end
 
-    it "should contain component from course" do
-      component_in_course = Factory(:component, :course => @course, :name => "Euler's Little Theorem" , :description => "e^pi = -1")
-      get :show, :id => @course
-      response.should have_selector("a", :content => component_in_course.name)
-    end
-
     describe "for teachers" do
 
       before(:each) do
