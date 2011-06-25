@@ -13,8 +13,8 @@
   float: left;
   width: 340px; }
   #stream-area #content {
-    height: 41px;
-    padding: 20px 15px 250px 15px;
+    height: 271px;
+    padding: 20px 15px 20px 15px;
     overflow: auto;
     background: #eee; }
   #stream-area #control-links {

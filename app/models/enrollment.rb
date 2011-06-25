@@ -59,8 +59,7 @@ class Enrollment < ActiveRecord::Base
 
   def create_lesson_statuses
     course.lessons.each do |lesson|
-      new_status = lesson.lesson_statuses.build(:user_id => self.user)
-      new_status.save!
+      LessonStatus.create!(:lesson_id => lesson.id, :user_id => self.user.id)
     end
   end
 end

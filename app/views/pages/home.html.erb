@@ -28,10 +28,10 @@
         <%= link_to "Study now", course_study_index_path(course.id), :class => 'study-link' %>
         </li>
 
-        <% if course.first_lesson_for(current_user).nil? %>
+        <% if course.lessons.incomplete_for(current_user).empty? %>
           <li class="next-lesson">Completed all lessons!</li>
         <% else %> 
-          <% next_lesson = course.first_lesson_for(current_user) %>
+          <% next_lesson = course.lessons.incomplete_for(current_user).first %>
           <li class="next-lesson">Next lesson: <br/> <%= link_to next_lesson.name, next_lesson, :class => 'lesson-link' %></li>
         <% end %>
 

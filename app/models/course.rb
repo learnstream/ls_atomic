@@ -81,22 +81,6 @@ class Course < ActiveRecord::Base
 
 
 
-    def first_lesson_for(student)
-
-      lessons.each do |lesson|
-        lesson.quizzes.each do |quiz|
-          quiz.components.each do |cmp|
-            mem = cmp.memories.find_by_user_id(student)
-            if !mem.viewed?
-              return lesson
-            end
-          end
-        end
-      end
-
-      return nil
-    end
-
     private
 
     def find_problems(text)

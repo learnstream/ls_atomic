@@ -4,40 +4,66 @@
 
   <h1><%= @course.name %></h1>
 
-<p><%= @course.description %></p>
 
-<% if current_user.student?(@course) %>
-<p><%= link_to "Study", course_study_index_path(@course), :class => "study_button round" %></p>
+  <% if current_user.student?(@course) %>
 
-<div id="lessons">
-  <h2>Lessons</h2>
-  <%if @lessons.empty? %>
-    Course has no lessons.
-  <% else %>
-    <ul>
-      <% @lessons.each do |lesson| %>
-        <li><%= link_to lesson.name, [@course, lesson] %></li>
+    <div id = "exercises">
+      <h2> Exercises </h2>
+      <p>
+      <% memories_due = current_user.memories_due_with_quiz(@course).count %>
+      <% if memories_due == 0 %>
+        Complete a lesson to unlock more exercises.
+      <% else %>
+        <%= link_to "Study now", course_study_index_path(@course.id), :class => 'quizbutton' %>
+        <%= pluralize(memories_due, "item") %> for review
       <% end %>
-    </ul>
-  <% end %>
-</div>
+      </p>
+    </div>
 
-<div id="components">
-  <h2>Components</h2>
-  <% if @components.empty? %>
-    Course has no components.
+    <div id="lessons">
+      <h2>Lessons</h2>
+      <%if @lessons.empty? %>
+        Course has no lessons.
+      <% else %>
+        <table>
+          <% @lessons.each do |lesson| %>
+            <tr> 
+              <td>
+                <% if current_user.lesson_statuses.find_by_lesson_id(lesson).completed %>
+                  Completed!
+                <% end %>
+              </td>
+              <td> <%= link_to lesson.name, [@course, lesson] %> </td>
+              <td> <% lesson_status = current_user.lesson_statuses.find_by_lesson_id(lesson) %>
+                <% if lesson_status.event_id == -1 %>
+                  Not yet started
+                <% else %>
+                  Last viewed <%= time_ago_in_words(lesson_status.updated_at) %> ago
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+
+    <div id="components">
+      <h2>Components</h2>
+      <% if @components.empty? %>
+        Course has no components.
+      <% else %>
+        <div id="course_id" class="hidden"><%= @course.id %></div>
+        <input type="text" id="course_components" size="30" /><br />
+        <a href="#" id="component_help_link" class="quizbutton">Learn more</a>
+      <% end %>
+    </div>
+
   <% else %>
-    <ul>
-      <%= render @components %>
-    </ul>
+
+    <p><%= @course.description %></p>
+    <%= render :partial => 'users/enroll', :locals => { :course => @course }  %>
+
   <% end %>
-</div>
-
-<% else %>
-
-<%= render :partial => 'users/enroll', :locals => { :course => @course }  %>
-
-<% end %>
 
 </div>
 

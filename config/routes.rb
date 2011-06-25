@@ -51,6 +51,8 @@ LsAtomic::Application.routes.draw do
     resources :events
   end
 
+  resources :lesson_statuses
+
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'
   match '/signout', :to => 'user_sessions#destroy'

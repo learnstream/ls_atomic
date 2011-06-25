@@ -11,6 +11,8 @@ class Lesson < ActiveRecord::Base
 
   after_create :create_lesson_statuses
 
+  scope :incomplete_for, lambda {|user_id| joins(:lesson_statuses).merge(LessonStatus.where(:user_id => user_id, :completed => false)) }
+
   private 
 
   def create_lesson_statuses

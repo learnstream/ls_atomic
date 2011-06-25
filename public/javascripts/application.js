@@ -4,10 +4,26 @@
 $(function () {
     var course_id = $('#course_id').text();
 
+    var goToComponent = function(item) {
+      console.log("asdf");
+      console.log(item);
+    };
+      
+
     $('#quiz_component_tokens').tokenInput('/components.json?course_id=' + course_id,
       { 
         crossDomain: false,
         prePopulate: $('#quiz_component_tokens').data('pre')
       });
+
+    $("#course_components").tokenInput('/components.json?course_id=' + course_id,
+      { 
+        hintText: "What do you want to know more about?",
+        tokenLimit: 1
+      });
+
+    $("#component_help_link").click(function() {
+        window.location.replace("/courses/" + course_id +  "/components/" + $("#course_components").val());
+        });
   });
 

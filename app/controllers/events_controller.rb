@@ -26,8 +26,10 @@ class EventsController < ApplicationController
       events_json << event_json
     end
 
+    current_event = @lesson.lesson_statuses.find_by_user_id(current_user).event_id
+
     respond_to do |format|
-      format.json { render :json => events_json }
+      format.json { render :json => {:events => events_json, :current_event => current_event}}
       format.html   { render :partial => "event", :collection => @events, :as => :event, :layout => false }
     end
   end
