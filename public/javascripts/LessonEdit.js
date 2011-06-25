@@ -19,6 +19,10 @@ $(document).ready(function() {
     $("#note_new_event_attributes_video_url").val(defaultUrl);
 });
 
+function renderLatex() { 
+  MathJax.Hub.Typeset();
+}
+
 
 function prepareQuizFirst() {
   $("#quiz_new_event_attributes_lesson_id").val($("#lesson_id").text());

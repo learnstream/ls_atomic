@@ -1,3 +1,4 @@
 $("#note-<%= @updated_note.id %>").replaceWith("<%= escape_javascript(render(@event)) %>");
 $("#add-note").html("<%= escape_javascript(render :partial => 'form') %>");
 prepareNoteNew();
+renderLatex();

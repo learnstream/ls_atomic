@@ -1,3 +1,4 @@
 $("#quiz-<%= @updated_quiz.id %>").replaceWith("<%= escape_javascript(render(@event)) %>");
 $("#add-quiz").html("<%= escape_javascript(render :partial => 'form') %>");
 prepareQuizNew();
+renderLatex();

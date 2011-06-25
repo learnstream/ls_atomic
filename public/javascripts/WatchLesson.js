@@ -99,6 +99,7 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
   if (new_event.type == "Note") {
     newdiv.text(new_event.content);
 
+
   } else if (new_event.type == "Quiz") {
     $("<div />").text("Loading quiz...")
                 .attr("id", "quiz_" + new_event.id)
@@ -107,6 +108,7 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
         // scroll again because the size is larger... 
           var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
           $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
+          MathJax.Hub.Typeset();
           });
   }
 
@@ -114,8 +116,16 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
 
   $("#content").append(newdiv);
 
-  var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
-  $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
+  if (new_event.type == "Note") {
+    // scroll to the new div 
+    
+    var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
+    $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
+
+    // render latex
+    MathJax.Hub.Typeset();
+  }
+
 
   // play the video clip 
 
