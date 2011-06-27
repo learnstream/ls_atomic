@@ -180,6 +180,7 @@ a.study_button {
     padding-bottom: 15px; }
 
 #rate-button-panel {
+  margin-top: 10px;
   margin-bottom: 15px; }
   #rate-button-panel #rate-buttons {
     margin-top: 25px;
@@ -225,8 +226,7 @@ a.study_button {
     padding: 0px;
     padding-left: 10px;
     float: left;
-    clear: right;
-    border-left: 1px solid #ddd; }
+    clear: right; }
     #course-overview .course-listing ul.course-actions > li {
       vertical-align: top;
       margin: 0px;

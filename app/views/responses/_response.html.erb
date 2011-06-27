@@ -1,6 +1,6 @@
 
 <div id="quiz-id" class="hidden"><%= @response.quiz.id %></div>
-<p>Question: <span id="question"><%= @response.quiz.question %></span></p>
+<p><strong>Question:</strong> <span id="question"><%= @response.quiz.question %></span></p>
 <div id="judgement">
   <% if not @response.status.blank? %> 
     Your answer: <span class="answer"
@@ -20,6 +20,12 @@
   <% if @response.quiz.answer_type == 'fbd' %>
   <%= render :partial => 'fbd', :locals => { :answer_output => @response.quiz.answer_output } %>
   <% end %>
+<div id = "explain"> 
+  <% if @response.quiz.explanation %>
+    <p class = "header">Explanation</p>
+    <%= @response.quiz.explanation %> 
+  <% end %>
+</div>
 
 </div>
 
@@ -30,12 +36,6 @@
   <%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
 <% end %>
 
-<div id = "explain"> 
-  <% if @response.quiz.explanation %>
-    <p class = "header">Explanation</p>
-    <%= @response.quiz.explanation %> 
-  <% end %>
-</div>
 
 <%= render :partial => 'components/help' %>
 
