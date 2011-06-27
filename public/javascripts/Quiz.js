@@ -3,7 +3,7 @@ $(document).ready(function () {
     
     var updateInputForm = function() {
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
-        $("#add-answer").hide();
+        $("#addanswerbutton").hide();
         $("#remove-answer").hide();
         $("#fbd_form").show();
         if (ff == null) {
@@ -14,7 +14,7 @@ $(document).ready(function () {
          }
       } else {
         $("#fbd_form").hide();
-        $("#add-answer").show();
+        $("#addanswerbutton").show();
         $("#remove-answer").show();
         $("#quiz_answer_input").val("");
         $("#quiz_answer_output").val("");
