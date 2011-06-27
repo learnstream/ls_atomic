@@ -143,7 +143,10 @@ function FBD() {
       var a = answerDiv.parent().text().split(" ")[1];
       answer = oi + " " + a; 
 
-      $("#quiz_answer").val(answer);
+      // FIXME: Fills in the first of the answer fields with the FBD info
+      // (should be able to fill in an arbitrary answer field. Reading from it
+      // is probably broken too)
+      $("#quiz_answers_attributes_0_text").val(answer);
       $("#response_answer").val(answer);
       $(".force-item").removeClass("selected-answer");
       answerDiv.parent().addClass("selected-answer");
