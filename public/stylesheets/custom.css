@@ -73,48 +73,61 @@ nav {
 
 /* Teacher course page navigation */
 #course-head {
-  background: #f4a317;
-  border-bottom: 1px solid #a65500;
+  background: #ccc;
+  border-bottom: 1px solid #737373;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  padding-bottom: 5px; }
-
-#course-name {
-  display: inline;
-  font-size: 1.8em;
-  color: #fff;
-  margin-left: 10px; }
+  padding: 0px; }
 
 #breadcrumb {
-  background: #fce6c2;
+  background: #8c8c8c;
   margin: 0px 5px 30px 5px;
   padding-left: 10px; }
+  #breadcrumb a {
+    color: #fff; }
+  #breadcrumb a:visited {
+    color: #fff; }
 
-#local-nav {
+ul#local-nav {
   display: inline;
-  padding: 0 0.7em;
-  white-space: nowrap; }
-  #local-nav ul {
-    margin: 0;
-    padding: 0; }
-  #local-nav li {
-    margin-right: 0.5em;
-    width: 100px;
+  white-space: nowrap;
+  padding: 0px;
+  margin: 0px; }
+  ul#local-nav li {
     text-align: center;
-    background-color: #E78F08;
     list-style-type: none;
     display: inline-block;
-    padding: 0.2em 0; }
-    #local-nav li a {
-      padding: 0 5px;
+    padding: 0px;
+    margin: 0px; }
+    ul#local-nav li a {
+      display: block;
+      background: #a6a6a6;
+      width: 100px;
+      padding: 0.5em 0.0em;
+      margin: 0px;
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-bottom: -1px;
       font-weight: bold;
-      color: #a65500; }
-      #local-nav li a:visited {
-        color: #a65500; }
-      #local-nav li a:hover {
+      border: 1px solid #737373;
+      color: white; }
+      ul#local-nav li a:visited {
+        color: white; }
+      ul#local-nav li a:hover {
         text-decoration: none;
-        color: #fef6e8; }
+        color: #fef6e8;
+        background: #8c8c8c;
+        border-bottom: 1px solid #8c8c8c; }
+  ul#local-nav li.course-name {
+    margin-left: 10px;
+    margin-right: 30px; }
+    ul#local-nav li.course-name a {
+      font-size: 1.5em;
+      line-height: 14px;
+      color: #09c;
+      background: #ccc;
+      border: 0px none; }
 
 .add-course-item {
   font-size: 1.2em;

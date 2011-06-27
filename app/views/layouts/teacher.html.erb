@@ -1,12 +1,12 @@
 
   <% content_for :local_nav do %>
     <div id="course-head">
-<%= link_to @course.name, @course, :id => 'course-name'  %>
 <ul id="local-nav">
-  <li class="round ui-widget-header"><%= link_to "Students", student_status_course_path(@course) %></li>
-  <li class="round ui-widget-header"><%= link_to "Lessons", course_lessons_path(@course) %></li>
-  <li class="round ui-widget-header"><%= link_to "Components", course_components_path(@course) %></li> 
-  <li class="round ui-widget-header"><%= link_to "Exercises", course_quizzes_path(@course) %></li>
+  <li class="course-name"><%= link_to @course.name, @course, :id => 'course-name'  %></li>
+  <li><%= link_to "Students", student_status_course_path(@course) %></li>
+  <li><%= link_to "Lessons", course_lessons_path(@course) %></li>
+  <li><%= link_to "Components", course_components_path(@course) %></li> 
+  <li><%= link_to "Exercises", course_quizzes_path(@course) %></li>
 </ul>
 </div>
 <% end %>
