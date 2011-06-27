@@ -1,6 +1,6 @@
 <% breadcrumb :quizzes, @course %>
 
-<%= link_to "Add exercise", new_course_quiz_path(@course) %>
+<%= link_to "Add exercise", new_course_quiz_path(@course), :class => 'add-course-item' %><br /><br />
 
 <ul>
 <% @quizzes.each do |quiz| %>

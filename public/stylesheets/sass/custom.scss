@@ -92,31 +92,90 @@ nav {
 
 /* Teacher course page navigation */
 
-#local-nav {
-  padding: 0 0.7em;
-  white-space: nowrap;
+#course-head {
+  background: #ccc;
+  border-bottom: 1px solid darken(#ccc, 35%);
+  @include rounded(5px);
+  padding: 0px;
+}
 
-  ul { margin: 0; padding: 0; }
 
-  li {
-    margin-right: 0.5em;
-    width: 100px;
-    text-align: center;
-    background-color: #E78F08;
-    list-style-type: none;
-    display: inline-block;
-    padding: 0.2em 0;  
-
-    a {
-      padding: 0 5px;
-      font-weight: bold;
-      color: #a65500;
-
-      &:visited { color: #a65500; }
-      &:hover { text-decoration: underline; }
-    }
+#breadcrumb {
+  background: darken(#ccc, 25%);
+  margin: 0px 5px 30px 5px;
+  padding-left: 10px;
+  a {
+    color: #fff;
+  }
+  a:visited {
+    color: #fff;
   }
 }
+
+ul#local-nav {
+  display: inline;
+  white-space: nowrap;
+  padding: 0px;
+  margin: 0px;
+
+  li {
+    text-align: center;
+    list-style-type: none;
+    display: inline-block;
+    padding: 0px;  
+    margin: 0px;
+
+    a {
+      display: block;
+      background: darken(#ccc, 15%);
+      width: 100px;
+      padding: 0.5em 0.0em;
+      margin: 0px;
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-bottom: -1px;
+      font-weight: bold;
+      border: 1px solid darken(#ccc, 35%);
+
+      $nav-link-color: #fff;
+      
+      color: $nav-link-color;
+
+      &:visited { color: $nav-link-color; }
+      &:hover { text-decoration: none; 
+        color: lighten(#f6b648, 33%); 
+      background: darken(#ccc, 25%);
+      border-bottom: 1px solid darken(#ccc, 25%); }
+    }
+  }
+
+  li.course-name {
+      
+    a { 
+      font-size: 1.5em;
+      line-height: 14px;
+      color: #09c;
+      background: #ccc;
+      border: 0px none;
+    }
+    margin-left: 10px;
+    margin-right: 30px;
+  }
+}
+
+.add-course-item
+{
+  font-size: 1.2em;
+  color: #09c;
+  padding: 5px 15px 5px 15px;
+  background: #eee;
+  border: 0px none;
+  margin: auto;
+
+  &:hover { text-decoration: underline; cursor: pointer; }
+  @include rounded(5px);
+}
+
 
 /* Student course page */
 
@@ -258,7 +317,15 @@ a.study_button {
   overflow: auto;
   margin-left: 116px;
   td {
-    padding: 0px; border: 1px solid #000; height: 40px; max-height: 40px; min-width: 110px; max-width: 110px; margin-left: -110px; 
+    padding: 5px;
+    border-left: 1px solid #fff; 
+    font-size: .8em;
+    
+    height: 40px;
+    max-height: 40px; 
+    min-width: 110px; 
+    max-width: 110px; 
+    margin-left: -110px; 
     &.label { background: #ccc; }
     &.due { background: red; }
     &.good { background: green; }                     
