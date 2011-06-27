@@ -1,5 +1,7 @@
 <p class = "fields">
   <%= f.label :text, "Answer" %>
   <%= f.text_field :text  %>
-  <%= link_to_remove_fields "remove", f %>
+  <span id="remove-answer">
+    <%= link_to_remove_fields "remove", f %>
+  </span>
 </p>

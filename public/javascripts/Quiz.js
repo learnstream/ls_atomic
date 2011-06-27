@@ -3,6 +3,8 @@ $(document).ready(function () {
     
     var updateInputForm = function() {
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
+        $("#add-answer").hide();
+        $("#remove-answer").hide();
         $("#fbd_form").show();
         if (ff == null) {
           ff = new FBD;
@@ -12,6 +14,8 @@ $(document).ready(function () {
          }
       } else {
         $("#fbd_form").hide();
+        $("#add-answer").show();
+        $("#remove-answer").show();
         $("#quiz_answer_input").val("");
         $("#quiz_answer_output").val("");
       }
@@ -21,7 +25,7 @@ $(document).ready(function () {
     updateInputForm();
 
     $("#quiz_answer_type").change(function() { 
-      $("#quiz_answer").val("");
+      $("#quiz_answers_attributes_0_text").val("");
       $("#quiz_answer_input").val("");
       $("#quiz_answer_output").val("");
       updateInputForm();
@@ -143,7 +147,7 @@ function FBD() {
       var a = answerDiv.parent().text().split(" ")[1];
       answer = oi + " " + a; 
 
-      $("#quiz_answer").val(answer);
+      $("#quiz_answers_attributes_0_text").val(answer);
       $("#response_answer").val(answer);
       $(".force-item").removeClass("selected-answer");
       answerDiv.parent().addClass("selected-answer");

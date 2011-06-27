@@ -4,6 +4,6 @@
 
 <ul>
 <% @quizzes.each do |quiz| %>
-  <li><%= quiz.question %></li>
+  <li><%= quiz.question %> | <%= link_to "Edit", edit_course_quiz_path(@course, quiz) %></li>
 <% end %>
 </ul>
