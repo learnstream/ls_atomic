@@ -13,9 +13,24 @@ describe StudyController do
       @user.enroll!(@course)
       
       @component = Factory(:component, :course => @course)
+      @quiz = Factory(:quiz, :course => @course)
+      @quiz.components << @component
       @memory = @user.memories.find_by_component_id(@component)
-      @memory.due = Time.now
+      @memory.view(4)
+      @memory.due = Time.now - 15.minutes
       @memory.save!
+    end
+
+    it "should pull up quizzes with a due component" do
+      get :index, :course_id => @course
+      response.should redirect_to quiz_path(@quiz)
+    end
+
+    it "should not pull up quizzes that are in a lesson" do
+      @quiz.in_lesson = true
+      @quiz.save!
+      get :index, :course_id => @course
+      response.should have_selector("div", :content => "Nothing is due")
     end
 
     describe "when nothing is due" do

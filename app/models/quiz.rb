@@ -36,6 +36,8 @@ class Quiz < ActiveRecord::Base
 
   after_update :save_event
 
+  scope :exercises, where("in_lesson = ?", false) 
+
   def to_json(options = {})
     super 
   end
