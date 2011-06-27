@@ -210,25 +210,29 @@ a.study_button {
 
 /* Home page */
 #course-overview .course-listing {
-  margin-bottom: 15px; }
+  overflow: auto;
+  border-top: 1px solid #ddd; }
+  #course-overview .course-listing .name-and-status {
+    float: left;
+    padding-top: 15px;
+    width: 250px; }
   #course-overview .course-listing .course-name {
     font-size: 2em; }
   #course-overview .course-listing .study-info {
-    display: inline;
     font-size: .8em; }
   #course-overview .course-listing ul.course-actions {
     margin: 0px;
-    padding: 0px; }
+    padding: 0px;
+    padding-left: 10px;
+    float: left;
+    clear: right;
+    border-left: 1px solid #ddd; }
     #course-overview .course-listing ul.course-actions > li {
       vertical-align: top;
       margin: 0px;
       margin-right: 10px;
-      background: #eee;
-      text-align: center;
       padding: 10px;
-      display: inline-block;
-      width: 240px;
-      height: 60px; }
+      list-style-type: none; }
       #course-overview .course-listing ul.course-actions > li.other-actions {
         text-align: left;
         background: #fff; }
