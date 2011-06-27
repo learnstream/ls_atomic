@@ -28,9 +28,7 @@ tbody tr:nth-child(even) td, tbody tr.even td {
   background: #fff; }
 
 section {
-  margin-top: 1em;
   font-size: 120%;
-  padding: 20px;
   background: white;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
@@ -73,27 +71,25 @@ nav {
 
 /* Teacher course page navigation */
 #course-head {
-  background: #ccc;
-  border-bottom: 1px solid #737373;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
   padding: 0px; }
 
 #breadcrumb {
   background: #8c8c8c;
-  margin: 0px 5px 30px 5px;
-  padding-left: 10px; }
+  margin-bottom: 30px;
+  padding-left: 10px;
+  color: #b3b3b3; }
   #breadcrumb a {
     color: #fff; }
   #breadcrumb a:visited {
     color: #fff; }
 
 ul#local-nav {
-  display: inline;
+  display: block;
   white-space: nowrap;
   padding: 0px;
-  margin: 0px; }
+  margin: 0px;
+  background: #ccc;
+  border-bottom: 1px solid #737373; }
   ul#local-nav li {
     text-align: center;
     list-style-type: none;

@@ -39,9 +39,7 @@ tbody tr:nth-child(even) td, tbody tr.even td {background:#fff;}
 
 
 section {
-  margin-top: 1em;
   font-size: 120%;
-  padding: 20px;
   background: $body-color;
   @include rounded(20px);
 }
@@ -93,17 +91,15 @@ nav {
 /* Teacher course page navigation */
 
 #course-head {
-  background: #ccc;
-  border-bottom: 1px solid darken(#ccc, 35%);
-  @include rounded(5px);
   padding: 0px;
 }
 
 
 #breadcrumb {
   background: darken(#ccc, 25%);
-  margin: 0px 5px 30px 5px;
+  margin-bottom: 30px;
   padding-left: 10px;
+  color: darken(#fff, 30%);
   a {
     color: #fff;
   }
@@ -113,10 +109,12 @@ nav {
 }
 
 ul#local-nav {
-  display: inline;
+  display: block;
   white-space: nowrap;
   padding: 0px;
   margin: 0px;
+  background: #ccc;
+  border-bottom: 1px solid darken(#ccc, 35%);
 
   li {
     text-align: center;
