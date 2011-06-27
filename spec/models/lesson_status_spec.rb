@@ -9,7 +9,7 @@ describe LessonStatus do
     @lesson = Factory(:lesson, :course => @course)
   end
 
-  it "should be created by a lesson" do
+  it "should be created for each student by a lesson" do
     LessonStatus.count.should == 1
   end
 
