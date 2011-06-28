@@ -1,5 +1,6 @@
 <% breadcrumb :lessons, @course %>
-<%= link_to "Add a new lesson", new_course_lesson_path(@course) %>
+
+<%= link_to "Add a new lesson", new_course_lesson_path(@course), :class => 'add-course-item' %><br /><br />
 
 <% if @lessons.empty? %>
   This course has no lessons yet!

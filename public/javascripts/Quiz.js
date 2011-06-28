@@ -3,6 +3,8 @@ $(document).ready(function () {
     
     var updateInputForm = function() {
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
+        $("#addanswerbutton").hide();
+        $("#remove-answer").hide();
         $("#fbd_form").show();
         if (ff == null) {
           ff = new FBD;
@@ -12,6 +14,8 @@ $(document).ready(function () {
          }
       } else {
         $("#fbd_form").hide();
+        $("#addanswerbutton").show();
+        $("#remove-answer").show();
         $("#quiz_answer_input").val("");
         $("#quiz_answer_output").val("");
       }
@@ -143,10 +147,10 @@ function FBD() {
       var a = answerDiv.parent().text().split(" ")[1];
       answer = oi + " " + a; 
 
-      // FIXME: Fills in the first of the answer fields with the FBD info
-      // (should be able to fill in an arbitrary answer field. Reading from it
-      // is probably broken too)
-      $("#quiz_answers_attributes_0_text").val(answer);
+      $(':regex(id, quiz_answers_attributes.*)').parent().hide();
+      $(':regex(id, quiz_answers_attributes.*)').parent().first().show();
+      $(':regex(id, quiz_answers_attributes.*)').first().val(answer);
+
       $("#response_answer").val(answer);
       $(".force-item").removeClass("selected-answer");
       answerDiv.parent().addClass("selected-answer");

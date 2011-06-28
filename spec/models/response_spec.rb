@@ -39,4 +39,12 @@ describe Response do
     @incorrect_response.reload
     @incorrect_response.has_been_rated.should == true
   end
+
+  it "should not rate components that are not due as a miss" do
+    @memory = @user.memories.find_by_component_id(@component)
+    @memory.view(4)
+    @incorrect_response = Factory(:response, :user => @user, :quiz => @quiz)
+    @memory.reload
+    @memory.streak.should_not == 0
+  end
 end

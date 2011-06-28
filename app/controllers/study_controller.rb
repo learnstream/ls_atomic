@@ -5,7 +5,7 @@ class StudyController < ApplicationController
 
   def index
     @course = Course.find(params[:course_id])
-    @memory = current_user.memories_due_with_quiz(@course).first
+    @memory = current_user.memories.course_exercise(@course).first
 
     if @memory.nil?
       render 'index'
@@ -13,8 +13,13 @@ class StudyController < ApplicationController
     end
 
     #Choose a random quiz
-    @quiz = @memory.component.quizzes.sample
-    redirect_to @quiz
+    @quiz = @memory.component.quizzes.exercises.sample
+    if @quiz
+      redirect_to @quiz
+    else
+      render 'index'
+      return
+    end
   end
 end
 

@@ -12,31 +12,33 @@
     <% end %>
     <% @studied_courses.each do |course| %>
       <div class="course-listing">
-        <%= link_to course.name, course, :class => 'course-name' %>
+        <div class = "name-and-status">
+          <%= link_to course.name, course, :class => 'course-name' %>
 
-        <div class="study-info">
-        <% if current_user.all_memories(course).latest_studied.first and current_user.all_memories(course).latest_studied.first.last_viewed %>
-          Last studied <%= time_ago_in_words(current_user.all_memories(course).latest_studied.first.last_viewed) %> ago
-        <% else %>
-          You haven't started studying yet!
-        <% end %>
-      </div>
+          <div class="study-info">
+            <% if current_user.all_memories(course).latest_studied.first and current_user.all_memories(course).latest_studied.first.last_viewed %>
+              Last studied <%= time_ago_in_words(current_user.all_memories(course).latest_studied.first.last_viewed) %> ago
+            <% else %>
+              You haven't started studying yet!
+            <% end %>
+          </div>
+        </div>
 
-      <ul class="course-actions">
-        <li class="items-for-review">
-        <%= pluralize(current_user.memories_due_with_quiz(course).count, "item") %> for review<br />
-        <%= link_to "Study now", course_study_index_path(course.id), :class => 'study-link' %>
-        </li>
+        <ul class="course-actions">
+          <li class="items-for-review">
+          <%= pluralize(current_user.memories_due_with_quiz(course).count, "item") %> for review<br />
+          <%= link_to "Study now", course_study_index_path(course.id), :class => 'study-link' %>
+          </li>
 
-        <% if course.lessons.incomplete_for(current_user).empty? %>
-          <li class="next-lesson">Completed all lessons!</li>
-        <% else %> 
-          <% next_lesson = course.lessons.incomplete_for(current_user).first %>
-          <li class="next-lesson">Next lesson: <br/> <%= link_to next_lesson.name, next_lesson, :class => 'lesson-link' %></li>
-        <% end %>
+          <% if course.lessons.incomplete_for(current_user).empty? %>
+            <li class="next-lesson">Completed all lessons!</li>
+          <% else %> 
+            <% next_lesson = course.lessons.incomplete_for(current_user).first %>
+            <li class="next-lesson">Next lesson: <br/> <%= link_to next_lesson.name, next_lesson, :class => 'lesson-link' %></li>
+          <% end %>
 
-        <li>See your progress<br /><%= link_to "Course statistics", course %></li>
-      </ul>
+          <li>See your progress<br /><%= link_to "Course statistics", course %></li>
+        </ul>
       </div>
     <% end %>
   <% end %>

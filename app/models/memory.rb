@@ -9,6 +9,9 @@ class Memory < ActiveRecord::Base
   scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
   scope :due_before, lambda { |time| where("due <= ?", time) }
   scope :latest_studied, :order => 'last_viewed DESC'
+  scope :viewed, where('views > ?', 0)
+
+  scope :course_exercise, lambda { |course_id| in_course(course_id).due_before(DateTime.now.utc).viewed }
 
   default_scope :order => 'memories.due'  
 
