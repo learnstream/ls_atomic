@@ -1,4 +1,12 @@
+<% content_for :javascript do%>
+  <%= javascript_include_tag "Quiz" %>
+  <%= javascript_include_tag "AddRemoveFields" %>
+  <%= javascript_include_tag "raphael-min" %>
+<% end %>
+
 <h1>Editing quiz item</h1>
 <script type="text/javascript">$(document).ready(function() { $("#holder").data("mode", "edit"); });</script>
 
 <%= render 'form' %>
+
+

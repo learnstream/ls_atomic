@@ -8,6 +8,11 @@ describe "Doing exercises" do
     @user.enroll!(@course)
 
     @component = Factory(:component, :course => @course)
+    @memory = @user.memories.find_by_component_id(@component)
+    @memory.views += 1 #simulate appearance in a lesson
+    @memory.last_viewed = DateTime.now  #simulate appearance in a lesson
+    @memory.save!
+
     @quiz = Factory(:quiz, :course => @course)
     @quiz.components << @component
     @answer = Factory(:answer, :quiz => @quiz)
@@ -31,11 +36,13 @@ describe "Doing exercises" do
   end
 
   it "should be skippable" do
+    save_and_open_page
     click_button "Skip"
     page.should have_css("p", :text => "Nothing is due")
   end
   
   it "should let the user say they don't know" do
+    save_and_open_page
     click_button "Don't know"
     page.should have_css("#judgement")
   end

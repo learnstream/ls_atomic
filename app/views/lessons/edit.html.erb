@@ -1,3 +1,4 @@
+
 <%= javascript_include_tag "LessonEdit" %>
 <% breadcrumb :edit_lesson, @lesson %>
 
@@ -33,3 +34,8 @@
     </div>
   </div>
 </div>
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag "LessonEdit" %>
+  <%= javascript_include_tag "raphael-min" %>
+<% end %>

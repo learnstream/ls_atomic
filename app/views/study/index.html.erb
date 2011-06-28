@@ -1,2 +1,8 @@
 <% breadcrumb :study, @course %>
 <p>Congrats! Nothing is due, go have some fun!</p>
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag "raphael-min" %>
+  <%= javascript_include_tag "Study" %>
+  <%= javascript_include_tag "Quiz" %>
+<% end %>

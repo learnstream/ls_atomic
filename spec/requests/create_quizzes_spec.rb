@@ -14,10 +14,10 @@ describe "Using the quiz creation interface" do
 
   it "should allow an authorized user to create quizzes" do
     click_link "Add exercise"
-    page.should have_css("h1", :content => "New quiz")
+    page.should have_css("a", :text => "Add answer")
   end
 
-  it "should create a self-rate quiz" do
+  it "should create a self-rate quiz", :js => true do
     click_link "Add exercise"
     fill_in "Components", :with => @component.id
     fill_in "Question", :with => "What is the answer?"
@@ -27,7 +27,7 @@ describe "Using the quiz creation interface" do
     page.should have_content("Quiz created!")
   end 
 
-  pending "should allow an authorized user to edit a quiz" do
+  pending "should allow an authorized user to edit a quiz", :js => true do
     click_link "1"
     fill_in "Question", :with => "Did I change the question?"
     fill_in "Answer", :with => "Yes!"

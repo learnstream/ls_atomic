@@ -1,4 +1,10 @@
-<%= javascript_include_tag "AddAnswer.js" %>
+<% content_for :javascript do %>
+  <%= javascript_include_tag "raphael-min" %>
+  <%= javascript_include_tag "Quiz" %>
+  <%= javascript_include_tag "AddRemoveFields" %>
+<% end %>
+
+  <%= javascript_include_tag "AddAnswer.js" %>
 <%= form_for [@course, @quiz] do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
 

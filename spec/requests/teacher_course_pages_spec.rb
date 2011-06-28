@@ -24,7 +24,7 @@ describe "Teacher course page" do
   it "should have a link back to the course page" do
     click_link "Students"
     click_link @course.name
-    page.should have_css("h1", :content => @course.name)
+    page.should have_css("a", :text => @course.name)
   end
 
   it "should have enrolled students on the global stats page" do

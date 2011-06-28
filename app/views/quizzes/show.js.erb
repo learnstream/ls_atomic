@@ -1,2 +1,10 @@
+
 $("#quiz_<%= @quiz.id %>").html("<%= escape_javascript render @quiz %>");
 $("#quiz_<%= @quiz.id %> #new_response").attr("data-remote", "true");
+
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag "raphael-min" %>
+  <%= javascript_include_tag "Study" %>
+  <%= javascript_include_tag "Quiz" %>
+<% end %>
