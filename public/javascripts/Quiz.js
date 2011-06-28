@@ -21,7 +21,7 @@ $(document).ready(function () {
     updateInputForm();
 
     $("#quiz_answer_type").change(function() { 
-      $("#quiz_answer").val("");
+      $("#quiz_answers_attributes_0_text").val("");
       $("#quiz_answer_input").val("");
       $("#quiz_answer_output").val("");
       updateInputForm();
