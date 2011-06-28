@@ -14,12 +14,12 @@ describe "Using the quiz creation interface" do
 
   it "should allow an authorized user to create quizzes" do
     click_link "Add exercise"
-    page.should have_css("h1", :content => "New quiz")
+    page.should have_css("input", :name => "Question")
   end
 
-  it "should create a self-rate quiz" do
+  it "should create a self-rate quiz", :js => true do
     click_link "Add exercise"
-    fill_in "Components", :with => @component.id
+    page.execute_script('$("#quiz_component_tokens").val('+@component.id.to_s+')');
     fill_in "Question", :with => "What is the answer?"
     select "Self-rating", :from => "Answer type"
     fill_in "Answer", :with => "42"
