@@ -3,7 +3,7 @@
 
   <div id="rate-buttons">
   <% if myresponse.quiz.answer_type == "self-rate" %>
-    <%= link_to "Miss", response_path(myresponse, :quality => 0), :id => "rate-miss", :class => "round quizbutton", :method => :get %>
+    <%= link_to "Miss", response_path(myresponse, :quality => 0), :id => "rate-miss", :class => "round quizbutton", :method => :put %>
   <% end %>
 
     <%= link_to "Hard", response_path(myresponse, :quality => 3), :id => "rate-hard", :class => "round quizbutton", :method => :put %>
