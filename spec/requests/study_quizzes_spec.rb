@@ -37,13 +37,11 @@ describe "Doing exercises" do
   end
 
   it "should be skippable" do
-    save_and_open_page
     click_button "Skip"
     page.should have_css("p", :text => "Nothing is due")
   end
   
   it "should let the user say they don't know" do
-    save_and_open_page
     click_button "Don't know"
     page.should have_css("#judgement")
   end
