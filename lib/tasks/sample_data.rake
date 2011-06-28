@@ -14,7 +14,15 @@ namespace :db do
     view_memories
   end
 
-  desc "Add Components to course given by course_id"
+
+  desc "Add real data"
+  task :add_real_data, :course_id do |t, args|
+    
+
+
+  end
+
+  #desc "Add Components to course given by course_id"
   # To call, do rake db:add_components[course_id]
   task :add_components, :course_id do |t, args|
     # removes old components first.
@@ -23,37 +31,46 @@ namespace :db do
     file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentsData.txt", "rb")
     contents = file.read
     components = JSON.parse(contents)
+    component_id_map = Hash.new
+
     components.each do |c|
-      comp = course.components.build(c)
-      comp.save
+      component = course.components.build(c)
+      if component.save
+        component_id_map["#{c['unique_id']}"] = component.id
+      end
     end
+    return component_id_map
     file.close()
   end
   task :add_components => :environment
 
-  desc "Create lesson from import"
+  #desc "Create lesson from import"
   task :add_lessons, :course_id do |t, args|
     course = Course.find(args.course_id)
     course.lessons.destroy_all
     file = File.open("#{Rails.root}/lib/tasks/DataFiles/LessonData.txt", "rb")
     contents = file.read
     lessonEvents = JSON.parse(contents)
-    created_lessons = []
-    order_number = 0
 
+    order_number = 0
+    lesson_id_map = Hash.new
+    lesson = nil
+    
     lessonEvents.each do |lesson_event|
-      if !created_lesson.include?(lesson_event[:lesson_id]){
-        lesson = course.lessons.build(:name => lesson_event[:lesson_name])
+      if !lesson_id_map.has_key?(lesson_event["lesson_id"])
+        lesson = course.lessons.build(:name => lesson_event["lesson_name"])
         lesson.save!
-        created_lessons << lesson_event[:lesson_id]
+        lesson_id_map["#{lesson_event['lesson_id']}"] = lesson.id
         order_number = 0
-      }
-      event = lesson.events.build(:video_url => lesson_event[:video_url], 
-                                    :start_time => lesson_event[:start_time],
-                                    :end_time => lesson_event[:start_time],
+      end 
+
+      event = lesson.events.build(:video_url => lesson_event["video_url"], 
+                                    :start_time => lesson_event["start_time"],
+                                    :end_time => lesson_event["end_time"],
                                     :order_number => order_number += 1)
 
-      note = Note.create!(:content => lesson_event[:note_content])
+      note = Note.create!(:content => lesson_event["note_content"])
+      note.events << event
 
     end
     file.close()
