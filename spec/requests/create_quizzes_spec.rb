@@ -19,8 +19,6 @@ describe "Using the quiz creation interface" do
 
   it "should create a self-rate quiz", :js => true do
     click_link "Add exercise"
-    save_and_open_page
-    fill_in "Components", :with => @component.name
     fill_in "Question", :with => "What is the answer?"
     select "Self-rating", :from => "Answer type"
     fill_in "Answer", :with => "42"
