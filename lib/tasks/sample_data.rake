@@ -31,6 +31,37 @@ namespace :db do
   end
   task :add_components => :environment
 
+  desc "Create lesson from import"
+  task :add_lessons, :course_id do |t, args|
+    course = Course.find(args.course_id)
+    course.lessons.destroy_all
+    file = File.open("#{Rails.root}/lib/tasks/DataFiles/LessonData.txt", "rb")
+    contents = file.read
+    lessonEvents = JSON.parse(contents)
+    created_lessons = []
+    order_number = 0
+
+    lessonEvents.each do |lesson_event|
+      if !created_lesson.include?(lesson_event[:lesson_id]){
+        lesson = course.lessons.build(:name => lesson_event[:lesson_name])
+        lesson.save!
+        created_lessons << lesson_event[:lesson_id]
+        order_number = 0
+      }
+      event = lesson.events.build(:video_url => lesson_event[:video_url], 
+                                    :start_time => lesson_event[:start_time],
+                                    :end_time => lesson_event[:start_time],
+                                    :order_number => order_number += 1)
+
+      note = Note.create!(:content => lesson_event[:note_content])
+
+    end
+    file.close()
+  end
+  task :add_lessons => :environment
+
+
+
 end
 
 def make_users
