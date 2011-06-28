@@ -36,7 +36,6 @@ def add_lessons(course_id, component_map)
   lesson = nil
 
   lessonEvents.each do |lesson_event|
-
     if !created_lessons.include?(lesson_event["lesson_id"])
       lesson = course.lessons.build(:name => lesson_event["lesson_name"])
       if lesson.save
@@ -55,27 +54,21 @@ def add_lessons(course_id, component_map)
       note = Note.create!(:content => lesson_event["note_content"])
       note.events << event
     elsif lesson_event["playable_type"] == "Quiz"
-
-   
-
-        component_tokens = lesson_event["component_list"].to_s.split(",").map{|e| "#{component_map[e]}"}.join(",")
-
+        component_tokens = lesson_event["component_list"].to_s.split(",").map{|e| component_map[e] }
         lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].split("&") : answer_tokens = [lesson_event["answer"]]
-        puts answer_tokens
-
+        #is there a better way to do this? I'll admit i'm a bit lost now in the quiz controller/model code. -NP
         quiz = Quiz.create!(:course_id => course,
                  :in_lesson => true,
-                 :component_tokens => component_tokens,
+                 :answer_type => lesson_event["answer_type"],
                  :explanation => lesson_event["explanation"],
                  :question => lesson_event["question"],
                  :answer_input => { :type => lesson_event["answer_type"] }.to_json,
                  :answer_output => { :type => "text" }.to_json)
 
+        component_tokens.each { |c| quiz.components << Component.find(c)} 
         answer_tokens.each { |a| quiz.answers.create!(:text => a ) }
-        puts quiz.id.to_s + " and event " + event.to_s
         quiz.events << event
     end
-
   end
   file.close()
 end
