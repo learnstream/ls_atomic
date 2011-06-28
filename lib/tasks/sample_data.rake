@@ -4,11 +4,17 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     Timecop.travel(2011, 1, 1, 0, 0, 0) do
       make_users
-      make_courses_and_components
+      make_courses
       enroll_users
+      
+      #add_real_data stuff
+      component_map = add_components(1)
+      add_lessons(1, component_map)
+
+      #make these things for course 2
       make_quizzes
-      create_many_components
-      make_lesson
+      create_other_components
+      make_other_lesson
     end
 
     view_memories
@@ -116,27 +122,21 @@ def make_users
   
 end
 
-def make_courses_and_components
-  course1 = Course.create!(:name => "Reading",
-                           :description => "rainbows") 
+def make_courses
+  course1 = Course.create!(:name => "Physics",
+                           :description => "is all about the rainbows") 
   course2 = Course.create!(:name => "Writing",
                            :description => "A Post-Lacanian approach to ruby on rails tutorials")
   course3 = Course.create!(:name => "Rithmetic",
                            :description => "numbers and stuff")
-  c1 = course1.components.create!(:name => "Newton's first law",
-                         :description => "An object in motion remains in motion")  
-  c2 = course1.components.create!(:name => "Newton's second law",
-                         :description => "\\( \\vec{F} = m\\vec{a} \\)")
-  c3 = course1.components.create!(:name => "Newton's third law",
-                         :description => "Every action has an opposite and equal reaction")
-  
+ 
 end
 
-def create_many_components
-  course = Course.find(1)
+def create_other_components
+  course = Course.find(2)
 
   20.times do |n|
-    course.components.create!(:name => "Newton's #{n}th law", :description => "what comes up, must come #{ n.times do
+    course.components.create!(:name => "Shakespeare's #{n}th law", :description => "what doth fly up, shouldeth likewise come #{ n.times do
                                                                                                               "down"
                                                                                                             end }")
   end
@@ -158,7 +158,7 @@ def enroll_users
 end
 
 def make_quizzes
-  course = Course.first
+  course = Course.find(2)
   
   course.components.each do |component|
     quiz = Quiz.create!(:course_id => course,
@@ -184,8 +184,8 @@ def view_memories
   end
 end
 
-def make_lesson
-  course = Course.first
+def make_other_lesson
+  course = Course.find(2)
   lesson = Lesson.create!(:course_id => course,
                           :name => "Newton's Laws")
 
