@@ -147,7 +147,10 @@ function FBD() {
       var a = answerDiv.parent().text().split(" ")[1];
       answer = oi + " " + a; 
 
-      $("#quiz_answers_attributes_0_text").val(answer);
+      $(':regex(id, quiz_answers_attributes.*)').parent().hide();
+      $(':regex(id, quiz_answers_attributes.*)').parent().first().show();
+      $(':regex(id, quiz_answers_attributes.*)').first().val(answer);
+
       $("#response_answer").val(answer);
       $(".force-item").removeClass("selected-answer");
       answerDiv.parent().addClass("selected-answer");
