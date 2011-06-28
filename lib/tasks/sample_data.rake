@@ -17,68 +17,87 @@ namespace :db do
 
   desc "Add real data"
   task :add_real_data, :course_id do |t, args|
-    
-
-
+    component_map = add_components(args.course_id)
+    add_lessons(args.course_id, component_map)
   end
+  task :add_real_data => :environment
+end
 
-  #desc "Add Components to course given by course_id"
-  # To call, do rake db:add_components[course_id]
-  task :add_components, :course_id do |t, args|
-    # removes old components first.
-    course = Course.find(args.course_id)
-    course.components.destroy_all
-    file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentsData.txt", "rb")
-    contents = file.read
-    components = JSON.parse(contents)
-    component_id_map = Hash.new
+def add_lessons(course_id, component_map)
+  course = Course.find(course_id)
+  course.lessons.destroy_all
 
-    components.each do |c|
-      component = course.components.build(c)
-      if component.save
-        component_id_map["#{c['unique_id']}"] = component.id
-      end
-    end
-    return component_id_map
-    file.close()
-  end
-  task :add_components => :environment
+  file = File.open("#{Rails.root}/lib/tasks/DataFiles/LessonData.txt", "rb")
+  contents = file.read
+  lessonEvents = JSON.parse(contents)
 
-  #desc "Create lesson from import"
-  task :add_lessons, :course_id do |t, args|
-    course = Course.find(args.course_id)
-    course.lessons.destroy_all
-    file = File.open("#{Rails.root}/lib/tasks/DataFiles/LessonData.txt", "rb")
-    contents = file.read
-    lessonEvents = JSON.parse(contents)
+  order_number = 0
+  created_lessons = []
+  lesson = nil
 
-    order_number = 0
-    lesson_id_map = Hash.new
-    lesson = nil
-    
-    lessonEvents.each do |lesson_event|
-      if !lesson_id_map.has_key?(lesson_event["lesson_id"])
-        lesson = course.lessons.build(:name => lesson_event["lesson_name"])
-        lesson.save!
-        lesson_id_map["#{lesson_event['lesson_id']}"] = lesson.id
+  lessonEvents.each do |lesson_event|
+
+    if !created_lessons.include?(lesson_event["lesson_id"])
+      lesson = course.lessons.build(:name => lesson_event["lesson_name"])
+      if lesson.save
+        created_lessons << lesson_event["lesson_id"]
         order_number = 0
-      end 
+      end
+    end 
 
-      event = lesson.events.build(:video_url => lesson_event["video_url"], 
-                                    :start_time => lesson_event["start_time"],
-                                    :end_time => lesson_event["end_time"],
-                                    :order_number => order_number += 1)
+    event = lesson.events.build(:video_url => lesson_event["video_url"], 
+                                :start_time => lesson_event["start_time"],
+                                :end_time => lesson_event["end_time"],
+                                :order_number => order_number += 1)
 
+ 
+    if lesson_event["playable_type"] == "Note"
       note = Note.create!(:content => lesson_event["note_content"])
       note.events << event
+    elsif lesson_event["playable_type"] == "Quiz"
 
+   
+
+        component_tokens = lesson_event["component_list"].to_s.split(",").map{|e| "#{component_map[e]}"}.join(",")
+
+        lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].split("&") : answer_tokens = [lesson_event["answer"]]
+        puts answer_tokens
+
+        quiz = Quiz.create!(:course_id => course,
+                 :in_lesson => true,
+                 :component_tokens => component_tokens,
+                 :explanation => lesson_event["explanation"],
+                 :question => lesson_event["question"],
+                 :answer_input => { :type => lesson_event["answer_type"] }.to_json,
+                 :answer_output => { :type => "text" }.to_json)
+
+        answer_tokens.each { |a| quiz.answers.create!(:text => a ) }
+        puts quiz.id.to_s + " and event " + event.to_s
+        quiz.events << event
     end
-    file.close()
+
   end
-  task :add_lessons => :environment
+  file.close()
+end
 
+def add_components(course_id) 
+  # removes old components first.
+  course = Course.find(course_id)
+  course.components.destroy_all
+  file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentsData.txt", "rb")
+  contents = file.read
+  components = JSON.parse(contents)
+  component_id_map = Hash.new
 
+  components.each do |c|
+    component = course.components.build(c)
+    if component.save
+      component_id_map["#{c['unique_id']}"] = component.id
+    end
+  end
 
+  file.close()
+  return component_id_map
 end
 
 def make_users
