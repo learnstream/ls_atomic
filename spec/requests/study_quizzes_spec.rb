@@ -11,6 +11,7 @@ describe "Doing exercises" do
     @memory = @user.memories.find_by_component_id(@component)
     @memory.views += 1 #simulate appearance in a lesson
     @memory.last_viewed = DateTime.now  #simulate appearance in a lesson
+    @memory.due = DateTime.now - 1.day
     @memory.save!
 
     @quiz = Factory(:quiz, :course => @course)
