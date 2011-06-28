@@ -15,6 +15,7 @@ describe "Using the quiz creation interface" do
   it "should allow an authorized user to create quizzes" do
     click_link "Add exercise"
     page.should have_css("input", :name => "Question")
+    page.should have_css("a", :text => "Add answer")
   end
 
   it "should create a self-rate quiz", :js => true do
@@ -27,7 +28,7 @@ describe "Using the quiz creation interface" do
     page.should have_content("Quiz created!")
   end 
 
-  pending "should allow an authorized user to edit a quiz" do
+  pending "should allow an authorized user to edit a quiz", :js => true do
     click_link "1"
     fill_in "Question", :with => "Did I change the question?"
     fill_in "Answer", :with => "Yes!"

@@ -8,6 +8,12 @@ describe "Doing exercises" do
     @user.enroll!(@course)
 
     @component = Factory(:component, :course => @course)
+    @memory = @user.memories.find_by_component_id(@component)
+    @memory.views += 1 #simulate appearance in a lesson
+    @memory.last_viewed = DateTime.now  #simulate appearance in a lesson
+    @memory.due = DateTime.now - 1.day
+    @memory.save!
+
     @quiz = Factory(:quiz, :course => @course)
     @quiz.components << @component
     @answer = Factory(:answer, :quiz => @quiz)
