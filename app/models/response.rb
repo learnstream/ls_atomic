@@ -11,7 +11,9 @@ class Response < ActiveRecord::Base
     self.has_been_rated = true
     quiz.components.each do |component|
       memory = user.memories.find_by_component_id(component)
-      memory.view(quality)
+      if ((quality != 0) || (memory.due?))
+        memory.view(quality)
+      end
     end
   end
 

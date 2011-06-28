@@ -28,6 +28,7 @@
   <%= javascript_include_tag "Quiz" %>
   <%= javascript_include_tag "WatchLesson" %>
   <%= javascript_include_tag "AddRemoveFields" %>
+  <%= javascript_include_tag "jqueryregex.js" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -55,14 +56,14 @@
   </header>
   <section>
   <%= yield(:panel) if content_for?(:panel) %>
-  
-  <div id = "breadcrumb"
+
+  <%= yield(:local_nav) if content_for?(:local_nav) %>
+
+  <div id = "breadcrumb">
     <%= breadcrumb :separator => ">",
       :autoroot => true,
       :link_last => false %>
     </div>
-
-  <%= yield(:local_nav) if content_for?(:local_nav) %>
 
    
   <% flash.each do |key, value| %>

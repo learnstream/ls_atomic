@@ -12,7 +12,6 @@ class QuizzesController < ApplicationController
   def new 
     @quiz = Quiz.new
     @lesson = nil
-    answer = @quiz.answers.build
   end
 
   def create 
@@ -34,6 +33,7 @@ class QuizzesController < ApplicationController
         format.js {
           @event = @quiz.events[0]
           @quiz = @course.quizzes.new
+          answer = @quiz.answers.build
         }
       end
     else

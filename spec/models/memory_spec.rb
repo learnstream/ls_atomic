@@ -6,8 +6,8 @@ describe Memory do
     @user = Factory(:user)
     @course = Factory(:course)
     @component = @course.components.create!(:name => "My component")
-    @memory = @user.memories.create!(:component_id => @component)
-    @component.memories << @memory
+    @user.enroll!(@course)
+    @memory = @user.memories.find_by_component_id(@component)
     @default_ease = 2.5
   end
 
@@ -85,6 +85,20 @@ describe Memory do
       @memory.due = Time.now.utc.to_date + 1.day
       @memory.save
       @user.memories.due_before(Time.now.utc).should_not include(@memory)
+    end
+  end
+
+  describe "using course_exercise scope" do
+
+    it "should not include unviewed memories" do
+      @user.memories.course_exercise(@course).should_not include(@memory)
+    end
+
+    it "should include viewed, due memories from the course" do
+      @memory.view(4)
+      @memory.due = DateTime.now.utc - 15.minutes
+      @memory.save!
+      @user.memories.course_exercise(@course).should include(@memory)
     end
   end
 

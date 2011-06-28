@@ -1,28 +1,5 @@
 <% breadcrumb :study, @quiz.course %>
 
 <div id="study-area">
-  <div id= "innards">
-  <% if @quiz %> 
-    <%= render @quiz %>
-
-  <% elsif @component %>
-
-    <div id="answer-area">
-      <div id="problem"><%= component.name %></div>
-      <div id="answer"></div>
-      vertical-align: top;
-
-      <div id="answer-area">
-        <%= link_to "Show", describe_component_path(@component, :format => :json), :remote => true, :id => "show-answer", :class => "round", :method => :get %>
-
-        <div id="rate-button-panel-block;
-          <%= link_to "Miss", rate_3emory_path(@memory, :quality => 0), :id => "rate-miss", :class => "round quizbutton", :method => :get %>
-          <%= link_to "Hard", rate_memory_path(@memory, :quality => 3), :id => "rate-hard", :class => "round quizbutton", :method => :get %>
-          <%= link_to "Good", rate_memory_path(@memory, :quality => 4), :id => "rate-good", :class => "round quizbutton", :method => :get %>
-          <%= link_to "Easy", rate_memory_path(@memory, :quality => 5), :id => "rate-easy", :class => "round quizbutton", :method => :get %>
-        </div>
-      </div>
-
-    <% end %>
-  </div>
-  </div>
+  <%= render @quiz %>
+</div>

@@ -7,9 +7,21 @@ describe "Course page" do
     integration_sign_in(@user)
 
     @course = Factory(:course)
+    @lesson = Factory(:lesson, :course => @course)
 
     click_link "courses"
     click_link @course.name
+  end
+  
+  describe "for enrolled users" do
+
+    before(:each) do 
+      click_button "Enroll"
+    end
+
+    it "should list the lessons" do
+      page.should have_css("td", :text => @lesson.name)
+    end
   end
 
   describe "for unenrolled users" do
@@ -18,5 +30,8 @@ describe "Course page" do
       page.should have_css("input", :value => "Enroll")
     end
 
+    it "should not show the lessons" do
+      page.should_not have_css("td", :text => @lesson.name)
+    end
   end
 end
