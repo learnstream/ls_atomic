@@ -132,13 +132,8 @@ def make_courses
  
 end
 
-<<<<<<< HEAD
-def create_many_components
-  course = Course.find_by_name("Reading")
-=======
 def create_other_components
   course = Course.find(2)
->>>>>>> 1c053e1d869fd59622d5a02060061221d7d6f123
 
   20.times do |n|
     course.components.create!(:name => "Shakespeare's #{n}th law", :description => "what doth fly up, shouldeth likewise come #{ n.times do
