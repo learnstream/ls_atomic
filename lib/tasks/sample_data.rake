@@ -186,7 +186,7 @@ end
 
 def make_other_lesson
   course = Course.find(2)
-  lesson = Lesson.create!(:course_id => course,
+  lesson = Lesson.create!(:course_id => course.id,
                           :name => "Newton's Laws")
 
   events = []
