@@ -140,6 +140,10 @@ ul#local-nav {
     cursor: pointer; }
 
 /* Student course page */
+/* Memory list */
+#memories td.needs-review {
+  background: #fcc; }
+
 /* Study button */
 a.study_button {
   color: #fff;

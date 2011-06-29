@@ -1,0 +1,21 @@
+<table id="memories">
+  <tr>
+    <th>Component</th>
+    <th>Strength</th>
+    <th>Times reviewed</th>
+    <th></th>
+  </tr>
+  <% @memories.each do |memory| %>
+    <tr>
+      <td><%= memory.component.name %></td>
+      <td class="<%= strength_class(memory) %>"><%= strength(memory) %></td> 
+      <td><%= pluralize(memory.memory_ratings.count, "time") %></td>
+      <td><% if strength(memory) != "Not being studied" %>
+            <%= form_for [@course, memory] do |f| %>
+            <%= f.submit "Stop studying" %> 
+            <% end %>
+          <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

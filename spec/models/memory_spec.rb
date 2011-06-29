@@ -244,4 +244,21 @@ describe Memory do
       @memory.due.to_date.should == Time.now.utc.to_date
     end
   end
+
+  describe "after being removed" do
+
+    before(:each) do
+      @memory.due = DateTime.now.utc - 1.day
+      @memory.save!
+      @memory.remove!
+    end
+
+    it "should not be due" do
+      @memory.should_not be_due
+    end
+
+    it "should be removed" do
+      @memory.should be_removed
+    end
+  end
 end

@@ -22,6 +22,7 @@ LsAtomic::Application.routes.draw do
       get :student_status
     end
     resources :study, :only => [:index, :show]
+    resources :memories, :only => [:index, :update] 
   end
 
   resources :components do

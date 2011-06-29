@@ -49,6 +49,7 @@
 
     <div id="components">
       <h2>Components</h2>
+      <%= link_to "See all components", course_memories_path(@course) %>
       <% if @components.empty? %>
         Course has no components.
       <% else %>

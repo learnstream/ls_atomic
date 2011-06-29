@@ -89,5 +89,16 @@ class Memory < ActiveRecord::Base
     self.ease = 2.5
     self.last_viewed = nil
     self.due = Time.now
+    self.save
   end
+
+  def remove!
+    self.due = DateTime.now + 1000.years
+    self.save
+  end
+
+  def removed?
+    due >= (DateTime.now + 900.years)
+  end
+    
 end
