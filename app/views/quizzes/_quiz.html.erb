@@ -4,7 +4,10 @@
 
 <p id="explanation"><%= @quiz.explanation %></p>
 
+<p>Component(s): <% @quiz.components.each do |component| %><%= link_to component.name, course_component_path(@course, component) %><% end %></p>
+
 <p><%= @quiz.responses.count  %> responses given. <%= @quiz.percent_responses_correct %>% correct.</p>
+
 
 <table id="student_responses">
   <tr id="labels">

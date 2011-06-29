@@ -23,7 +23,7 @@ describe StudyController do
 
     it "should pull up quizzes with a due component" do
       get :index, :course_id => @course
-      response.should redirect_to quiz_path(@quiz)
+      response.should redirect_to course_study_path(@course, @quiz)
     end
 
     it "should not pull up quizzes that are in a lesson" do
