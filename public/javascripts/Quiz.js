@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    var ff = null;
     
     var updateInputForm = function() {
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
@@ -10,7 +9,6 @@ $(document).ready(function () {
           ff = new FBD;
 
           ff.loadJSONFBD({ "fb" :{"shape":"rect-line","top":80,"left":80,"width":162,"height":100,"radius":60,"rotation":-15,"cinterval":30}});
-
          }
       } else {
         $("#fbd_form").hide();
@@ -20,9 +18,6 @@ $(document).ready(function () {
         $("#quiz_answer_output").val("");
       }
     };
-    
-
-    updateInputForm();
 
     $("#quiz_answer_type").change(function() { 
       $("#quiz_answers_attributes_0_text").val("");
@@ -31,12 +26,26 @@ $(document).ready(function () {
       updateInputForm();
     });
 
-    if ($("#holder").data("mode") == "student" || $("#holder").data("mode") == "edit") {
+    ff = loadExistingFBD();
+    updateInputForm();
+
+});
+
+var loadExistingFBD = function() {
+    var ff = null;
+
+    if ($("#holder").data("mode") == "student") {
       ff = new FBD;
 
       ff.loadJSONFBD($("#holder").data("json"));
-    } 
-});
+    } else if ($("#quiz_answer_output").val() != "") {
+      ff = new FBD;
+
+      ff.loadJSONFBD($.parseJSON($("#quiz_answer_output").val()));
+    }
+
+    return ff;
+}
 
 function Force() {
   this.length = 110;
@@ -76,11 +85,94 @@ function FBD() {
 
   var current_force = null;
 
+  var assignAnswer = function(answerDiv) {
+    var oi = answerDiv.parent().text().split(" ")[0];
+    var a = answerDiv.parent().text().split(" ")[1];
+    answer = oi + " " + a; 
+
+    $('.quiz_answer_text').each(function() { $(this).parent().hide(); });
+    $('.quiz_answer_text').first().parent().show();
+    $('.quiz_answer_text').first().val(answer);
+
+    $("#response_answer").val(answer);
+    $(".force-item").removeClass("selected-answer");
+    answerDiv.parent().addClass("selected-answer");
+    $(".force-add-answer").text("Use as answer");
+    answerDiv.text("Selected answer");
+
+    updateJSON();
+  };
+
+  var displayForce = function(force) {
+
+
+      var force_disp = $("<li>").text(force.origin_index + " " + force.angle + " ")
+      .addClass("force-item");
+
+      current_force = new Object();
+
+      var remove_link = $("<a>").text("Remove").attr("href", "#").click(function() {
+        for (var i=0; i < forces.length; i++) {
+          var f = forces[i];
+          var oi = $(this).parent().text().split(" ")[0];
+          var a = $(this).parent().text().split(" ")[1];
+          if (f.origin_index == oi && f.angle == a) {
+            forces[i].obj.remove();
+            forces.splice(i, 1);
+
+            break;
+          }
+        }
+
+        updateJSON();
+        $(this).parent().hide();
+        return false;
+      });
+
+      var add_answer = $("<a>")
+        .text("Use as answer")
+        .attr("href", "#")
+        .css("margin-left", "8px")
+        .addClass("force-add-answer")
+        .click(function() {
+            assignAnswer($(this));
+            return false;
+            });
+
+      force_disp.append(remove_link);
+      force_disp.append(add_answer);
+
+      force_disp.appendTo($("#forces"));
+
+      if (!$(".force-item").hasClass("selected-answer")) {
+        assignAnswer($(".force-add-answer"));
+      }
+  };
+
   var init = function() {
     fb.cx = fb.top + fb.radius;
     fb.cy = fb.left + fb.radius;
     fb.obj = null;
     fb.extra = null;
+
+    var existing_answer = null;
+    if ($("#quiz_answers_attributes_0_text").length > 0 && $("#quiz_answers_attributes_0_text").val() != "") { 
+      existing_answer = $("#quiz_answers_attributes_0_text").val();
+    }
+
+    // add each existing force to the displayed force list
+    for (var i=0; i < forces.length; i++) {
+      displayForce(forces[i]);
+    }
+
+    // select the answer that's being used
+    if (existing_answer != null) {
+      for (var i=1; i <= $(".force-item").length; i++) {
+        if ($(".force-item:nth-child("+i+")").text().split(" ").slice(0,2).join(" ") == existing_answer) {
+          assignAnswer($(".force-item:nth-child("+i+")").find(".force-add-answer"));
+        }
+      }
+    }
 
     waitingToBeginForce = true;
     current_force = new Object();
@@ -94,71 +186,12 @@ function FBD() {
         waitingToBeginForce = true;
 
         forces.push(current_force);
-
-        var force_disp = $("<li>").text(current_force.origin_index + " " + current_force.angle + " ")
-        .addClass("force-item");
-
-        current_force = new Object();
-
-        var remove_link = $("<a>").text("Remove").attr("href", "#").click(function() {
-          for (var i=0; i < forces.length; i++) {
-            var f = forces[i];
-            var oi = $(this).parent().text().split(" ")[0];
-            var a = $(this).parent().text().split(" ")[1];
-            if (f.origin_index == oi && f.angle == a) {
-              forces[i].obj.remove();
-              forces.splice(i, 1);
-
-              break;
-            }
-          }
-
-          updateJSON();
-          $(this).parent().hide();
-          return false;
-        });
-
-        var add_answer = $("<a>")
-          .text("Use as answer")
-          .attr("href", "#")
-          .css("margin-left", "8px")
-          .addClass("force-add-answer")
-          .click(function() {
-              assignAnswer($(this));
-              return false;
-              });
-
-        force_disp.append(remove_link);
-        force_disp.append(add_answer);
-
-        force_disp.appendTo($("#forces"));
-
-        if (!$(".force-item").hasClass("selected-answer")) {
-          assignAnswer($(".force-add-answer"));
-        }
+        displayForce(current_force);
 
         updateJSON();
 
         return false;
     });
-
-    var assignAnswer = function(answerDiv) {
-      var oi = answerDiv.parent().text().split(" ")[0];
-      var a = answerDiv.parent().text().split(" ")[1];
-      answer = oi + " " + a; 
-
-      $(':regex(id, quiz_answers_attributes.*)').parent().hide();
-      $(':regex(id, quiz_answers_attributes.*)').parent().first().show();
-      $(':regex(id, quiz_answers_attributes.*)').first().val(answer);
-
-      $("#response_answer").val(answer);
-      $(".force-item").removeClass("selected-answer");
-      answerDiv.parent().addClass("selected-answer");
-      $(".force-add-answer").text("Use as answer");
-      answerDiv.text("Selected answer");
-
-      updateJSON();
-    }
 
     $("#holder").mousemove(function(e) { 
         if (waitingToBeginForce) return; // don't care about the mouse if we're still picking the force
@@ -321,7 +354,6 @@ function FBD() {
       clearShape();
       clearForces();
       fb.shape = $(this).val();
-      console.log("about to draw...");
       draw();
       updateJSON();
       });
@@ -427,8 +459,6 @@ function FBD() {
   };
 
   var updateJSON = function() {
-    console.log(getInputJSON());
-    console.log($("#quiz_answer_input"));
     $("#quiz_answer_input").val(getInputJSON());
     $("#quiz_answer_output").val(getOutputJSON());
   };

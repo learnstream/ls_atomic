@@ -1,3 +1,9 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag "Study" %>
+  <%= javascript_include_tag "raphael-min" %>
+  <%= javascript_include_tag "Quiz" %>
+<% end %>
+
 <% breadcrumb :study, @response.quiz.course %>
 <div id="study-area">
   <div id="innards">
@@ -5,8 +11,3 @@
   </div>
 </div>
 
-<% content_for :javascript do %>
-  <%= javascript_include_tag "Study" %>
-  <%= javascript_include_tag "raphael-min" %>
-  <%= javascript_include_tag "Quiz" %>
-<% end %>

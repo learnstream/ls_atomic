@@ -1,10 +1,7 @@
 <% content_for :javascript do %>
-  <%= javascript_include_tag "raphael-min" %>
-  <%= javascript_include_tag "Quiz" %>
-  <%= javascript_include_tag "AddRemoveFields" %>
+  <%= javascript_include_tag "AddAnswer.js" %>
 <% end %>
 
-  <%= javascript_include_tag "AddAnswer.js" %>
 <%= form_for [@course, @quiz] do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
 
@@ -17,8 +14,8 @@
                    :event => @quiz.events[0] } %>
   <% end %>
 
-  <%= f.hidden_field :answer_input, :value => "" %>
-  <%= f.hidden_field :answer_output, :value => "" %>
+  <%= f.hidden_field :answer_input %>
+  <%= f.hidden_field :answer_output %>
 
   <div class="field">
     <%= f.label :component_tokens, "Components" %><br />

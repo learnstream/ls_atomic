@@ -6,8 +6,8 @@ namespace :db do
       make_users
       make_courses_and_components
       enroll_users
-      make_quizzes
       create_many_components
+      make_quizzes
       make_lesson
     end
 
@@ -73,7 +73,7 @@ def make_courses_and_components
 end
 
 def create_many_components
-  course = Course.find(1)
+  course = Course.find_by_name("Reading")
 
   20.times do |n|
     course.components.create!(:name => "Newton's #{n}th law", :description => "what comes up, must come #{ n.times do
@@ -109,6 +109,16 @@ def make_quizzes
                  :answer_output => '{ "type" : "text" }')
     quiz.answers.create!(:text => "42")
   end
+
+  component = course.components.first 
+  quiz = Quiz.create!(:course_id => course,
+               :component_tokens => component.id.to_s,
+               :question => "What is the force?",
+               :answer_type => "fbd",
+               :answer_input => '{ "type" : "fbd", "fb" : {"shape" : "rect-line", "top" : 80, "left" : 80, "width" : 162, "height" : 100, "radius" : 60, "rotation" : -60, "cinterval" : 30}}',
+               :answer_output => '{ "type" : "fbd", "fb" : {"shape" : "rect-line", "top" : 80, "left" : 80, "width" : 162, "height" : 100, "radius" : 60, "rotation" : -60, "cinterval" : 30}, "forces" : [{"origin_index" : "8", "ox" : 161, "oy" : 130, "angle" : -90}]}')
+  quiz.answers.create!(:text => "8 -90")
+
 end
 
 def view_memories
@@ -117,10 +127,9 @@ def view_memories
   user.memories.in_course(course).each do |memory| 
     Timecop.travel(DateTime.now - 30.days) { memory.view(0) }
     Timecop.travel(DateTime.now - 20.days) { memory.view(4) }
-    Timecop.travel(DateTime.now - 20.days) { memory.view(4) }
-    Timecop.travel(DateTime.now - 10.days) { memory.view(4) }
-    Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
-    Timecop.travel(DateTime.now - 10.days) { memory.view(0) }
+    Timecop.travel(DateTime.now - 15.days) { memory.view(0) }
+    Timecop.travel(DateTime.now - 12.days) { memory.view(4) }
+    Timecop.travel(DateTime.now - 4.days) { memory.view(0) }
   end
 end
 

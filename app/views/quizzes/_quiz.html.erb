@@ -1,9 +1,3 @@
-<% content_for :javascript do %>
-  <%= javascript_include_tag "raphael-min" %>
-  <%= javascript_include_tag "Study" %>
-  <%= javascript_include_tag "Quiz" %>
-<% end %>
-
 <div class="header"><%= @quiz.question %></div>
 
 <%= form_for @response || Response.new do |f| %>

@@ -1,13 +1,6 @@
-<% content_for :javascript do %>
-  <%= javascript_include_tag "raphael-min" %>
-  <%= javascript_include_tag "Quiz" %>
-  <%= javascript_include_tag "AddRemoveFields" %>
-  <%= javascript_include_tag "AddAnswer.js" %>
-<% end %>
-
 <p class = "fields">
   <%= f.label :text, "Answer" %>
-  <%= f.text_field :text  %>
+  <%= f.text_field :text, :class => "quiz_answer_text"  %>
   <span id="remove-answer">
     <%= link_to_remove_fields "remove", f %>
   </span>
