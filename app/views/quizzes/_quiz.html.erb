@@ -1,19 +1,24 @@
 <div class="header"><%= @quiz.question %></div>
 
-<%= form_for @response || Response.new do |f| %>
-  <% if @quiz.answer_type == "text" %>
-    <%= render :partial => "text_input", :locals => { :f => f, :answer_input => @quiz.answer_input }, :object => f.object %>
-  <% elsif @quiz.answer_type == "fbd" %>
-    <%= render :partial => "fbd_student_input", :locals => { :f => f, :answer_input => @quiz.answer_input }, :object => f.object %>
+<p>Answer(s): <% @quiz.answers.each do |answer| %><%= answer.text %> <% end %></p>
+
+<p id="explanation"><%= @quiz.explanation %></p>
+
+<p><%= @quiz.responses.count  %> responses given. <%= @quiz.percent_responses_correct %>% correct.</p>
+
+<table id="student_responses">
+  <tr id="labels">
+    <th> Student </th>
+    <th> Response </th>
+    <th> Status </th>
+    <th> Date </th>
+  </tr>
+  <% @quiz.responses.each do |r| %>
+    <tr>
+      <td> <%= r.user.email %> </td>
+      <td> <%= r.answer %> </td>
+      <td> <%= r.status %> </td>
+      <td> <%= time_ago_in_words(r.created_at) %> ago </td>
+    </tr>
   <% end %>
-
-  <%= f.hidden_field :quiz_id, :value => @quiz.id %>
-
-  <div id="check-answer">
-    <div class="actions">
-      <%= f.submit "Check answer", :class => "round quizbutton" %>
-      <%= f.submit "Skip", :class => "round quizbutton" %>
-      <%= f.submit "Don't know", :class => "round quizbutton" %>
-    </div>
-  </div>
-<% end %>
+</table>

@@ -18,7 +18,7 @@ describe "Teacher course page" do
 
   it "should allow a teacher to access the course global stats page" do
     click_link "Students"
-    page.should have_css("table",:content => @component.name)
+    page.should have_css("table",:text => @component.name)
   end
 
   it "should have a link back to the course page" do
@@ -29,7 +29,7 @@ describe "Teacher course page" do
 
   it "should have enrolled students on the global stats page" do
     click_link "Students"
-    page.should have_css("td", :content => @student.email)
+    page.should have_css("td", :text => @student.email)
   end
 
   it "should allow a teacher to see the course components" do
@@ -39,17 +39,31 @@ describe "Teacher course page" do
 
   it "should have a link for adding new components" do
     click_link "Components"
-    page.should have_css("a", :content => "Add component")
+    page.should have_css("a", :text => "Add component")
   end
 
-  pending "should allow a teacher to see all the quizzes in the course" do
+  it "should allow a teacher to see all the quizzes in the course" do
     click_link "Exercises"
+    page.should have_css("a", :text => @quiz.question)  
   end
 
+  it "shouldh ave a link for adding new exercises" do
+    click_link "Exercises"
+    page.should have_css("a", :text => "Add exercise")
+  end
+
+  it "should show quizzes with a list of student responses" do
+    @response = Factory(:response, :quiz => @quiz, :user => @student)
+    click_link "Exercises"
+    click_link @quiz.question
+    page.should have_css("div", :text => @quiz.question)
+    page.should have_css("td", :text => @student.email)
+    page.should have_css("td", :text => @response.answer)
+  end
 
   it "should have a link for adding new quizzes" do
     click_link "Exercises"
-    page.should have_css("a", :content => "Add exercise")
+    page.should have_css("a", :text => "Add exercise")
   end
 
 end

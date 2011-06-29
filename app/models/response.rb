@@ -5,7 +5,9 @@ class Response < ActiveRecord::Base
   before_create :grade_response
   before_create :handle_skip
 
+  default_scope order("created_at DESC")
   scope :by_user, lambda { |user_id| where(:user_id => user_id) } 
+  scope :correct, where(:status => "correct")
 
   def rate_components!(quality)
     self.has_been_rated = true

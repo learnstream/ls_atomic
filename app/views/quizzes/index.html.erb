@@ -2,8 +2,20 @@
 
 <%= link_to "Add exercise", new_course_quiz_path(@course), :class => 'add-course-item' %><br /><br />
 
-<ul>
+<table>
+  <tr>
+    <th>Quiz</th>
+    <th></th>
+    <th># of responses</th>
+    <th>% correct</th>
+  </tr>
 <% @quizzes.each do |quiz| %>
-  <li><%= quiz.question %> | <%= link_to "Edit", edit_course_quiz_path(@course, quiz) %></li>
+  <tr>
+    <td><%= link_to truncate(quiz.question,:length => 80), course_quiz_path(@course, quiz) %></td>
+    <td><%= link_to "Edit", edit_course_quiz_path(@course, quiz) %></td>
+
+    <td><%= quiz.responses.count %></td>
+    <td><%= quiz.percent_responses_correct %>%</td>
+  </tr>
 <% end %>
-</ul>
+</table>

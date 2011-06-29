@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  layout :choose_layout 
+  layout 'teacher'
 
   before_filter :grab_course_from_course_id 
   before_filter :authenticate
@@ -98,16 +98,6 @@ class QuizzesController < ApplicationController
   def authorized_teacher
     if current_user.perm != "admin" and !current_user.teacher?(@course)
       redirect_to root_path
-    end
-  end
-
-  def choose_layout
-    if [ 'show' ].include? action_name
-      'study'
-    elsif [ 'new', 'edit', 'index' ].include? action_name
-      'teacher'
-    else
-      'application'
     end
   end
 

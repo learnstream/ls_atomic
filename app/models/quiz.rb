@@ -84,4 +84,12 @@ class Quiz < ActiveRecord::Base
       student.memories.find_by_component_id(cmp).skip!
     end
   end
+
+  def percent_responses_correct
+    if responses.count == 0 
+      return 0
+    end
+
+    (responses.correct.count / responses.count * 100).round(0)
+  end
 end
