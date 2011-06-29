@@ -104,7 +104,10 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
     $("<div />").text("Loading quiz...")
                 .attr("id", "quiz_" + new_event.id)
                 .appendTo(newdiv);
-    $.get("/quizzes/" + new_event.id + ".js #study-area", function() {
+
+    var course_id = $("#course-id").text();
+
+    $.get("/courses/" + course_id + "/study/" + new_event.id + ".js #study-area", function() {
         // scroll again because the size is larger... 
           var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
           $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });

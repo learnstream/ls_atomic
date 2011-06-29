@@ -1,0 +1,10 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag "raphael-min" %>
+  <%= javascript_include_tag "Quiz" %>
+<% end %>
+
+<% breadcrumb :study, @quiz.course %>
+
+<div id="study-area">
+  <%= render :partial => "study/quiz", :locals => {:quiz => @quiz} %>
+</div>

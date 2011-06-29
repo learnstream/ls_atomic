@@ -21,7 +21,7 @@ LsAtomic::Application.routes.draw do
       get :course_achieved_stats
       get :student_status
     end
-    resources :study, :only => [:index]
+    resources :study, :only => [:index, :show]
   end
 
   resources :components do

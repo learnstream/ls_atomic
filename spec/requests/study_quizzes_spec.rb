@@ -51,7 +51,7 @@ describe "Doing exercises" do
     click_button "Check answer"
     click_link "Easy"
 
-    visit quiz_path(@quiz)
+    visit course_study_path(@course, @quiz)
     page.should have_css("#judgement")
   end
 
@@ -188,7 +188,7 @@ describe "Doing exercises" do
       click_button "Check answer"
       click_link "Good"
 
-      visit quiz_path(@quiz)
+      visit course_study_path(@course, @quiz)
       page.should_not have_css("a", :text => "Good")
     end
 

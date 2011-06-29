@@ -29,6 +29,16 @@ describe "Lessons for the student" do
     page.should have_content(@note.content)
   end
 
+  it "should have the initial event listed when the event is a quiz", :js => true do
+    @event3.order_number = 0
+    @event3.save!
+    @event.order_number = 5
+    @event.save!
+    visit course_lesson_path(@course, @lesson)
+    pending("being able to access the fucking quiz page in test mode")
+    page.should have_content(@quiz.question)
+  end
+
   it "should update lesson status with the correct event id", :js => true do
     click_link "Next"
     visit course_path(@course)
