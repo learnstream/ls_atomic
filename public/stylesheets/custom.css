@@ -405,19 +405,6 @@ a.signup_button {
   width: 900px;
   height: 400px;
   clear: both; }
-  #quiz_area #innards {
-    background-color: #fff;
-    padding: 10px;
-    width: 870px;
-    height: 370px;
-    margin: 5px 5px 5px 5px;
-    border-right: 1px solid #999999;
-    border-bottom: 1px solid #999999;
-    border-left: 1px solid #cccccc;
-    border-top: 1px solid #cccccc;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; }
 
 /* Lessons - Student */
 #events-area-student {

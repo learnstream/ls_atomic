@@ -4,33 +4,99 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     Timecop.travel(2011, 1, 1, 0, 0, 0) do
       make_users
-      make_courses_and_components
+      make_courses
       enroll_users
-      create_many_components
+      
+      #add_real_data stuff
+      component_map = add_components(1)
+      add_lessons(1, component_map)
+
+      #make these things for course 2
       make_quizzes
-      make_lesson
+      create_other_components
+      make_other_lesson
     end
 
     view_memories
   end
 
-  desc "Add Components to course given by course_id"
-  # To call, do rake db:add_components[course_id]
-  task :add_components, :course_id do |t, args|
-    # removes old components first.
-    course = Course.find(args.course_id)
-    course.components.destroy_all
-    file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentsData.txt", "rb")
-    contents = file.read
-    components = JSON.parse(contents)
-    components.each do |c|
-      comp = course.components.build(c)
-      comp.save
-    end
-    file.close()
-  end
-  task :add_components => :environment
 
+  desc "Add real data"
+  task :add_real_data, :course_id do |t, args|
+    component_map = add_components(args.course_id)
+    add_lessons(args.course_id, component_map)
+  end
+  task :add_real_data => :environment
+end
+
+def add_lessons(course_id, component_map)
+  course = Course.find(course_id)
+  course.lessons.destroy_all
+
+  file = File.open("#{Rails.root}/lib/tasks/DataFiles/LessonData.txt", "rb")
+  contents = file.read
+  lessonEvents = JSON.parse(contents)
+
+  order_number = 0
+  created_lessons = []
+  lesson = nil
+
+  lessonEvents.each do |lesson_event|
+    if !created_lessons.include?(lesson_event["lesson_id"])
+      lesson = course.lessons.build(:name => lesson_event["lesson_name"])
+      if lesson.save
+        created_lessons << lesson_event["lesson_id"]
+        order_number = 0
+      end
+    end 
+
+    event = lesson.events.build(:video_url => lesson_event["video_url"], 
+                                :start_time => lesson_event["start_time"],
+                                :end_time => lesson_event["end_time"],
+                                :order_number => order_number += 1)
+
+ 
+    if lesson_event["playable_type"] == "Note"
+      note = Note.create!(:content => lesson_event["note_content"])
+      note.events << event
+    elsif lesson_event["playable_type"] == "Quiz"
+        component_tokens = lesson_event["component_list"].to_s.split(",").map{|e| component_map[e] }
+        lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].split("&") : answer_tokens = [lesson_event["answer"]]
+        #is there a better way to do this? I'll admit i'm a bit lost now in the quiz controller/model code. -NP
+        quiz = Quiz.create!(:course_id => course,
+                 :in_lesson => true,
+                 :answer_type => lesson_event["answer_type"],
+                 :explanation => lesson_event["explanation"],
+                 :question => lesson_event["question"],
+                 :answer_input => { :type => lesson_event["answer_type"] }.to_json,
+                 :answer_output => { :type => "text" }.to_json)
+
+        component_tokens.each { |c| quiz.components << Component.find(c)} 
+        answer_tokens.each { |a| quiz.answers.create!(:text => a ) }
+        quiz.events << event
+    end
+  end
+  file.close()
+end
+
+def add_components(course_id) 
+  # removes old components first.
+  course = Course.find(course_id)
+  course.components.destroy_all
+  file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentsData.txt", "rb")
+  contents = file.read
+  components = JSON.parse(contents)
+  component_id_map = Hash.new
+
+  components.each do |c|
+    component = course.components.build(c)
+    if component.save
+      component_id_map["#{c['unique_id']}"] = component.id
+    end
+  end
+
+  file.close()
+  return component_id_map
 end
 
 def make_users
@@ -56,27 +122,26 @@ def make_users
   
 end
 
-def make_courses_and_components
-  course1 = Course.create!(:name => "Reading",
-                           :description => "rainbows") 
+def make_courses
+  course1 = Course.create!(:name => "Physics",
+                           :description => "is all about the rainbows") 
   course2 = Course.create!(:name => "Writing",
                            :description => "A Post-Lacanian approach to ruby on rails tutorials")
   course3 = Course.create!(:name => "Rithmetic",
                            :description => "numbers and stuff")
-  c1 = course1.components.create!(:name => "Newton's first law",
-                         :description => "An object in motion remains in motion")  
-  c2 = course1.components.create!(:name => "Newton's second law",
-                         :description => "\\( \\vec{F} = m\\vec{a} \\)")
-  c3 = course1.components.create!(:name => "Newton's third law",
-                         :description => "Every action has an opposite and equal reaction")
-  
+ 
 end
 
+<<<<<<< HEAD
 def create_many_components
   course = Course.find_by_name("Reading")
+=======
+def create_other_components
+  course = Course.find(2)
+>>>>>>> 1c053e1d869fd59622d5a02060061221d7d6f123
 
   20.times do |n|
-    course.components.create!(:name => "Newton's #{n}th law", :description => "what comes up, must come #{ n.times do
+    course.components.create!(:name => "Shakespeare's #{n}th law", :description => "what doth fly up, shouldeth likewise come #{ n.times do
                                                                                                               "down"
                                                                                                             end }")
   end
@@ -98,7 +163,7 @@ def enroll_users
 end
 
 def make_quizzes
-  course = Course.first
+  course = Course.find(2)
   
   course.components.each do |component|
     quiz = Quiz.create!(:course_id => course,
@@ -133,9 +198,9 @@ def view_memories
   end
 end
 
-def make_lesson
-  course = Course.first
-  lesson = Lesson.create!(:course_id => course,
+def make_other_lesson
+  course = Course.find(2)
+  lesson = Lesson.create!(:course_id => course.id,
                           :name => "Newton's Laws")
 
   events = []
