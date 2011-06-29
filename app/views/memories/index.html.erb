@@ -7,7 +7,7 @@
   </tr>
   <% @memories.each do |memory| %>
     <tr>
-      <td><%= memory.component.name %></td>
+      <td><%= link_to memory.component.name, course_component_path(@course, memory.component) %></td>
       <td class="<%= strength_class(memory) %>"><%= strength(memory) %></td> 
       <td><%= pluralize(memory.memory_ratings.count, "time") %></td>
       <td><% if strength(memory) != "Not being studied" %>
