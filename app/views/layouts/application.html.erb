@@ -13,6 +13,16 @@
   <%= javascript_include_tag "jquery.ui.min" %>
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" %> 
   <%= javascript_include_tag "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" %>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: {
+        Macros: {
+          unitsf: ['{\\ \\frac{\\mathrm{#1}}{\\mathrm{#2}}}',2],
+          units: ['{\\ \\mathrm{#1}}',1]
+        }
+      }
+    });
+  </script>
   <%= javascript_include_tag "YouTubeEmbed" %>
   <%= javascript_include_tag "jquery.tokeninput" %> 
   <%= javascript_include_tag "jquery.scrollTo.min.js" %>
