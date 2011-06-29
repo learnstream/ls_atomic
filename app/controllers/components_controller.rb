@@ -5,6 +5,7 @@ class ComponentsController < ApplicationController
   before_filter :only => [:create, :edit, :update, :new] do 
     check_permissions(params)
   end 
+  before_filter :select_components
 
   def new 
     @course = Course.find(params[:course_id])
@@ -101,4 +102,7 @@ class ComponentsController < ApplicationController
       end
     end
 
+    def select_components
+      @components_selected = "selected"
+    end
 end

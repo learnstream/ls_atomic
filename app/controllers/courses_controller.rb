@@ -176,6 +176,7 @@ class CoursesController < ApplicationController
 
   def student_status
     @course = Course.find(params[:id])
+    @students_selected = "selected"
   end
 
   private

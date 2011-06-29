@@ -4,6 +4,7 @@ class QuizzesController < ApplicationController
   before_filter :grab_course_from_course_id 
   before_filter :authenticate
   before_filter :authorized_teacher, :only => [:create, :update, :new, :edit, :index] 
+  before_filter :select_quizzes
 
   def index
     @quizzes = @course.quizzes
@@ -114,4 +115,8 @@ class QuizzesController < ApplicationController
       params[:quiz][:answer_output] = { :type => "text" }.to_json
     end
   end 
+
+  def select_quizzes
+    @exercises_selected = "selected"
+  end
 end

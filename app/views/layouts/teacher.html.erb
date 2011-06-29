@@ -1,12 +1,15 @@
-
   <% content_for :local_nav do %>
+<% @students_selected ||= "" %>
+<% @lessons_selected ||= "" %>
+<% @components_selected ||= "" %>
+<% @exercises_selected ||= "" %>
     <div id="course-head">
 <ul id="local-nav">
   <li class="course-name"><%= link_to @course.name, @course, :id => 'course-name'  %></li>
-  <li><%= link_to "Students", student_status_course_path(@course) %></li>
-  <li><%= link_to "Lessons", course_lessons_path(@course) %></li>
-  <li><%= link_to "Components", course_components_path(@course) %></li> 
-  <li><%= link_to "Exercises", course_quizzes_path(@course) %></li>
+  <li><%= link_to "Students", student_status_course_path(@course), :class => @students_selected %></li>
+  <li><%= link_to "Lessons", course_lessons_path(@course), :class => @lessons_selected %></li>
+  <li><%= link_to "Components", course_components_path(@course), :class => @components_selected  %></li> 
+  <li><%= link_to "Exercises", course_quizzes_path(@course), :class => @exercises_selected %></li>
 </ul>
 </div>
 <% end %>

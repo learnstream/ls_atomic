@@ -55,17 +55,17 @@
   <% end %>
   </ul>
   </nav>
-  </header>
-  <section>
-  <%= yield(:panel) if content_for?(:panel) %>
-
   <%= yield(:local_nav) if content_for?(:local_nav) %>
-
   <div id = "breadcrumb">
     <%= breadcrumb :separator => ">",
       :autoroot => true,
       :link_last => false %>
     </div>
+  </header>
+  <section>
+  <%= yield(:panel) if content_for?(:panel) %>
+
+
 
    
   <% flash.each do |key, value| %>

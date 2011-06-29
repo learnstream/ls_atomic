@@ -4,6 +4,7 @@ class LessonsController < ApplicationController
   before_filter :grab_course_from_course_id 
   before_filter :authenticate
   before_filter :authorized_teacher, :except => :show 
+  before_filter :select_lessons
 
   def index
     @lessons = @course.lessons
@@ -72,5 +73,9 @@ class LessonsController < ApplicationController
     if current_user.perm != "admin" and !current_user.teacher?(@course)
       redirect_to root_path
     end
+  end
+
+  def select_lessons
+    @lessons_selected = "selected"
   end
 end

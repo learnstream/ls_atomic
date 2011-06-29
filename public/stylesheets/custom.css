@@ -1,19 +1,21 @@
 body {
   background: white; }
 
-header {
-  padding-top: 20px; }
-  header img {
-    padding: 1em;
-    background: #fff; }
-  header a#logo {
-    color: black;
-    font-size: 1.5em;
-    font-weight: bold;
-    display: inline;
-    clear: left; }
-    header a#logo:visited {
-      color: black; }
+.container {
+  width: 100%; }
+
+header img {
+  padding: 1em;
+  background: #fff; }
+header a#logo {
+  margin-left: 30px;
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold;
+  display: inline;
+  clear: left; }
+  header a#logo:visited {
+    color: black; }
 
 /* Common stuff */
 .hidden {
@@ -30,9 +32,8 @@ tbody tr:nth-child(even) td, tbody tr.even td {
 section {
   font-size: 120%;
   background: white;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-  border-radius: 20px; }
+  margin: auto;
+  padding: 15px 60px 10px 60px; }
 
 h1 {
   font-size: 2em; }
@@ -71,6 +72,7 @@ nav {
 
 /* Teacher course page navigation */
 #course-head {
+  border-top: 1px solid #eee;
   padding: 0px; }
 
 #breadcrumb {
@@ -97,8 +99,8 @@ ul#local-nav {
     margin: 0px; }
     ul#local-nav li a {
       display: block;
-      -moz-border-radius: 10px 10px 0px 0px;
-      border-radius: 10px 10px 0px 0px;
+      -moz-border-radius: 5px 5px 0px 0px;
+      border-radius: 5px 5px 0px 0px;
       background: #a6a6a6;
       width: 100px;
       padding: 0.5em 0.0em;
@@ -115,8 +117,12 @@ ul#local-nav {
         color: #fef6e8;
         background: #8c8c8c;
         border-bottom: 1px solid #8c8c8c; }
+    ul#local-nav li a.selected {
+      color: #fef6e8;
+      background: #8c8c8c;
+      border-bottom: 1px solid #8c8c8c; }
   ul#local-nav li.course-name {
-    margin-left: 10px;
+    margin-left: 30px;
     margin-right: 30px; }
     ul#local-nav li.course-name a {
       font-size: 1.5em;
