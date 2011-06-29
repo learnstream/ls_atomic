@@ -35,15 +35,28 @@
   #stream-area .event {
     margin-bottom: 15px;
     padding: 10px;
+#content {
+  clear: both;
+  width: 690px;
+  height: 250px;
+  margin: auto;
+  padding: 50px 15px 0px 15px;
+  overflow: auto;
+  background: #eee; }
+  #content .event {
+    margin-bottom: 100px;
+    padding: 15px;
     background: #fff;
     border: 1px solid #ddd;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px; }
-  #stream-area div.timelink {
-    text-align: right;
-    font-size: .8em; }
-  #stream-area div.nextlink {
+  #content div.timelink {
+    width: 90px;
+    margin-bottom: 10px;
+    background: #eee;
+    text-align: center; }
+  #content div.nextlink {
     width: 90px;
     margin: 0px auto 50px auto;
     text-align: center; }
