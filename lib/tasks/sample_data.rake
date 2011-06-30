@@ -10,10 +10,11 @@ namespace :db do
       #add_real_data stuff
       component_map = add_components(1)
       add_lessons(1, component_map)
+      add_exercises(1, component_map)
 
       #make these things for course 2
-      make_quizzes
       create_other_components
+      make_quizzes
       make_other_lesson
     end
 
@@ -27,6 +28,30 @@ namespace :db do
     add_lessons(args.course_id, component_map)
   end
   task :add_real_data => :environment
+end
+
+def add_exercises(course_id, component_map)
+  course = Course.find(course_id)
+
+  file = File.open("#{Rails.root}/lib/tasks/DataFiles/ExerciseData.txt", "rb")
+  contents = file.read
+  exercises = JSON.parse(contents)
+  
+  exercises.each do |e|
+    component_tokens = e["component_list"].to_s.split(",").map{|e| component_map[e] }
+    e["answer_type"] == "text" ? answer_tokens = e["answer"].to_s.split("&") : answer_tokens = [e["answer"].to_s]
+    quiz = Quiz.create!(:course_id => course,
+                        :in_lesson => true,
+                        :answer_type => e["answer_type"],
+                        :explanation => e["explanation"],
+                        :question => e["question"],
+                        :answer_input => { :type => e["answer_type"] }.to_json,
+                        :answer_output => { :type => "text" }.to_json)
+
+    component_tokens.each { |c| quiz.components << Component.find(c)} 
+    answer_tokens.each { |a| quiz.answers.create!(:text => a ) }
+  end
+
 end
 
 def add_lessons(course_id, component_map)
@@ -133,7 +158,7 @@ def make_courses
 end
 
 def create_other_components
-  course = Course.find(2)
+  course = Course.find_by_name("Writing")
 
   20.times do |n|
     course.components.create!(:name => "Shakespeare's #{n}th law", :description => "what doth fly up, shouldeth likewise come #{ n.times do
@@ -158,10 +183,10 @@ def enroll_users
 end
 
 def make_quizzes
-  course = Course.find(2)
+  course = Course.find_by_name("Writing")
   
   course.components.each do |component|
-    quiz = Quiz.create!(:course_id => course,
+    quiz = Quiz.create!(:course_id => course.id, #For some reason, these get created in Physics course unless we do course.id explicitly. go figure.
                  :component_tokens => component.id.to_s,
                  :question => "What is the #{component.id}th answer?",
                  :answer_type => "text",
@@ -194,7 +219,7 @@ def view_memories
 end
 
 def make_other_lesson
-  course = Course.find(2)
+  course = Course.find_by_name("Writing")
   lesson = Lesson.create!(:course_id => course.id,
                           :name => "Newton's Laws")
 
