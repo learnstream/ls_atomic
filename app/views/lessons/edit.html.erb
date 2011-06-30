@@ -28,6 +28,7 @@
       <ul>
         <li><a href="#add-note">Add Note</a></li>
         <li><a href="#add-quiz">Add Quiz</a></li>
+        <li><a href="#edit-components">Components</a></li>
       </ul>
       <div id="add-note">
         <%= render :partial => 'notes/form' %> 
@@ -36,6 +37,17 @@
       <div id="add-quiz">
         <%= render :partial => 'quizzes/form' %>
       </div>
+
+      <div id="edit-components">
+        <%= render :partial => 'lesson_components/form' %>
+        <ul id="component-list">
+          <% @lesson.components.each do |comp| %>
+            <% lc = comp.lesson_components.find_by_lesson_id(@lesson) %>
+            <li id="lc-<%= lc.id %>"><%= comp.name %>
+            <%= render :partial => 'lesson_components/remove', :locals => {:lc => lc } %>
+            </li>
+          <% end %>
+        </ul>
     </div>
   </div>
 </div>

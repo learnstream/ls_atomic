@@ -15,6 +15,7 @@ $(document).ready(function() {
     $("#lesson-edit-tabs").tabs();
     prepareQuizFirst();
     prepareNoteNew();
+    prepareComponentNew();
     $("#quiz_new_event_attributes_video_url").val(defaultUrl);
     $("#note_new_event_attributes_video_url").val(defaultUrl);
 });
@@ -112,4 +113,9 @@ function createSyncLinks() {
         $("#add-note .end_time").val(time);
         return false;
     });
+}
+
+function prepareComponentNew() {
+  $("#lesson_component_lesson_id").val($("#lesson_id").text());
+  $("#lesson_component_component_id").tokenInput('clear');
 }
