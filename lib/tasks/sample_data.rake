@@ -13,8 +13,8 @@ namespace :db do
       add_exercises(1, component_map)
 
       #make these things for course 2
-      make_quizzes
       create_other_components
+      make_quizzes
       make_other_lesson
     end
 
@@ -39,7 +39,7 @@ def add_exercises(course_id, component_map)
   
   exercises.each do |e|
     component_tokens = e["component_list"].to_s.split(",").map{|e| component_map[e] }
-    e["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].split("&") : answer_tokens = [lesson_event["answer"]]
+    e["answer_type"] == "text" ? answer_tokens = e["answer"].to_s.split("&") : answer_tokens = [e["answer"].to_s]
     quiz = Quiz.create!(:course_id => course,
                         :in_lesson => true,
                         :answer_type => e["answer_type"],
@@ -158,7 +158,7 @@ def make_courses
 end
 
 def create_other_components
-  course = Course.find(2)
+  course = Course.find_by_name("Writing")
 
   20.times do |n|
     course.components.create!(:name => "Shakespeare's #{n}th law", :description => "what doth fly up, shouldeth likewise come #{ n.times do
@@ -183,10 +183,10 @@ def enroll_users
 end
 
 def make_quizzes
-  course = Course.find(2)
+  course = Course.find_by_name("Writing")
   
   course.components.each do |component|
-    quiz = Quiz.create!(:course_id => course,
+    quiz = Quiz.create!(:course_id => course.id, #For some reason, these get created in Physics course unless we do course.id explicitly. go figure.
                  :component_tokens => component.id.to_s,
                  :question => "What is the #{component.id}th answer?",
                  :answer_type => "text",
@@ -219,7 +219,7 @@ def view_memories
 end
 
 def make_other_lesson
-  course = Course.find(2)
+  course = Course.find_by_name("Writing")
   lesson = Lesson.create!(:course_id => course.id,
                           :name => "Newton's Laws")
 
