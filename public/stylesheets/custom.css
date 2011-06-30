@@ -146,6 +146,35 @@ ul#local-nav {
     cursor: pointer; }
 
 /* Student course page */
+#stats-sidebar {
+  float: right;
+  display: block; }
+
+#course-content {
+  float: left;
+  width: 560px; }
+  #course-content .course-section {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #4d4d4d;
+    background: #cccccc;
+    padding: 10px;
+    margin-bottom: 15px; }
+    #course-content .course-section h2 {
+      font-size: 1.4em;
+      color: white;
+      border-bottom: 1px dotted #eee; }
+    #course-content .course-section tr {
+      background: #eee; }
+    #course-content .course-section tr:nth-child(even) {
+      background: #e6e6e6; }
+    #course-content .course-section .lesson-number {
+      font-size: 1.5em;
+      font-style: italic;
+      color: #666;
+      margin-left: 5px; }
+
 /* Memory list */
 #memories td.needs-review {
   background: #fcc; }
@@ -250,14 +279,6 @@ a.study_button {
       font-size: 1.5em; }
 
 /* Course Show page */
-#stats-sidebar {
-  float: right;
-  display: block; }
-
-#course-content {
-  float: left;
-  width: 500px; }
-
 /* Teacher stats */
 #student-status {
   overflow: auto;

@@ -7,27 +7,28 @@
 
   <% if current_user.student?(@course) %>
 
-    <div id = "exercises">
+    <div id = "exercises" class="course-section">
       <h2> Exercises </h2>
       <p>
       <% memories_due = current_user.memories_due_with_quiz(@course).count %>
       <% if memories_due == 0 %>
         Complete a lesson to unlock more exercises.
       <% else %>
-        <%= link_to "Study now", course_study_index_path(@course.id), :class => 'quizbutton' %>
-        <%= pluralize(memories_due, "item") %> for review
+        <%= pluralize(memories_due, "item") %> for review<br /><br />
+        <%= link_to "Study now!", course_study_index_path(@course.id), :class => 'quizbutton round' %>
       <% end %>
       </p>
     </div>
 
-    <div id="lessons">
+    <div id="lessons" class="course-section">
       <h2>Lessons</h2>
       <%if @lessons.empty? %>
         Course has no lessons.
       <% else %>
         <table>
-          <% @lessons.each do |lesson| %>
+          <% @lessons.each_with_index do |lesson, i| %>
             <tr> 
+              <td><span class="lesson-number"><%= i+1 %></span></td>
               <td>
                 <% if current_user.lesson_statuses.find_by_lesson_id(lesson).completed %>
                   Completed!
@@ -47,15 +48,18 @@
       <% end %>
     </div>
 
-    <div id="components">
+    <div id="components" class="course-section">
       <h2>Components</h2>
-      <%= link_to "See all components", course_memories_path(@course) %>
+      <p><%= link_to "See all components", course_memories_path(@course) %></p>
       <% if @components.empty? %>
         Course has no components.
       <% else %>
+        <p>
+        Learn more about...
         <div id="course_id" class="hidden"><%= @course.id %></div>
         <input type="text" id="course_components" size="30" /><br />
-        <a href="#" id="component_help_link" class="quizbutton">Learn more</a>
+        <a href="#" id="component_help_link" class="quizbutton round">Go</a>
+        </p>
       <% end %>
     </div>
 

@@ -189,7 +189,41 @@ ul#local-nav {
 
 
 /* Student course page */
+#stats-sidebar{ float: right; display: block; }
 
+#course-content {
+ float:left; width: 560px;
+
+  $section-bg: #ccc;
+  .course-section {
+    @include rounded(10px);
+    border: 1px solid darken($section-bg, 50%);
+    background: $section-bg;
+    padding: 10px;
+    margin-bottom: 15px;
+
+    h2 {
+      font-size: 1.4em;
+      color: white;
+      border-bottom: 1px dotted #eee;
+    }
+
+    tr {
+      background: #eee;
+    }
+
+    tr:nth-child(even) {
+      background: lighten($section-bg, 10%);
+    }
+
+    .lesson-number {
+      font-size: 1.5em;
+      font-style: italic;
+      color: #666;
+      margin-left: 5px;
+    }
+  }
+}
 
 /* Memory list */
 
@@ -336,8 +370,6 @@ a.study_button {
 
 /* Course Show page */
 
-#stats-sidebar{ float: right; display: block; }
-#course-content{ float:left; width: 500px; }
 
 /* Teacher stats */
 
