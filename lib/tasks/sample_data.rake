@@ -10,6 +10,7 @@ namespace :db do
       #add_real_data stuff
       component_map = add_components(1)
       add_lessons(1, component_map)
+      add_exercises(1, component_map)
 
       #make these things for course 2
       make_quizzes
@@ -27,6 +28,30 @@ namespace :db do
     add_lessons(args.course_id, component_map)
   end
   task :add_real_data => :environment
+end
+
+def add_exercises(course_id, component_map)
+  course = Course.find(course_id)
+
+  file = File.open("#{Rails.root}/lib/tasks/DataFiles/ExerciseData.txt", "rb")
+  contents = file.read
+  exercises = JSON.parse(contents)
+  
+  exercises.each do |e|
+    component_tokens = e["component_list"].to_s.split(",").map{|e| component_map[e] }
+    e["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].split("&") : answer_tokens = [lesson_event["answer"]]
+    quiz = Quiz.create!(:course_id => course,
+                        :in_lesson => true,
+                        :answer_type => e["answer_type"],
+                        :explanation => e["explanation"],
+                        :question => e["question"],
+                        :answer_input => { :type => e["answer_type"] }.to_json,
+                        :answer_output => { :type => "text" }.to_json)
+
+    component_tokens.each { |c| quiz.components << Component.find(c)} 
+    answer_tokens.each { |a| quiz.answers.create!(:text => a ) }
+  end
+
 end
 
 def add_lessons(course_id, component_map)
