@@ -18,12 +18,16 @@
 <p> <%= link_to "Edit", edit_course_component_path(@course, @component) %></p>
 <% end %>
 
-<% if ! @videos.empty? %>
-<h3>Related Videos:</h3>
-
-<div id="video-embed-area"></div>
-
-<div id="related-videos">
-<%= render :partial => 'videos/video', :collection => @videos, :locals => { :edit => false } %>
-</div>
+<% if not @component.lessons.empty? %>
+  <h3> Related Lessons: </h3>
+  <ul>
+    <% @component.lessons.each do |lesson| %>
+      <% if current_user.teacher?(@component.course) %>
+        <li> <%= link_to lesson.name, edit_course_lesson_path(@component.course, lesson) %> </li>
+      <% else %>
+        <li> <%= link_to lesson.name, course_lesson_path(@component.course, lesson) %> </li>
+      <% end %>
+    <% end %>
+  </ul>
 <% end %>
+    

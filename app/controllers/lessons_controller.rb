@@ -4,6 +4,7 @@ class LessonsController < ApplicationController
   before_filter :grab_course_from_course_id 
   before_filter :authenticate
   before_filter :authorized_teacher, :except => :show 
+  before_filter :enrolled, :only => :show
 
   def index
     @lessons = @course.lessons
@@ -71,6 +72,14 @@ class LessonsController < ApplicationController
   def authorized_teacher
     if current_user.perm != "admin" and !current_user.teacher?(@course)
       redirect_to root_path
+    end
+  end
+
+  def enrolled
+    if not current_user.enrolled?(@course)
+      redirect_to root_path
+    elsif current_user.teacher?(@course)
+      redirect_to course_path(@course)
     end
   end
 end

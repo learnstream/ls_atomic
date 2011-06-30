@@ -43,7 +43,7 @@
         <ul id="component-list">
           <% @lesson.components.each do |comp| %>
             <% lc = comp.lesson_components.find_by_lesson_id(@lesson) %>
-            <li id="lc-<%= lc.id %>"><%= comp.name %>
+            <li id="lc-<%= lc.id %>"><%= link_to comp.name, course_component_path(@lesson.course,comp) %>
             <%= render :partial => 'lesson_components/remove', :locals => {:lc => lc } %>
             </li>
           <% end %>
