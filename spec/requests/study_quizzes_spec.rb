@@ -32,8 +32,13 @@ describe "Doing exercises" do
     page.should have_css("div", :content => @quiz.question)
   end
 
-  it "should have a Check Answer button" do
-    page.should have_css("a", :content => "Check answer")
+  it "should have a Don't know button before an answer is typed" do
+    page.should have_css('input[value="Don\'t know"]')
+  end
+
+  it "should have a Check Answer button once something is typed", :js => true do
+    fill_in :input, :with => "asdf"
+    page.should have_css('input[value="Check answer"]')
   end
 
   it "should be skippable" do
@@ -46,7 +51,7 @@ describe "Doing exercises" do
     page.should have_css("#judgement")
   end
 
-  it "should redirect to responses for questions that aren't due" do
+  it "should redirect to responses for questions that aren't due",:js => true do
     fill_in :input, :with => @quiz.answers.first.text
     click_button "Check answer"
     click_link "Easy"
@@ -97,14 +102,14 @@ describe "Doing exercises" do
 
   describe "after submitting the response" do
 
-    it "should show the correct answer" do
+    it "should show the correct answer", :js => true do
       visit course_study_index_path(@course)
       fill_in :input, :with => "41"
       click_button "Check answer"
       page.should have_content("42")
     end
 
-    it "should display help for the problem" do
+    it "should display help for the problem", :js => true do
       visit course_study_index_path(@course)
       fill_in :input, :with => "41"
       click_button "Check answer"
@@ -115,14 +120,14 @@ describe "Doing exercises" do
 
       describe "for correct answers" do
 
-        it "should say the answer was correct" do 
+        it "should say the answer was correct", :js => true do 
           visit course_study_index_path(@course)
           fill_in :input, :with => "42"
           click_button "Check answer"
           page.should have_content("correct")
         end
 
-        it "should have a self rating panel" do
+        it "should have a self rating panel", :js => true do
           visit course_study_index_path(@course)
           fill_in :input, :with => @quiz.answers.first.text
           click_button "Check answer"
@@ -131,7 +136,7 @@ describe "Doing exercises" do
           page.should have_css("a#rate-easy")
         end
 
-        it "should not allow the user to select a miss" do
+        it "should not allow the user to select a miss", :js => true do
           visit course_study_index_path(@course)
           fill_in :input, :with => @quiz.answers.first.text
           click_button "Check answer"
@@ -141,14 +146,14 @@ describe "Doing exercises" do
 
       describe "for incorrect answers" do 
 
-        it "should say the answer was incorrect" do
+        it "should say the answer was incorrect", :js => true do
           visit course_study_index_path(@course)
           fill_in :input, :with => "wrong asnwfaerw"
           click_button "Check answer"
           page.should have_content("incorrect")
         end
 
-        it "should have a next button" do
+        it "should have a next button", :js => true do
           visit course_study_index_path(@course)
           fill_in :input, :with => "wrong asnwfaerw"
           click_button "Check answer"
@@ -164,13 +169,13 @@ describe "Doing exercises" do
         @quiz.save
       end
 
-      it "should not judge the answer" do
+      it "should not judge the answer", :js => true do
         visit course_study_index_path(@course)
         click_button "Check answer"
         page.should_not have_css("p.flash")
       end
 
-      it "should have a full self rating panel" do
+      it "should have a full self rating panel", :js => true do
         visit course_study_index_path(@course)
         click_button "Check answer"
         page.should have_css("a#rate-miss")
@@ -181,7 +186,7 @@ describe "Doing exercises" do
     end
   end
 
-  describe "rating panel" do
+  describe "rating panel", :js => true do
     it "should not appear for users who have already rated their response" do
       visit course_study_index_path(@course)
       fill_in :input, :with => @quiz.answers.first.text

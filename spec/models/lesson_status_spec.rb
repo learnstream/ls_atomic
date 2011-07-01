@@ -29,5 +29,13 @@ describe LessonStatus do
     LessonStatus.count.should == 1
   end
 
-  it "should have a lesson attribute"
+  it "should be destroyed when the student unenrolls" do
+    @student.unenroll!(@course)
+    LessonStatus.count.should == 0
+  end
+
+  it "should have a lesson attribute" do
+    @lesson_status = @student.lesson_statuses.first
+    @lesson_status.should respond_to(:lesson)
+  end
 end
