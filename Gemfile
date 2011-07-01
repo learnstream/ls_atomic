@@ -14,13 +14,14 @@ gem 'jquery-rails', '>= 1.0.3'
 gem 'paperclip', '~> 2.3'
 gem 'time_diff'
 gem 'sass'
+gem 'timecop'
 
 group :development, :test do
   gem 'jasmine'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
   gem 'launchy'
   gem 'database_cleaner'
-  gem 'timecop'
+  #Note: I moved timecop out of development group so we can populate on heroku.
 end
 
 group :development do

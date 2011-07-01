@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110630012818) do
+ActiveRecord::Schema.define(:version => 20110701002620) do
 
   create_table "answers", :force => true do |t|
-    t.string   "text"
+    t.text     "text"
     t.integer  "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -148,13 +148,13 @@ ActiveRecord::Schema.define(:version => 20110630012818) do
   add_index "quiz_components", ["quiz_id"], :name => "index_quiz_components_on_quiz_id"
 
   create_table "quizzes", :force => true do |t|
-    t.text     "question",      :limit => 65536
+    t.text     "question"
     t.text     "answer_input"
     t.text     "answer_output"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
-    t.boolean  "in_lesson",                      :default => false
+    t.boolean  "in_lesson",     :default => false
     t.text     "explanation"
   end
 
