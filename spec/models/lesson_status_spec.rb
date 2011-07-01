@@ -18,7 +18,6 @@ describe LessonStatus do
     LessonStatus.count.should == 1
     @student2.id.should_not == @student.id
     @student2.lesson_statuses.count.should == 0
-    puts "created student" 
     
     @student2.enroll!(@course)
     LessonStatus.count.should == 2

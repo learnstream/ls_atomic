@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: d956e5eec64b03aa3d97d182439433184aef888a
+  revision: f6c787e13ad266be15fa0ebe161f331cdcbafd31
   specs:
     capybara (1.0.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      selenium-webdriver (~> 0.2.0)
+      selenium-webdriver (~> 0.2.2)
       xpath (~> 0.1.4)
 
 GEM
