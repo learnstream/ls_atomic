@@ -112,6 +112,17 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
           var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
           $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
           MathJax.Hub.Typeset();
+
+          $(newdiv > "#response_answer").keyup(function() {
+            answer = $("#response_answer").val();
+            if (answer == "") {
+            $("#answer-morph").val("Don't know");
+            } else {
+            $("#answer-morph").val("Check answer");
+            }
+    });
+
+
           });
   }
 
