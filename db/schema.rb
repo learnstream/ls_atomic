@@ -136,13 +136,13 @@ ActiveRecord::Schema.define(:version => 20110630234844) do
   add_index "quiz_components", ["quiz_id"], :name => "index_quiz_components_on_quiz_id"
 
   create_table "quizzes", :force => true do |t|
-    t.text     "question",      :limit => 65536
+    t.text     "question"
     t.text     "answer_input"
     t.text     "answer_output"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
-    t.boolean  "in_lesson",                      :default => false
+    t.boolean  "in_lesson",     :default => false
     t.text     "explanation"
   end
 
