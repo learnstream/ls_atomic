@@ -1,7 +1,8 @@
 <div class="header"><%= @quiz.question %></div>
-<br />
 
-<% if not @quiz.due_for?(current_user) %>
+
+<% if not @quiz.due_for?(current_user) and @quiz.last_response_from(current_user) %>
+  <br />
   <div class="last-response">
     You've already answered this exercise!
     <%= link_to "See your last response", response_path(@quiz.last_response_from(current_user)), :class => 'response-link' %>
