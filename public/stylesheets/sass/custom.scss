@@ -377,6 +377,36 @@ a.study_button {
 
 /* Course Show page */
 
+/* Teacher pages */
+table.course-data {
+  border: 1px solid #ddd;
+  border-right: 2px solid #ddd;
+  tbody {
+    tr.course-data-head {
+      background: #ddd;
+      th {
+        text-align: center;
+      }
+    }
+
+    tr:nth-child(even) {
+      td {
+        background: #eee;
+      }
+    }
+
+    tr.course-data-row {
+      td {
+        border-left: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+      }
+      li {
+        list-style: square;
+        color: #999;
+      }
+    }
+  }
+}
 
 /* Teacher stats */
 
@@ -410,6 +440,10 @@ a.study_button {
   position: absolute;
   margin-left: 15px;
 }
+
+
+
+
 
 /* Welcome page */
 

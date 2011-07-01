@@ -2,15 +2,15 @@
 
 <%= link_to "Add exercise", new_course_quiz_path(@course), :class => 'add-course-item' %><br /><br />
 
-<table>
-  <tr>
+<table class="course-data">
+  <tr class="course-data-head">
     <th>Quiz</th>
-    <th></th>
+    <th>Actions</th>
     <th># of responses</th>
     <th>% correct</th>
   </tr>
 <% @quizzes.each do |quiz| %>
-  <tr>
+  <tr class="course-data-row">
     <td><%= link_to truncate(quiz.question,:length => 80), course_quiz_path(@course, quiz) %></td>
     <td><%= link_to "Edit", edit_course_quiz_path(@course, quiz) %></td>
 

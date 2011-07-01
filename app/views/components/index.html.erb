@@ -4,19 +4,32 @@
 <% if @components.empty? %>
   Course has no components.
 <% else %>
-  <table>
-    <tr>
+  <table class="course-data">
+    <tr class="course-data-head">
       <th>Component</th>
+      <th>Lessons</th>
       <th>Quizzes</th>
     </tr>
 
     <% @components.each do |component| %>
-      <tr>
+      <tr class="course-data-row">
         <td>
           <%= link_to component, course_component_path(component.course, component) %>
         </td>
         <td>
-        </td>
+        <ul>
+          <% component.lessons.each do |lesson| %>
+            <li><%= link_to lesson.name, [@course, lesson] %></li>
+          <% end %>
+        </ul>
+      </td>
+      <td>
+        <ul>
+        <% component.quizzes.each do |quiz| %>
+          <li><%= link_to truncate(quiz.question, :length => 60), [@course, quiz] %></li>
+        <% end %>
+        </ul>
+      </td>
       </tr>
     <% end %>
     <%= will_paginate @components %>

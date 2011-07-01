@@ -1,13 +1,18 @@
-<table id="memories">
-  <tr>
+<table id="memories" class="course-data">
+  <tr class="course-data-head">
     <th>Component</th>
+    <th>Lesson</th>
     <th>Strength</th>
     <th>Times reviewed</th>
     <th></th>
   </tr>
   <% @memories.each do |memory| %>
-    <tr>
-      <td><%= link_to memory.component.name, course_component_path(@course, memory.component) %></td>
+    <tr class="course-data-row">
+      <td><%= link_to truncate(memory.component.name, :length => 60), course_component_path(@course, memory.component) %></td>
+      <td><ul><% memory.component.lessons.each do |lesson| %>
+          <li><%= link_to lesson.name, [@course, lesson] %></li>
+        <% end %></ul>
+      </td>
       <td class="<%= strength_class(memory) %>"><%= strength(memory) %></td> 
       <td><%= pluralize(memory.memory_ratings.count, "time") %></td>
       <td><% if strength(memory) != "Not being studied" %>
