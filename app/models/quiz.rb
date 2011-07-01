@@ -92,4 +92,17 @@ class Quiz < ActiveRecord::Base
 
     (responses.correct.count / responses.count * 100).round(0)
   end
+
+  def due_for?(user)
+    components.each do |component|
+      if user.memories.find_by_component_id(component).due?
+        return true
+      end
+    end
+    return false
+  end
+
+  def last_response_from(user)
+    self.responses.by_user(user).last
+  end
 end

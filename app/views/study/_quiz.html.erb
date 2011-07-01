@@ -1,4 +1,12 @@
 <div class="header"><%= @quiz.question %></div>
+<br />
+
+<% if not @quiz.due_for?(current_user) %>
+  <div class="last-response">
+    You've already answered this exercise!
+    <%= link_to "See your last response", response_path(@quiz.last_response_from(current_user)), :class => 'response-link' %>
+  </div>
+<% end %>
 
 <%= form_for @response || Response.new do |f| %>
   <% if @quiz.answer_type == "text" %>

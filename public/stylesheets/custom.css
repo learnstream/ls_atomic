@@ -238,6 +238,9 @@ a.study_button {
     text-decoration: underline;
     cursor: pointer; }
 
+.last-response {
+  font-size: .8em; }
+
 #check-answer {
   margin-top: 15px; }
   #check-answer .actions {

@@ -13,29 +13,14 @@ describe QuizzesController do
 
   describe "GET 'new'" do
 
-    describe "for authorized users" do
-      before(:each) do
-        @user = Factory(:admin)
-        test_sign_in(@user)
-      end
-
-      it "should be successful" do
-        get :new, :course_id => @course 
-        response.should be_success
-      end
+    before(:each) do
+      @user = Factory(:admin)
+      test_sign_in(@user)
     end
 
-    describe "for students" do
-      before(:each) do
-        @user = Factory(:user)
-        test_sign_in(@user)
-        @user.enroll!(@course)
-      end
-
-      it "should not be successful" do
-        get :new, :course_id => @course
-        response.should_not be_success
-      end
+    it "should be successful" do
+      get :new, :course_id => @course 
+      response.should be_success
     end
   end
 
@@ -61,6 +46,20 @@ describe QuizzesController do
       put :update, :id => @quiz, :course_id => @course, :quiz => @attr
       @quiz.reload
       @quiz.events.first.start_time.should == 15
+    end
+
+    describe "for students" do
+      before(:each) do
+        @user = Factory(:user)
+        test_sign_in(@user)
+        @user.enroll!(@course)
+      end
+
+      it "should not be successful" do
+        put :update, :id => @quiz, :course_id => @course, :quiz => @attr
+        get :new, :course_id => @course
+        response.should_not be_success
+      end
     end
   end
 
@@ -181,14 +180,21 @@ describe QuizzesController do
   describe "GET 'show'" do
 
     before(:each) do
-      @student = Factory(:user)
-      test_sign_in(@student)
-      @student.enroll!(@course)
+      @teacher = Factory(:user)
+      test_sign_in(@teacher)
+      @teacher.enroll_as_teacher!(@course)
     end
 
-    it "should be successful" do
-      get :show, :id => @quiz
+    it "should be successful for teachers" do
+      get :show, :course_id => @course, :id => @quiz
       response.should be_success
+    end
+
+    it "should not work for students" do
+      @teacher.unenroll!(@course)
+      @teacher.enroll!(@course)
+      get :show, :course_id => @course, :id => @quiz
+      response.should_not be_success
     end
   end
 end
