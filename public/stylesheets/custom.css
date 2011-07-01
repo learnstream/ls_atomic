@@ -284,6 +284,23 @@ a.study_button {
       font-size: 1.5em; }
 
 /* Course Show page */
+/* Teacher pages */
+table.teacher-data {
+  border: 1px solid #ddd;
+  border-right: 2px solid #ddd; }
+  table.teacher-data tbody tr.teacher-data-head {
+    background: #ddd; }
+    table.teacher-data tbody tr.teacher-data-head th {
+      text-align: center; }
+  table.teacher-data tbody tr:nth-child(even) td {
+    background: #eee; }
+  table.teacher-data tbody tr.teacher-data-row td {
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; }
+  table.teacher-data tbody tr.teacher-data-row li {
+    list-style: square;
+    color: #999; }
+
 /* Teacher stats */
 #student-status {
   overflow: auto;
