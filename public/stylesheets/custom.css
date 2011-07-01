@@ -79,10 +79,12 @@ nav {
   background: #8c8c8c;
   margin-bottom: 15px;
   padding-left: 10px;
-  color: #b3b3b3; }
+  color: white; }
   #breadcrumb a {
-    color: #fff; }
+    color: #d9d9d9; }
   #breadcrumb a:visited {
+    color: #d9d9d9; }
+  #breadcrumb a:hover {
     color: #fff; }
 
 ul#local-nav {

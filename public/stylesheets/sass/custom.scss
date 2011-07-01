@@ -105,11 +105,14 @@ nav {
   background: darken(#ccc, 25%);
   margin-bottom: 15px;
   padding-left: 10px;
-  color: darken(#fff, 30%);
+  color: darken(#fff, 0%);
   a {
-    color: #fff;
+    color: darken(#fff, 15%);
   }
   a:visited {
+    color: darken(#fff, 15%);
+  }
+  a:hover {
     color: #fff;
   }
 }
