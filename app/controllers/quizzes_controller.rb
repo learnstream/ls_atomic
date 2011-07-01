@@ -3,7 +3,7 @@ class QuizzesController < ApplicationController
 
   before_filter :grab_course_from_course_id 
   before_filter :authenticate
-  before_filter :authorized_teacher, :only => [:create, :update, :new, :edit, :index] 
+  before_filter :authorized_teacher
   before_filter :select_quizzes
 
   def index

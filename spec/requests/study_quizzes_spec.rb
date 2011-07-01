@@ -51,15 +51,23 @@ describe "Doing exercises" do
     page.should have_css("#judgement")
   end
 
-  it "should redirect to responses for questions that aren't due",:js => true do
-    fill_in :input, :with => @quiz.answers.first.text
-    click_button "Check answer"
-    click_link "Easy"
+  describe "when none of the components are due" do
 
-    visit course_study_path(@course, @quiz)
-    page.should have_css("#judgement")
+    before(:each) do
+      fill_in :input, :with => @quiz.answers.first.text
+      click_button "Check answer"
+      click_link "Easy"
+      visit course_study_path(@course, @quiz)
+    end
+
+    it "should display a warning", :js => true do
+      page.should have_css("div", :text => "You've already answered this exercise!")
+    end
+
+    it "should link to the response when the quiz has already been answered", :js => true do
+      page.should have_css("a", :text => "See your last response")
+    end
   end
-
 
   describe "for text input questions" do
 

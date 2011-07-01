@@ -6,7 +6,7 @@ class Response < ActiveRecord::Base
   before_create :handle_skip
 
   default_scope order("created_at DESC")
-  scope :by_user, lambda { |user_id| where(:user_id => user_id) } 
+  scope :by_user, lambda { |user| where(:user_id => user.id) } 
   scope :correct, where(:status => "correct")
 
   def rate_components!(quality)
