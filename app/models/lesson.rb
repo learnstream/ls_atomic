@@ -3,9 +3,10 @@ class Lesson < ActiveRecord::Base
   has_many :quizzes, :through => :events, 
                      :source => :playable,
                      :source_type => "Quiz"
-
-  belongs_to :course
   has_many :lesson_statuses, :dependent => :destroy
+  has_many :lesson_components, :dependent => :destroy
+  has_many :components, :through => :lesson_components
+  belongs_to :course
   default_scope :order => 'lessons.order_number'
   validates :name, :uniqueness => { :scope => :course_id }
 

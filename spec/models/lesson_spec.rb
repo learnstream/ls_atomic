@@ -11,6 +11,8 @@ describe Lesson do
     @lesson.should respond_to(:course)
   end
 
+
+
   it "should have the right course" do
     @lesson.course.should == @course
   end
@@ -48,4 +50,22 @@ describe Lesson do
       end.should change(LessonStatus, :count).by(1)
     end
   end
+
+  describe "components" do
+
+    before(:each) do
+      @component = Factory(:component)
+      @lesson.components << @component
+    end
+
+    it "should have components" do
+      @lesson.should respond_to(:components)
+    end
+
+    it "should be associated to the correct components" do
+      @lesson.components.first.should == @component
+    end
+
+  end
+
 end

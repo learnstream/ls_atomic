@@ -472,6 +472,8 @@ a.signup_button {
   height: 480px;
   overflow-y: auto;
   margin-left: 5px; }
+#lesson-edit .edit_lesson_component {
+  display: inline; }
 
 #tabs-container {
   width: 502px;

@@ -100,5 +100,11 @@ class Memory < ActiveRecord::Base
   def removed?
     due >= (DateTime.now + 900.years)
   end
+
+  def unlock!
+    self.views += 1
+    self.last_viewed = Time.now
+    self.save
+  end
     
 end

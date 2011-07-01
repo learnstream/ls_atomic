@@ -105,6 +105,44 @@ describe "Lessons" do
       page.should have_css("div.event div.content", :text => "A note!")
       page.should have_css("div.event div.content", :text => "Another note!")
     end
+
+    describe "components" do
+      before(:each) do
+        @component = Factory(:component, :course => @lesson.course)
+      end
+
+      it "should have a button for adding components" do
+        page.should have_css("a", "Components")
+      end
+
+      it "should allow new components to be added", :js => true do
+        within("#lesson-edit-tabs") do
+          click_link "Components"
+        end
+        page.execute_script('$("#lesson_component_component_id").val('+@component.id.to_s+')');
+        click_button "Submit"
+        page.should have_css("li", @component.name)
+      end
+
+      it "should allow components to be deleted", :js => true do
+        LessonComponent.create(:lesson_id => @lesson.id, :component_id => @component.id)
+        visit course_path(@course)
+        click_link "Lessons"
+        click_link "Edit"
+
+        within("#lesson-edit-tabs") do
+          click_link "Components"
+        end
+
+        page.should have_css("li", :text => @component.name)
+
+        within("#component-list") do
+          click_button "x"
+        end
+
+        page.should_not have_css("li", :text => @component.name)
+      end
+    end
   end
 end
 

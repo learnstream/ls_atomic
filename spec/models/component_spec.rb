@@ -48,5 +48,22 @@ describe Component do
       @component.should respond_to(:quizzes)
     end
   end
+
+  describe "lesson associations" do
+    before(:each) do
+      @component = Factory(:component)
+      @lesson = Factory(:lesson)
+      @lesson.components << @component
+    end
+
+    it "should have a lessons method" do
+      @component.should respond_to(:lessons)
+    end
+
+    it "should be associated to the correct lesson" do
+      @component.lessons.first.should == @lesson
+    end
+  end
+
 end
 
