@@ -14,7 +14,8 @@ describe "Lessons for the student" do
     @quiz = Factory(:quiz, :course => @course)
     @event3 = Factory(:event, :lesson => @lesson, :start_time => 20)
     @quiz.events << @event3
-    @component = Factory(:component, :lesson => @lesson)
+    @component = Factory(:component, :course => @course)
+    @lesson.components << @component
 
     integration_sign_in(@user)
     visit course_path(@course)

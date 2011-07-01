@@ -64,26 +64,6 @@ describe ComponentsController do
         response.should_not have_selector("a", :content => "Edit", :href => edit_component_path(@component))
       end
     end
-
-    describe "for video display" do
-      before(:each) do
-        @student = Factory(:user)
-        test_sign_in(@student)
-        @video = Factory(:video, :component_id => @component.id)
-      end        
-
-      it "should display a youtube video if one is associated" do
-        get :show, :course_id => @course, :id => @component
-        response.should have_selector("div", :id => "video-embed-url", :content => @video.url)
-      end 
-
-      it "should display all  related videos" do
-        @video = @component.videos.create!(:name => "Awesome example video", :url => "http://www.youtube.com/watch?v=U7mPqycQ0tQ", :start_time => 0, :end_time => 60)
-        get :show, :course_id => @course, :id => @component
-        response.should have_selector("div", :content => "Awesome example video")
-      end
-
-    end
   end
 
   describe "POST 'create'" do
