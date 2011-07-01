@@ -11,9 +11,12 @@
 
   <div id="check-answer">
     <div class="actions">
-      <%= f.submit "Check answer", :class => "round quizbutton" %>
+      <% if @quiz.answer_type == "text" %>
+        <%= f.submit "Don't know", :class => "round quizbutton", :id => "answer-morph"%>
+      <% else %>
+        <%= f.submit "Check answer", :class => "round quizbutton"%>
+      <% end %>
       <%= f.submit "Skip", :class => "round quizbutton" %>
-      <%= f.submit "Don't know", :class => "round quizbutton" %>
     </div>
   </div>
 <% end %>

@@ -26,14 +26,21 @@ $(document).ready(function () {
       updateInputForm();
     });
 
-    ff = loadExistingFBD();
-    updateInputForm();
+    $("#response_answer").keyup(function() {
+      answer = $("#response_answer").val();
+      if (answer == "") {
+        $("#answer-morph").val("Don't know");
+      } else {
+        $("#answer-morph").val("Check answer");
+      }
+    });
 
+    ff = loadExistingFBD();
+
+    updateInputForm();
 });
 
-$("#response_answer").keydown = function(key) {
 
-}
 
 var loadExistingFBD = function() {
     var ff = null;
