@@ -28,6 +28,21 @@ namespace :db do
     add_lessons(args.course_id, component_map)
   end
   task :add_real_data => :environment
+
+  desc "Add Components as separate task"
+  task :add_components, :course_id do |t, args|
+    component_map = add_components(args.course_id)
+  end
+  task :add_components => :environment
+  
+  desc "Add lessons as separate task"
+  task :add_lessons, :course_id do |t, args|
+    file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", "rb")
+    contents = file.read
+    component_map = JSON.parse(contents)
+    add_lessons(args.course_id, component_map)
+  end
+  task :add_lessons => :environment
 end
 
 def add_exercises(course_id, component_map)
@@ -72,6 +87,7 @@ def add_lessons(course_id, component_map)
       if lesson.save
         created_lessons << lesson_event["lesson_id"]
         order_number = 0
+        puts lesson.id
       end
     end 
 
@@ -121,6 +137,7 @@ def add_components(course_id)
   end
 
   file.close()
+  File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", 'w'){ |f| f.write(component_id_map.to_json) }
   return component_id_map
 end
 
