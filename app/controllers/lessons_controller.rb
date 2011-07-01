@@ -5,6 +5,7 @@ class LessonsController < ApplicationController
   before_filter :authenticate
   before_filter :authorized_teacher, :except => :show 
   before_filter :select_lessons
+  before_filter :enrolled, :only => :show
 
   def index
     @lessons = @course.lessons
@@ -12,6 +13,14 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id])
+    @status = @lesson.lesson_statuses.find_by_user_id(current_user)
+
+    @lesson.components.each do |cmp|
+      mem = current_user.memories.find_by_component_id(cmp)
+      if not mem.viewed?
+        mem.unlock!
+      end
+    end
   end
 
   def new
@@ -77,5 +86,13 @@ class LessonsController < ApplicationController
 
   def select_lessons
     @lessons_selected = "selected"
+  end
+
+  def enrolled
+    if not current_user.enrolled?(@course)
+      redirect_to root_path
+    elsif current_user.teacher?(@course)
+      redirect_to course_path(@course)
+    end
   end
 end

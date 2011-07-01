@@ -1,0 +1,11 @@
+<%= form_for LessonComponent.new, :remote => true do |f| %> 
+  <%= f.hidden_field :lesson_id %>
+
+  <div class="field">
+    <%= f.label :component_id, "Components" %><br />
+    <%= f.text_field :component_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

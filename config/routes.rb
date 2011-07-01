@@ -63,4 +63,6 @@ LsAtomic::Application.routes.draw do
    
   root :to => 'pages#welcome'
 
+  resources :lesson_components, :only => [:update, :create, :destroy]
+
 end

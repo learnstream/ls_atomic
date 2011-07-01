@@ -13,6 +13,8 @@ class Component < ActiveRecord::Base
   has_many :memories, :dependent => :destroy
   has_many :quiz_components, :dependent => :destroy
   has_many :quizzes, :through => :quiz_components
+  has_many :lesson_components, :dependent => :destroy
+  has_many :lessons, :through => :lesson_components
 
   after_create :add_to_each_student
 

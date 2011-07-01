@@ -16,6 +16,13 @@ $(function () {
         prePopulate: $('#quiz_component_tokens').data('pre')
       });
 
+    $("#lesson_component_component_id").tokenInput('/components.json?course_id=' + course_id,
+      { 
+        crossDomain: false,
+        tokenLimit: 1
+      });
+
+
     $("#course_components").tokenInput('/components.json?course_id=' + course_id,
       { 
         hintText: "What do you want to know more about?",

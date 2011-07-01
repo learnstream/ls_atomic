@@ -65,6 +65,18 @@ ActiveRecord::Schema.define(:version => 20110701002620) do
   add_index "events", ["lesson_id"], :name => "index_events_on_lesson_id"
   add_index "events", ["playable_type", "playable_id"], :name => "index_events_on_playable_type_and_playable_id"
 
+  create_table "lesson_components", :force => true do |t|
+    t.integer  "lesson_id"
+    t.integer  "component_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lesson_components", ["component_id"], :name => "index_lesson_components_on_component_id"
+  add_index "lesson_components", ["lesson_id", "component_id"], :name => "index_lesson_components_on_lesson_id_and_component_id", :unique => true
+  add_index "lesson_components", ["lesson_id"], :name => "index_lesson_components_on_lesson_id"
+
   create_table "lesson_statuses", :force => true do |t|
     t.integer  "lesson_id"
     t.integer  "user_id"
