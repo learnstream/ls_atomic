@@ -12,6 +12,7 @@ class Enrollment < ActiveRecord::Base
   after_create :remember_components
   after_create :create_lesson_statuses, :if => :student?
   before_destroy :forget_components
+  before_destroy :destroy_lesson_statuses, :if => :student?
   
   def memories
     user.memories.in_course(course)
@@ -62,4 +63,11 @@ class Enrollment < ActiveRecord::Base
       LessonStatus.create!(:lesson_id => lesson.id, :user_id => self.user.id)
     end
   end
+
+  def destroy_lesson_statuses
+    self.user.lesson_statuses.in_course(self.course).each do |ls|
+      ls.destroy
+    end
+  end
+
 end

@@ -4,4 +4,6 @@ class LessonStatus < ActiveRecord::Base
   belongs_to :event
 
   validates :lesson_id, :uniqueness => { :scope => :user_id }
+
+  scope :in_course, lambda { |course_id| joins(:lesson).merge(Lesson.where(:course_id => course_id)) }
 end

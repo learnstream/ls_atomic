@@ -31,6 +31,10 @@ $(document).ready(function () {
 
 });
 
+$("#response_answer").keydown = function(key) {
+
+}
+
 var loadExistingFBD = function() {
     var ff = null;
 
