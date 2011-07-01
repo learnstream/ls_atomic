@@ -4,15 +4,15 @@
 <% if @components.empty? %>
   Course has no components.
 <% else %>
-  <table class="teacher-data">
-    <tr class="teacher-data-head">
+  <table class="course-data">
+    <tr class="course-data-head">
       <th>Component</th>
       <th>Lessons</th>
       <th>Quizzes</th>
     </tr>
 
     <% @components.each do |component| %>
-      <tr class="teacher-data-row">
+      <tr class="course-data-row">
         <td>
           <%= link_to component, course_component_path(component.course, component) %>
         </td>

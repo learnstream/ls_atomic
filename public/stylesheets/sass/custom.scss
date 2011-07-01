@@ -378,11 +378,11 @@ a.study_button {
 /* Course Show page */
 
 /* Teacher pages */
-table.teacher-data {
+table.course-data {
   border: 1px solid #ddd;
   border-right: 2px solid #ddd;
   tbody {
-    tr.teacher-data-head {
+    tr.course-data-head {
       background: #ddd;
       th {
         text-align: center;
@@ -395,7 +395,7 @@ table.teacher-data {
       }
     }
 
-    tr.teacher-data-row {
+    tr.course-data-row {
       td {
         border-left: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
