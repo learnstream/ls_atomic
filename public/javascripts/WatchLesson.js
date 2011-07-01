@@ -108,22 +108,24 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
     var course_id = $("#course-id").text();
 
     $.get("/courses/" + course_id + "/study/" + new_event.id + ".js #study-area", function() {
+        console.log("getting shit");
         // scroll again because the size is larger... 
           var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
           $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
           MathJax.Hub.Typeset();
 
-          $(newdiv > "#response_answer").keyup(function() {
-            answer = $("#response_answer").val();
+          $("#quiz_" + new_event.id).find("#response_answer").keyup(function() {
+            console.log('typing stuff' + new_event.id);
+            answer = $(this).val();
             if (answer == "") {
-            $("#answer-morph").val("Don't know");
+              $("#quiz_" + new_event.id).find("#answer-morph").val("Don't know");
             } else {
-            $("#answer-morph").val("Check answer");
+              $("#quiz_" + new_event.id).find("#answer-morph").val("Check answer");
             }
-    });
-
-
           });
+
+
+    });
   }
 
   newdiv.append(timelinkdiv);
