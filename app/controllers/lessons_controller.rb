@@ -12,6 +12,14 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id])
+    @status = @lesson.lesson_statuses.find_by_user_id(current_user)
+
+    @lesson.components.each do |cmp|
+      mem = current_user.memories.find_by_component_id(cmp)
+      if not mem.viewed?
+        mem.unlock!
+      end
+    end
   end
 
   def new

@@ -1,4 +1,4 @@
-var item = $("<li>").html("<%= link_to @lc.component.name, course_component_path(@lc.lesson.course,@lc.component) %> <%= escape_javascript(render :partial => 'lesson_components/remove', :locals => {:lc => @lc} ) %>").attr("id", "lc-<%= @lc.id %>");
+var item = $("<li>").html("<a href = \"/courses/<%=@lc.component.course.id.to_s%>/components/<%=@lc.component.id.to_s%>\"><%= @lc.component.name%></a> <%= escape_javascript(render :partial => 'lesson_components/remove', :locals => {:lc => @lc} ) %>").attr("id", "lc-<%= @lc.id %>");
 $("#component-list").append(item);
 prepareComponentNew();
 
