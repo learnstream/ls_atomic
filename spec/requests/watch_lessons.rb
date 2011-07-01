@@ -14,6 +14,7 @@ describe "Lessons for the student" do
     @quiz = Factory(:quiz, :course => @course)
     @event3 = Factory(:event, :lesson => @lesson, :start_time => 20)
     @quiz.events << @event3
+    @component = Factory(:component, :lesson => @lesson)
 
     integration_sign_in(@user)
     visit course_path(@course)
@@ -71,5 +72,11 @@ describe "Lessons for the student" do
       visit course_path(@course)
       page.should have_css("td", :text => "1 day ago")
     }
+  end
+
+  it "should unlock related components" do
+    click_link @course.name
+    click_link "See all components"
+    page.should have_css("td", :text => "Needs review")
   end
 end
