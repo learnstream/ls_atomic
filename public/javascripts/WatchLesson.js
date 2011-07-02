@@ -144,6 +144,10 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
 
 
   // play the video clip 
+  if (index > 0 && getYoutubeID(ytplayer.getVideoUrl(), "v") != getYoutubeID(new_event.video_url, "v")) {
+    $("#video-area").html($("<div>").attr("id", "player")); 
+    ytplayer = null;
+  }
 
   loadAndPlayVideo(getYoutubeID(new_event.video_url, "v"),
                    new_event.start_time,
@@ -159,10 +163,7 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
 
   if (new_event.type == "Note") {
     waitingForNext = setInterval(function() {
-        console.log(ytplayer.getPlayerState());
-        console.log(ytplayer.getCurrentTime());
-
-        if (getYoutubeID(ytplayer.getVideoUrl(), "v") == getYoutubeID(new_event.video_url, "v") && ytplayer.getCurrentTime() > new_event.end_time && ytplayer.getPlayerState() == 1) {
+        if (getYoutubeID(ytplayer.getVideoUrl(), "v") == getYoutubeID(new_event.video_url, "v") && ytplayer.getCurrentTime() > new_event.end_time) {
           loadEvent(index + 1, events, lesson_status_id, current_index);
         }
       }, 200);
