@@ -43,6 +43,15 @@ namespace :db do
     add_lessons(args.course_id, component_map)
   end
   task :add_lessons => :environment
+
+  desc "Print out the component map, need a heroku workaround for no writing to disk"
+  task :print_map do
+    file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", "rb")
+    contents = file.read
+    component_map = JSON.parse(contents)
+    puts component_map
+  end
+
 end
 
 def add_exercises(course_id, component_map)
@@ -102,7 +111,7 @@ def add_lessons(course_id, component_map)
       note.events << event
     elsif lesson_event["playable_type"] == "Quiz"
         component_tokens = lesson_event["component_list"].to_s.split(",").map{|e| component_map[e] }
-        lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].split("&") : answer_tokens = [lesson_event["answer"]]
+        lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].to_s.split("&") : answer_tokens = [lesson_event["answer"].to_s]
         #is there a better way to do this? I'll admit i'm a bit lost now in the quiz controller/model code. -NP
         quiz = Quiz.create!(:course_id => course,
                  :in_lesson => true,
@@ -137,7 +146,7 @@ def add_components(course_id)
   end
 
   file.close()
-  File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", 'w'){ |f| f.write(component_id_map.to_json) }
+  #File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", 'w'){ |f| f.write(component_id_map.to_json) }
   return component_id_map
 end
 
