@@ -151,6 +151,7 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
                    "player", 1);
 
 
+
   // get ready to load next clip
   
   if (typeof(waitingForNext) != "undefined")
@@ -158,7 +159,10 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
 
   if (new_event.type == "Note") {
     waitingForNext = setInterval(function() {
-        if (ytplayer.getCurrentTime() > new_event.end_time) {
+        console.log(ytplayer.getPlayerState());
+        console.log(ytplayer.getCurrentTime());
+
+        if (getYoutubeID(ytplayer.getVideoUrl(), "v") == getYoutubeID(new_event.video_url, "v") && ytplayer.getCurrentTime() > new_event.end_time && ytplayer.getPlayerState() == 1) {
           loadEvent(index + 1, events, lesson_status_id, current_index);
         }
       }, 200);
