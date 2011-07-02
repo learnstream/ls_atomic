@@ -102,7 +102,7 @@ def add_lessons(course_id, component_map)
       note.events << event
     elsif lesson_event["playable_type"] == "Quiz"
         component_tokens = lesson_event["component_list"].to_s.split(",").map{|e| component_map[e] }
-        lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].split("&") : answer_tokens = [lesson_event["answer"]]
+        lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].to_s.split("&") : answer_tokens = [lesson_event["answer"].to_s]
         #is there a better way to do this? I'll admit i'm a bit lost now in the quiz controller/model code. -NP
         quiz = Quiz.create!(:course_id => course,
                  :in_lesson => true,
