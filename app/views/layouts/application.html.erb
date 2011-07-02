@@ -37,6 +37,7 @@
 <body>
   <div class="container">
   <header>
+  <div id="top-bar">
   <%= link_to "Learnstream", root_path, :id => "logo" %>
   <nav>
   <ul>
@@ -56,6 +57,7 @@
   <% end %>
   </ul>
   </nav>
+  </div>
   <%= yield(:local_nav) if content_for?(:local_nav) %>
   <div id = "breadcrumb">
     <%= breadcrumb :separator => ">",

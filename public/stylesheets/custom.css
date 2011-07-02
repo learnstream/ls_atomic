@@ -4,6 +4,8 @@ body {
 .container {
   width: 100%; }
 
+header #top-bar {
+  background: #ddd; }
 header img {
   padding: 1em;
   background: #fff; }
@@ -50,7 +52,6 @@ a {
 
 /* Navigation */
 nav {
-  background-color: white;
   padding: 0 0.7em;
   white-space: nowrap;
   float: right; }

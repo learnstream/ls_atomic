@@ -12,6 +12,8 @@ body {
 
 header {
 
+  #top-bar { background: #ddd; }
+
   img { padding: 1em; background: #fff; }
 
   a#logo {
@@ -70,7 +72,6 @@ a {
 /* Navigation */
 
 nav {
-  background-color: white;
   padding: 0 0.7em;
   white-space: nowrap;
   float: right;
