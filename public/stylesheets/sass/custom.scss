@@ -193,22 +193,32 @@ ul#local-nav {
 
 
 /* Student course page */
-#stats-sidebar{ float: right; display: block; }
+#stats-sidebar{ 
+  float: right; 
+  display: block; 
+
+  h3 { 
+    font-size: 1.2em;
+  }
+
+  div {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+h1.course-name {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
 
 #course-content {
- float:left; width: 560px;
+ float:left; width: 600px;
 
-  $section-bg: #ccc;
   .course-section {
-    @include rounded(10px);
-    border: 1px solid darken($section-bg, 50%);
-    background: $section-bg;
-    padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     h2 {
       font-size: 1.4em;
-      color: white;
       border-bottom: 1px dotted #eee;
     }
 
@@ -217,7 +227,33 @@ ul#local-nav {
     }
 
     tr:nth-child(even) {
-      background: lighten($section-bg, 10%);
+      background: #eee;
+    }
+
+    td.lesson-link {
+      font-weight: bold;
+    }
+
+    td.last-viewed {
+      font-size: .8em;
+      color: #999;
+      display: none;
+    }
+
+    td.completion {
+      color: green;
+      font-size: 1.8em;
+    }
+
+    &#exercises {
+      p {
+        color: #f00;
+      }
+
+      a.quizbutton {
+        font-weight: bold;
+      }
+
     }
 
     .lesson-number {

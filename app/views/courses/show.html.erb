@@ -2,7 +2,6 @@
 
 <div id="course-content">
 
-  <h1><%= @course.name %></h1>
 
 
   <% if current_user.student?(@course) %>
@@ -14,8 +13,8 @@
       <% if memories_due == 0 %>
         Complete a lesson to unlock more exercises.
       <% else %>
-        <%= pluralize(memories_due, "item") %> for review<br /><br />
-        <%= link_to "Study now!", course_study_index_path(@course.id), :class => 'quizbutton round' %>
+        <%= link_to "Study now!", course_study_index_path(@course.id), :class => 'quizbutton round' %><br />
+        <%= pluralize(memories_due, "item") %> for review
       <% end %>
       </p>
     </div>
@@ -29,17 +28,17 @@
           <% @lessons.each_with_index do |lesson, i| %>
             <tr> 
               <td><span class="lesson-number"><%= i+1 %></span></td>
-              <td>
+              <td class="completion">
                 <% if current_user.lesson_statuses.find_by_lesson_id(lesson).completed %>
-                  Completed!
+                  ✓
                 <% end %>
               </td>
-              <td> <%= link_to lesson.name, [@course, lesson] %> </td>
-              <td> <% lesson_status = current_user.lesson_statuses.find_by_lesson_id(lesson) %>
+              <td class="lesson-link"> <%= link_to lesson.name, [@course, lesson] %> </td>
+              <td class="last-viewed"><% lesson_status = current_user.lesson_statuses.find_by_lesson_id(lesson) %>
                 <% if lesson_status.event_id == -1 %>
-                  Not yet started
+                  not yet started
                 <% else %>
-                  Last viewed <%= time_ago_in_words(lesson_status.updated_at) %> ago
+                  viewed <%= time_ago_in_words(lesson_status.updated_at) %> ago
                 <% end %>
               </td>
             </tr>
@@ -50,15 +49,15 @@
 
     <div id="components" class="course-section">
       <h2>Components</h2>
-      <p><%= link_to "See all components", course_memories_path(@course) %></p>
       <% if @components.empty? %>
         Course has no components.
       <% else %>
         <p>
-        Learn more about...
         <div id="course_id" class="hidden"><%= @course.id %></div>
         <input type="text" id="course_components" size="30" /><br />
-        <a href="#" id="component_help_link" class="quizbutton round">Go</a>
+        <a href="#" id="component_help_link" class="quizbutton round">Learn more</a>
+        or
+        <%= link_to "see all components", course_memories_path(@course) %>
         </p>
       <% end %>
     </div>

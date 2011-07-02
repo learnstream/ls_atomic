@@ -152,26 +152,43 @@ ul#local-nav {
 #stats-sidebar {
   float: right;
   display: block; }
+  #stats-sidebar h3 {
+    font-size: 1.2em; }
+  #stats-sidebar div {
+    margin-top: 15px;
+    margin-bottom: 15px; }
+
+h1.course-name {
+  text-align: center;
+  border-bottom: 1px solid #eee; }
 
 #course-content {
   float: left;
-  width: 560px; }
+  width: 600px; }
   #course-content .course-section {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    border: 1px solid #4d4d4d;
-    background: #cccccc;
-    padding: 10px;
-    margin-bottom: 15px; }
+    margin-bottom: 25px; }
     #course-content .course-section h2 {
       font-size: 1.4em;
-      color: white;
       border-bottom: 1px dotted #eee; }
     #course-content .course-section tr {
       background: #eee; }
     #course-content .course-section tr:nth-child(even) {
-      background: #e6e6e6; }
+      background: #eee; }
+    #course-content .course-section td.lesson-link {
+      font-weight: bold; }
+      #course-content .course-section td.lesson-link a:visited {
+        text-decoration: underline; }
+    #course-content .course-section td.last-viewed {
+      font-size: .8em;
+      color: #999;
+      display: none; }
+    #course-content .course-section td.completion {
+      color: green;
+      font-size: 1.8em; }
+    #course-content .course-section#exercises p {
+      color: #f00; }
+    #course-content .course-section#exercises a.quizbutton {
+      font-weight: bold; }
     #course-content .course-section .lesson-number {
       font-size: 1.5em;
       font-style: italic;
