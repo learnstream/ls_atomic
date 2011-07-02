@@ -43,6 +43,15 @@ namespace :db do
     add_lessons(args.course_id, component_map)
   end
   task :add_lessons => :environment
+
+  desc "Print out the component map, need a heroku workaround for no writing to disk"
+  task :print_map do
+    file = File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", "rb")
+    contents = file.read
+    component_map = JSON.parse(contents)
+    puts component_map
+  end
+
 end
 
 def add_exercises(course_id, component_map)
@@ -137,7 +146,7 @@ def add_components(course_id)
   end
 
   file.close()
-  File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", 'w'){ |f| f.write(component_id_map.to_json) }
+  #File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", 'w'){ |f| f.write(component_id_map.to_json) }
   return component_id_map
 end
 
