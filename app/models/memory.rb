@@ -31,6 +31,9 @@ class Memory < ActiveRecord::Base
     return !component.quizzes.empty?
   end
 
+  def has_exercise?
+    return !component.quizzes.exercises.empty?
+
   def view(quality)
 
     if (quality > 5 || quality < 0)
