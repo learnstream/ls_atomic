@@ -222,7 +222,7 @@ def make_quizzes
   end
 
   component = course.components.first 
-  quiz = Quiz.create!(:course_id => course,
+  quiz = Quiz.create!(:course_id => course.id,
                :component_tokens => component.id.to_s,
                :question => "What is the force?",
                :answer_type => "fbd",
@@ -260,13 +260,13 @@ def make_other_lesson
   note = Note.create!(:content => "Spam that probe, spam it")
   note.events << events[0]
 
-  quiz = Quiz.first
+  quiz = course.quizzes.first
   quiz.events << events[1]
 
-  quiz = Quiz.all[1]
+  quiz = course.quizzes.all[1]
   quiz.events << events[2]
 
-  quiz = Quiz.all[2]
+  quiz = course.quizzes.all[2]
   quiz.events << events[3]
   
   16.times do |n| 
