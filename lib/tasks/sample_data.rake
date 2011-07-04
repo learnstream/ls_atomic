@@ -93,10 +93,12 @@ def add_lessons(course_id, component_map)
   lessonEvents.each do |lesson_event|
     if !created_lessons.include?(lesson_event["lesson_id"])
       lesson = course.lessons.build(:name => lesson_event["lesson_name"])
+      #will change this when we decide on an ordering scheme for lessons, now defaults
+      #to order in which they appear on spreadsheet.
+      lesson.order_number = lesson_event["lesson_id"] - 1
       if lesson.save
         created_lessons << lesson_event["lesson_id"]
         order_number = 0
-        puts lesson.id
       end
     end 
 
@@ -114,7 +116,7 @@ def add_lessons(course_id, component_map)
         lesson_event["answer_type"] == "text" ? answer_tokens = lesson_event["answer"].to_s.split("&") : answer_tokens = [lesson_event["answer"].to_s]
         #is there a better way to do this? I'll admit i'm a bit lost now in the quiz controller/model code. -NP
         quiz = Quiz.create!(:course_id => course,
-                 :in_lesson => true,
+                 :in_lesson => lesson_event["in_lesson"],
                  :answer_type => lesson_event["answer_type"],
                  :explanation => lesson_event["explanation"],
                  :question => lesson_event["question"],
