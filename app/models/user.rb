@@ -83,6 +83,6 @@ class User < ActiveRecord::Base
   end
 
   def number_of_memories_today(course)
-    memories.rated_today.uniq.length + memories_due_with_quiz(course).length
+    memories.reviewed_today.uniq.length + memories_due_with_quiz(course).length
   end
 end
