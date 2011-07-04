@@ -77,12 +77,14 @@ describe Memory do
     
     it "should return memories actually due now" do
       @memory.due = Time.now.utc.to_date - 1.day
+      @memory.views += 1
       @memory.save
       @user.memories.due_before(Time.now.utc).should include(@memory)
     end
 
     it "should not return memories not due now" do
       @memory.due = Time.now.utc.to_date + 1.day
+      @memory.views += 1
       @memory.save
       @user.memories.due_before(Time.now.utc).should_not include(@memory)
     end

@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   def index
     @lesson = Lesson.find(params[:lesson_id])
-    @events = @lesson.events.all
+    @events = @lesson.events.includes(:playable).all
 
     events_json = []
 

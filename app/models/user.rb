@@ -79,27 +79,10 @@ class User < ActiveRecord::Base
   end
 
   def memories_due_with_quiz(course)
-    memories.includes(:component => :quizzes).in_course(course).due_before(Time.now.utc).map { |m| m.has_exercise? ? m : nil }.compact
+    memories.joins(:component => :quizzes).merge(Quiz.where(:in_lesson => false)).in_course(course).due_before(Time.now.utc)
   end
 
-  def all_memories_with_quiz(course)
-    all_memories(course).map { |m| m.has_quiz? ? m : nil }.compact
-  end
-
-  def stats(course, stime, etime)
-    time_range = stime..etime
-    ratings = memory_ratings.in_course(course).ratings_between(time_range)
-    m = h = g = e = 0   #initializing ratings
-    ratings.each { |r|
-      if r.quality == 0
-        m += 1
-      elsif r.quality == 3
-        h += 1
-      elsif r.quality == 4
-        g += 1
-      elsif r.quality == 5
-        e += 1
-      end }
-    return [m, h, g, e]
+  def number_of_memories_today(course)
+    memories.rated_today.uniq.length + memories_due_with_quiz(course).length
   end
 end

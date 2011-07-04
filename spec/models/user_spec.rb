@@ -143,22 +143,13 @@ describe User do
       @user.should respond_to(:memories_due)
     end
 
-    it "should pull up the right memories that are due" do
-      @memory.due = (Time.now.utc - 1000.days)
-      @memory.save!
-      @user.memories_due(@component.course).should == [@memory]
-    end 
-
-    it "should pull up all memories with a quiz when calling all_memories_with_quiz" do
-      @user.all_memories_with_quiz(@course).should == [@memory]
-    end
-
     it "should have a memories_due_with_quiz method" do
       @user.should respond_to(:memories_due_with_quiz)
     end
 
     it "should only pull up memories due with a quiz" do
       @memory.due = (Time.now.utc - 1000.days)
+      @memory.views += 1
       @memory2.due = (Time.now.utc - 3000.days)
       @memory.save!
       @memory2.save!
@@ -173,15 +164,6 @@ describe User do
       @course = Factory(:course)
       @component = Factory(:component, :course => @course)
       @memory = @user.remember(@component)
-    end
-
-    it "should respond to a stats method" do
-      @user.should respond_to(:stats)
-    end
-
-    it "should pull up a stats array" do
-      @memory.view(3)
-      @user.stats(@course, Time.now.utc - 1.day, Time.now.utc).should == [0,1,0,0]
     end
   end 
 end
