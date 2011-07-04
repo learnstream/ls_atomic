@@ -59,8 +59,8 @@ describe "Doing exercises" do
       visit course_study_index_path(@course)
     end
 
-    it "should show the event video for the quiz" do
-      page.should have_css("div#ytplayer")
+    it "should show the event video for the quiz", :js => true do
+      page.should have_css("object#ytPlayer")
     end
   end
 

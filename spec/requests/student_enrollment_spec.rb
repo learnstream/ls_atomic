@@ -21,7 +21,7 @@ describe "Enrolling in a course" do
 
   it "should allow you to enroll into a course" do
     click_button "Enroll"
-    page.should have_css("h1", :content => @course.name)
+    page.should have_css("h2", :content => "Exercises")
   end
   
   it "should flash a confirmation when you try to unenroll", :js => true do
