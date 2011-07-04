@@ -1,10 +1,19 @@
 <% content_for :javascript do %>
   <%= javascript_include_tag "raphael-min" %>
   <%= javascript_include_tag "Quiz" %>
+  <%= javascript_include_tag "lesson_exercise_vid" %>
 <% end %>
 
 <% breadcrumb :study, @quiz.course %>
 
+<% if !@quiz.events.empty? %>
+  <% url = @quiz.events.first.video_url %>
+  <% start_time = @quiz.events.first.start_time %>
+  <% end_time = @quiz.events.first.end_time %>
+<% end %>
+
 <div id="study-area">
+  <div id="player" data-url="<%= url %>" data-starttime="<%= start_time %>" data-endtime="<%= end_time %>"></div>
   <%= render :partial => "study/quiz", :locals => {:quiz => @quiz} %>
 </div>
+
