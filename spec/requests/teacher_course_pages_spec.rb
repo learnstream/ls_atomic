@@ -5,6 +5,7 @@ describe "Teacher course page" do
   before(:each) do
     @course = Factory(:course)
     @component = Factory(:component, :course => @course)
+    @lesson = Factory(:lesson, :course => @course)
     @quiz = Factory(:quiz, :course => @course)
     @teacher = Factory(:user, :email => "iamateacher@teacher.com")
     integration_sign_in(@teacher)
@@ -18,7 +19,7 @@ describe "Teacher course page" do
 
   it "should allow a teacher to access the course global stats page" do
     click_link "Students"
-    page.should have_css("table",:text => @component.name)
+    page.should have_css("table",:text => @lesson.name)
   end
 
   it "should have a link back to the course page" do
