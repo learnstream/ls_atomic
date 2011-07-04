@@ -93,6 +93,9 @@ def add_lessons(course_id, component_map)
   lessonEvents.each do |lesson_event|
     if !created_lessons.include?(lesson_event["lesson_id"])
       lesson = course.lessons.build(:name => lesson_event["lesson_name"])
+      #will change this when we decide on an ordering scheme for lessons, now defaults
+      #to order in which they appear on spreadsheet.
+      lesson.order_number = lesson_event["lesson_id"] - 1
       if lesson.save
         created_lessons << lesson_event["lesson_id"]
         order_number = 0
