@@ -96,7 +96,6 @@ def add_lessons(course_id, component_map)
       if lesson.save
         created_lessons << lesson_event["lesson_id"]
         order_number = 0
-        puts lesson.id
       end
     end 
 
