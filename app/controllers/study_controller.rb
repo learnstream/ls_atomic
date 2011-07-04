@@ -5,14 +5,13 @@ class StudyController < ApplicationController
 
   def index
     @course = Course.find(params[:course_id])
-    memories = current_user.memories.course_exercise(@course)
+    memories = current_user.memories.course_exercise(@course).includes(:component => :quizzes)
 
-    memories.each do |memory|
-      @quiz = memory.component.quizzes.exercises.sample
-      if @quiz
-        redirect_to course_study_path(@course, @quiz)
-        return
-      end
+    @quiz = Quiz.where(:in_lesson => false).joins(:components => :memories).where('memories.user_id = ?', current_user.id).merge(Memory.due_before(DateTime.now.utc)).sample
+
+    if @quiz
+      redirect_to course_study_path(@course, @quiz)
+      return
     end
 
     render 'index'

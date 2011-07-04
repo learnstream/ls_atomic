@@ -3,8 +3,8 @@
   <table>
     <tr>
       <td class="unused student-column"></td>
-      <% @course.components.each { |component| %>
-        <td class="label"><%= link_to component.name,[@course, component] %></td>
+      <% @lessons.each { |lesson| %>
+        <td class="label"><%= link_to lesson.name,[@course, lesson] %></td>
       <% } %>
     </tr>
     <% @course.student_enrollments.each { |enrollment| %>
@@ -15,15 +15,9 @@
           (<%= (enrollment.course_completion*100).round %>%)
         </td>
 
-        <% @course.components.each { |component| %>
-          <% memory = student.memories.find_by_component_id(component) %>
-          <% memory.viewed? ? (memory.due? ? status="due" : status="good") : status="unviewed" %> 
-          <td class="<%= status %>">
-          <div class="hidden popup">
-            Ease: <%= memory.ease %><br />
-            Interval: <%= memory.interval %>
-          </div>
-        </td>
+        <% student.lesson_statuses.each { |lesson_status| %>
+          <% lesson_status.completed? ? status="good" : lesson_status.event_id == -1 ? status="unviewed" : status="due" %> 
+          <td class="<%= status %>"></td>
         <% } %>
       </tr>
     <% } %>

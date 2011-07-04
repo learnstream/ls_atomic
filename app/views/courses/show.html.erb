@@ -26,15 +26,16 @@
       <% else %>
         <table>
           <% @lessons.each_with_index do |lesson, i| %>
+            <% lesson_status = @lesson_statuses[i] %>
             <tr> 
               <td><span class="lesson-number"><%= i+1 %></span></td>
               <td class="completion">
-                <% if current_user.lesson_statuses.find_by_lesson_id(lesson).completed %>
+                <% if lesson_status.completed %>
                   ✓
                 <% end %>
               </td>
               <td class="lesson-link"> <%= link_to lesson.name, [@course, lesson] %> </td>
-              <td class="last-viewed"><% lesson_status = current_user.lesson_statuses.find_by_lesson_id(lesson) %>
+              <td class="last-viewed">
                 <% if lesson_status.event_id == -1 %>
                   not yet started
                 <% else %>

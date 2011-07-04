@@ -7,9 +7,10 @@ class Memory < ActiveRecord::Base
   before_create lambda { self.due = Time.now }
 
   scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
-  scope :due_before, lambda { |time| where("due <= ?", time) }
+  scope :due_before, lambda { |time| where("due <= ? AND views > 0", time) }
   scope :latest_studied, :order => 'last_viewed DESC'
   scope :viewed, where('views > ?', 0)
+  scope :rated_today, joins(:memory_ratings).merge(MemoryRating.where('memory_ratings.created_at >= ? AND memory_ratings.created_at <= ?', DateTime.now.utc.beginning_of_day, DateTime.now.utc))
 
   scope :course_exercise, lambda { |course_id| in_course(course_id).due_before(DateTime.now.utc).viewed }
 
@@ -28,11 +29,11 @@ class Memory < ActiveRecord::Base
   end
 
   def has_quiz?
-    return !component.quizzes.empty?
+    return component.quizzes.length != 0
   end
 
   def has_exercise?
-    return !component.quizzes.exercises.empty?
+    return component.quizzes.exercises.length != 0
   end
 
   def view(quality)

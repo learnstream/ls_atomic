@@ -19,7 +19,8 @@ class CoursesController < ApplicationController
       return 
     end
 
-    @lessons = @course.lessons
+    @lessons = @course.lessons.all()
+    @lesson_statuses = current_user.lesson_statuses.includes(:lesson).joins(:lesson).merge(Lesson.where(:course_id => @course))
     @components = @course.components
   end
 
@@ -105,16 +106,20 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     total_output = []
     correct_output = []
-    (0..28).each { |i|
-      success_ratio = nil
-      start_time = Time.now.utc - (29 - i).day
-      end_time = Time.now.utc - (28 - i).day
-      day_stats = current_user.stats(@course, start_time, end_time)
-      total_mr = day_stats.sum
-      correct_mr = total_mr - day_stats[0] 
-      total_output << [ i, total_mr ] 
-      correct_output << [i, correct_mr]
-      }
+    ratings = current_user.memory_ratings.ratings_after(DateTime.now.utc - 28.days).in_course(@course)
+
+    (0..28).each do |i| 
+      correct_output << [i, 0]
+      total_output << [i, 0]
+    end
+
+    ratings.each do |rating|
+      day = 28 - ((Time.now.utc - rating.created_at)/60/60/24).round
+      if rating.quality != 0
+        correct_output[day] = [day, correct_output[day][1] + 1]
+      end
+      total_output[day] = [day, total_output[day][1] + 1]
+    end
     output_json = { :success_stats => [ {label: "Total", lines: {fill: true, fillColor: "rgba(0,0,255,0.8)"}, data: total_output},{label: "Correct", lines: {fill: true, fillColor: "rgba(0,255,0,0.8)"}, data: correct_output}] }
     respond_to do |format|
       format.json { render :json => output_json.to_json }
@@ -143,7 +148,7 @@ class CoursesController < ApplicationController
       output << [i, 0]
     }
 
-    current_user.memories.in_course(@course).each{ | memory|
+    current_user.memories.in_course(@course).includes(:memory_ratings).each{ | memory|
       ignore_below = 0 
       memory.memory_ratings.each { |rating|
         interval = rating.interval.floor
@@ -176,6 +181,7 @@ class CoursesController < ApplicationController
 
   def student_status
     @course = Course.find(params[:id])
+    @lessons = @course.lessons.includes(:lesson_statuses)
     @students_selected = "selected"
   end
 
