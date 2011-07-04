@@ -20,7 +20,7 @@ describe "Lessons" do
     click_link "Add a new lesson"
     fill_in "lesson_name", :with => "First lesson"
     click_button "lesson_submit"
-    page.should have_css("h1", :text => "First lesson")
+    page.should have_css("div", :text => "Lesson created!")
   end
 
   describe "editing" do
@@ -30,10 +30,6 @@ describe "Lessons" do
       click_link "Lessons"
       click_link "Edit"
     end
-
-    it "should be editable from the lessons index" do 
-      page.should have_css("h1", :text => @lesson.name)
-    end 
 
     it "should create a new quiz event", :js => true do
       make_quiz
@@ -104,6 +100,13 @@ describe "Lessons" do
       make_note
       page.should have_css("div.event div.content", :text => "A note!")
       page.should have_css("div.event div.content", :text => "Another note!")
+    end
+
+    it "should support lesson exclusivity for quizzes", :js => true do
+      if page.has_css?("a", :text => "Add Quiz")
+        click_link "Add Quiz"
+      end
+      page.should have_css("input#quiz_in_lesson")
     end
 
     describe "components" do

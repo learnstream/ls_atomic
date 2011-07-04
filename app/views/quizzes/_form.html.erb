@@ -45,6 +45,12 @@
     <%= f.text_area :explanation %>
   </div>
 
+  <% if @lesson %>
+  <div class = "field">
+    <%= f.label :in_lesson, "Use in lesson only?" %>
+    <%= f.check_box :in_lesson %>
+  </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Submit" %>
