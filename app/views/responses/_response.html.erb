@@ -12,10 +12,10 @@
     <% if @response.status == "correct" %>
       You're correct!<br />
     <% else %>
-      That's incorrect. The answer is <span class="answer" id="correct_answer"><%= @response.quiz.answers.first.text %></span>.
+      That's incorrect. <b>The answer is:</b> <span class="answer" id="correct_answer"><%= @response.quiz.answers.first.text %></span>.
     <% end %>
   <% else %>
-    The answer is <span class="answer" id="correct_answer"><%= @response.quiz.answers.first.text %></span>. 
+    <b>The answer is:</b> <span class="answer" id="correct_answer"><%= @response.quiz.answers.first.text %></span>. 
   <% end %>
   <% if @response.quiz.answer_type == 'fbd' %>
   <%= render :partial => 'responses/fbd', :locals => { :answer_output => @response.quiz.answer_output } %>
