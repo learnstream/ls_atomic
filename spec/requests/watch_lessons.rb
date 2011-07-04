@@ -82,11 +82,14 @@ describe "Lessons for the student" do
   end
 
   it "should have a link to the course exercises" do
-    page.should have_css("a", :text => "Exercises", :href => course_study_index_path(@course))
+    page.should have_css("a", :text => "Review this lesson", :href => course_study_index_path(@course))
   end
 
   it "should have a link to the next lesson" do
-    @lesson2 = Factory(:lesson, :order_number => 2, :name => "Lesson TWO")
+    @lesson2 = Factory(:lesson, :order_number => 2, :name => "Lesson TWO", :course => @course)
+    @lesson.order_number.should == 1
+    @lesson2.order_number.should == 2
+    @lesson.next_lesson.should_not be_nil
     visit course_lesson_path(@course, @lesson)
     page.should have_css("a", :text => "Next lesson: " + @lesson2.name, :href => course_lesson_path(@course, @lesson2))
   end

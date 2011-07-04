@@ -14,6 +14,10 @@ class Lesson < ActiveRecord::Base
 
   scope :incomplete_for, lambda {|user_id| joins(:lesson_statuses).merge(LessonStatus.where(:user_id => user_id, :completed => false)) }
 
+  def next_lesson
+    self.course.lessons.where("order_number > ?", self.order_number).first
+  end
+
   private 
 
   def create_lesson_statuses

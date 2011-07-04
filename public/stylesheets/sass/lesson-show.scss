@@ -49,6 +49,7 @@
   #control-links {
     text-align: right;
     margin-top: 5px;
+    clear: both;
     a {
       @include buttony();
       margin: 2px;
@@ -75,3 +76,10 @@
     text-align: center;
   }
 }
+
+#watch-lesson-links {
+  clear: both;
+  text-align: center;
+  margin: 15px auto;
+}
+

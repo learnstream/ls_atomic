@@ -28,3 +28,8 @@
 <div id="lesson-status-id" class="hidden"><%= @lesson.lesson_statuses.find_by_user_id(current_user).id %></div>
 <div id="course-id" class="hidden"><%= @course.id %></div>
 
+<div id="watch-lesson-links"><%= link_to "Review this lesson", course_study_index_path(@course), :class => "round quizbutton" %>
+  <% if @lesson.next_lesson  %>
+    <%= link_to "Next lesson: #{@lesson.next_lesson.name}", course_lesson_path(@course, @lesson.next_lesson), :class => "round quizbutton" %>
+  <% end %>
+</div>
