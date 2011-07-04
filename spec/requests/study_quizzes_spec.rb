@@ -51,6 +51,19 @@ describe "Doing exercises" do
     page.should have_css("#judgement")
   end
 
+  describe "when the quiz has an event" do
+
+    before(:each) do
+      @event = Factory(:event)
+      @quiz.events << @event
+      visit course_study_index_path(@course)
+    end
+
+    it "should show the event video for the quiz" do
+      page.should have_css("div#ytplayer")
+    end
+  end
+
   describe "when none of the components are due" do
 
     before(:each) do

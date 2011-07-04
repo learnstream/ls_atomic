@@ -43,4 +43,9 @@ describe "Using the quiz creation interface" do
     select "Free body diagram", :from => "Answer type"
     page.should have_css("#fbd")
   end
+
+  it "should not contain a choice for lesson exclusivity" do
+    click_link "Add exercise"
+    page.should_not have_css("input#quiz_in_lesson")
+  end
 end

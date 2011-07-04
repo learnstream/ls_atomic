@@ -49,7 +49,7 @@ var loadExistingFBD = function() {
       ff = new FBD;
 
       ff.loadJSONFBD($("#holder").data("json"));
-    } else if ($("#quiz_answer_output").val() != "") {
+    } else if ($("#holder").length != 0 && $("#quiz_answer_output").val() != "") {
       ff = new FBD;
 
       ff.loadJSONFBD($.parseJSON($("#quiz_answer_output").val()));

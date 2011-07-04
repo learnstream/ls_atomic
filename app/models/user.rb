@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def memories_due_with_quiz(course)
-    memories.includes(:component => :quizzes).in_course(course).due_before(Time.now.utc).map { |m| m.has_exercises? ? m : nil }.compact
+    memories.includes(:component => :quizzes).in_course(course).due_before(Time.now.utc).map { |m| m.has_exercise? ? m : nil }.compact
   end
 
   def all_memories_with_quiz(course)
