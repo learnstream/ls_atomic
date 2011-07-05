@@ -15,6 +15,9 @@ class EventsController < ApplicationController
       if event.playable_type == "Note"
         event_json["pause"] = false
         event_json["content"] = event.playable.content
+        if event.playable.is_document
+          event_json["type"] = "Document"
+        end
       else
         event_json["pause"] = true
       end

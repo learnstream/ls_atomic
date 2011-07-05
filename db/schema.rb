@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701002620) do
+ActiveRecord::Schema.define(:version => 20110704232321) do
 
   create_table "answers", :force => true do |t|
     t.text     "text"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20110701002620) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_document", :default => false
   end
 
   create_table "quiz_components", :force => true do |t|

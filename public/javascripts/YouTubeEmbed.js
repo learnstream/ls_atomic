@@ -94,6 +94,9 @@ function onYouTubePlayerReady() {
 // Checks to see if current video is past the designated 'end time'
 // This function should be called every second by ytTimer, after playing a video
 function check_end_time() {
+  if (ytplayer == null) {
+    clearInterval(ytTimer);
+  }
   var time = ytplayer.getCurrentTime();
   if (current_end_time != 0 && time > current_end_time){
     ytplayer.pauseVideo();

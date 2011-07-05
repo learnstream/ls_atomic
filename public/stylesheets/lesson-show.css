@@ -45,13 +45,6 @@
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px; }
-  #stream-area div.timelink {
-    text-align: right;
-    font-size: .8em; }
-  #stream-area div.nextlink {
-    width: 90px;
-    margin: 0px auto 50px auto;
-    text-align: center; }
 
 #watch-lesson-links {
   clear: both;
