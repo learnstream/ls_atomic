@@ -54,7 +54,19 @@ var displayDocument = function(new_event) {
   $("#video-area").html($("<div>").attr("id", "player")); 
   ytplayer = null;
   $("#document-area").text(new_event.content);
-  // create a link in the stream to display the document again
+  MathJax.Hub.Typeset();
+}
+
+var restoreLesson = function(events) {
+  $("#lesson-area").show();
+  $("#document-area").html("");
+  var last_index = $(".event").last().attr("data-index");
+  var last_event = events[last_index];
+  
+  loadAndPlayVideo(getYoutubeID(last_event.video_url, "v"),
+                   last_event.start_time,
+                   last_event.end_time,
+                   "player", 0);
 }
 
 var displayNote = function(new_event,newdiv) {
@@ -89,7 +101,7 @@ var displayQuiz = function(new_event,newdiv) {
 var prepareVideo = function(new_event, index, events, lesson_status_id, current_index) {
 
   // Create replay link
-  var timelinkdiv = $("<div />").addClass("timelink");
+  var timelinkdiv = $("<div />").addClass("play-event");
   $("<a />").addClass("timelink")
             .text("Replay")
             .attr("href", "#")
@@ -161,7 +173,8 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
 
   // add the div on the page
   var newdiv = $("<div />").addClass(new_event.type.toLowerCase())
-                           .addClass("event");
+                           .addClass("event")
+                           .attr("data-index", index);
   
   
   // ignore old transition events
@@ -172,6 +185,24 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
   if (current_index == index) $("#resume").hide();
   
   if (new_event.type == "Document") {
+    newdiv.append($("<p>").text(new_event.content.substring(0, 100) + "...")); 
+    newdiv.append($("<div>").addClass("play-event").append(
+        $("<a>")
+        .attr("href","#")
+        .click(function() {
+          clearInterval(waitingForNext);
+          displayDocument(new_event);
+          var returnlink = 
+            $("<a>").attr("href","#")
+                    .addClass("video-nav-link")
+                    .text("Return to lesson")
+                    .click(function() { restoreLesson(events); });
+
+          returnlink.wrap("<div></div>");
+          $("#document-area").append($("<div>").addClass("nav-link-area").append(returnlink));
+          return false; 
+          })
+        .text("View document")));
     displayDocument(new_event);
   } else {
     $("#document-area").html("");
@@ -192,7 +223,10 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
   createNavLinks(index,events,lesson_status_id,current_index);
 
   if (new_event.type == "Document") {
-    $("#nextlink").clone(true).appendTo("#document-area");
+    $("<div>").addClass("nav-link-area")
+              .append($("#nextlink").clone(true)
+                                    .addClass("video-nav-link"))
+              .appendTo("#document-area");
   }
 
   if (new_event.type == "Note") {
@@ -202,7 +236,7 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
     $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
 
     // render latex
-    //MathJax.Hub.Typeset();
+    MathJax.Hub.Typeset();
   }
 
 

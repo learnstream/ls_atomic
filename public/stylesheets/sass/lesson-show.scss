@@ -64,11 +64,33 @@
     border: 1px solid #ddd;
     @include rounded(10px);
   }
+
+  div.play-event {
+    text-align: right;
+    font-size: .8em;
+  }
+}
+
+#document-area {
+  width: 700px;
+  margin: auto;
+  .nav-link-area {
+    text-align: center;
+  }
+
+  .video-nav-link {
+      margin: auto;
+      clear: both;
+      text-align: center;
+
+      @include buttony();
+  }
 }
 
 #watch-lesson-links {
   clear: both;
   text-align: center;
-  margin: 15px auto;
+  margin: 0px auto;
+  padding-top: 50px;
 }
 

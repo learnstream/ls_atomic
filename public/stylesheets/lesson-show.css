@@ -45,8 +45,31 @@
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px; }
+  #stream-area div.play-event {
+    text-align: right;
+    font-size: .8em; }
+
+#document-area {
+  width: 700px;
+  margin: auto; }
+  #document-area .nav-link-area {
+    text-align: center; }
+  #document-area .video-nav-link {
+    margin: auto;
+    clear: both;
+    text-align: center;
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    border-left: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
+    padding: 4px;
+    font-size: 1.1em;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
 
 #watch-lesson-links {
   clear: both;
   text-align: center;
-  margin: 15px auto; }
+  margin: 0px auto;
+  padding-top: 50px; }
