@@ -15,6 +15,7 @@ gem 'paperclip', '~> 2.3'
 gem 'time_diff'
 gem 'sass'
 gem 'timecop'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'jasmine'

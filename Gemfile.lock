@@ -103,6 +103,7 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.9.2)
+    redcarpet (1.17.2)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -155,6 +156,7 @@ DEPENDENCIES
   launchy
   paperclip (~> 2.3)
   rails (= 3.0.7)
+  redcarpet
   rspec (= 2.5.0)
   rspec-rails (= 2.5.0)
   sass
