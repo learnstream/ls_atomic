@@ -85,19 +85,31 @@ def add_lessons(course_id, component_map)
   file = File.open("#{Rails.root}/lib/tasks/DataFiles/LessonData.txt", "rb")
   contents = file.read
   lessonEvents = JSON.parse(contents)
+  file.close()
+
+  file = File.open("#{Rails.root}/lib/tasks/DataFiles/LessonComponentData.txt", "rb")
+  contents = file.read
+  lessonComponents = JSON.parse(contents)
+  file.close()
 
   order_number = 0
   created_lessons = []
   lesson = nil
 
   lessonEvents.each do |lesson_event|
-    if !created_lessons.include?(lesson_event["lesson_id"])
+    lessonUID = lesson_event["lesson_id"]
+    if !created_lessons.include?(lessonUID)
       lesson = course.lessons.build(:name => lesson_event["lesson_name"])
       #will change this when we decide on an ordering scheme for lessons, now defaults
       #to order in which they appear on spreadsheet.
-      lesson.order_number = lesson_event["lesson_id"] - 1
+      lesson.order_number = lessonUID - 1
       if lesson.save
-        created_lessons << lesson_event["lesson_id"]
+        if lessonComponents.has_key?(lessonUID.to_s)
+          lesson_tokens = lessonComponents[lessonUID.to_s].split(",").map{ |c| component_map[c] }
+          lesson_tokens.each { |c| lesson.components << Component.find(c) }
+        end
+
+        created_lessons << lessonUID
         order_number = 0
       end
     end 
@@ -128,7 +140,8 @@ def add_lessons(course_id, component_map)
         quiz.events << event
     end
   end
-  file.close()
+
+
 end
 
 def add_components(course_id) 
