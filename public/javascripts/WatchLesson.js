@@ -115,7 +115,6 @@ var prepareVideo = function(new_event, index, events, lesson_status_id, current_
 
 
   // play the video clip 
-  console.log(ytplayer);
   
   if (ytplayer == null || index > 0 && getYoutubeID(ytplayer.getVideoUrl(), "v") != getYoutubeID(new_event.video_url, "v")) {
     $("#video-area").html($("<div>").attr("id", "player")); 
@@ -169,7 +168,6 @@ var createNavLinks = function(index, events,lesson_status_id, current_index) {
 var loadEvent = function(index, events, lesson_status_id, current_index) {
 
   var new_event = events[index];
-  console.log(new_event);
 
   // add the div on the page
   var newdiv = $("<div />").addClass(new_event.type.toLowerCase())
