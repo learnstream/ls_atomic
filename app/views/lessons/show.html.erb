@@ -19,11 +19,14 @@
     <div id="content"></div>
     <div id="control-links">
       <a id="resume" href="#" class="hidden">Resume</a>
-      <a id="nextlink" href="#">Next</a>
+      <a id="nextlink" class="nextlink" href="#">Next</a>
       <a id="showall" href="#">Show all</a>
     </div>
   </div>
 </div>
+<div id ="document-area">
+</div>
+
 <div id="lesson-id" class="hidden"><%= @lesson.id %></div>
 <div id="lesson-status-id" class="hidden"><%= @lesson.lesson_statuses.find_by_user_id(current_user).id %></div>
 <div id="course-id" class="hidden"><%= @course.id %></div>

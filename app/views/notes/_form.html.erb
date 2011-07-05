@@ -9,8 +9,11 @@
     <%= note_form.label :content %><br />
     <%= note_form.text_area :content %>
   </div>
+  <div class="field">
+    <%= note_form.label :is_document, "Display as document " %>
+    <%= note_form.check_box :is_document %>
+  </div>
   <div class="actions">
   <%= note_form.submit "Submit"  %>
   </div>
 <% end %>
-
