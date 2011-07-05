@@ -6,8 +6,19 @@
   <% else %>
     <% @taught_courses.each do |course| %>
       <div class="course-listing">
-        <h2><%= link_to course.name, course %></h2>
-        <p>You currently have <%=course.enrollments.count%> students in your course. </p>
+        <div class="name-and-status">
+          <%= link_to course.name, course, :class => 'course-name' %>
+          <div class="study-info">
+            <%=course.enrollments.count%> students
+          </div>
+        </div>
+
+        <ul class="teacher-actions">
+          <li><%= link_to "Students", course_path(course) %></li>
+          <li><%= link_to "Lessons", course_lessons_path(course) %></li>
+          <li><%= link_to "Components", course_components_path(course) %></li>
+          <li><%= link_to "Exercises", course_quizzes_path(course) %></li>
+        </ul>
       </div>
     <% end %>
     <% @studied_courses.each do |course| %>

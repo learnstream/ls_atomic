@@ -176,8 +176,6 @@ h1.course-name {
       background: #eee; }
     #course-content .course-section td.lesson-link {
       font-weight: bold; }
-      #course-content .course-section td.lesson-link a:visited {
-        text-decoration: underline; }
     #course-content .course-section td.last-viewed {
       font-size: .8em;
       color: #999;
@@ -283,6 +281,17 @@ a.study_button {
     font-size: 2em; }
   #course-overview .course-listing .study-info {
     font-size: .8em; }
+  #course-overview .course-listing ul.teacher-actions {
+    padding-left: 5px;
+    padding-top: 20px;
+    float: left;
+    clear: right;
+    list-style-type: none; }
+    #course-overview .course-listing ul.teacher-actions > li {
+      font-size: 1.2em;
+      margin-right: 15px; }
+      #course-overview .course-listing ul.teacher-actions > li a {
+        margin-left: 15px; }
   #course-overview .course-listing ul.course-actions {
     margin: 0px;
     padding: 0px;
@@ -300,6 +309,28 @@ a.study_button {
         background: #fff; }
     #course-overview .course-listing ul.course-actions a {
       font-size: 1.5em; }
+
+/* Course index page */
+ul#courses {
+  list-style-type: none; }
+  ul#courses h3 {
+    display: inline;
+    margin-left: 15px;
+    clear: right; }
+  ul#courses p {
+    margin-left: 100px;
+    clear: right; }
+  ul#courses input {
+    background: #69c;
+    border: none;
+    font-size: 1.1em;
+    width: 80px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px; }
+  ul#courses input:hover {
+    background: #9fbfdf;
+    cursor: pointer; }
 
 /* Course Show page */
 /* Teacher pages */
