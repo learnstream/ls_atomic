@@ -49,7 +49,9 @@ var formatTime = function(time) {
 };
 
 var displayDocument = function(new_event) {
-  clearInterval(waitingForNext);
+  if(typeof(waitingForNext) != 'undefined')
+    clearInterval(waitingForNext);
+
   $("#lesson-area").hide();
   $("#video-area").html($("<div>").attr("id", "player")); 
   ytplayer = null;
