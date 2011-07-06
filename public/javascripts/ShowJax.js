@@ -1,18 +1,17 @@
 $(document).ready(function() {
-    var fields = jQuery.parseJSON($("#markdown-fields").text());
-    for (i=0 ; i<fields.length; i++) {
-      renderField(fields[i]);
-    }
+   $(".markdown").each(function() { $(this).markdown(); });
 });
 
-var renderField = function (field) {
-  converter = new Showdown.converter(); 
-  $(field).html(converter.makeHtml($(field).text()));
+$.fn.markdown = function(typeset) {
+  console.log($(this));
+  converter = new Showdown.converter();
+  $(this).html(converter.makeHtml($(this).text()));
+  if (typeof(typeset) == "undefined" || typeset == true)
+    MathJax.Hub.Typeset();
 }
 
-var renderFields = function (field) {
-  converter = new Showdown.converter(); 
-  $(field).each(function () {
-      html(converter.makeHtml($(this).html()));
-  });
+$.fn.markdownInner = function() {
+  $(this).find(".markdown").each(function() {
+      $(this).markdown(false); });
+  MathJax.Hub.Typeset();
 }

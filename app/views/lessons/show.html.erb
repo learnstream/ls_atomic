@@ -2,11 +2,7 @@
   <%= javascript_include_tag "WatchLesson" %>
   <%= javascript_include_tag "raphael-min" %>
   <%= javascript_include_tag "Quiz" %>
-  <%= javascript_include_tag "showdown" %>
-  <%= javascript_include_tag "ShowJax" %>
 <% end %>
-
-<div id="markdown-fields" class="hidden"><%= ["#content", "#document-area"].to_json %></div>
 
 <% if current_user.can_edit?(@course) %>
   <% breadcrumb :lesson, @lesson %>

@@ -2,7 +2,7 @@
   <%= javascript_include_tag "showdown" %>
 <% end %>
 
-<div class="header"><%= @quiz.question %></div>
+<div class="header markdown"><%= @quiz.question %></div>
 
 
 <% if not @quiz.due_for?(current_user) and @quiz.last_response_from(current_user) %>

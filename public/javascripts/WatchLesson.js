@@ -54,8 +54,7 @@ var displayDocument = function(new_event) {
   $("#video-area").html($("<div>").attr("id", "player")); 
   ytplayer = null;
   $("#document-area").text(new_event.content);
-  MathJax.Hub.Typeset();
-  renderFields("#document-area");
+  $("#document-area").markdown();
 }
 
 var restoreLesson = function(events) {
@@ -63,7 +62,6 @@ var restoreLesson = function(events) {
   $("#document-area").html("");
   var last_index = $(".event").last().attr("data-index");
   var last_event = events[last_index];
-  
   loadAndPlayVideo(getYoutubeID(last_event.video_url, "v"),
                    last_event.start_time,
                    last_event.end_time,
@@ -71,7 +69,13 @@ var restoreLesson = function(events) {
 }
 
 var displayNote = function(new_event,newdiv) {
-    newdiv.text(new_event.content);
+    newdiv.append($("<div />").addClass("content")
+                              .text(new_event.content));
+
+    newdiv.find(".content").markdown();
+    
+    var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
+    $("#content").scrollTo(newdiv, 500, { "offset" : offset });
 }
 
 var displayQuiz = function(new_event,newdiv) {
@@ -85,8 +89,7 @@ var displayQuiz = function(new_event,newdiv) {
       // scroll again because the size is larger... 
         var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
         $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
-        MathJax.Hub.Typeset();
-        renderField(".note");
+        $("#content .event").last().markdownInner();
 
         $("#quiz_" + new_event.id).find("#response_answer").keyup(function() {
           answer = $(this).val();
@@ -173,11 +176,10 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
   var new_event = events[index];
   console.log(new_event);
 
-  // add the div on the page
   var newdiv = $("<div />").addClass(new_event.type.toLowerCase())
                            .addClass("event")
-                           .attr("data-index", index);
-  
+                           .attr("data-index", index)
+                           .appendTo($("#content"));
   
   // ignore old transition events
   if (typeof(waitingForNext) != "undefined")
@@ -219,7 +221,6 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
     timelink = prepareVideo(new_event, index, events,lesson_status_id, current_index);
     newdiv.append(timelink);
   }
-  $("#content").append(newdiv);
  
 
   createNavLinks(index,events,lesson_status_id,current_index);
@@ -234,12 +235,6 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
   if (new_event.type == "Note") {
     // scroll to the new div 
     
-    var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
-    $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
-
-    // render latex
-    MathJax.Hub.Typeset();
-    renderFields(".note");
   }
 
 

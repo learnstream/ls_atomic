@@ -82,6 +82,7 @@ Showdown.converter = function() {
 var g_urls;
 var g_titles;
 var g_html_blocks;
+var g_tex_blocks;
 
 // Used to track when we're inside an ordered or unordered list
 // (see _ProcessListItems() for details):
@@ -103,6 +104,17 @@ this.makeHtml = function(text) {
 	g_urls = new Array();
 	g_titles = new Array();
 	g_html_blocks = new Array();
+
+        
+
+        /*
+        text = text.replace(/\\(/g,"\\(");
+        text = text.replace(/\\)/g,"\\)");
+        text = text.replace(/\\[/g,"\\[");
+        text = text.replace(/\\]/g,"\\]");
+        */
+        
+
 
 	// attacklab: Replace ~ with ~T
 	// This lets us use tilde as an escape char to avoid md5 hashes
@@ -130,6 +142,9 @@ this.makeHtml = function(text) {
 	// match consecutive blank lines with /\n+/ instead of something
 	// contorted like /[ \t]*\n+/ .
 	text = text.replace(/^[ \t]+$/mg,"");
+
+
+        text = _HashTexBlocks(text);
 
 	// Turn block-level HTML blocks into hash entries
 	text = _HashHTMLBlocks(text);
@@ -200,6 +215,25 @@ var _StripLinkDefinitions = function(text) {
 	return text;
 }
 
+var _HashTexBlocks = function(text) {
+  // attacklab: Double up blank lines to reduce lookaround
+  text = text.replace(/\n/g,"\n\n");
+  text = text.replace(/\\\([^\r]*?\\\)/gm, hashTex);
+  text = text.replace(/\\\[[^\r]*?\\\]/gm, hashTex);
+  text.replace(/\n\n/g, "\n");
+  return text;
+}
+
+var hashTex = function(match) {
+  blockText = match;
+  // Undo double lines
+  blockText = blockText.replace(/\n\n/g,"\n");
+  blockText = blockText.replace(/^\n/,"");
+  
+  // strip trailing blank lines
+  blockText = blockText.replace(/\n+$/g,"");
+  return "~M" + (g_html_blocks.push(match)-1) + "M";
+}
 
 var _HashHTMLBlocks = function(text) {
 	// attacklab: Double up blank lines to reduce lookaround
@@ -1083,6 +1117,11 @@ var _FormParagraphs = function(text) {
 			blockText = blockText.replace(/\$/g,"$$$$"); // Escape any dollar signs
 			grafsOut[i] = grafsOut[i].replace(/~K\d+K/,blockText);
 		}
+
+                while (grafsOut[i].search(/~M(\d+)M/) >= 0) {
+                  var blockText = g_html_blocks[RegExp.$1];
+                  grafsOut[i] = grafsOut[i].replace(/~M\d+M/,blockText);
+                }
 	}
 
 	return grafsOut.join("\n\n");
