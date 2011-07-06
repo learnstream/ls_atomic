@@ -9,9 +9,10 @@
 <% else %>
   <% breadcrumb :lesson_student, @lesson %>
 <% end %>
+
+<h1 id="lesson-name"><%= @lesson.name %></h1>
 <div id="lesson-area">
 
-  <h1><%= @lesson.name %></h1>
   <div id="video-area">
     <div id="player"></div>
   </div>
