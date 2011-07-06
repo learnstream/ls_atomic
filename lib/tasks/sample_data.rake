@@ -102,7 +102,7 @@ def add_lessons(course_id, component_map)
       lesson = course.lessons.build(:name => lesson_event["lesson_name"])
       #will change this when we decide on an ordering scheme for lessons, now defaults
       #to order in which they appear on spreadsheet.
-      lesson.order_number = lessonUID - 1
+      lesson.order_number = lessonUID.to_i - 1
       if lesson.save
         if lessonComponents.has_key?(lessonUID.to_s)
           lesson_tokens = lessonComponents[lessonUID.to_s].split(",").map{ |c| component_map[c] }
