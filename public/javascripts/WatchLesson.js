@@ -55,6 +55,7 @@ var displayDocument = function(new_event) {
   ytplayer = null;
   $("#document-area").text(new_event.content);
   MathJax.Hub.Typeset();
+  renderFields("#document-area");
 }
 
 var restoreLesson = function(events) {
@@ -85,6 +86,7 @@ var displayQuiz = function(new_event,newdiv) {
         var offset = -1*($("#content").outerHeight() - $("#content .event").last().outerHeight())/2;
         $("#content").scrollTo($("#content .event").last(), 500, { "offset" : offset });
         MathJax.Hub.Typeset();
+        renderField(".note");
 
         $("#quiz_" + new_event.id).find("#response_answer").keyup(function() {
           answer = $(this).val();
@@ -237,6 +239,7 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
 
     // render latex
     MathJax.Hub.Typeset();
+    renderFields(".note");
   }
 
 
