@@ -11,7 +11,7 @@
 </h1>
 
 <p>
-  <%= @component.description %>
+  <%= markdown @component.description %>
 </p>
 
 <% if current_user and current_user.can_edit?(@course) %>

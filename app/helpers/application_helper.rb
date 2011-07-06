@@ -10,4 +10,9 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')", :id => "addanswerbutton")
   end
+
+  def markdown(text)
+    options = [:hard_wrap, :filter_html, :no_intraemphasis]
+    Redcarpet.new(text, *options).to_html.html_safe
+  end
 end

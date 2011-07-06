@@ -1,3 +1,8 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag "showdown" %>
+  <%= javascript_include_tag "testshowdown" %>
+<% end %>
+
 <div class="header"><%= @quiz.question %></div>
 
 <p>Answer(s): <% @quiz.answers.each do |answer| %><%= answer.text %> <% end %></p>

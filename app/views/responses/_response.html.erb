@@ -23,7 +23,7 @@
 <div id = "explain"> 
   <% if @response.quiz.explanation %>
     <p class = "header">Explanation</p>
-    <%= @response.quiz.explanation %> 
+    <%= markdown @response.quiz.explanation %> 
   <% end %>
 </div>
 
