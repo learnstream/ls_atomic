@@ -1,6 +1,6 @@
-<div class="header"><%= @quiz.question %></div>
+<div class="header markdown"><%= @quiz.question %></div>
 
-<p>Answer(s): <% @quiz.answers.each do |answer| %><%= answer.text %> <% end %></p>
+<p class="markdown">Answer(s): <% @quiz.answers.each do |answer| %><%= answer.text %> <% end %></p>
 
 <p id="explanation" class="markdown"><%= @quiz.explanation %></p>
 

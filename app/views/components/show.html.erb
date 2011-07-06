@@ -10,8 +10,8 @@
   <%= @component.name%>
 </h1>
 
-<p>
-  <%= markdown @component.description %>
+<p class="markdown">
+  <%= @component.description %>
 </p>
 
 <% if current_user and current_user.can_edit?(@course) %>
