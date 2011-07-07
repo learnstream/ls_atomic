@@ -8,13 +8,11 @@ class UserSessionsController < ApplicationController
 
   def create 
     @user_session = UserSession.new(params[:user_session])
-    @user_session.save do |result|
-      if result
-        flash[:notice] = "Successfully logged in."
-        redirect_to root_path
-      else
-        render 'new'
-      end
+    if @user_session.save
+      flash[:notice] = "Successfully logged in."
+      redirect_to root_path
+    else
+      render 'new'
     end
   end
 
