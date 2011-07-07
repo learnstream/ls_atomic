@@ -4,8 +4,8 @@ connect:
     secret: "186bbed08646b7ddd0cc765c3fd13371"
     label: "facebook"
   twitter:
-    key: "my_key"
-    secret: "my_secret"
+    key: "W0XdUpc8SZaUZ48lTZnxg"
+    secret: "qoq24DUG3T6dddtf4E20n78wdmHVud6DpiGQGJHty4"
     label: "twitter"
 
 

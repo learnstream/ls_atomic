@@ -8,6 +8,11 @@ when "production"
         :key => ENV["CONNECT_FACEBOOK_KEY"],
         :secret => ENV["CONNECT_FACEBOOK_SECRET"],
         :label => "Facebook"
+      },
+      :twitter => {
+        :key => ENV["CONNECT_TWITTER_KEY"],
+        :secret => ENV["CONNECT_TWITTER_SECRET"],
+        :label => "Twitter"
       }
     }
   }
