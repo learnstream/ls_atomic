@@ -10,6 +10,9 @@
     <%= f.label :password %><br />
     <%= f.password_field :password %>
   </div>
+  <%= hidden_field_tag :authentication_type, :session %>
+  <%= radio_button_tag :oauth_provider, :facebook %>
+  <%= radio_button_tag :oauth_provider, :twitter %>
   <div class="actions">
     <%= f.submit "Sign in" %>
   </div>

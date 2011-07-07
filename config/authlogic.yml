@@ -1,0 +1,11 @@
+connect:
+  facebook:
+    key: "143168212426941"
+    secret: "186bbed08646b7ddd0cc765c3fd13371"
+    label: "facebook"
+  twitter:
+    key: "my_key"
+    secret: "my_secret"
+    label: "twitter"
+
+

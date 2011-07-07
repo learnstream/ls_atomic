@@ -9,12 +9,14 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    if @user.save
-      flash[:success] = "Welcome to Learnstream"
-      redirect_to root_path
-    else
-      @title = "Sign up"
-      render 'new'
+    @user.save do |result|
+      if result
+        flash[:success] = "Welcome to Learnstream"
+        redirect_to root_path
+      else
+        @title = "Sign up"
+        render 'new'
+      end 
     end
   end
 
@@ -28,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if not is_admin?
+    if params[:user][:perm] and not is_admin?
       flash[:error] = "You don't have permission to do that!"
       redirect_to @current_user
       return 
@@ -37,20 +39,19 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     new_perm = params[:user][:perm]
     
+    # SHOULD BE MOVED TO A VALIDATION
     if user == current_user and new_perm != "admin"
       flash[:error] = "You cannot remove yourself as admin"
       redirect_to users_path
       return
     end
 
-    user.perm = new_perm
-
-    if user.save
-      flash[:success] = "Changed user role!"
-      redirect_to users_path 
-    else 
-      flash[:error] = "Couldn't update user role"
-      redirect_to users_path
+    user.update_attributes(params[:users]) do |result|
+      if result 
+        redirect_to users_path 
+      else 
+        redirect_to users_path
+      end
     end
   end
 
