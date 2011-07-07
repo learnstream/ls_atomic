@@ -15,6 +15,11 @@ gem 'paperclip', '~> 2.3'
 gem 'time_diff'
 gem 'sass'
 gem 'timecop'
+gem 'ruby-openid'
+gem 'rack-openid', '>=0.2.1', :require => 'rack/openid'
+gem 'oauth'
+gem 'oauth2'
+gem 'authlogic-connect'
 
 group :development, :test do
   gem 'jasmine'
