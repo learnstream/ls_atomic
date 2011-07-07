@@ -8,6 +8,11 @@
   float: none;
   margin: auto; }
 
+#lesson-name {
+  margin: auto;
+  margin-bottom: 15px;
+  width: 950px; }
+
 #lesson-area {
   margin: auto;
   width: 950px; }
@@ -50,14 +55,20 @@
     font-size: .8em; }
 
 #document-area {
-  width: 700px;
-  margin: auto; }
+  width: 720px;
+  border: 8px solid #eee;
+  padding: 20px 90px 20px 90px;
+  margin: auto;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; }
   #document-area .nav-link-area {
     text-align: center; }
   #document-area .video-nav-link {
     margin: auto;
     clear: both;
     text-align: center;
+    margin-top: 15px;
     border-right: 1px solid #999999;
     border-bottom: 1px solid #999999;
     border-left: 1px solid #cccccc;
