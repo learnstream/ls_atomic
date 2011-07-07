@@ -20,11 +20,6 @@ describe "LayoutLinks" do
                                 :text => "Sign in")
     end
 
-    it "should allow the user to sign in with facebook" do
-      visit root_path
-      page.should have_css("a", :text => "Sign in with Facebook")
-    end
-
     it "should default to a welcome page" do
       visit root_path
       page.should have_css("div#tagline")
