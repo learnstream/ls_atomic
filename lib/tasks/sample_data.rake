@@ -29,6 +29,18 @@ namespace :db do
   end
   task :add_real_data => :environment
 
+  desc "Add Calc Tutorials"
+  task :add_calc_tutorials, :course_id do |t,args|
+    file = File.open("#{Rails.root}/lib/tasks/DataFiles/CalcTutorials.txt",'rb')
+    contents = File.read
+    file.close()
+    calc = eval(contents)
+    course = Course.find(args.course_id)
+    course.lessons.destroy_all
+
+  end
+
+
   desc "Add Components as separate task"
   task :add_components, :course_id do |t, args|
     component_map = add_components(args.course_id)
