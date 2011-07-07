@@ -174,7 +174,7 @@ def add_components(course_id)
 
   file.close()
   #Uncomment next line when running locally, re-comment when pushing to heroku.
-  File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", 'w'){ |f| f.write(component_id_map.to_json) }
+  #File.open("#{Rails.root}/lib/tasks/DataFiles/ComponentMap.txt", 'w'){ |f| f.write(component_id_map.to_json) }
   return component_id_map
 end
 
