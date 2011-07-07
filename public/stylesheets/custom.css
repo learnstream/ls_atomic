@@ -269,6 +269,10 @@ a.study_button {
   .video-name a {
     font-size: 0.75em; }
 
+/* Study/responses show */
+.correct {
+  background: #efe; }
+
 /* Home page */
 #course-overview .course-listing {
   overflow: auto;
@@ -474,21 +478,6 @@ a.signup_button {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px; }
-  .events-area .note-old {
-    border-right: 1px solid #4d4d4d;
-    border-bottom: 1px solid #4d4d4d;
-    border-left: 1px solid #999999;
-    border-top: 1px solid #999999; }
-  .events-area .quiz-old {
-    border-right: 1px solid red;
-    border-bottom: 1px solid red;
-    border-left: 1px solid #ff4d4d;
-    border-top: 1px solid #ff4d4d; }
-    .events-area .quiz-old.answered-old {
-      border-right: 1px solid #00b300;
-      border-bottom: 1px solid #00b300;
-      border-left: 1px solid #1aff1a;
-      border-top: 1px solid #1aff1a; }
   .events-area .timelink {
     font-size: .7em;
     margin-right: .5em; }

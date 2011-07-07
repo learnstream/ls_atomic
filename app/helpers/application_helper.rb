@@ -10,9 +10,4 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')", :id => "addanswerbutton")
   end
-
-  def markdown
-    
-  end
-
 end
