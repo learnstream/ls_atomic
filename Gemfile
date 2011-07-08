@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
 
+gem 'nokogiri', '~> 1.4.2'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -15,10 +17,11 @@ gem 'paperclip', '~> 2.3'
 gem 'time_diff'
 gem 'sass'
 gem 'timecop'
+gem 'omniauth', '0.1.6'
 
 group :development, :test do
   gem 'jasmine'
-  gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner'
   #Note: I moved timecop out of development group so we can populate on heroku.
