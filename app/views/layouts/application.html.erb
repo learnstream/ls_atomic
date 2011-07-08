@@ -47,7 +47,7 @@
   <nav>
   <ul>
     <% if signed_in? %>
-      <%= current_user.email %>
+      <%= display_name(current_user) %>
     <% end %>
     <li><%= link_to "Home", root_path  %></li>
     <% if signed_in? %>
