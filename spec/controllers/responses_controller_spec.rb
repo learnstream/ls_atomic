@@ -15,6 +15,8 @@ describe ResponsesController do
 
         @quiz = Factory(:quiz, :course => @course)
         @quiz.components << @component
+        @answer = Factory(:answer)
+        @quiz.answers << @answer
         @attr = { :quiz => @quiz, :answer => @quiz.answers.first.text }
       end
 
