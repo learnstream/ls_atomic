@@ -18,6 +18,10 @@ describe User do
       no_perm_user = User.new(@attr.merge(:perm => ""))
       no_perm_user.should_not be_valid
     end
+
+    it "should have authentications" do
+      @user.should respond_to(:authentications)
+    end
   end
 
   describe "enrollments" do

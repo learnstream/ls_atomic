@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110704232321) do
+ActiveRecord::Schema.define(:version => 20110708014218) do
 
   create_table "answers", :force => true do |t|
     t.text     "text"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20110704232321) do
   end
 
   add_index "answers", ["quiz_id"], :name => "index_answers_on_quiz_id"
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "components", :force => true do |t|
     t.string   "name"
@@ -180,11 +188,11 @@ ActiveRecord::Schema.define(:version => 20110704232321) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                      :null => false
+    t.string   "email"
     t.string   "persistence_token",                          :null => false
-    t.string   "crypted_password",                           :null => false
-    t.string   "password_salt",                              :null => false
-    t.string   "single_access_token",                        :null => false
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "single_access_token"
     t.string   "perishable_token",                           :null => false
     t.integer  "login_count",         :default => 0,         :null => false
     t.integer  "failed_login_count",  :default => 0,         :null => false

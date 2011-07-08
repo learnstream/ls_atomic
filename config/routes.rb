@@ -53,6 +53,9 @@ LsAtomic::Application.routes.draw do
   end
 
   resources :lesson_statuses
+  resources :authentications
+
+  match '/auth/:provider/callback' => 'authentications#create'
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'user_sessions#new'

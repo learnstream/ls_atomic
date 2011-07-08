@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :memories, :dependent => :destroy
   has_many :memory_ratings, :through => :memories
   has_many :lesson_statuses, :dependent => :destroy
+  has_many :authentications
 
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5
@@ -84,5 +85,14 @@ class User < ActiveRecord::Base
 
   def number_of_memories_today(course)
     memories.reviewed_today.uniq.length + memories_due_with_quiz(course).length
+  end
+
+  def apply_omniauth(omniauth)
+    #self.email = omniauth['user_info']['email'] if email.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+
+  def password_required?
+    (authentications.empty? || !password.blank?) && super
   end
 end

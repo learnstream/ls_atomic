@@ -1,0 +1,31 @@
+
+#signin {
+  width: 950px;
+  margin:auto;
+  margin-top: 50px;
+  h1 {
+    margin-bottom: 40px;
+  }
+  #signin-form {
+    border-right: 1px solid #ddd;
+    width: 350px; 
+    clear: left;
+    float: left;
+    text-align: right;
+    padding-right: 130px;
+    form {
+    }
+  }
+
+  #oauth-login {
+    float: left;
+    width: 350px; 
+    padding-left: 80px;
+    text-align: left;
+    a {
+      display: block;
+      width: 250px;
+      margin: auto;
+    }
+  }
+}
