@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110708014218) do
+ActiveRecord::Schema.define(:version => 20110708164250) do
 
   create_table "answers", :force => true do |t|
     t.text     "text"
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(:version => 20110708014218) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.string   "perm",                :default => "learner"
+    t.string   "name"
   end
 
   create_table "videos", :force => true do |t|
