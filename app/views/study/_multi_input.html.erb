@@ -1,0 +1,6 @@
+<% parsed_json = ActiveSupport::JSON.decode(answer_input) %>
+<% parsed_json["choices"].each_with_index do |choice, i| %>
+  <%= f.radio_button :answer, (i+1).to_s %>
+  <%= f.label "answer_#{i+1}", choice %>
+  <br />
+<% end %>

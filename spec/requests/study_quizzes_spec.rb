@@ -16,7 +16,8 @@ describe "Doing exercises" do
 
     @quiz = Factory(:quiz, :course => @course)
     @quiz.components << @component
-    @answer = Factory(:answer, :quiz => @quiz)
+    @answer = Factory(:answer)
+    @quiz.answers << @answer
 
     integration_sign_in(@user) 
     visit course_study_index_path(@course)
@@ -120,6 +121,34 @@ describe "Doing exercises" do
       page.should_not have_css("input#response_answer")
     end
   end
+
+  describe "for multiple choice questions" do
+    before(:each) do
+      @quiz.answer_input = '{"type": "multi", "choices" : ["41","42","43","44"]}'
+      @answer.text = "2"
+      @answer.save!
+      @quiz.save!
+      @quiz.reload
+      @answer.reload
+    end
+    
+    it "should have multiple choices" do
+      visit course_study_index_path(@course)
+      page.should have_content("42")
+      page.should have_css('input[value="1"]')
+    end
+
+    it "should allow user to select an option" do
+      @quiz.answers.should == [@answer]
+      @answer.text.should == "2"
+      visit course_study_index_path(@course)
+      choose "42"
+      click_button "Check answer"
+      save_and_open_page
+      page.should_not have_content("incorrect")
+    end
+  end
+
 
   describe "after submitting the response" do
 

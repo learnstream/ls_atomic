@@ -28,6 +28,19 @@ describe "Using the quiz creation interface" do
     page.should have_content("Quiz created!")
   end 
 
+  it "should allow multiple-choice quizzes", :js => true do
+    click_link "Add exercise"
+    fill_in "Question", :with => "Which is the answer?"
+    select "Multiple choice", :from => "Answer type"
+    fill_in "Choice 1", :with => "40"
+    fill_in "Choice 2", :with => "41"
+    fill_in "Choice 3", :with => "42"
+    fill_in "Choice 4", :with => "43"
+    fill_in "Answer", :with => "3"
+    click_button "Submit"
+    page.should have_content("Quiz created!")
+  end
+
   pending "should allow an authorized user to edit a quiz", :js => true do
     click_link "1"
     fill_in "Question", :with => "Did I change the question?"

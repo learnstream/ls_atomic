@@ -82,7 +82,6 @@ Factory.define :quiz do |quiz|
   quiz.explanation        "I said so"
   quiz.in_lesson          0
   quiz.association        :course, :factory => :course
-  quiz.answers            [Factory(:answer)]
 end
 
 

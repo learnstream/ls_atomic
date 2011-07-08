@@ -1,6 +1,7 @@
 $(document).ready(function () {
     
     var updateInputForm = function() {
+      $(".extra-form").hide();
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
         $("#addanswerbutton").hide();
         $("#remove-answer").hide();
@@ -10,12 +11,14 @@ $(document).ready(function () {
 
           ff.loadJSONFBD({ "fb" :{"shape":"rect-line","top":80,"left":80,"width":162,"height":100,"radius":60,"rotation":-15,"cinterval":30}});
          }
+      } else if ($("#quiz_answer_type option:selected").val() == 'multi') { 
+          $("#multichoice_form").show();
+          $("#addanswerbutton").hide();
+          $("#remove-answer").hide();
       } else {
-        $("#fbd_form").hide();
+        $(".extra-form").hide();
         $("#addanswerbutton").show();
         $("#remove-answer").show();
-        $("#quiz_answer_input").val("");
-        $("#quiz_answer_output").val("");
       }
     };
 
@@ -35,11 +38,30 @@ $(document).ready(function () {
       }
     });
 
+    $("#choices input").keyup(function() {
+        var inputJSON = getMCInputJSON();
+        $("#quiz_answer_input").val(inputJSON);
+      });
+
     ff = loadExistingFBD();
 
     updateInputForm();
 });
 
+
+var getMCInputJSON = function() {
+  var str = '{ "type" : "multi", "choices" : [ ';
+  var inputs = $("#choices input");
+  var broken = false;
+  inputs.each(function(i) {
+    if ($(this).val() == "") broken = true;
+    if (broken) return;
+    str += '"' + $(this).val() + '", ';
+  });
+  str = str.replace(/, $/, "");
+  str += "]}";
+  return str;
+};
 
 
 var loadExistingFBD = function() {
@@ -440,19 +462,6 @@ function FBD() {
     return '{ "type" : "fbd", "fb" : ' + toJSONString(fb, ["shape", "top", "left", "width", "height", "radius", "rotation", "cinterval"]) + '}';
     };
 
-  var toJSONString = function(obj, attrs) {
-    var strings = [];
-
-    for ( var i = 0; i<attrs.length ; i++) {
-      if (typeof(obj[attrs[i]]) == "string") {
-        strings[i] =  '"' + attrs[i] + '" : "' + obj[attrs[i]] + '"';
-      } else {
-        strings[i] = '"' + attrs[i] + '" : ' + obj[attrs[i]];
-      }
-    }
-
-    return '{' + strings.join(", ") + '}';
-  };
 
   var getOutputJSON = function() {
     var forces_strings = [];
@@ -475,6 +484,19 @@ function FBD() {
   };
 };
 
+function toJSONString(obj, attrs) {
+    var strings = [];
+
+    for ( var i = 0; i<attrs.length ; i++) {
+      if (typeof(obj[attrs[i]]) == "string") {
+        strings[i] =  '"' + attrs[i] + '" : "' + obj[attrs[i]] + '"';
+      } else {
+        strings[i] = '"' + attrs[i] + '" : ' + obj[attrs[i]];
+      }
+    }
+
+    return '{' + strings.join(", ") + '}';
+  };
 
 function getAbsolutePosition(element) {
     var r = { x: element.offsetLeft, y: element.offsetTop };

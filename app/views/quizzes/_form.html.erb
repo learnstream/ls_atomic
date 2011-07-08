@@ -30,10 +30,11 @@
   <div class="field">
     <%= f.label :answer_type, "Answer type" %><br />
     <%= f.select :answer_type, options_for_select([['Self-rating', 'self-rate'], 
-      ['Text input', 'text'], ['Free body diagram', 'fbd']], :selected => @quiz.answer_type || 'self-rate') %>
+      ['Text input', 'text'],['Multiple choice', 'multi'],['Free body diagram', 'fbd']], :selected => @quiz.answer_type || 'self-rate') %>
   </div>
 
-  <div class="hidden" id="fbd_form"> <%= render "quizzes/fbd_input" %> </div>
+  <div class="hidden extra-form" id="fbd_form"> <%= render "quizzes/fbd_input" %> </div>
+  <div class ="hidden extra-form" id = "multichoice_form"><%= render "quizzes/multiple_choice" %></div>
 
   <%= f.fields_for :answers do |builder| %>
     <%= render 'answer_fields', :f => builder %>
