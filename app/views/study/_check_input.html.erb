@@ -1,0 +1,7 @@
+<% parsed_json = ActiveSupport::JSON.decode(answer_input) %>
+<% parsed_json["choices"].each_with_index do |choice, i| %>
+  <%= check_box_tag "response[answer][]", i.to_s %>
+  <%= label "choice_#{i}", choice %>
+  <br />
+<% end %>
+<%= f.hidden_field :answer, :value => response[answer].join %>

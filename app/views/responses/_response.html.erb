@@ -4,21 +4,35 @@
 <div id="judgement">
   <% if not @response.status.blank? %> 
     Your answer: <span class="answer markdown <%= @response.status %>">
-      <%= @response.answer %></span><br />
+      <% if @response.quiz.answer_type == 'multi' %>
+        <%= showMultiAnswer(@response.answer, @response.quiz.answer_input) %>
+      <% else %>
+        <%= @response.answer %></span><br />
+    <% end %>
     <% if @response.status == "correct" %>
       You're correct!<br />
     <% else %>
-      That's incorrect. The answer is <span class="answer markdown correct"><%= @response.quiz.answers.first.text %></span>
+      That's incorrect. The answer is 
+      <% if @response.quiz.answer_type == 'multi' %>
+        <%= showMultiAnswer(@response.quiz.answers.first.text, @response.quiz.answer_input) %>
+      <% else %>
+        <%= @response.quiz.answers.first.text %></span>
     <% end %>
-  <% else %>
-    The answer is: <span class="answer markdown correct"><%= @response.quiz.answers.first.text %></span>
   <% end %>
-  <% if @response.quiz.answer_type == 'fbd' %>
+<% else %>
+  The answer is: <span class="answer markdown correct">
+    <% if @response.quiz.answer_type == 'multi' %>
+      <%= showMultiAnswer(@response.quiz.answers.first.text, @response.quiz.answer_input) %>
+    <% else %>
+      <%= @response.quiz.answers.first.text %></span>
+  <% end %>
+<% end %>
+<% if @response.quiz.answer_type == 'fbd' %>
   <%= render :partial => 'responses/fbd', :locals => { :answer_output => @response.quiz.answer_output } %>
-  <% end %>
-  <% if @response.quiz.explanation %>
-    <p class="markdown"><%= @response.quiz.explanation %></p>
-  <% end %>
+<% end %>
+<% if @response.quiz.explanation %>
+  <p class="markdown"><%= @response.quiz.explanation %></p>
+<% end %>
 
 </div>
 

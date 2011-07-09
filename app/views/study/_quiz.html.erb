@@ -20,6 +20,9 @@
     <%= render :partial => "fbd_input", :locals => { :f => f, :answer_input => @quiz.answer_input }, :object => f.object %>
   <% elsif @quiz.answer_type == "multi" %>
     <%= render :partial => "multi_input", :locals => { :f => f, :answer_input => @quiz.answer_input }, :object => f.object %>
+  <% elsif @quiz.answer_type == "check" %>
+    <%= render :partial => "check_input", :locals => { :f => f, :answer_input => @quiz.answer_input, :response => @response }, :object => f.object %>
+
   <% end %>
 
   <%= f.hidden_field :quiz_id, :value => @quiz.id %>
