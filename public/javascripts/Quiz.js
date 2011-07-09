@@ -3,8 +3,7 @@ $(document).ready(function () {
     var updateInputForm = function() {
       $(".extra-form").hide();
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
-        $("#addanswerbutton").hide();
-        $("#remove-answer").hide();
+        $("#add-answer").hide();
         $("#fbd_form").show();
         if (ff == null) {
           ff = new FBD;
@@ -13,10 +12,17 @@ $(document).ready(function () {
          }
       } else if ($("#quiz_answer_type option:selected").val() == 'multi') { 
           $("#multichoice_form").show();
-          $("#addanswerbutton").hide();
-          $("#remove-answer").hide();
-      } else {
+          $(".quiz_answer_text").val("");
+          $('.quiz_answer_text').first().show(); //Debug only
+          $("#add-answer").hide();
+     } else if ($("#quiz_answer_type option:selected").val() == 'check') { 
+          $("#check_box_form").show();
+          $(".quiz_answer_text").val("");
+          $('.quiz_answer_text').first().show(); //Debug only
+          //$("#add-answer").hide();
+     } else {
         $(".extra-form").hide();
+        $("#add-answer").show();
         $("#addanswerbutton").show();
         $("#remove-answer").show();
       }
@@ -43,6 +49,19 @@ $(document).ready(function () {
         $("#quiz_answer_input").val(inputJSON);
       });
 
+    $("#choices-check input").keyup(function() {
+        var inputJSON = getCheckInputJSON();
+        $("#quiz_answer_input").val(inputJSON);
+      });
+
+    $("#choices :radio").change(function() {
+        populateAnswerRadio();
+    });
+
+    $("#choices-check :checkbox").change(function() {
+        populateAnswerCheck();
+    });
+
     ff = loadExistingFBD();
 
     updateInputForm();
@@ -51,7 +70,7 @@ $(document).ready(function () {
 
 var getMCInputJSON = function() {
   var str = '{ "type" : "multi", "choices" : [ ';
-  var inputs = $("#choices input");
+  var inputs = $('#choices [name|="choice"]');
   var broken = false;
   inputs.each(function(i) {
     if ($(this).val() == "") broken = true;
@@ -61,6 +80,44 @@ var getMCInputJSON = function() {
   str = str.replace(/, $/, "");
   str += "]}";
   return str;
+};
+
+var getCheckInputJSON = function() {
+  var str = '{ "type" : "check", "choices" : [ ';
+  var inputs = $('#choices-check [name|="choice"]');
+  var broken = false;
+  inputs.each(function(i) {
+    if ($(this).val() == "") broken = true;
+    if (broken) return;
+    str += '"' + $(this).val() + '", ';
+  });
+  str = str.replace(/, $/, "");
+  str += "]}";
+  return str;
+};
+
+var populateAnswerRadio = function() {
+
+  var choices =$('#choices :radio');
+  str = "";
+  choices.each(function() {
+    if ($(this).attr("checked") == "checked") {
+      str += $(this).val();
+    }
+  }); 
+  $('.quiz_answer_text').first().val(str);
+};
+
+var populateAnswerCheck = function() {
+
+  var choices = $('#choices-check :checkbox');
+  str = "";
+  choices.each(function() {
+    if ($(this).attr("checked") == "checked") {
+      str += " " + $(this).val();
+    }
+  }); 
+  $('.quiz_answer_text').first().val(str);
 };
 
 

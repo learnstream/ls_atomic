@@ -68,6 +68,10 @@ class Quiz < ActiveRecord::Base
   end
 
   def check_answer(response)
+    if(response.answer.kind_of?(Array))
+      response.answer = " " + response.answer.join(" ")
+    end
+    
     response_answer = response.answer.downcase
    
     answers.each do |answer|

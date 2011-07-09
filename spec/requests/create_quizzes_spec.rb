@@ -36,7 +36,7 @@ describe "Using the quiz creation interface" do
     fill_in "Choice 2", :with => "41"
     fill_in "Choice 3", :with => "42"
     fill_in "Choice 4", :with => "43"
-    fill_in "Answer", :with => "3"
+    choose "use_choice_3"
     click_button "Submit"
     page.should have_content("Quiz created!")
   end

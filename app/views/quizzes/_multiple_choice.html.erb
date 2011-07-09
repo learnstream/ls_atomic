@@ -1,7 +1,11 @@
 <div id = "choices">
-  <label for="choice1">Choice 1:</label> <input type="text" id="choice1" name="choice1"><br />
-  <label for="choice2">Choice 2:</label> <input type="text" id="choice2" name="choice2"><br />
-  <label for="choice3">Choice 3:</label> <input type="text" id="choice3" name="choice3"><br />
-  <label for="choice4">Choice 4:</label> <input type="text" id="choice4" name="choice4"><br />
-  <label for="choice5">Choice 5:</label> <input type="text" id="choice5" name="choice5"><br />
+  <% 5.times do |i| %>
+    <%= label_tag "choice-#{i}", "Choice #{i+1}" %>
+    <%= text_field_tag "choice-#{i}" %>
+    <% if (i==0) %>
+      <%= radio_button_tag "use_choice", i.to_s, true %><br />
+    <% else %>
+      <%= radio_button_tag "use_choice", i.to_s %><br />
+    <% end %>
+  <% end %>
 </div>

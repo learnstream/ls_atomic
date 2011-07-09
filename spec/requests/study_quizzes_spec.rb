@@ -125,7 +125,7 @@ describe "Doing exercises" do
   describe "for multiple choice questions" do
     before(:each) do
       @quiz.answer_input = '{"type": "multi", "choices" : ["41","42","43","44"]}'
-      @answer.text = "2"
+      @answer.text = "1"
       @answer.save!
       @quiz.save!
       @quiz.reload
@@ -140,11 +140,10 @@ describe "Doing exercises" do
 
     it "should allow user to select an option" do
       @quiz.answers.should == [@answer]
-      @answer.text.should == "2"
+      @answer.text.should == "1"
       visit course_study_index_path(@course)
       choose "42"
       click_button "Check answer"
-      save_and_open_page
       page.should_not have_content("incorrect")
     end
   end
