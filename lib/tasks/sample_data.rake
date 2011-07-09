@@ -40,6 +40,11 @@ namespace :db do
 
   end
 
+  desc "Add Calc Quizzes"
+  task :add_calc_quizzes, :course_id do |t,args|
+
+  end
+
 
   desc "Add Components as separate task"
   task :add_components, :course_id do |t, args|
