@@ -45,21 +45,21 @@ $(document).ready(function () {
     });
 
     $("#choices input").keyup(function() {
-        var inputJSON = getMCInputJSON();
+        var inputJSON = getMultiInputJSON("multi", "#choices");
         $("#quiz_answer_input").val(inputJSON);
       });
 
     $("#choices-check input").keyup(function() {
-        var inputJSON = getCheckInputJSON();
+        var inputJSON = getMultiInputJSON("check","#choices-check");
         $("#quiz_answer_input").val(inputJSON);
       });
 
     $("#choices :radio").change(function() {
-        populateAnswerRadio();
+        populateAnswer("#choices :radio");
     });
 
     $("#choices-check :checkbox").change(function() {
-        populateAnswerCheck();
+        populateAnswer("#choices-check :checkbox");
     });
 
     ff = loadExistingFBD();
@@ -67,10 +67,9 @@ $(document).ready(function () {
     updateInputForm();
 });
 
-
-var getMCInputJSON = function() {
-  var str = '{ "type" : "multi", "choices" : [ ';
-  var inputs = $('#choices [name|="choice"]');
+var getMultiInputJSON = function(type,div) {
+  var str = '{ "type" : "' + type + '", "choices" : [ ';
+  var inputs = $(div + ' [name|="choice"]');
   var broken = false;
   inputs.each(function(i) {
     if ($(this).val() == "") broken = true;
@@ -79,26 +78,14 @@ var getMCInputJSON = function() {
   });
   str = str.replace(/, $/, "");
   str += "]}";
+  console.log("hello");
+  console.log(str);
   return str;
 };
 
-var getCheckInputJSON = function() {
-  var str = '{ "type" : "check", "choices" : [ ';
-  var inputs = $('#choices-check [name|="choice"]');
-  var broken = false;
-  inputs.each(function(i) {
-    if ($(this).val() == "") broken = true;
-    if (broken) return;
-    str += '"' + $(this).val() + '", ';
-  });
-  str = str.replace(/, $/, "");
-  str += "]}";
-  return str;
-};
+var populateAnswer = function(choicesSelector) {
 
-var populateAnswerRadio = function() {
-
-  var choices =$('#choices :radio');
+  var choices =$(choicesSelector);
   str = "";
   choices.each(function() {
     if ($(this).attr("checked") == "checked") {
@@ -106,11 +93,12 @@ var populateAnswerRadio = function() {
     }
   }); 
   $('.quiz_answer_text').first().val(str);
+  console.log(str);
 };
 
 var populateAnswerCheck = function() {
 
-  var choices = $('#choices-check :checkbox');
+  var choices = $(choicesSelector);
   str = "";
   choices.each(function() {
     if ($(this).attr("checked") == "checked") {
