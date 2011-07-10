@@ -11,6 +11,8 @@
     float: left;
     text-align: right;
     padding-right: 130px; }
+    #signin #signin-form form input #user_session_password {
+      width: 100px; }
   #signin #oauth-login {
     float: left;
     width: 350px;

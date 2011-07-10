@@ -5,11 +5,11 @@
       <%= render 'shared/error_messages', :object => f.object %>
       <div class="field">
         <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.text_field(:email, :size => 25) %>
       </div>
       <div class="field">
         <%= f.label :password %>
-        <%= f.password_field :password %>
+        <%= f.password_field(:password, :size => 25)  %>
       </div>
       <div class="actions">
         <%= f.submit "Sign in" %>
