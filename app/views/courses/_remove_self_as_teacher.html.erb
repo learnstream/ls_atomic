@@ -1,5 +1,10 @@
 <%= form_for(user.enrollments.find_by_course_id(course)) do |f| %>
-<%= submit_tag "Remove "<< display_name(user)<<" teacher", :name => "student" %>
+  <div class = "field">
+    <%= f.hidden_field :role, :value => "student" %>
+  </div>
+ <div class="actions">
+   <%= f.submit "Remove as teacher" %>
+ </div>
 <% end %>
 
 

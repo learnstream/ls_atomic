@@ -1,7 +1,7 @@
 <li><%=link_to display_name(user), user %>
 <% if current_user.can_edit?(@course) %>
-  <div id= "add_teacher_form">
+  <div id= "add_teacher_form" class = "inline-button">
     <%= render :partial => 'courses/make_teacher', :locals => { :course => @course, :user => user  } %>
-</div>
+  </div>
 <% end %>
 </li>

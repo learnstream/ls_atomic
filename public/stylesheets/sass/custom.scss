@@ -560,6 +560,13 @@ a.signup_button {
   .actions { display: inline; }
 }
 
+.inline-button {
+  display: inline;
+
+  form { display: inline; }
+  .actions { display: inline; }
+}
+
 /* Help/videos */
 
 #video-dialog{ background:grey;}

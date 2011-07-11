@@ -20,21 +20,20 @@ class EnrollmentsController < ApplicationController
         
     @enrollment = Enrollment.find(params[:id])
     @course = @enrollment.course
-    
-    if params['teacher']
-      @enrollment.role = "teacher"
-    elsif params['student']
-      @enrollment.role = "student" unless (current_user != @enrollment.user && current_user.perm != "admin")
-    elsif params.nil? == false 
-      # FIXME: Tests are updating parameters in a different manner from what is actually sent
-      # from the view.  
-      newrole = params[:enrollment][:role]
-      if (newrole == "teacher" || current_user == @enrollment.user || current_user.perm == "admin")
-        @enrollment.role = newrole
-      end
+
+    # Restrict permissions
+    if (not current_user.can_edit?(@course))
+      flash[:error] = "You do not have permission to do that!"
+      redirect_to @course
+      return
+    elsif (@enrollment.role == "teacher" && params[:enrollment][:role] == "student" && @enrollment.user != current_user && (not current_user.admin?))
+      flash[:error] = "You cannot remove other teachers from the course!"
+      redirect_to @course
+      return
     end
 
-    if @enrollment.save
+    #update
+    if @enrollment.update_attributes(params[:enrollment])
       redirect_to :controller => :courses, :id => @course, :action => :users
     else
       flash[:error] = "You did something wrong!"

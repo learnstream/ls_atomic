@@ -437,6 +437,13 @@ a.signup_button {
   #enroll_form .actions {
     display: inline; }
 
+.inline-button {
+  display: inline; }
+  .inline-button form {
+    display: inline; }
+  .inline-button .actions {
+    display: inline; }
+
 /* Help/videos */
 #video-dialog {
   background: grey; }
