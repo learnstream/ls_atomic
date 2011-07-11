@@ -18,6 +18,7 @@ gem 'time_diff'
 gem 'sass'
 gem 'timecop'
 gem 'omniauth', '0.1.6'
+gem 'seed-fu'
 
 group :development, :test do
   gem 'jasmine'
