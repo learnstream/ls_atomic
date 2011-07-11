@@ -246,14 +246,7 @@ describe CoursesController do
 
       it "should allow teachers to remove themselves as teacher" do
         get :users, :id => @course
-        response.should have_selector("input", :value => ("Remove #{@user.email} teacher" ))
-      end
-
-      it "should not allow teachers to remove other teachers" do
-        @user2.unenroll!(@course) 
-        @user2.enroll_as_teacher!(@course)
-        get :users, :id => @course
-        response.should_not have_selector("input", :value => ("Remove #{@user2.email} teacher" ))
+        response.should have_selector("input", :value => ("Remove as teacher" ))
       end
     end
   end
