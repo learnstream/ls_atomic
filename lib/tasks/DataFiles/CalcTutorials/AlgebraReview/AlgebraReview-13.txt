@@ -1,0 +1,5 @@
+\[ \frac{d}{dx} \left[ \frac{f}{g} \right] = \frac{f g' - g f'}{g^2} \]
+
+**MISTAKE!**
+
+This is backwards! It should be \[ \frac{d}{dx} \left[ \frac{f}{g} \right] = \frac{g f' - f g'}{g^2}. \] 

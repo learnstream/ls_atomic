@@ -1,0 +1,5 @@
+\[ (x+y)^2 = x^2 + y^2 \]
+
+**MISTAKE!**
+
+Powers don't behave this way. The correct way to expand this expression gives \[ (x+y)^2 = (x+y)(x+y) = x^2 + 2xy + y^2. \] 

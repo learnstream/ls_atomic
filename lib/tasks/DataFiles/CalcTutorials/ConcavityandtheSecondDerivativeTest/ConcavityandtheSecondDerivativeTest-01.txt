@@ -1,0 +1,10 @@
+#### Concavity
+
+The Second Derivative Test provides a means of classifying relative extreme values by using the sign of the second derivative at the critical number. To appreciate this test, it is first necessary to understand the concept of concavity. 
+
+The graph of a function \(f\) is **concave upward** at the point \((c,f(c))\) if \(f'(c)\) exists and if for all \(x\) in some open interval containing \(c\), the point \((x,f(x))\) on the graph of \(f\) lies above the corresponding point on the graph of the tangent line to \(f\) at \(c\). This is expressed by the inequality \(f(x) > [f(c) + f'(c)(x-c)]\) for all \(x\) in some open interval containing \(c\). Imagine holding a ruler along the tangent line through the point \((c,f(c))\): if the ruler __supports the graph of \(f\)__ near \((c,f(c))\), then the graph of the function is concave upward. 
+
+The graph of a function \(f\) is **concave downward** at the point \((c,f(c))\) if \(f'(c)\) exists and if for all \(x\) in some open interval containing \(c\), the point \((x,f(x))\) on the graph of \(f\) lies below the corresponding point on the graph of the tangent line to \(f\) at \(c\). This is expressed by the inequality \(f(x) < [f(c) + f'(c)(x-c)]\) for all \(x\) in some open interval containing \(c\). In this situation __the graph of \(f\) supports the ruler__. This is pictured below: 
+
+![](http://www.math.hmc.edu/calculus/tutorials/secondderiv/gif/rulers.gif)
+

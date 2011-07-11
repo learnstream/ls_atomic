@@ -1,0 +1,5 @@
+\[ \frac{d}{dx} \left[ 2^x \right] = x 2^{x-1} \]
+
+**MISTAKE!**
+
+The correct answer is \( 2^x \ln{2} \). The power rule only applies if the base is a variable and the exponent is a constant, as in \(x^3\). 

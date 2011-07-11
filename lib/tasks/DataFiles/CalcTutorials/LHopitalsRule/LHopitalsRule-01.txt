@@ -1,0 +1,17 @@
+#### L'Hopital's Rule for \(\displaystyle\frac{0}{0}\)
+
+Suppose \(\lim f(x)=\lim g(x)=0\). Then 
+
+  1. If \(\displaystyle \lim\, \frac{f'(x)}{g'(x)}=L\), then \(\displaystyle \lim\, \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}=L\). 
+  2. If \(\displaystyle \lim\, \frac{f'(x)}{g'(x)}\) tends to \(+\infty\) or \(-\infty\) in the limit, then so does \(\displaystyle\frac{f(x)}{g(x)}\). 
+
+**[Geometrical Interpretation][4]** \(\qquad\) **[Sketch of the Proof of L'Hopital's Rule][5]**
+
+#### Examples
+
+\[ \lim_{x\to 0}\, \frac{\sin x}{x}=\lim_{x\to 0}\, \frac{\frac{d}{dx}(\sin x)}{\frac{d}{dx}(x)}=\lim_{x\to 0}\, \frac{\cos x}{1}=1.\] 
+\[ \lim_{x\to 1}\, \frac{2\ln x}{x-1}=\lim_{x\to 1}\, \frac{\frac{d}{dx}(2\ln x)}{\frac{d}{dx}(x-1)}=\lim_{x\to 1}\, \frac{~\frac{2}{x}~}{1}=2.\]
+\[ \lim_{x\to 0}\, \frac{e^x-1}{x^2}=\lim_{x\to 0}\, \frac{\frac{d}{dx}(e^x-1)}{\frac{d}{dx}(x^2)}=\lim_{x\to 0}\, \frac{e^x}{2x}=\infty.\]
+
+If the numerator and the denominator both tend to \(\infty\) or \(-\infty\), L'Hopital's Rule still applies. 
+

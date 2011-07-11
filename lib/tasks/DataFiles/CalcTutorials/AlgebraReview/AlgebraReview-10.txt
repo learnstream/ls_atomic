@@ -1,0 +1,6 @@
+\[ \frac{d}{dx} \left[ \sin{(x^2 + 1)} \right] = \cos{(2x)} \]     
+
+**MISTAKE!**
+
+This is a typical example of the kind of mistakes made when applying the chain rule. The correct answer is 
+\[ \frac{d}{dx} \left[ \sin{(x^2 + 1)} \right] = \cos{(x^2 + 1)} \times 2x. \] 

@@ -1,0 +1,30 @@
+#### First Derivative Test
+
+Suppose \(f\) is continuous at a critical point \(x_0\). 
+
+  * If \(f'(x) > 0\) on an open interval extending left from \(x_0\) and \(f'(x) < 0\) on an open interval extending right from \(x_0\), then \(f\) has a relative maximum at \(x_0\). 
+  * If \(f'(x) < 0\) on an open interval extending left from \(x_0\) and \(f'(x) > 0\) on an open interval extending right from \(x_0\), then \(f\) has a relative minimum at \(x_0\). 
+  * If \(f'(x)\) has the same sign on both an open interval extending left from \(x_0\) and an open interval extending right from \(x_0\), then \(f\) does not have a relative extremum at \(x_0\). 
+
+In summary, relative extrema occur where \(f'(x)\) changes sign. 
+
+#### Example
+
+![](http://www.math.hmc.edu/calculus/tutorials/extrema/gif/signfderiv.gif)
+![](https://lh4.googleusercontent.com/-OToX68Tqtoo/ThdV-8mtF1I/AAAAAAAAABE/3ZuUBpQx3QQ/FirstDerivativeExample.png)
+
+Our function \(f(x) = 3x^4-4x^3-12x^2+3\) is differentiable everywhere on \([-2,3]\), with \(f'(x) = 0\) for \(x=-1,0,2\). These are the three critical points of \(f\) on \([-2,3]\). By the First Derivative Test, \(f\) has a relative maximum at \(x=0\) and relative minima at \(x=-1\) and \(x=2\). 
+
+#### Absolute Maxima and Minima 
+
+If \(f(x_0) \geq f(x)\) for all \(x\) in an interval \(I\), then \(f\) achieves its **absolute maximum** over \(I\) at \(x_0\). 
+
+If \(f(x_0) \leq f(x)\) for all x in an interval \(I\), then \(f\) achieves its **absolute minimum** over \(I\) at \(x_0\). 
+
+Absolute maxima and absolute minima are often refered to simply as maxima and minima and are collectively called **extreme values** of \(f\).
+
+  * If \(f\) has an extreme value on an __open__ interval, then the extreme value occurs at a critical point of \(f\). 
+  * If \(f\) has an extreme value on a __closed__ interval, then the extreme value occurs either at a critical point or at an endpoint. 
+
+According to the **Extreme Value Theorem**, if a function is continuous on a closed interval, then it achieves both an absolute maximum and an absolute minimum on the interval. 
+

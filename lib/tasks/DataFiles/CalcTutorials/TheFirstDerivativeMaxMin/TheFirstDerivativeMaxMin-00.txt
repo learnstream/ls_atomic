@@ -1,0 +1,22 @@
+#!META: title(The First Derivative: Maxima and Minima);
+
+
+Consider the function \[ f(x) = 3x^4-4x^3-12x^2+3 \] on the interval \([-2,3]\). We cannot find regions of which \(f\) is increasing or decreasing, relative maxima or minima, or the absolute maximum or minimum value of \(f\) on \([-2,3]\) by inspection. Graphing by hand is tedious and imprecise. Even the use of a graphing program will only give us an approximation for the locations and values of maxima and minima. We can use the first derivative of \(f\), however, to find all these things quickly and easily. 
+
+Let \(f\) be continuous on an interval \(I\) and differentiable on the interior of \(I\). 
+
+  * If \(f'(x) > 0\) for all \(x \in I\), then \(f\) is _increasing_ on \(I\). 
+  * If \(f'(x) < 0\) for all \(x \in I\), then \(f\) is _decreasing_ on \(I\). 
+
+
+##### Increasing and Decreasing Functions 
+
+![](http://www.math.hmc.edu/calculus/tutorials/extrema/gif/inc_dec.gif)
+
+
+Let \(f\) be defined on an interval \(I\). Let \(x_1 \in I\) and \(x_2 \in I\). 
+
+Then \(f\) is **increasing** on \(I\) if \(x_1 < x_2\) implies \(f(x_1) < f(x_2)\). 
+
+The function \(f\) is **decreasing** on \(I\) if \(x_1 < x_2\) implies \(f(x_1) > f(x_2)\).
+

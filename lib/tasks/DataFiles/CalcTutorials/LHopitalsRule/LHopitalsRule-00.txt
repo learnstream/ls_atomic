@@ -1,0 +1,16 @@
+#!META: title(L'Hopital's Rule);
+
+Consider the limit \[\lim_{x\to a}\, \frac{f(x)}{g(x)}.\] If both the numerator and the denominator are finite at \(a\) and \(g(a)\neq 0\), then \[\lim_{x\to a}\, \frac{f(x)}{g(x)}=\frac{f(a)}{g(a)}.\] 
+
+#### Example
+
+\(\displaystyle\lim_{x\to 3}\, \frac{x^2+1}{x+2}=\frac{10}{5}=2\). 
+
+But what happens if both the numerator and the denominator tend to \(0\)? It is not clear what the limit is. In fact, depending on what functions \(f(x)\) and \(g(x)\) are, the limit can be anything at all! 
+
+#### Example
+
+\[ \begin{array}{l@{\qquad\qquad}l} \displaystyle\lim_{x\to 0}\, \frac{x^3}{x^2}=\lim_{x\to 0} x=0. & \displaystyle\lim_{x\to 0}\, \frac{-x}{x^3}=\lim_{x\to 0} \frac{-1}{x^2}=-\infty.\\ \displaystyle\lim_{x\to 0}\, \frac{x}{x^2}=\lim_{x\to 0} \frac{1}{x}=\infty. & \displaystyle\lim_{x\to 0}\, \frac{kx}{x}=\lim_{x\to 0} k=k. \end{array} \]
+
+These limits are examples of __indeterminate forms__ of type \(\frac{0}{0}\). L'Hopital's Rule provides a method for evaluating such limits. We will denote \(\displaystyle\lim_{x\to a}, \lim_{x\to a^+}, \lim_{x\to a^-}, \lim_{x\to \infty}, \) and \( \displaystyle\lim_{x\to -\infty}\) generically by \(\lim\) in what follows. 
+

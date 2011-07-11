@@ -1,0 +1,12 @@
+#### The Second Derivative Test
+
+The Second Derivative Test relates the concepts of critical points, extreme values, and concavity to give a very useful tool for determining whether a critical point on the graph of a function is a relative minimum or maximum. 
+
+**The Second Derivative Test:** Suppose that \(c\) is a critical point at which \(f'(c)= 0\), that \(f'(x)\) exists in a neighborhood of \(c\), and that \(f''(c)\) exists. Then \(f\) has a relative maximum value at \(c\) if \(f''(c) < 0\) and a relative minimum value at \(c\) if \(f''(c)> 0\). If \(f''(c)= 0\), the test is not informative. 
+
+#### Example
+
+Let's find and classify the extreme values for the function \(f\) with values \(f(x) = x^3 -3x^2 + x - 2\) that was introduced above. We find that \(f'(x) = 3x^2 -6x + 1\), and so there are two critical numbers where \(f'(c) = 0\): \[ c_1 = 3 - \sqrt{6} \quad {\rm and} \quad c_2 = 3 + \sqrt{6}. \] Notice that \(c_1 < 1\) and that \(f''(c) < 0\). Thus \(f\) has a relative maximum at \(x = 3 - \sqrt{6}\). Since \(c_2 > 1\) and \(f''(c_2) > 0\), the Second Derivative Test informs us that \(f\) has a relative minumum at \(x = 3 + \sqrt{6}\). 
+
+* * *
+

@@ -31,14 +31,43 @@ namespace :db do
 
   desc "Add Calc Tutorials"
   task :add_calc_tutorials, :course_id do |t,args|
-    file = File.open("#{Rails.root}/lib/tasks/DataFiles/CalcTutorials.txt",'rb')
-    contents = File.read
-    file.close()
-    calc = eval(contents)
     course = Course.find(args.course_id)
     course.lessons.destroy_all
 
+
+    dir_list = Dir["#{Rails.root}/lib/tasks/DataFiles/CalcTutorials/*"]
+    lesson = nil
+
+    dir_list.each do |tutorial|
+      Dir["#{tutorial}/*"].each_with_index do |segment, index|
+        file = File.open(segment, 'rb')
+        contents = file.read
+        file.close()
+        if contents[0..6] == "#!META:"
+          
+          title = contents.split("\n")[0][/title\(([.]*[^\)\n)]*)\)/, 1]
+          puts title
+          lesson = course.lessons.build(:name => title)
+          lesson.order_number = course.lessons.length
+          lesson.save!
+          contents = contents.split("\n")[1..-1].join("\n") 
+        end
+        event = lesson.events.build(:video_url => "", 
+                                    :start_time => 0,
+                                    :end_time => 0,
+                                    :order_number => index)
+        note = Note.create!(:content => contents, :is_document => true)
+        note.events << event
+      end
+    end
+
+
+    #file = File.open("#{Rails.root}/lib/tasks/DataFiles/CalcTutorials.txt",'rb')
+    #contents = File.read
+    ##file.close()
+    #calc = eval(contents)
   end
+  task :add_calc_tutorials => :environment
 
   desc "Add Calc Quizzes"
   task :add_calc_quizzes, :course_id do |t,args|

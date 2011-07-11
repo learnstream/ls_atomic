@@ -1,0 +1,13 @@
+#!META: title(Quotient Rule for Derivatives);
+
+
+Suppose we are working with a function \(h(x)\) that is a ratio of two functions \(f(x)\) and \(g(x)\). 
+
+**How is the derivative of \(h(x)\) related to \(f(x)\), \(g(x)\), and their derivatives?**
+
+#### Quotient Rule
+
+Let \(f\) and \(g\) be differentiable at \(x\) with \(g(x)\neq 0\). Then \(f/g\) is differentiable at \(x\) and \[\left[\frac{f(x)}{g(x)}\right]'=\frac{g(x)f'(x)-f(x)g'(x)}{[g(x)]^2}.\]   
+
+We will prove this next using the limit definition of the derivative.
+
