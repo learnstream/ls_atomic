@@ -96,6 +96,14 @@
 
       @include buttony();
   }
+  
+  .quiz-embed {
+    width: 640px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #f8f8f8; 
+  }
 }
 
 #watch-lesson-links {
