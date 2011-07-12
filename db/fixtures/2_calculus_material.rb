@@ -30,6 +30,7 @@ f.close()
 
 dir_list = Dir["#{Rails.root}/lib/tasks/DataFiles/Calculus/CalcTutorials/*"]
 lessons = Course.find(2).lessons
+puts dir_list
 
 dir_list.each_with_index do |tutorial, t|
   Dir["#{tutorial}/*"].each_with_index do |segment, index|
