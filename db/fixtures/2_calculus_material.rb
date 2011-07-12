@@ -28,18 +28,19 @@ f.close()
 
 # Lessons
 
-dir_list = Dir["#{Rails.root}/lib/tasks/DataFiles/Calculus/CalcTutorials/*"]
+dir_list = Dir["#{Rails.root}/lib/tasks/DataFiles/Calculus/CalcTutorials/*"].sort
 lessons = Course.find(2).lessons
-
+puts dir_list
 dir_list.each_with_index do |tutorial, t|
-  Dir["#{tutorial}/*"].each_with_index do |segment, index|
+  Dir["#{tutorial}/*"].sort.each_with_index do |segment, index|
+    puts Dir["#{tutorial}/*"].sort
     file = File.open(segment, 'rb')
     contents = file.read
     file.close()
     if contents[0..6] == "#!META:"
       title = contents.split("\n")[0][/title\(([.]*[^\)\n)]*)\)/, 1]
       lesson_components = contents.split("\n")[0][/components\(([.]*[^\)\n)]*)\)/, 1]
-      lesson_components = lesson_components.nil? ? [] : lesson_components.split(",")
+      lesson_components = lesson_components.nil? ? [] : lesson_components.split(",").map{ |c| compMap[c] }
       if lessons[t].nil?
         Lesson.seed do |s|
           s.name = title
@@ -58,6 +59,7 @@ dir_list.each_with_index do |tutorial, t|
       end
       contents = contents.split("\n")[1..-1].join("\n") 
     end
+    puts lessons
     Event.seed(:lesson_id, :order_number) do |s|
       s.lesson_id = lessons[t].id
       s.order_number = index

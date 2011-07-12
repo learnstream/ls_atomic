@@ -139,7 +139,7 @@ DB_id	UniqueID	Category	Question	Description	Dependency (UniqueID)	For more info
 	138	Integration by parts	How can an expression with only one term be integrated by parts?	An general heuristic in math is to introduce a helpful term without changing the expression. In this case, we want another multiplicative term, so we should do so by multiplying by 1. Consider the example \(\int\! \ln x\,dx\) (assuming you haven't already memorized the answer). Let's apply integration by parts to the same integral, \(\int\!1\cdot\ln x\,dx\), letting \(u=\ln x\), \(dv=1\) (since we do know how to differentiate \(\ln x\)). Then by integration by parts, we have \(\int\!\ln x\,dx=x\ln x+\int\!x\frac 1x\,dx=x\ln x+x\).
 	139	Integration by parts	How can an integral be computed by integration by parts if the new integral has not been reduced into something integrable?	Suppose we compute \(\displaystyle\int\! f(x)g'(x)\, dx=f(x)g(x)-\displaystyle\int\! f'(x)g(x)\,dx\). If the right hand side itself cannot be reduced into an expression without an integral, it may be possible to let \(X=\displaystyle\int\!f(x)g'(x)\) and solve for \(X\). Often we will have something like \(X=f(x)g(x)-X\), so that \(X=f(x)g(x)/2\), and that __is__ computable.
 	140	LHopitals rule	When should L'Hopital's rule be applied?	If we are finding the limit \(x\to x_0\) and \(x\) is involved in a fraction, the possibilities when plugging in \(x_0\) are, for \(c\) finite, \(\frac 00\), \(\frac c{\pm\infty}, \(\frac{\pm\infty}c\), \(\frac{\pm\infty}{\pm\infty}\), or any other purely finite fraction. In the case of \(\frac c{\pm\infty}\), the limit is 0. For \(\frac{\pm\infty}c\), \(\pm\infty\). For a finite fraction, it is simply that fraction. In the remaining two cases, we apply L'Hopital's rule.
-	141		When is the limit different depending in whether it is evaluated from the left or the right?
-	142		What is the derivative of a polynomial?
-	143		What is the integral of a polynomial?
-	144		What is the derivative of a constant?
+	141		When is the limit different depending in whether it is evaluated from the left or the right?	TBA
+	142		What is the derivative of a polynomial?	TBA
+	143		What is the integral of a polynomial?	TBA
+	144		What is the derivative of a constant?	TBA
