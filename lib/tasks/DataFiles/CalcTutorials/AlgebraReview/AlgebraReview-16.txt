@@ -1,5 +1,0 @@
-\[ \int \frac{1}{x} \, dx = \frac{x^0}{0} + C \]
-
-**MISTAKE!**
-
-The power rule for integration does not apply to \(x^{-1}\). Instead, \[ \int \frac{1}{x} \, dx = \ln \left\vert x \right\vert + C. \] 

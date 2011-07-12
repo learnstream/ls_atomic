@@ -1,9 +1,0 @@
-#!META: title(Algebra Review);
-
-### Algebra Review
---or--
-### A whirlwind tour of the most common mistakes on tests
-
-(The material in this tutorial is reprinted with permission of the authors and publisher of __How to Ace Calculus__ by Colin Adams, Abigail Franklin, and Joel Hass.)
-
-Here we will list some of the most common mistakes that we see on exams. If you can avoid these, then at least your mistakes will be uncommon. Most of the mistakes that occur repeatedly involve algebra, rather than calculus. They can be avoided by being careful and checking your work. Others involve common misunderstandings about various aspects of calculus. 

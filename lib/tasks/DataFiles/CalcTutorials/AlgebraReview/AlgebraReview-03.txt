@@ -1,5 +1,0 @@
-\[ \frac{1}{x+y} = \frac{1}{x} + y . \]
-
-**MISTAKE!**
-
-This very common error comes from carelessness about what's in the denominator. It can be avoided by careful handwriting or frequent use of parentheses.

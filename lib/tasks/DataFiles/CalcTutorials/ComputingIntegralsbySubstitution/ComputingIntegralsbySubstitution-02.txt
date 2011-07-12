@@ -1,9 +1,0 @@
-#### Example \#2
-
-To compute \(\displaystyle\int\! \sin (2x)\cos (2x)\, dx\), let 
-\[ \begin{eqnarray*} u = \sin (2x) \; \rightarrow \; du=2\cos (2x)\, dx. \end{eqnarray*} \]
-Then 
-\[\int \sin (2x)\cos (2x)\, dx=\int\frac{1}{2}\sin (2x)[2\cos (2x)\, dx]=\int \frac{1}{2}u\, du=\frac{1}{4}u^2+C=\frac{1}{4}\sin^2 (2x)+C.\] 
-
-With practice, you will often be able to write down the result immediately. 
-

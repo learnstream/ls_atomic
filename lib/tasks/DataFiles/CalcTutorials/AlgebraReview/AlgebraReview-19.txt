@@ -1,3 +1,0 @@
-Not substituting back to the original variable:     **MISTAKE!**
-
-\[ \int 2 x e^{x^2} \, dx \] does not equal \(e^u + C\). It equals \(e^{x^2} + C\). 

@@ -1,5 +1,0 @@
- \[  x < y \text{, so  }  kx < ky \text{  where  }  k \text{ is a constant.} \]
-
-**MISTAKE!**
-
-This is true when \(k\) is a POSITIVE constant. If \(k\) is negative you need to reverse the inequality. For example, if \( x < y \) then \( -x > -y \). If \(k\) is zero all bets are off.  

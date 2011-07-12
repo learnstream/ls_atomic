@@ -1,5 +1,0 @@
-#!META: title(Review of Trigonometric, Logarithmic, and Exponential Functions);
-
-
-In this tutorial, we review trigonometric, logarithmic, and exponential functions with a focus on those properties which will be useful in future math and science applications. 
-

@@ -1,5 +1,0 @@
-Misreading the problem:     **MISTAKE!**
-
-If asked to find an area, don't find a volume. If asked to find a derivative, don't find an integral. If asked to use calculus to solve a problem, don't do it in your head using algebra. Although it seems silly to include this item in our list, billions of points have been taken off exams for mistakes of this type. After you finish a problem on the exam, go back and read the question again. Check to make sure you answered the question that was asked, and make sure to show all of your work!
-
-Remember, **style** counts for something too! You'd best practice clear and concise mathematical communication, because it will serve you well for the rest of your life.

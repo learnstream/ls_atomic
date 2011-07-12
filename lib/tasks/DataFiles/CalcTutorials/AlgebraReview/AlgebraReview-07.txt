@@ -1,5 +1,0 @@
-\[ \frac{\sin{2x}}{x} = \sin{2} \]     
-
-**MISTAKE!**
-
-You can only cancel terms in the numerator and denominator of a fraction if they are not inside anything else and are just multiplying the rest of the numerator and denominator. The function \(\sin 2x\) is NOT \(\sin{2}\) multiplied by \(x\). If the fraction had been written as \[ \frac{\sin{(2x)}}{x} \] it would be harder to make such an error. 

@@ -1,5 +1,0 @@
-\[ \frac{d}{dx} \left[ \sin{(x^2 + 1)} \right] = \cos{(x^2 + 1)} + \sin{(2x)} \]
-
-**MISTAKE!**
-
-Another common way in which the chain rule is misapplied. This time the product rule has been used in a setting where the chain rule was the way to go. 

@@ -1,9 +1,0 @@
-\[  \frac{1}{x+y} = \frac{1}{x} + \frac{1}{y}  \]     
-
-**MISTAKE!**
-
-The rule for adding fractions gives \[ \frac{1}{x} + \frac{1}{y} = \frac{x+y}{xy}. \] 
-
-You have to do this by first putting them over a common denominator:
-
-\[ \frac{1}{x} + \frac{1}{y} = \frac{y}{xy} + \frac{x}{xy} = \frac{x+y}{xy} \] as shown above.

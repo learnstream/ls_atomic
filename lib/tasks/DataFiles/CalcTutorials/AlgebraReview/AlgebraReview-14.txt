@@ -1,5 +1,0 @@
-\[ \frac{d}{dx} \left[ \ln 3 \right] = \frac{1}{3} \]
-
-**MISTAKE!**
-
-The quantity \(\ln{3}\) is a constant, so \[ \frac{d}{dx} \left[ \ln 3 \right] = 0\] The same is true for ALL constants. So \(\frac{d}{dx} \left[e\right] = 0\) and \(\frac{d}{dx} \left[ \sin \left (\frac{\pi}{2} \right) \right] = 0\) as well. The mistake here is that the student (correctly) thought \[ \frac{d}{dx} \left[ \ln x \right] = \frac{1}{x} \] and then (incorrectly) plugged in \( x = 3 \) after taking the derivative.

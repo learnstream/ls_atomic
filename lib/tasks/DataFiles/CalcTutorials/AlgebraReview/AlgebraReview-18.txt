@@ -1,3 +1,0 @@
-Forgetting to simplify:     **MISTAKE!**
-
-For example \[ \int x \sqrt{x} \, dx \] is easy if you notice that \(x \sqrt{x} = x^{3/2}\) and then apply the power rule for integration. But if you try to do it using integration by parts or substitution, you will find your self in outer space without a space suit. 

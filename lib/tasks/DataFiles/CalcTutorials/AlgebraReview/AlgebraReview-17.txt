@@ -1,5 +1,0 @@
-\[ \int \tan{x} \, dx = \sec^2 x + C \]
-
-**MISTAKE!**
-
-It's the other way around: \[ \frac{d}{dx} \left[ \tan{x} \right] = \sec^2 x \] and so the correct answer is \[ \int \tan x \, dx = \ln \left\vert \sec{x} \right\vert + C \] as can be found by \(u\)-substitution with \(u = \cos{x}\). 

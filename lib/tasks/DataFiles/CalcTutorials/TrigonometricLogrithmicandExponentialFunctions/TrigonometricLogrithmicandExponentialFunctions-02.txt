@@ -1,7 +1,0 @@
-#### Evaluating Trigonometric Functions
-
-Typically, you'll have to evaluate these functions with a calculator or [WolframAlpha](http://www.wolframalpha.com/). However, there are a few with concise values that you should know.
-
-\[ \begin{array}{c|c|c|c|c|c} \hline \\  & 0 \text{ rad }  & \pi/6 \text{ rad } & \pi/4 \text{ rad }  & \pi/3 \text{ rad } & \pi/4 \text{ rad } \\   & 0^{\circ} & 30^{\circ} & 45^{\circ} & 60^\circ & 90^{\circ} \\  \hline  \sin \theta & 0 & \frac{1}{2} & \frac{\sqrt{2}}{2} & \frac{\sqrt{3}}{2} & 1 \\ \hline \cos \theta & 1 & \frac{\sqrt{3}}{2} & \frac{\sqrt{2}}{2} & \frac{1}{2} & 0 \\ \hline \tan \theta & 0 & \frac{\sqrt{3}}{3} & 1 & \sqrt{3} & \text{undefined} \end{array} \]
-
-![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/45triangle.gif) ![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/3060triangle.gif)
