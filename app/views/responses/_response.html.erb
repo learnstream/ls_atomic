@@ -6,6 +6,8 @@
     Your answer: <span class="answer markdown <%= @response.status %>">
       <% if @response.quiz.answer_type == 'multi' %>
         <%= showMultiAnswer(@response.answer, @response.quiz.answer_input) %>
+      <% elsif @response.quiz.answer_type == 'check' %>
+        <%= showCheckAnswer(@response.answer, @response.quiz.answer_input) %>
       <% else %>
         <%= @response.answer %></span><br />
     <% end %>
@@ -15,6 +17,9 @@
       That's incorrect. The answer is 
       <% if @response.quiz.answer_type == 'multi' %>
         <%= showMultiAnswer(@response.quiz.answers.first.text, @response.quiz.answer_input) %>
+      <% elsif @response.quiz.answer_type == 'check' %>
+        <%= showCheckAnswer(@response.quiz.answers.first.text, @response.quiz.answer_input) %>
+
       <% else %>
         <%= @response.quiz.answers.first.text %></span>
     <% end %>

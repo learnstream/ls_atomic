@@ -2,6 +2,6 @@
   <% 5.times do |i| %>
     <%= label_tag "choice-#{i}", "Choice #{i+1}" %>
     <%= text_field_tag "choice-#{i}" %>
-    <%= check_box_tag "use_choice", i.to_s %><br />
+    <%= check_box_tag "use_check_#{i}", i.to_s %><br />
   <% end %>
 </div>

@@ -11,14 +11,24 @@ $(document).ready(function () {
           ff.loadJSONFBD({ "fb" :{"shape":"rect-line","top":80,"left":80,"width":162,"height":100,"radius":60,"rotation":-15,"cinterval":30}});
          }
       } else if ($("#quiz_answer_type option:selected").val() == 'multi') { 
+          if($("#quiz_answer_input").val() != "") {
+            loadExistingMulti('#choices [name|="choice"]');
+          }
           $("#multichoice_form").show();
           $(".quiz_answer_text").val("");
           $('.quiz_answer_text').first().show(); //Debug only
           $("#add-answer").hide();
+          getMultiInputJSON("multi", "#choices");
+          populateAnswer("#choices :radio");
      } else if ($("#quiz_answer_type option:selected").val() == 'check') { 
+          if($("#quiz_answer_input").val() != "") {
+            loadExistingMulti('#choices-check [name|="choice"]');
+          }
           $("#check_box_form").show();
           $(".quiz_answer_text").val("");
           $('.quiz_answer_text').first().show(); //Debug only
+          getMultiInputJSON("check","#choices-check");
+          populateAnswer("#choices-check :checkbox");
           //$("#add-answer").hide();
      } else {
         $(".extra-form").hide();
@@ -62,7 +72,9 @@ $(document).ready(function () {
         populateAnswer("#choices-check :checkbox");
     });
 
-    ff = loadExistingFBD();
+    if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
+      ff = loadExistingFBD();
+    }
 
     updateInputForm();
 });
@@ -78,8 +90,6 @@ var getMultiInputJSON = function(type,div) {
   });
   str = str.replace(/, $/, "");
   str += "]}";
-  console.log("hello");
-  console.log(str);
   return str;
 };
 
@@ -92,22 +102,27 @@ var populateAnswer = function(choicesSelector) {
       str += $(this).val();
     }
   }); 
-  $('.quiz_answer_text').first().val(str);
+  str.trim();
   console.log(str);
-};
-
-var populateAnswerCheck = function() {
-
-  var choices = $(choicesSelector);
-  str = "";
-  choices.each(function() {
-    if ($(this).attr("checked") == "checked") {
-      str += " " + $(this).val();
-    }
-  }); 
   $('.quiz_answer_text').first().val(str);
 };
 
+loadExistingMulti = function(selector) {
+  var json = ($.parseJSON($("#quiz_answer_input").val()));
+  choices = json["choices"];
+  checked = $(".quiz_answer_text").first().val().split("");
+  $(selector).each(function(index) {
+    $(this).val(choices[index]);
+  });
+  console.log("checked");
+  console.log(checked);
+  for(var i=0; i < checked.length; i++) {
+    var check = checked[i];
+    $("#use_choice_" + check).attr("checked", "checked");
+    $("#use_check_" + check).attr("checked", "checked");
+  }
+  
+};
 
 var loadExistingFBD = function() {
     var ff = null;
