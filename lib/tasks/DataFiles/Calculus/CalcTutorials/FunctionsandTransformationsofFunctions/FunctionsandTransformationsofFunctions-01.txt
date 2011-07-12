@@ -1,0 +1,21 @@
+### Examples of functions
+
+  *  \(f(x)=x^2\), \(x\) real.   
+![](http://www.math.hmc.edu/calculus/tutorials/transformations/gif/figure1.gif)
+  
+
+  *  \(f(x)=\sin x\), \(x\) real.   
+![](http://www.math.hmc.edu/calculus/tutorials/transformations/gif/figure2.gif)
+  
+
+  *  \(f(x)=\left\{ \begin{array}{rl} -1, & x < 0\\ 2, & x\geq 0 \end{array}\right.\)   
+![](http://www.math.hmc.edu/calculus/tutorials/transformations/gif/figure3.gif)
+  
+
+  * \(\displaystyle f(x)=\frac{1}{x+1}\).
+![](http://www.math.hmc.edu/calculus/tutorials/transformations/gif/figure4.gif)
+  
+
+  *  \(f(x)=\sqrt{x-3}\). 
+![](http://www.math.hmc.edu/calculus/tutorials/transformations/gif/figure5.gif)
+

@@ -1,0 +1,12 @@
+#!META: title(Functions and Transformations of Functions);
+
+We will review some of the important concepts dealing with functions and transformations of functions. Most likely you have encountered each of these ideas previously, but here we will tie the concepts together.
+
+### Definition of a Function
+
+Let \(A\) and \(B\) be sets.
+
+A **function** \(F:A\to B\) is a relation that assigns to each \(x\in A\) a unique \(y\in B\). We write \(y=f(x)\) and call \(y\) the **value of \(f\) at \(x\)** or the **image of \(x\) under \(f\)**. We also say that \(f\) **maps** \(x\) to \(y\).
+
+The set \(A\) is called the **domain** of \(f\). The set of all possible values of \(f(x)\) in \(B\) is called the **range** of \(f\). Here, we will only consider real-valued functions of a real variable, so \(A\) and \(B\) will both be subsets of the real numbers. If \(A\) is left unspecified, we will assume it to be the largest set of real numbers such that for all \(x\in A\), \(f(x)\) is real.
+

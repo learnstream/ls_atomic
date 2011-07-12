@@ -1,0 +1,8 @@
+#### Example \#3
+
+We can evaluate \(\displaystyle\int\! \frac{dx}{(4x-3)^2}\) by letting 
+\[ \begin{align} u = 4x-3 \; \rightarrow \; du &= 4\, dx\quad\longrightarrow \\ dx &= \frac{1}{4}\, du.\end{align} \]
+Then \[\int \frac{dx}{(4x-3)^2}=\int \frac{\frac{1}{4}\, du}{u^2}=-\frac{1}{4u}+C=\frac{-1}{4(4x-3)}+C.\] 
+
+It is not always apparent until you try it whether or not a substitution will work. 
+

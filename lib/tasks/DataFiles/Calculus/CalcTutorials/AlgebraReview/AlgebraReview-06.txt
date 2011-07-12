@@ -1,0 +1,7 @@
+Forgetting to simplify fractions in limits:   **MISTAKE!**
+
+It is not correct to say 
+\[ \lim_{x \to 1} \frac{x^2 - 1}{x-1} = \frac{0}{0} \]
+ and therefore the limit is undefined. Even worse would be to cancel the zeroes and say the limit equals one.   
+Any time you get \(\frac{0}{0}\) for a limit, it is a BIG WARNING SIGN that says YOU HAVE MORE WORK TO DO! In this case, you first have to simplify the fractions:
+\[ \begin{align} \lim_{x \to 1} \frac{x^2 - 1}{x-1} &= \lim_{x \to 1} \frac{(x+1)(x-1)}{x-1} \\ &= \lim_{x \to 1} (x + 1) = 2. \end{align} \]

@@ -1,0 +1,5 @@
+\[ ax = bx, \hspace .5em  \text{ therefore } \hspace .5em  a = b \]
+
+**MISTAKE!**
+
+This is a more subtle mistake. The cancellation is correct IF \(x\) is not \(0\). For example \(2x = 3x\) forces \(x = 0\). You cannot cancel the \(x = 0\) and conclude that \(2 = 3\). Not in this universe, anyway. 

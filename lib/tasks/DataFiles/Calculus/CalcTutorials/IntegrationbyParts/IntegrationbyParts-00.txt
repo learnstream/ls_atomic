@@ -1,0 +1,13 @@
+#!META: title(Integration By Parts); components(77,78,79,137,138,139)
+
+
+We will use the **Product Rule** for derivatives to derive a powerful integration formula: 
+
+  * Start with \((f(x)g(x))'=f(x)g'(x)+f'(x)g(x)\). 
+  * Integrate both sides to get \(\displaystyle f(x)g(x)=\int\! f(x)g'(x)\, dx +\int\! f'(x)g(x)\, dx\). (We need not include a constant of integration on the left, since the integrals on the right will also have integration constants.) 
+  * Solve for \(\displaystyle\int\! f(x)g'(x)\, dx\), obtaining \[\int f(x)g'(x)\, dx=f(x)g(x)-\int f'(x)g(x)\, dx.\] 
+
+This formula frequently allows us to compute a difficult integral by computing a much simpler integral. We often express the **Integration by Parts** formula as follows: 
+
+Let \[ \begin{array}{ll} u = f(x)\qquad\qquad & dv = g'(x)\, dx\\ du = f'(x)\, dx & v = g(x) \end{array} \] Then the formula becomes \[\int u\, dv=uv-\int v\, du.\] To integrate by parts, strategically choose \(u\), \(dv\) and then apply the formula. 
+
