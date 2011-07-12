@@ -1,39 +1,42 @@
 #Adds stuff for Calc tutorial.
 
+
+component_map = make_calc_components()
+
 # Components
-f = File.open("#{Rails.root}/lib/tasks/DataFiles/Calculus/CalculusComponents.tsv", 'rb')
-compMap = {}
+#
+def make_calc_components
+  f = File.open("#{Rails.root}/lib/tasks/DataFiles/Calculus/CalculusComponents.tsv", 'rb')
+  compMap = {}
 
-f.each do |line|
-  next if f.lineno == 1
-  compData = line.split("\t")
-  if compData[0].empty?
-    Component.seed do |s|
-      s.course_id = 2
-      s.name = compData[3]
-      s.description = compData[4]
+  f.each do |line|
+    next if f.lineno == 1 # Skip the first line, which has spreadsheet column headers
+    data = line.split("\t")
+    if data[0].empty?  # If the DB_id column is empty...
+      Component.seed do |s|
+        s.course_id = 2
+        s.name = compData[3]
+        s.description = compData[4]
+      end
+    else
+      Component.seed(:id) do |s|
+        s.id = compData[0]
+        s.name = compData[3]
+        s.description = compData[4]
+      end
     end
-  else
-    Component.seed(:id) do |s|
-      s.id = compData[0]
-      s.name = compData[3]
-      s.description = compData[4]
-    end
+    # Maps UniqueID => DB_id 
+    compMap.merge!( { compData[1] => "#{Component.where(:name => compData[3]).first.id}" })
   end
-  # Maps UniqueID => DB_id 
-  compMap.merge!( { compData[1] => "#{Component.where(:name => compData[3]).first.id}" })
+  f.close()
 end
-f.close()
-
 
 # Lessons
 
 dir_list = Dir["#{Rails.root}/lib/tasks/DataFiles/Calculus/CalcTutorials/*"].sort
 lessons = Course.find(2).lessons
-puts dir_list
 dir_list.each_with_index do |tutorial, t|
   Dir["#{tutorial}/*"].sort.each_with_index do |segment, index|
-    puts Dir["#{tutorial}/*"].sort
     file = File.open(segment, 'rb')
     contents = file.read
     file.close()
@@ -59,7 +62,6 @@ dir_list.each_with_index do |tutorial, t|
       end
       contents = contents.split("\n")[1..-1].join("\n") 
     end
-    puts lessons
     Event.seed(:lesson_id, :order_number) do |s|
       s.lesson_id = lessons[t].id
       s.order_number = index
