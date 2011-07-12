@@ -29,7 +29,6 @@ $(document).ready(function () {
           populateAnswer("#choices-check :checkbox");
           $("#add-answer").hide();
      } else {
-        $(".extra-form").hide();
         $("#add-answer").show();
         $("#addanswerbutton").show();
         $("#remove-answer").show();
@@ -78,17 +77,17 @@ $(document).ready(function () {
 });
 
 var getMultiInputJSON = function(type,div) {
-  var str = '{ "type" : "' + type + '", "choices" : [ ';
+  var jsonObj = { "type" : type };
+  jsonObj["choices"] = [];
   var inputs = $(div + ' [name|="choice"]');
   var broken = false;
   inputs.each(function(i) {
     if ($(this).val() == "") broken = true;
     if (broken) return;
-    str += '"' + $(this).val() + '", ';
+    jsonObj["choices"].push($(this).val());
   });
-  str = str.replace(/, $/, "");
-  str += "]}";
-  return str;
+
+  return JSON.stringify(jsonObj);
 };
 
 var populateAnswer = function(choicesSelector) {
@@ -101,7 +100,6 @@ var populateAnswer = function(choicesSelector) {
     }
   }); 
   str.trim();
-  console.log(str);
   $('.quiz_answer_text').first().val(str);
 };
 
@@ -112,8 +110,7 @@ loadExistingMulti = function(selector) {
   $(selector).each(function(index) {
     $(this).val(choices[index]);
   });
-  console.log("checked");
-  console.log(checked);
+
   for(var i=0; i < checked.length; i++) {
     var check = checked[i];
     $("#use_choice_" + check).attr("checked", "checked");
