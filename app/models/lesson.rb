@@ -1,4 +1,7 @@
 class Lesson < ActiveRecord::Base
+
+  attr_reader :component_tokens
+
   has_many :events, :dependent => :destroy
   has_many :quizzes, :through => :events, 
                      :source => :playable,
@@ -18,6 +21,13 @@ class Lesson < ActiveRecord::Base
     self.course.lessons.where("order_number > ?", self.order_number).first
   end
 
+
+
+  #----- added
+  def component_tokens=(ids)
+    self.component_ids = ids.split(",")
+  end
+  #---------
   private 
 
   def create_lesson_statuses

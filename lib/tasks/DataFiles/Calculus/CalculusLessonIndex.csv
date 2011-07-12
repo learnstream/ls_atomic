@@ -1,4 +1,4 @@
-DB_id,name,course_id,order_number,components,document_path
+DB_id,name,course_id,order_number,components,lesson_path
 1,Common Algebra Mistakes,2,1,,AlgebraReview
 2,"Review of Trigonometric, Logarithmic, and Exponential Functions",2,2,,TrigonometricLogrithmicandExponentialFunctions
 3,Functions and Transformations of Functions,2,3,,FunctionsandTransformationsofFunctions

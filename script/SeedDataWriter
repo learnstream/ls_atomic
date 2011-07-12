@@ -11,6 +11,9 @@ CALC_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures',
 CALC_QUIZ = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/CalculusExercises.csv' )
 CALC_QUIZ_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '03_calculus_quizzes.rb')
 CALC_ANSW_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '04_calculus_quiz_answers.rb')
+CALC_LESSON_INDEX = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/CalculusLessonIndex.csv' )
+CALC_LESSON_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '05_calculus_lessons.rb')
+CALC_LESSON_EVENT_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '05_calculus_lesson_eventss.rb')
 
 PHYS_COMPONENTS = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Physics/PhysicsComponents.csv' )
 PHYS_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '03_physics_components.rb' )
@@ -21,10 +24,16 @@ component_writer = SeedFu::Writer.new({
   :seed_by => [:id]
 })
 
-lesson_doc_writer = SeedFu::Writer.new({
+lesson_writer = SeedFu::Writer.new({
   :class_name => 'Lesson',
   :seed_by => [:id]
 })
+
+event_doc_writer = SeedFu::Writer.new({
+  :class_name => 'Event',
+  :seed_by => [:lesson_id, :order_number]
+})
+
 
 quiz_writer = SeedFu::Writer.new({
   :class_name => 'Quiz',
@@ -90,22 +99,20 @@ end
 
 lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
   event_doc_writer.write(CALC_LESSON_EVENT_OUT) do |e_writer|
-  CSV.foreach(CALC_LESSON_INDEX, :return_headers => false, :headers => :first_row) do |row|
+    CSV.foreach(CALC_LESSON_INDEX, :return_headers => false, :headers => :first_row) do |row|
+      l_writer.add({
+        :id => row['DB_id'].to_i,
+        :course_id => row['course_id'].to_i,
+        :name => row['name'],
+        :order_number => row['order_number'].to_i,
+        :component_tokens => row['components'].to_s
+      })
+      pathname = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/Lessons', row['lesson_path'])
 
-    l_writer.add({
-      :id => row['DB_id'].to_i,
-      :course_id => row['course_id'].to_i,
-      :name => row['name'],
-      :order_number => row['order_number'].to_i,
-      :component_tokens => row['components'].to_s
-    })
-
-
+      puts Dir["#{pathname}/*"].sort
+    end
   end
-
-
 end
-
 
 
 
