@@ -16,9 +16,8 @@ $(document).ready(function () {
           }
           $("#multichoice_form").show();
           $(".quiz_answer_text").val("");
-          $('.quiz_answer_text').first().show(); //Debug only
           $("#add-answer").hide();
-          getMultiInputJSON("multi", "#choices");
+          $("#quiz_answer_input").val(getMultiInputJSON("multi", "#choices"));
           populateAnswer("#choices :radio");
      } else if ($("#quiz_answer_type option:selected").val() == 'check') { 
           if($("#quiz_answer_input").val() != "") {
@@ -26,10 +25,9 @@ $(document).ready(function () {
           }
           $("#check_box_form").show();
           $(".quiz_answer_text").val("");
-          $('.quiz_answer_text').first().show(); //Debug only
-          getMultiInputJSON("check","#choices-check");
+          $("#quiz_answer_input").val(getMultiInputJSON("check","#choices-check"));
           populateAnswer("#choices-check :checkbox");
-          //$("#add-answer").hide();
+          $("#add-answer").hide();
      } else {
         $(".extra-form").hide();
         $("#add-answer").show();
