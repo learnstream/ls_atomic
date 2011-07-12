@@ -59,6 +59,7 @@ dir_list.each_with_index do |tutorial, t|
       end
       contents = contents.split("\n")[1..-1].join("\n") 
     end
+    puts lessons
     Event.seed(:lesson_id, :order_number) do |s|
       s.lesson_id = lessons[t].id
       s.order_number = index
