@@ -98,7 +98,7 @@ file.each do |line|
       s.course_id = 2
       s.in_lesson = false
       s.question = exerciseData[2]
-      s.answer_type = "multi"
+      s.answer_type = exerciseData[3]
       s.answer_input = { :type => "multi", :choices => answer_tokens }.to_json
       s.answer_output = { :type => "text" }.to_json #is this depricated...?
       s.components = component_tokens.map { |c| Component.find(c) }
@@ -113,7 +113,7 @@ file.each do |line|
       s.course_id = 2
       s.in_lesson = false
       s.question = exerciseData[2]
-      s.answer_type = "multi"
+      s.answer_type = exerciseData[3]
       s.answer_input = { :type => "multi", :choices => answer_tokens }.to_json
       s.answer_output = { :type => "text" }.to_json #is this depricated...?
       s.components = component_tokens.map { |c| Component.find(c) }
