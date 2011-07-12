@@ -1,0 +1,113 @@
+#!/usr/bin/env ruby
+#
+# This is: script/generate_cities_seed_from_csv
+#
+require 'seed-fu'
+require 'rubygems'
+require 'csv'
+
+CALC_COMPONENTS = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/CalculusComponents.csv' )
+CALC_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '02_calculus_components.rb' )
+CALC_QUIZ = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/CalculusExercises.csv' )
+CALC_QUIZ_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '03_calculus_quizzes.rb')
+CALC_ANSW_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '04_calculus_quiz_answers.rb')
+
+PHYS_COMPONENTS = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Physics/PhysicsComponents.csv' )
+PHYS_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '03_physics_components.rb' )
+
+# Create a seed_writer, walk the CSV, add to the file.
+component_writer = SeedFu::Writer.new({
+  :class_name => 'Component',
+  :seed_by => [:id]
+})
+
+lesson_doc_writer = SeedFu::Writer.new({
+  :class_name => 'Lesson',
+  :seed_by => [:id]
+})
+
+quiz_writer = SeedFu::Writer.new({
+  :class_name => 'Quiz',
+  :seed_by => [:id]
+})
+
+answer_writer = SeedFu::Writer.new({
+  :class_name => "Answer",
+  :seed_by => [:quiz_id]
+})
+
+
+component_writer.write(CALC_COMPONENTS_OUT) do |writer|
+  CSV.foreach( CALC_COMPONENTS, :return_headers => false, :headers => :first_row) do |row|
+    # Write the seed
+    writer.add({
+      :id => row['DB_id'].to_i,
+      :course_id => 2,
+      :name => row['name'],
+      :description => row['description']
+    })
+  end
+end
+
+component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
+  CSV.foreach( PHYS_COMPONENTS, :return_headers => false, :headers => :first_row) do |row|
+    # Write the seed
+    writer.add({
+      :id => row['DB_id'].to_i,
+      :course_id => 1,
+      :name => row['name'],
+      :description => row['description']
+    })
+  end
+end
+
+
+quiz_writer.write(CALC_QUIZ_OUT) do |q_writer|
+  answer_writer.write(CALC_ANSW_OUT) do |a_writer|
+    CSV.foreach(CALC_QUIZ, :return_headers => false, :headers => :first_row) do |row|
+      answer_tokens = (0..3).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
+      q_writer.add({
+        :id => row['DB_id'].to_i,
+        :course_id => 2,
+        :in_lesson => false,
+        :question => row['question'],
+        :answer_type => row['answer_type'],
+        :answer_input => { :type => row['answer_type'], :choices => answer_tokens}.to_json,
+        :answer_output => {:type => "text"}.to_json,
+        :component_tokens => row['components'].to_s
+      })
+
+      row['answer'].split("").each do |a|
+        a_writer.add({
+          :quiz_id => row['DB_id'].to_i,
+          :text => a
+        })
+      end 
+    end
+  end
+end
+
+
+lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
+  event_doc_writer.write(CALC_LESSON_EVENT_OUT) do |e_writer|
+  CSV.foreach(CALC_LESSON_INDEX, :return_headers => false, :headers => :first_row) do |row|
+
+    l_writer.add({
+      :id => row['DB_id'].to_i,
+      :course_id => row['course_id'].to_i,
+      :name => row['name'],
+      :order_number => row['order_number'].to_i,
+      :component_tokens => row['components'].to_s
+    })
+
+
+  end
+
+
+end
+
+
+
+
+
+
