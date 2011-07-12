@@ -28,11 +28,11 @@ f.close()
 
 # Lessons
 
-dir_list = Dir["#{Rails.root}/lib/tasks/DataFiles/Calculus/CalcTutorials/*"]
+dir_list = Dir["#{Rails.root}/lib/tasks/DataFiles/Calculus/CalcTutorials/*"].sort
 lessons = Course.find(2).lessons
 puts dir_list
 dir_list.each_with_index do |tutorial, t|
-  Dir["#{tutorial}/*"].each_with_index do |segment, index|
+  Dir["#{tutorial}/*"].sort.each_with_index do |segment, index|
     puts Dir["#{tutorial}/*"].sort
     file = File.open(segment, 'rb')
     contents = file.read
