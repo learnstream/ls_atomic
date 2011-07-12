@@ -537,6 +537,12 @@ table.course-data {
   }
 }
 
+#signup { 
+  margin: auto;
+  width: 450px;
+  text-align: center;
+}
+
 a.signup_button {
   margin-left: auto;
   margin-right: auto;
@@ -547,8 +553,13 @@ a.signup_button {
   background: #ccc;
   font-size: 150%;
   font-weight: bold;
-  padding: 20px;
+  padding: 10px;
   clear: both;
+
+  &:hover {
+    background: #ddd;
+    text-decoration: none;
+  }
 }
 
 /* Buttons/Forms */
