@@ -24,6 +24,7 @@ describe MemoriesController do
       get :index, :course_id => @course
       response.should be_success
     end
+
   end
 
   describe "PUT 'update'" do

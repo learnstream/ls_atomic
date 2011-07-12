@@ -23,4 +23,21 @@
       </td>
     </tr>
   <% end %>
+  <% @locked_memories.each do |memory| %>
+    <tr class="course-data-row">
+      <td><%= link_to truncate(memory.component.name, :length => 60), course_component_path(@course, memory.component) %></td>
+      <td><ul><% memory.component.lessons.each do |lesson| %>
+          <li><%= link_to lesson.name, [@course, lesson] %></li>
+        <% end %></ul>
+      </td>
+      <td class="<%= strength_class(memory) %>"><%= strength(memory) %></td> 
+      <td><%= pluralize(memory.memory_ratings.count, "time") %></td>
+      <td><% if strength(memory) != "Not being studied" %>
+            <%= form_for [@course, memory] do |f| %>
+            <%= f.submit "Stop studying" %> 
+            <% end %>
+          <% end %>
+      </td>
+    </tr>
+  <% end %>
 </table>

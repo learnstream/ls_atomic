@@ -28,27 +28,6 @@ describe "Course page" do
     it "should link to a list of components" do
       page.should have_css("a", :text => "See all components")
     end
-
-    it "should list the status of each component on the component page" do
-      click_link "See all components"
-      page.should have_css("td", :text => @component.name)
-      page.should have_css("td", :text => "Not started")
-    end
-
-    it "should allow the student to stop studying components" do
-      click_link "See all components"
-      click_button "Stop studying"
-      page.should have_css("td", :text => "Not being studied")
-    end
-
-    it "should update the status when the component is viewed" do
-      @memory = @user.memories.find_by_component_id(@component)
-      @memory.view(4)
-      click_link "all components"
-      page.should have_css("td", :text => @component.name)
-      page.should have_css("td", :text => "Weak")
-      page.should have_css("td", :text => "1 time")
-    end
   end
 
   describe "for unenrolled users" do

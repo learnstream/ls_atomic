@@ -16,7 +16,8 @@ class MemoriesController < ApplicationController
 
   def index 
     @course = Course.find(params[:course_id])
-    @memories = current_user.memories.in_course(@course)
+    @memories = current_user.memories.in_course(@course).where("views > 0")
+    @locked_memories = current_user.memories.in_course(@course).where("views = 0")
   end
 
   private
