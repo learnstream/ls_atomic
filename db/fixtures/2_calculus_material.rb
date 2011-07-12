@@ -40,7 +40,7 @@ dir_list.each_with_index do |tutorial, t|
     if contents[0..6] == "#!META:"
       title = contents.split("\n")[0][/title\(([.]*[^\)\n)]*)\)/, 1]
       lesson_components = contents.split("\n")[0][/components\(([.]*[^\)\n)]*)\)/, 1]
-      lesson_components = lesson_components.nil? ? [] : lesson_components.split(",")
+      lesson_components = lesson_components.nil? ? [] : lesson_components.split(",").map{ |c| compMap[c] }
       if lessons[t].nil?
         Lesson.seed do |s|
           s.name = title
