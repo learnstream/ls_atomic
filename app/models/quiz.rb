@@ -107,6 +107,6 @@ class Quiz < ActiveRecord::Base
   end
 
   def last_response_from(user)
-    self.responses.by_user(user).last
+    self.responses.by_user(user).first
   end
 end
