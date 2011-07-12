@@ -3,41 +3,25 @@
 <p><strong>Question:</strong> <span id="question" class="markdown"><%= @response.quiz.question %></span></p>
 <div id="judgement">
   <% if not @response.status.blank? %> 
-    Your answer: <span class="answer markdown <%= @response.status %>">
-      <% if @response.quiz.answer_type == 'multi' %>
-        <%= showMultiAnswer(@response.answer, @response.quiz.answer_input) %>
-      <% elsif @response.quiz.answer_type == 'check' %>
-        <%= showCheckAnswer(@response.answer, @response.quiz.answer_input) %>
-      <% else %>
-        <%= @response.answer %></span><br />
-    <% end %>
+    Your answer: 
+    <span class="answer <%= @response.status %>">
+      <%= user_answer(@response) %>
+    </span><br />
     <% if @response.status == "correct" %>
-      You're correct!<br />
+      <span class="correct-status">You're correct!</span><br />
     <% else %>
-      That's incorrect. The answer is 
-      <% if @response.quiz.answer_type == 'multi' %>
-        <%= showMultiAnswer(@response.quiz.answers.first.text, @response.quiz.answer_input) %>
-      <% elsif @response.quiz.answer_type == 'check' %>
-        <%= showCheckAnswer(@response.quiz.answers.first.text, @response.quiz.answer_input) %>
-
-      <% else %>
-        <%= @response.quiz.answers.first.text %></span>
+      <span class="incorrect-status">That's incorrect</span>. The answer is 
+      <span class="answer correct"><%= quiz_answer(@response) %></span>.<br />
     <% end %>
+  <% else %>
+    The answer is: <span class="answer correct"><%= @response.quiz.answers.first.text %></span><br />
   <% end %>
-<% else %>
-  The answer is: <span class="answer markdown correct">
-    <% if @response.quiz.answer_type == 'multi' %>
-      <%= showMultiAnswer(@response.quiz.answers.first.text, @response.quiz.answer_input) %>
-    <% else %>
-      <%= @response.quiz.answers.first.text %></span>
+  <% if @response.quiz.answer_type == 'fbd' %>
+    <%= render :partial => 'responses/fbd', :locals => { :answer_output => @response.quiz.answer_output } %>
   <% end %>
-<% end %>
-<% if @response.quiz.answer_type == 'fbd' %>
-  <%= render :partial => 'responses/fbd', :locals => { :answer_output => @response.quiz.answer_output } %>
-<% end %>
-<% if @response.quiz.explanation %>
-  <p class="markdown"><%= @response.quiz.explanation %></p>
-<% end %>
+  <% if @response.quiz.explanation %>
+    <br /><p class="markdown"><%= @response.quiz.explanation %></p>
+  <% end %>
 
 </div>
 
@@ -48,5 +32,5 @@
   <%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
 <% end %>
 
-
+<br /><br />
 <%= render :partial => 'components/help' %>
