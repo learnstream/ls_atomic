@@ -57,16 +57,6 @@ class ComponentsController < ApplicationController
     @title = @component.name
   end
 
-  def describe
-    @component = Component.find(params[:id])
-    respond_to do |format|
-      format.json { render :json => {
-        :text => @component.description
-        }
-      }
-    end
-  end
-
   def index
     @course = Course.find(params[:course_id])
     respond_to do |format|

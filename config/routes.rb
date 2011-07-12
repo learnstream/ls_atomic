@@ -25,27 +25,13 @@ LsAtomic::Application.routes.draw do
     resources :memories, :only => [:index, :update] 
   end
 
-  resources :components do
-    member do
-      get :describe
-    end
-  end
+  resources :components 
 
   resources :videos, :only => [:create, :update, :destroy, :edit]
   resources :enrollments, :only => [:create, :update, :destroy]
 
-  resources :memories do
-    member do
-      get :rate
-    end
-  end
-
-  resources :quizzes do
-    member do
-      get :rate_components
-    end
-  end
-
+  resources :memories
+  resources :quizzes
   resources :responses, :only => [:create, :update, :edit, :index, :show]
 
   resources :lessons do

@@ -314,21 +314,6 @@ describe ComponentsController do
     end
   end
 
-  describe "GET 'describe'" do
-    before(:each) do
-      test_sign_in(Factory(:admin))
-    end
-
-    it "should return the component's description for a valid component" do
-      @course = Factory(:course)
-      @component = @course.components.create(:name => "name", :descriptions => "desc")
-
-      @expected = { :text => @component.description }.to_json
-      get :describe, :course_id => @course, :id => @component, :format => :json
-      response.body.should == @expected
-    end
-  end
-
   describe "GET 'new'" do
 
     before(:each) do

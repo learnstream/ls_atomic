@@ -10,19 +10,6 @@ describe MemoriesController do
       @component = @course.components.create!(:name => "name", :description => "desc")
       @user.enroll!(@course)
       @memory = @user.memories.find_by_component_id(@component)
-    end
-
-  describe "GET 'rate'" do
-    
-    it "should fail when given an invalid quality score" do
-      get :rate, :id => @memory, :quality => 10
-      response.should_not be_success
-    end
-
-    it "should redirect to the course study page" do
-      get :rate, :id => @memory, :quality => 4 
-      response.should redirect_to(course_study_index_path(@course))
-    end
   end
 
   describe "GET 'index'" do
