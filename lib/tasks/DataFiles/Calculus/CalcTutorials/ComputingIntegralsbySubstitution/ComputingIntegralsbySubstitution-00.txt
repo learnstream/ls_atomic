@@ -1,0 +1,13 @@
+#!META: title(Computing Integrals by Substitution); components(15,16,136);
+
+Many integrals are most easily computed by means of a change of variables, commonly called a **\(u\)-substitution**.
+
+The substitution method amounts to applying the Chain Rule in reverse. That is, to compute an integral of the form
+\[ \int f(g(x))g'(x)\, dx\] 
+we let \[ u = g(x) \rightarrow du = g'(x) dx\] 
+
+Then,
+\[\int f(g(x)) g'(x)\, dx = \int f(u)\, du = F(u) = F(g(x)) \] 
+where \(F\) is an antiderivative of \(f\).
+
+Let's look at some examples to make this clearer!

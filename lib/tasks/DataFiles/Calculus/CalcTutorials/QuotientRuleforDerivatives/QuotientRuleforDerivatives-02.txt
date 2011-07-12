@@ -1,0 +1,22 @@
+#### Examples
+
+  * If \(\displaystyle f(x)=\frac{2x+1}{x-3}\), then:
+\[ \begin{eqnarray*} f'(x)&=&\frac{(x-3)\frac{d}{dx}[2x+1]-(2x+1)\frac{d}{dx}[x-3]}{[x-3]^2}\\ &=& \frac{(x-3)(2)-(2x+1)(1)}{(x-3)^2}\\ &=& -\frac{7}{(x-3)^2}. \end{eqnarray*}   \]
+  
+
+  * If \(\displaystyle f(x)=\tan x=\frac{\sin x}{\cos x}\), then:
+\[ \begin{eqnarray*} f'(x)&=&\frac{\cos (x)\frac{d}{dx}[\sin (x)]-\sin (x)\frac{d}{dx} [\cos x]}{[\cos x ]^2}\\ &=& \frac{\cos^2 (x)+\sin^2 (x)}{\cos^2 (x)}\\ &=& \frac{1}{\cos^2 (x)}\\ &=& \sec^2 (x), \end{eqnarray*} \]
+verifying the familiar differentiation formula for \(\tan (x)\).   
+  
+
+  * If \(\displaystyle f(x)=\frac{1}{g(x)}\), then:
+\[\begin{eqnarray*} f'(x)=\left[\frac{1}{g(x)}\right]'&=&\frac{g(x)\frac{d}{dx}[1]-(1)g'(x)} {[g(x)]^2}\\ &=& \frac{g(x)(0)-(1)g'(x)}{[g(x)]^2}\\ &=& -\frac{g'(x)}{[g(x)]^2}. \end{eqnarray*} \]
+For example, \(\displaystyle \frac{d}{dx}[x^{-4}]=\frac{d}{dx}\left[\frac{1}{x^4}\right] =-\frac{\frac{d}{dx}[x^4]}{[x^4]^2}=-\frac{4x^3}{x^8}=-\frac{4}{x^5}=-4x^{-5}\). 
+
+* * *
+
+### Key Concepts
+
+#### Quotient Rule
+
+Let \(f\) and \(g\) be differentiable at \(x\) with \(g(x) \neq 0\). Then \(f/g\) is differentiable at \(x\) and \[\left[\frac{f(x)}{g(x)}\right]' = \frac{g(x)f'(x)-f(x)g'(x)}{\left[g(x)\right]^2}.\]

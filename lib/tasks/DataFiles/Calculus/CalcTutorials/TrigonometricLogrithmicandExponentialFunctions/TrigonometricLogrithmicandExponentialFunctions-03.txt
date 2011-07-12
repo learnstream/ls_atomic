@@ -1,0 +1,21 @@
+#### Trigonometric Identities
+
+There are a few simple identities which you should know like the back of your hand -- these come straight from a little geometry and the "Polar Angle" definition of sine and cosine.
+
+
+\[ \begin{array}{lcr} \sin(-\theta) & = & -\sin\theta \\ \cos(-\theta)& = & \cos\theta \\ ~\\ \cos(\theta+\pi) & = & -\cos\theta \\ \sin(\theta+\pi) & = & -\sin\theta \end{array} \]
+\[ \begin{array}{lcr} \sin(\theta +\pi/2) & = & \cos\theta\\ \cos(\theta +\pi/2) & = & -\sin\theta\\ ~\\ \cos(\theta +2\pi) & = & \cos\theta\\ \sin(\theta +2\pi) & = & \sin\theta \end{array} \]  
+
+
+We list here some of the most commonly used identities:
+ * \( \displaystyle\cos^2\theta+\sin^2\theta=1 \)
+ * \( \displaystyle\sin(2\theta)=2\sin\theta\cos\theta\)
+ * \( \displaystyle\cos^2\theta =\displaystyle\frac{1}{2}[1+\cos(2\theta)]\)
+ * \( \displaystyle \sin^2\theta=\displaystyle\frac{1}{2}[1-\cos(2\theta)]\)
+ * \( \displaystyle\cos(2\theta)=\cos^2\theta-\sin^2\theta \)
+ * \( \displaystyle\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta\)
+ * \( \displaystyle\cos(\alpha +\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta\)
+ * \( \displaystyle C_1\cos(\omega x)+C_2\sin(\omega x)=A\sin(\omega x+\phi) \qquad{\small\textrm{where }} A=\sqrt{C_1^2+C_2^2},\quad \phi=\arctan (C_1/C_2)\)
+
+These are good to be familiar with, so you can recognize them and look them up if needed. Many problems will become infinitely easier to solve if you can make the right substitution using these trig identities!
+

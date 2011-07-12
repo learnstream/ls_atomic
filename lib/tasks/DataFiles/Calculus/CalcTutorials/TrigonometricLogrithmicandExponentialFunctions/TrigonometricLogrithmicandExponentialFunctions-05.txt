@@ -1,0 +1,31 @@
+#### Logarithmic and Exponential Functions
+
+Logarithmic and exponential functions are inverses of each other: \begin{eqnarray*} y=\log_b x & \quad{\small\textrm{if and only if}} & x=b^y\\ y=\ln x & {\small\textrm{ if and only if }} & x=e^y. \end{eqnarray*} In words, \(\displaystyle \log_b x\) is the exponent you put on base \(b\) to get \(x\). Thus, \[log_b b^x=x \qquad {\small\textrm{and}} \qquad b^{\log_b x}=x.\] 
+
+**More Properties of Logarithmic and Exponential Functions**
+
+Notice the relationship between each pair of identities: 
+\[\begin{array}{ccc@{\qquad}ccc} \log_b 1=0 & \longleftrightarrow & b^0=1 & \log_b ac=\log_b a+\log_b c & \longleftrightarrow & b^mb^n=b^{m+n}\\ \log_b b=1 & \longleftrightarrow & b^1=b & \log_b \displaystyle\frac{a}{c}=\log_b a-\log_b c & \longleftrightarrow & \displaystyle\frac{b^m}{b^n}=b^{m-n}\\ \log_b \displaystyle\frac{1}{c}=-\log_b c & \longleftrightarrow & b^{-m}=\displaystyle\frac{1}{b^m} & \log_b a^r=r\log_b a & \longleftrightarrow & (b^m)^n=b^{mn} . \end{array}\] 
+
+**Graphs of Logarithmic and Exponential Functions**
+
+\(f(x) = \ln x\) :
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/lnx.gif)
+
+
+\(f(x) = e^x\):
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/expx.gif)
+
+Notice that each curve is the reflection of the other about the line \(y=x\).
+![](https://lh5.googleusercontent.com/-mlPUAW1pM04/ThddO8qiyaI/AAAAAAAAABY/ZSPv03mJ7BQ/ExpLogFunctions.png)
+
+
+**Limits of Logarithmic and Exponential Functions**
+
+  1. \(\displaystyle \lim_{x\to\infty} \frac{\ln x}{x}=0\quad\) (\(\ln x\) grows more slowly than \(x\)).   
+  
+
+  2. \(\displaystyle \lim_{x\to\infty} \frac{e^x}{x^n}=\infty\) for all positive integers \(n\quad\) (\(\displaystyle e^x\) grows faster than \(x^n\)).   
+  
+
+  3. For \(|x|\ll 1\), \(\displaystyle\lim_{n\to\infty} \left(1+\frac{x}{n}\right)^n=e^x\). 

@@ -1,0 +1,21 @@
+Sometimes it is necessary to integrate twice by parts in order to compute an integral: 
+
+#### Example \#3
+
+Let's compute \(\displaystyle\int\! e^x\cos x\, dx\). 
+
+Let \[ \begin{array}{ll} u = e^x\qquad\qquad & dv = \cos x\, dx\\ du = e^x\, dx & v = \sin x \end{array} \] Then \(\displaystyle\int\! e^x\cos x\, dx=e^x\sin x-\int\! e^x\sin x\, dx\). 
+
+It is not clear yet that we've accomplished anything, but now let's integrate the integral on the right-hand side by parts: 
+
+Now let \[ \begin{array}{ll} u = e^x\qquad\qquad & dv = \sin x\, dx\\ du = e^x\, dx & v = -\cos x \end{array} \] So \(\displaystyle\int\! e^x\sin x\, dx=-e^x\cos x+\int e^x\cos x\, dx\). 
+
+Substituting this into \(\displaystyle\int\! e^x\cos x\, dx=e^x\sin x-\int\! e^x\sin x\, dx\), we get 
+\[ \begin{align} \int e^x\cos x\, dx&= e^x\sin x-\left[-e^x\cos x+\int e^x\cos x\, dx\right] \\ &= e^x\sin x+ e^x\cos x -\int e^x\cos x\, dx. \end{align} \]
+ The integral \(\displaystyle\int\! e^x\cos x\, dx\) appears on both sides on the equation, so we can solve for it: 
+\[2\int e^x\cos x\, dx=e^x\sin x+e^x\cos x.\] 
+Finally, 
+\[\int e^x\cos x\, dx =\frac{1}{2}e^x\sin x+\frac{1}{2}e^x\cos x +C.\]  
+
+* * *
+

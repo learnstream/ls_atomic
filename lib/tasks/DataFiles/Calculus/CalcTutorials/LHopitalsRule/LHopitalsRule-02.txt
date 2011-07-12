@@ -1,0 +1,15 @@
+#### Geometrical Interpretation of L'Hopital's Rule \(\displaystyle\left(\frac{0}{0} {\small\bf\textrm{ Case}}\right)\)
+
+![](http://www.math.hmc.edu/calculus/tutorials/lhopital/gif/lhopital_geometric.gif)
+
+Consider \(\displaystyle \lim_{t\to a^+}\, \frac{y(t)}{x(t)}\), where \(x(a)=y(a)=0\). At time \(t\), the secant line through \((x(t), y(t))\) and \((0,0)\) has slope 
+\[\frac{y(t)-0}{x(t)-0}=\frac{y(t)}{x(t)}.\] 
+As \(t\to a^+\), \(x(t)\to 0\) and \(y(t)\to 0\), and we expect the secant line to approximate the tangent line at \((0,0)\) better and better. In the limit as \(t\to a^+\), 
+\[{\small\textrm{slope of tangent at }(0,0)} = \lim_{t\to a^+}\, \frac{y(t)}{x(t)}.\] 
+But we can also calculate the slope of the tangent line at \((0,0)\) as 
+\[{\small\textrm{slope of tangent at }(0,0)} = \left.\frac{dy}{dx}\right|_{x=0}=\frac{dy/dt|_{y=0}}{dx/dt|_{x=0}}=\lim_{t\to a^+} \frac{y'(t)}{x'(t)}.\] 
+Thus, \[\lim_{t\to a^+}\frac{y(t)}{x(t)}=\lim_{t\to a^+}\frac{y'(t)}{x'(t)}.\] 
+This is an informal geometrical interpretation, and certainly not a proof, of L'Hopital's Rule. However, it does give us insight into the formal statement of the rule.
+
+
+
