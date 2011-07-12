@@ -32,6 +32,7 @@ f.close()
 
 lessons = Course.find(1).lessons
 lessonMap = {}
+lesson_list = []
 # --------------------------------------
  
 file = File.open("#{Rails.root}/lib/tasks/DataFiles/Physics/PhysicsLessons.tsv", 'rb')
@@ -40,13 +41,17 @@ file.each do |line|
   next if file.lineno == 1
   lessonData = line.split("\t")
   lesson = nil
-  if lessonData[3].empty?   #No lesson_id from database in this table. Set order_number later.
-    Lesson.seed do |s|
-      s.course_id = 1
-      s.name = lessonData[2]
+
+  if lessonData[3].empty? 
+    if !lesson_list.include?(lessonData[4])   #No lesson_id from database in this table. Set order_number later.
+      Lesson.seed do |s|
+        s.course_id = 1
+        s.name = lessonData[2]
+      end
+      lesson = Lesson.where(:name => lessonData[2]).first
+      lessons << lesson   
+      lesson_list << lessonData[4]
     end
-    lesson = Lesson.where(:name => lessonData[2]).first
-    lessons << lesson   
   else
     Lesson.seed(:id) do |s|
       s.id = lessonData[3]
@@ -60,13 +65,19 @@ file.each do |line|
 
   Event.seed(:lesson_id, :order_number) do |s|
     s.lesson_id = lesson.id 
-    s.order_number = lessonData[8]
+    s.order_number = lessonData[8].to_i - 1
     s.video_url = lessonData[6]
     s.start_time = lessonData[16].to_i
     s.end_time = lessonData[17].to_i
   end
-  event = Event.where(:lesson_id => lesson.id, :order_number => lessonData[8]).first
-  component_tokens = lessonData[10].to_s.split(",").map{|e| Component.find(lessonMap[e]) }
+  puts lesson
+  event = Event.where(:lesson_id => lesson.id, :order_number => lessonData[8].to_i - 1).first
+  puts "Lesson order #{lessonData[8]}"
+  puts "Lesson id #{lesson.id}"
+  puts "#{lesson.events}"
+  puts "Event: #{event}"
+  component_tokens = lessonData[10].to_s.split(",").map{|e| Component.find(compMap[e]) }
+  puts "compTokens: #{component_tokens}"
   lessonData[12] == "text" ? answer_tokens = lessonData[13].to_s.split("&") : answer_tokens = [lessonData[13].to_s]
 
         #component_tokens.each { |c| quiz.components << Component.find(c)} 
@@ -106,27 +117,12 @@ file.each do |line|
     elsif lessonData[7] == "Note"
       Note.seed(:id) do |s|
         s.id = event.playable.id 
-        s.content = contents
-        s.is_document = true
+        s.content = lessonData[9]
         s.events = [event]
       end
     end
   end
 end
-
-
-        #is there a better way to do this? I'll admit i'm a bit lost now in the quiz controller/model code. -NP
-        quiz = Quiz.create!(:course_id => course,
-                 :in_lesson => lesson_event["in_lesson"],
-                 :answer_type => lesson_event["answer_type"],
-                 :explanation => lesson_event["explanation"],
-                 :question => lesson_event["question"],
-                 :answer_input => { :type => lesson_event["answer_type"] }.to_json,
-                 :answer_output => { :type => "text" }.to_json)
-
-        component_tokens.each { |c| quiz.components << Component.find(c)} 
-        answer_tokens.each { |a| quiz.answers.create!(:text => a ) }
-        quiz.events << event
 
 
 
