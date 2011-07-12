@@ -33,7 +33,7 @@ lessons = Course.find(2).lessons
 puts dir_list
 dir_list.each_with_index do |tutorial, t|
   Dir["#{tutorial}/*"].each_with_index do |segment, index|
-    puts Dir["#{tutorial}/*"]
+    puts Dir["#{tutorial}/*"].sort
     file = File.open(segment, 'rb')
     contents = file.read
     file.close()
