@@ -13,11 +13,12 @@ gem 'authlogic'
 gem 'will_paginate', '3.0.pre2'
 gem 'escape_utils'
 gem 'jquery-rails', '>= 1.0.3'
-gem 'paperclip', '~> 2.3'
+gem 'paperclip', '~> 2.3.15'
 gem 'time_diff'
 gem 'sass'
 gem 'timecop'
 gem 'omniauth', '0.1.6'
+gem 'seed-fu'
 
 group :development, :test do
   gem 'jasmine'

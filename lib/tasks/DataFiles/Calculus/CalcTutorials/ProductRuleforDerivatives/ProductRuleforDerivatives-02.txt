@@ -1,0 +1,17 @@
+We illustrate the product rule with the following examples. 
+
+  * If \(h(x) = x e^x \), then: \[ \begin{eqnarray*} h'(x) &=& (x)' e^x + x (e^x)'\\ &=& e^x + xe^x. \end{eqnarray*} \]
+  
+
+  * If \(h(x) = x^2 \sin x \), then:  \[ \begin{eqnarray*} h'(x) &=& (x^2)' \sin x + (x^2)(\sin x)'\\ &=& 2x \sin x + x^2 \cos x. \end{eqnarray*} \]
+  
+
+  * If \(h(x) = e^{-x^2} \cos 2x \), then: \[ \begin{eqnarray*} h'(x) &=& (e^{-x^2})' \cos 2x + e^{-x^2} (\cos 2x)' \\ &=& -2xe^{-x^2} \cos 2x -2e^{-x^2} \sin 2x. \end{eqnarray*} \]
+
+* * *
+
+### Key Concepts
+
+**Product Rule**
+
+Let \(f(x)\) and \(g(x)\) be differentiable at \(x\). Then \(h(x) = f(x)g(x)\) is differentiable at \(x\) and \(h'(x) = f'(x)g(x) + f(x)g'(x)\).

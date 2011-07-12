@@ -1,0 +1,5 @@
+\[ \sqrt{x+y} = \sqrt{x} + \sqrt{y} \]    
+
+ **MISTAKE!**
+
+There is no simplified way to write \(\sqrt{x + y}\). You just have to live with it as is. 

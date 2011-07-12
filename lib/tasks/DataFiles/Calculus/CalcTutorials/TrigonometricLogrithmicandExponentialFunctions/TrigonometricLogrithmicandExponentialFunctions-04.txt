@@ -1,0 +1,21 @@
+#### Graphs of Trigonometric Functions
+
+\(\sin x\):
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/sinx.gif)
+
+\(\cos x\):
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/cosx.gif)
+
+\(\tan x\):
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/tanx.gif)
+
+\(\cot x\):
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/cotx.gif)
+
+\(\sec x\):
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/secx.gif)
+
+\(\csc x\):
+![](http://www.math.hmc.edu/calculus/tutorials/reviewtriglogexp/gif/cscx.gif)
+
+

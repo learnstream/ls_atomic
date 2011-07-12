@@ -1,0 +1,11 @@
+#### Key Concepts (review)
+
+\[\int u\, dv=uv-\int v\, du.\] 
+
+  * Choose \(u\), \(dv\) in such a way that: 
+
+    1. \(u\) is easy to _differentiate_. 
+    2. \(dv\) is easy to _integrate_. 
+    3. \(\displaystyle\int\! v\, du\) is easier to compute that \(\displaystyle\int\! u\, dv\). 
+
+  * Sometimes it is necessary to integrate by parts more than once.

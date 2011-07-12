@@ -1,0 +1,6 @@
+#### Example \#4
+
+To compute \(\displaystyle\int\! x\sqrt{x-3}\, dx\), we will try 
+\[ \begin{align} u &= x-3 \quad\longrightarrow \\ x &= u+3 \, ; \, du = dx. \end{align} \]
+ So \[ \begin{align} \int x\sqrt{x-3}\, dx &= \int (u+3)\sqrt{u}\, du=\int \left(u^{3/2}+3u^{1/2}\right)\, du \\ &= \frac{2}{5}u^{5/2}+2u^{3/2}+C = \frac{2}{5}(x-3)^{5/2}+2(x-3)^{3/2}+C. \end{align} \]
+

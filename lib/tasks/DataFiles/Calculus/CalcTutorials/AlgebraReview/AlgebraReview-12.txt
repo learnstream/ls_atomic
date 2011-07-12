@@ -1,0 +1,5 @@
+\[ \frac{d}{dx} \left[\cos{x}\right] = \sin{x}\]
+
+**MISTAKE!**
+
+The answer should be \[ \frac{d}{dx} \left[ \cos x \right] = -\sin{x}\] Extremely common error costing students over 10 million points a year on exams around the world. 

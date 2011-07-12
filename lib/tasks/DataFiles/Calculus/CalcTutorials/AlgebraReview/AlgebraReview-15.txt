@@ -1,0 +1,5 @@
+\[ \int x \, dx = \frac{1}{2}x^2 \]
+
+**MISTAKE!**
+
+The correct answer is \[ \int x \, dx = \frac{1}{2}x^2 + C  \] Picky profs penalize points pedantically. Don't forget the \( +C \) on your tests, lest your professor decides to add a C+ instead!
