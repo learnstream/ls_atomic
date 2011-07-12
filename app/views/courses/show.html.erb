@@ -49,16 +49,15 @@
     </div>
 
     <div id="components" class="course-section">
-      <h2>Components</h2>
       <% if @components.empty? %>
-        Course has no components.
       <% else %>
-        <p>
+        <h2>Concepts</h2>
+        <p>Start typing to look up a question<br />
         <div id="course_id" class="hidden"><%= @course.id %></div>
         <input type="text" id="course_components" size="30" /><br />
         <a href="#" id="component_help_link" class="quizbutton round">Learn more</a>
         or
-        <%= link_to "see all components", course_memories_path(@course) %>
+        <%= link_to "see all concepts", course_memories_path(@course) %>
         </p>
       <% end %>
     </div>

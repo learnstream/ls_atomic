@@ -26,7 +26,7 @@ describe "Course page" do
     end
 
     it "should link to a list of components" do
-      page.should have_css("a", :text => "See all components")
+      page.should have_css("a", :text => "see all concepts")
     end
   end
 
