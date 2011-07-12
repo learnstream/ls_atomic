@@ -45,6 +45,17 @@
   #stream-area .event {
     margin-bottom: 15px;
     padding: 10px;
+#content {
+  clear: both;
+  width: 690px;
+  height: 250px;
+  margin: auto;
+  padding: 50px 15px 0px 15px;
+  overflow: auto;
+  background: #eee; }
+  #content .event {
+    margin-bottom: 100px;
+    padding: 15px;
     background: #fff;
     border: 1px solid #ddd;
     -moz-border-radius: 10px;
