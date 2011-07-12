@@ -11,7 +11,7 @@
       <% student = enrollment.user %>
       <tr>
         <td class="student-column">
-          <%= link_to student.email, student %><br />
+          <%= link_to display_name(student), student %><br />
           (<%= (enrollment.course_completion*100).round %>%)
         </td>
 
