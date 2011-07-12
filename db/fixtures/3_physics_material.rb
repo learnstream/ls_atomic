@@ -80,8 +80,6 @@ file.each do |line|
   puts "compTokens: #{component_tokens}"
   lessonData[12] == "text" ? answer_tokens = lessonData[13].to_s.split("&") : answer_tokens = [lessonData[13].to_s]
 
-        #component_tokens.each { |c| quiz.components << Component.find(c)} 
-        #answer_tokens.each { |a| quiz.answers.create!(:text => a ) }
   if event.playable.nil?
     if lessonData[7] == "Quiz"
       Quiz.seed do |s|
@@ -123,7 +121,21 @@ file.each do |line|
     end
   end
 end
+file.close()
 
+
+file = File.open("#{Rails.root}/lib/tasks/DataFiles/Physics/PhysicsLessonComponents.tsv", 'rb')
+file.each do |line|
+  next if file.lineno == 1
+  lineData = line.split("\t")
+  puts "Linedata #{lineData[0]}"
+  puts "Lesson #{lessonMap[lineData[0]]}"
+  puts lineData[1].split(",").map { |c| Component.find(compMap[c]) }
+  Lesson.seed(:id) do |s|
+    s.id = lessonMap[lineData[0]]
+    s.components = lineData[1].split(",").map{ |c| Component.find(compMap[c]) }
+  end
+end
 
 
 # Writes out the component map.
