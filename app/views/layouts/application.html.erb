@@ -72,8 +72,12 @@
   </header>
   <section>
   <%= yield(:panel) if content_for?(:panel) %>
- 
-  <%= (flash_msg = yield(:flash_msg)).blank? ? render(:partial => 'shared/flash', :locals => { :flash => flash }) : flash_msg %>
+
+  <% if content_for?(:flash_msg) %>
+    <%= yield(:flash_msg) %>
+  <% else %>
+    <%= render(:partial => 'shared/flash', :locals => { :flash => flash }) %>
+  <% end %>
   
   <%= yield %>
  </section>

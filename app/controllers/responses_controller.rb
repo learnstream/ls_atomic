@@ -44,7 +44,7 @@ class ResponsesController < ApplicationController
         format.html { 
           notice = "Just studied: "
           @response.quiz.components.each do |component|
-            studied += component.name + " "
+            notice += component.name + " "
           end
           flash[:notice] = notice
           redirect_to course_study_index_path(@course) }
