@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  before_filter :authenticate
+
   def index
     @lesson = Lesson.find(params[:lesson_id])
     @events = @lesson.events.includes(:playable).all
@@ -36,4 +38,12 @@ class EventsController < ApplicationController
       format.html   { render :partial => "event", :collection => @events, :as => :event, :layout => false }
     end
   end
+
+  def authorized_teacher
+    @course = Course.find(params[:course_id]) if params[:course_id]
+    if current_user.perm != "admin" and !current_user.teacher?(@course)
+      redirect_to root_path
+    end
+  end
+
 end

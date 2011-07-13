@@ -4,7 +4,7 @@
     <tr>
       <td class="unused student-column"></td>
       <% @lessons.each { |lesson| %>
-        <td class="label"><%= link_to lesson.name,[@course, lesson] %></td>
+        <td class="label"><%= link_to lesson.name,edit_course_lesson_path(@course, lesson) %></td>
       <% } %>
     </tr>
     <% @course.student_enrollments.each { |enrollment| %>
