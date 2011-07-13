@@ -53,6 +53,7 @@ quiz_writer.write(CALC_QUIZ_OUT) do |q_writer|
   answer_writer.write(CALC_ANSW_OUT) do |a_writer|
     CSV.foreach(CALC_QUIZ, :return_headers => false, :headers => :first_row) do |row|
       answer_tokens = (0..3).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
+      component_tokens = row['components'].to_s.split(",").map{ |c| id_encode("CalculusComponents-#{c}") }.join(",")
       quiz_id = id_encode("CalculusExercises-#{row['UniqueID']}")
       q_writer.add({
         :id => quiz_id, 
@@ -62,7 +63,7 @@ quiz_writer.write(CALC_QUIZ_OUT) do |q_writer|
         :answer_type => row['answer_type'],
         :answer_input => { :type => row['answer_type'], :choices => answer_tokens}.to_json,
         :answer_output => {:type => "text"}.to_json,
-        :component_tokens => row['components'].to_s
+        :component_tokens => component_tokens
       })
       row['answer'].split("").each do |a|
         a_writer.add({ :quiz_id => quiz_id, :text => a })
@@ -77,12 +78,13 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
     note_writer.write(CALC_LESSON_NOTE_OUT) do |n_writer|
       CSV.foreach(CALC_LESSONS_INDEX, :return_headers => false, :headers => :first_row) do |row|
         lesson_id = id_encode("CalculusLesson-#{row['UniqueID']}")
+        component_tokens = row['components'].to_s.split(",").map{ |c| id_encode("CalculusComponents-#{c}") }.join(",")
         l_writer.add({
           :id => lesson_id,
           :course_id => row['course_id'].to_i,
           :name => row['name'],
           :order_number => row['order_number'].to_i,
-          :component_tokens => row['components'].to_s
+          :component_tokens => component_tokens 
         })
 
         lesson_root_path = File.join( File.dirname(__FILE__), '..', "lib/tasks/DataFiles/Calculus/Lessons/#{row['lesson_path']}")
