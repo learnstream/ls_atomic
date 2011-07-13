@@ -1,12 +1,9 @@
 <% breadcrumb :course, @course %>
 
 <div id="course-content">
-
-
-
   <% if current_user.student?(@course) %>
 
-    <div id = "exercises" class="course-section">
+    <div id="exercises" class="course-section">
       <h2> Exercises </h2>
       <p>
       <% memories_due = current_user.memories_due_with_quiz(@course).count %>
@@ -14,10 +11,11 @@
         Complete a lesson to unlock more exercises.
       <% else %>
         <%= link_to "Study now!", course_study_index_path(@course.id), :class => 'quizbutton round' %><br />
-        <%= pluralize(memories_due, "item") %> for review
+        <%= pluralize(memories_due, "concept") %> to review
       <% end %>
       </p>
     </div>
+
 
     <div id="lessons" class="course-section">
       <h2>Lessons</h2>
@@ -47,7 +45,7 @@
         </table>
       <% end %>
     </div>
-
+    
     <div id="components" class="course-section">
       <% if @components.empty? %>
       <% else %>
@@ -71,12 +69,3 @@
 
 </div>
 
-<% if current_user.memory_ratings.in_course(@course).count > 0 %>
-  <div id="stats-sidebar"><%= render 'stats' %></div>
-<% end %>
-
-
-<% content_for :javascript do %>
-  <%= javascript_include_tag "jquery.flot.js" %>
-  <%= javascript_include_tag "Stats" %>
-<% end %>

@@ -163,7 +163,6 @@ h1.course-name {
   border-bottom: 1px solid #eee; }
 
 #course-content {
-  float: left;
   width: 600px; }
   #course-content .course-section {
     margin-bottom: 25px; }
@@ -215,7 +214,7 @@ a.study_button {
   background: #eee;
   padding: 20px; }
   #panel .number {
-    font-size: 4em; }
+    font-weight: bold; }
   #panel .section {
     padding-bottom: 15px;
     margin-bottom: 15px;

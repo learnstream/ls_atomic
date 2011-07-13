@@ -27,9 +27,9 @@
 
 
 <% if @response.has_been_rated %>
-  <%= render :partial => "shared/next_button", :locals => { :myresponse => @response } %>
+  <br /> <%= render :partial => "shared/next_button", :locals => { :myresponse => @response } %>
 <% else %>
-  <%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
+  <br /><%= render :partial => 'shared/rate_panel', :locals => { :myresponse => @response} %>
 <% end %>
 
 <br /><br />
