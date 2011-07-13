@@ -25,12 +25,25 @@ Answer(s):
   <p><%= @quiz.responses.count  %> responses given. <%= @quiz.percent_responses_correct %>% correct.</p>
 
 
-  <table id="student_responses">
-    <tr id="labels">
-      <th> Student </th>
-      <th> Response </th>
-      <th> Status </th>
-      <th> Date </th>
+<table id="student_responses">
+  <tr id="labels">
+    <th> Student </th>
+    <th> Response </th>
+    <th> Status </th>
+    <th> Date </th>
+  </tr>
+  <% @quiz.responses.each do |r| %>
+    <tr>
+      <td> <%= display_name(r.user) %> </td>
+      <td> <%= r.answer %> </td>
+      <td> 
+        <% if r.status == "challenged" %>
+          <%= render :partial => 'quizzes/challenge_form', :locals => {:response => r} %>
+        <% else %>
+          <%= r.status %> 
+        <% end %>
+      </td>
+      <td> <%= time_ago_in_words(r.created_at) %> ago </td>
     </tr>
     <% @quiz.responses.each do |r| %>
       <tr>
