@@ -1,14 +1,14 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 14:43:08 -0700
+# Date: 2011-07-13 15:11:04 -0700
 # Seeding Lesson
 # Written with the command:
 #
 #   ./script/SeedDataWriter 
 #
 Lesson.seed(:id,
-  {:id=>228348225, :course_id=>2, :name=>"Common Algebra Mistakes", :order_number=>0, :component_tokens=>""},
-  {:id=>59165149, :course_id=>2, :name=>"Review of Trigonometric, Logarithmic, and Exponential Functions", :order_number=>1, :component_tokens=>""},
+  {:id=>228348225, :course_id=>2, :name=>"Common Algebra Mistakes", :order_number=>0, :component_tokens=>"254777316,114106823,86201450,313981003,220861887,257577592,14666332,162961757,7818318,270803657,228833320,145019039,202551402,163683678,25871732,242613969,4937744,208378964,148809809,283167702,268881998,213754074,90037959,235168212,152590422,223517341,133635940,5665333,84525643,26105193,136323728,286573385,208406229,258685472,244996936,237846167,96633298,289184360,260706323,115186468,140955796,183767007,80617914,281482582,306012087,136075655,155033429,95646998,141780832,299171735"},
+  {:id=>59165149, :course_id=>2, :name=>"Review of Trigonometric, Logarithmic, and Exponential Functions", :order_number=>1, :component_tokens=>"209665939,3678723,96422419,15377297,124199519,207275880,45806381,266053806,23000720"},
   {:id=>1039797, :course_id=>2, :name=>"Functions and Transformations of Functions", :order_number=>2, :component_tokens=>""},
   {:id=>53245379, :course_id=>2, :name=>"Limit Definition of the Derivative", :order_number=>4, :component_tokens=>"125280352,148926907,256827288,284701906,70618010"},
   {:id=>119208138, :course_id=>2, :name=>"The Chain Rule", :order_number=>5, :component_tokens=>"60218940,311211863"},
