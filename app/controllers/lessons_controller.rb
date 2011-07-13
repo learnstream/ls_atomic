@@ -88,11 +88,4 @@ class LessonsController < ApplicationController
     @lessons_selected = "selected"
   end
 
-  def enrolled
-    if not current_user.enrolled?(@course)
-      redirect_to root_path
-    elsif current_user.teacher?(@course)
-      redirect_to course_path(@course)
-    end
-  end
 end

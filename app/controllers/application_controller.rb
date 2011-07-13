@@ -17,6 +17,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def enrolled
+    if not current_user.enrolled?(@course)
+      flash[:error] = "You must be enrolled in the course to do that!"
+      redirect_to root_path
+    elsif current_user.teacher?(@course)
+      flash[:error] = "You are a teacher in this course. You must be a student to study or watch lessons."
+      redirect_to course_path(@course)
+    end
+  end
+
   def signed_in?
     !current_user.nil?
   end

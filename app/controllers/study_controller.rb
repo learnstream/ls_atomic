@@ -1,5 +1,6 @@
 class StudyController < ApplicationController
   before_filter :authenticate
+  before_filter :enrolled
 
   layout "study"
 
