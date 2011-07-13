@@ -88,4 +88,14 @@ class LessonsController < ApplicationController
     @lessons_selected = "selected"
   end
 
+  def enrolled
+    if not current_user.enrolled?(@course)
+      flash[:error] = "You must be enrolled in the course to do watch lessons!"
+      redirect_to root_path
+    elsif current_user.teacher?(@course)
+      flash[:error] = "You are a teacher in this course. You must be a student to watch lessons."
+      redirect_to course_path(@course)
+    end
+  end
+
 end

@@ -1,4 +1,6 @@
 class ResponsesController < ApplicationController
+  before_filter :authenticate
+
   layout "study", :only => [:show]
   
   def create

@@ -90,6 +90,7 @@ class QuizzesController < ApplicationController
   end
 
   def authorized_teacher
+    @course = Course.find(params[:course_id]) if params[:course_id]
     if current_user.perm != "admin" and !current_user.teacher?(@course)
       redirect_to root_path
     end

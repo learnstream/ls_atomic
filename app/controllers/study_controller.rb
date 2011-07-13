@@ -29,4 +29,16 @@ class StudyController < ApplicationController
       format.js 
     end
   end
+
+  def enrolled
+    @course =  Course.find(params[:course_id]) if params[:course_id]
+    if not current_user.enrolled?(@course)
+      flash[:error] = "You must be enrolled in the course to study!"
+      redirect_to root_path
+    elsif current_user.teacher?(@course)
+      flash[:error] = "You are a teacher in this course. You must be a student to study."
+      redirect_to course_path(@course)
+    end
+  end
+
 end

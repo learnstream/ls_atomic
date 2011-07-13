@@ -8,9 +8,13 @@
     data-order_number="<%= event.order_number %>"> </div>
   <% if event.playable_type == "Note" %>
     <div class="content markdown"><%=event.playable.content%></div>
-    <%= link_to "Edit", edit_note_path(event.playable_id), :remote => true %>
+    <% if current_user.can_edit?(event.lesson.course) %>
+      <%= link_to "Edit", edit_note_path(event.playable_id), :remote => true %>
+    <% end %>
   <% else %>
     <div class="question"><%=event.playable.question%></div>
-    <%= link_to "Edit", edit_course_quiz_path(event.lesson.course, event.playable_id), :remote => true %>
+    <% if current_user.can_edit?(event.lesson.course) %>
+      <%= link_to "Edit", edit_course_quiz_path(event.lesson.course, event.playable_id), :remote => true %>
+    <% end %>
   <% end %>
 </div>

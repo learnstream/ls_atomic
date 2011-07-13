@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
 
   before_filter :authenticate
   before_filter :authorized_user, :only => [:new, :create]
-  before_filter :authorized_teacher, :only => [:student_stats]
+  before_filter :authorized_teacher, :only => [:student_status]
 
   layout :choose_layout
 

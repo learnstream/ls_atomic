@@ -2,7 +2,8 @@ class ComponentsController < ApplicationController
   layout :choose_layout
 
   before_filter :authenticate
-  before_filter :only => [:create, :edit, :update, :new] do 
+  #before_filter :only => [:create, :edit, :update, :new, :index, :destroy] do 
+  before_filter :except => [:show] do 
     check_permissions(params)
   end 
   before_filter :select_components
@@ -78,7 +79,7 @@ class ComponentsController < ApplicationController
       course ||= Course.find(params[:component][:course_id])
 
       unless current_user.can_edit?(course)
-        flash[:error] = "You don't have permissions!"
+        flash[:error] = "You need to be a teacher or an admin to do that!"
         redirect_to root_path
         return false
       end 
