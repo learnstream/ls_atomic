@@ -5,11 +5,14 @@
 require 'seed-fu'
 require 'rubygems'
 require 'csv'
+require 'digest/sha2'
 
 
 def id_encode(string)
+  temp_hash = Digest::SHA2.new << string
+  # Now, converts to integer...
   output = ""
-  string.each_byte {|b| output += b.to_s.rjust(3, "0") }
+  temp_hash.to_s.each_byte {|b| output += b.to_s.rjust(3, "0") }
   return output.to_i % 314159265
 end
 
@@ -227,7 +230,7 @@ lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
             quiz_id = id_encode("PhysicsExercises-#{row['UniqueID']}")
             q_writer.add({
               :id => quiz_id, 
-              :course_id => 2,
+              :course_id => 1,
               :in_lesson => false,
               :question => row['question'],
               :answer_type => row['answer_type'],

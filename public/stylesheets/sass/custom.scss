@@ -212,7 +212,7 @@ h1.course-name {
 }
 
 #course-content {
- float:left; width: 600px;
+  width: 600px;
 
   .course-section {
     margin-bottom: 25px;
@@ -297,7 +297,7 @@ a.study_button {
   background: #eee;
   padding: 20px;
 
-  .number { font-size: 4em; }
+  .number { font-weight: bold; }
 
   .section {
     padding-bottom: 15px;

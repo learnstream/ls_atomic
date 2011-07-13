@@ -80,11 +80,11 @@ class User < ActiveRecord::Base
   end
 
   def memories_due_with_quiz(course)
-    memories.joins(:component => :quizzes).merge(Quiz.where(:in_lesson => false)).in_course(course).due_before(Time.now.utc)
+    memories.joins(:component => :quizzes).merge(Quiz.unlocked(course.id, self.id).exercises).group('memories.id').in_course(course).due_before(Time.now.utc).all
   end
 
   def number_of_memories_today(course)
-    memories.reviewed_today.uniq.length + memories_due_with_quiz(course).length
+    memories.reviewed_today.length + memories_due_with_quiz(course).length
   end
 
   def apply_omniauth(omniauth)

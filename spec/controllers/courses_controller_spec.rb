@@ -111,6 +111,7 @@ describe CoursesController do
       test_sign_in(@user)
       @course = Factory(:course)
       @user.enroll!(@course)
+      @component = Factory(:component, :course => @course)
     end
   
     it "should be successful" do
