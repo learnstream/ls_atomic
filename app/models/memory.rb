@@ -13,6 +13,7 @@ class Memory < ActiveRecord::Base
   scope :reviewed_today, joins(:component => {:quizzes => :responses}).merge(Response.where('responses.created_at >= ? AND responses.created_at <= ?', DateTime.now.utc.beginning_of_day, DateTime.now.utc)).group('memories.id')
 
   scope :course_exercise, lambda { |course_id| in_course(course_id).due_before(DateTime.now.utc).viewed }
+  default_scope order('memories.due')
 
   def course
     component.course
