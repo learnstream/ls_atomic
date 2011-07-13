@@ -39,7 +39,13 @@ class ResponsesController < ApplicationController
 
   def update
     @response = Response.find(params[:id])
-    @response.rate_components!(Integer(params[:quality]))
+    
+    if params[:quality] # self-rate a correct response
+      @response.rate_components!(Integer(params[:quality]))
+    elsif params[:response] # challenge a response labelled as incorrect
+      @response.update_attributes(params[:response])
+    end
+
     @course = @response.quiz.course
 
     if @response.save

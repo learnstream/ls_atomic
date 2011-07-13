@@ -12,6 +12,7 @@
     <% else %>
       <span class="incorrect-status">That's incorrect</span>. The answer is 
       <span class="answer correct"><%= quiz_answer(@response.quiz) %></span>.<br />
+      <%= render :partial => 'responses/challenge', :locals => {:response => @response} %> 
     <% end %>
   <% else %>
     The answer is: <span class="answer correct"><%= quiz_answer(@response.quiz) %></span><br />
