@@ -17,7 +17,7 @@
       <td class="<%= strength_class(memory) %>"><%= strength(memory) %></td> 
       <td><%= pluralize(memory.memory_ratings.count, "time") %></td>
       <td><% if strength(memory) != "Not being studied" %>
-          <%= render :partial => 'memories/stop_studying', :locals => {:memory => memory} %>
+          <%= render :partial => 'memories/stop_studying', :locals => {:memory => memory, :course => @course} %>
           <% end %>
       </td>
     </tr>

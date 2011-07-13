@@ -29,12 +29,6 @@ describe MemoriesController do
 
   describe "PUT 'update'" do
 
-    it "should remove the memory" do
-      put :update, :course_id => @course, :id => @memory
-      @memory.reload
-      @memory.should be_removed
-    end
-
     it "should redirect to memories index" do
       put :update, :course_id => @course, :id => @memory
       response.should redirect_to course_memories_path(@course)
