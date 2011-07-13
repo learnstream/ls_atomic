@@ -1,6 +1,6 @@
 class ResponsesController < ApplicationController
   before_filter :authenticate
-  before_filter :correct_student
+  before_filter :correct_student, :only => [:show, :update]
 
   layout "study", :only => [:show]
   
@@ -73,8 +73,10 @@ class ResponsesController < ApplicationController
   end
 
   def correct_student
+    @response = Response.find(params[:id])
     if((@response.user != current_user) && (not current_user.can_edit?(@response.quiz.course)))
       flash[:error] = "You may not edit or view responses other than your own unless you are a teacher for this course."
       redirect_to course_path(@response.quiz.course)
     end
+  end
 end
