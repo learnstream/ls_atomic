@@ -38,7 +38,7 @@ Answer(s):
       <td> <%= r.answer %> </td>
       <td> 
         <% if r.status == "challenged" %>
-          <div id = "challenge-area"><%= render 'quizzes/challenge_link'%></div>
+          <div id = "challenge-area"><%= link_to "challenged", "/quizzes/challenge_link",:remote => true %></div>
         <% else %>
           <%= r.status %> 
         <% end %>

@@ -1,4 +1,1 @@
-$("#challenge-area").:tml("<a href = '#'>Challenge</a>")
-$("#challenge-area").click(function() {
-  $("#challenge-area").html(<%= render 'quizzes/challenge_form' %>); 
-});
+$("#challenge-area%>").replaceWith("<%= escape_javascript(render 'quizzes/challenge_form') %>");
