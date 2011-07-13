@@ -6,6 +6,14 @@ require 'seed-fu'
 require 'rubygems'
 require 'csv'
 
+
+def id_encode(string)
+  output = ""
+  string.each_byte {|b| output += b.to_s.rjust(3, "0") }
+  return output.to_i % 314159265
+end
+
+
 CALC_COMPONENTS = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/CalculusComponents.csv' )
 CALC_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '02_calculus_components.rb' )
 CALC_QUIZ = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/CalculusExercises.csv' )
@@ -13,7 +21,8 @@ CALC_QUIZ_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '03_c
 CALC_ANSW_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '04_calculus_quiz_answers.rb')
 CALC_LESSONS_INDEX = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Calculus/CalculusLessonIndex.csv' )
 CALC_LESSON_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '05_calculus_lessons.rb')
-CALC_LESSON_EVENT_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '05_calculus_lesson_eventss.rb')
+CALC_LESSON_EVENT_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '06_calculus_lesson_events.rb')
+CALC_LESSON_NOTE_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '07_calculus_lesson_notes.rb')
 
 PHYS_COMPONENTS = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Physics/PhysicsComponents.csv' )
 PHYS_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '03_physics_components.rb' )
@@ -33,8 +42,8 @@ component_writer.write(CALC_COMPONENTS_OUT) do |writer|
     writer.add({
       :id => id_encode("CalculusComponents-#{row['UniqueID']}"),
       :course_id => 2,
-      :name => row['name'],
-      :description => row['description']
+        :name => row['name'],
+        :description => row['description']
     })
   end
 end
@@ -64,42 +73,42 @@ end
 
 # Exports Caclulus Lessons
 lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
-  event_doc_writer.write(CALC_LESSON_EVENT_OUT) do |e_writer|
+  event_writer.write(CALC_LESSON_EVENT_OUT) do |e_writer|
     note_writer.write(CALC_LESSON_NOTE_OUT) do |n_writer|
-    CSV.foreach(CALC_LESSONS_INDEX, :return_headers => false, :headers => :first_row) do |row|
-      lesson_id = id_encode("CalculusLesson-#{row['UniqueID']}")
-      l_writer.add({
-        :id => lesson_id,
-        :course_id => row['course_id'].to_i,
-        :name => row['name'],
-        :order_number => row['order_number'].to_i,
-        :component_tokens => row['components'].to_s
-      })
-
-      lesson_root_path = File.join( File.dirname(__FILE__), '..', "lib/tasks/DataFiles/Calculus/Lessons/#{row['lesson_path']}")
-      lesson_index_path = File.join( lesson_root_path, "index_#{row['lesson_path']}.csv")
-
-      CSV.foreach(lesson_index_path, :return_headers => false, :headers => :first_row) do |l_row|
-        contents = l_row['is_document'] == "TRUE" ? File.open(File.join(lesson_root_path, l_row['playable_path_trunk'] + l_row['playable_path_itr'].rjust(2,"0")), 'rb') { |ff| ff.read } : l_row['note_content']
-
-        e_writer.add({
-          :lesson_id => row['DB_id'].to_i,
-          :order_number => l_row['order_number'].to_i,
-          :video_url => l_row['video_url'],
-          :start_time => l_row['start_time'].to_i,
-          :end_time => l_row['end_time'].to_i
+      CSV.foreach(CALC_LESSONS_INDEX, :return_headers => false, :headers => :first_row) do |row|
+        lesson_id = id_encode("CalculusLesson-#{row['UniqueID']}")
+        l_writer.add({
+          :id => lesson_id,
+          :course_id => row['course_id'].to_i,
+          :name => row['name'],
+          :order_number => row['order_number'].to_i,
+          :component_tokens => row['components'].to_s
         })
 
-        n_writer.add({
-          :id => id_encode(row['DB_id']*2 + l_row['order_number']*2), 
-          :content => contents,
-          :is_document => l_row['is_document']
-        })
+        lesson_root_path = File.join( File.dirname(__FILE__), '..', "lib/tasks/DataFiles/Calculus/Lessons/#{row['lesson_path']}")
+        lesson_index_path = File.join( lesson_root_path, "index_#{row['lesson_path']}.csv")
+
+        CSV.foreach(lesson_index_path, :return_headers => false, :headers => :first_row) do |l_row|
+          contents = l_row['is_document'] == "TRUE" ? File.open(File.join(lesson_root_path, l_row['playable_path_trunk'] + l_row['playable_path_itr'].rjust(2,"0")) + ".txt", 'rb') { |ff| ff.read } : l_row['note_content']
+
+          e_writer.add({
+            :lesson_id => lesson_id,
+            :order_number => l_row['order_number'].to_i,
+            :video_url => l_row['video_url'],
+            :start_time => l_row['start_time'].to_i,
+            :end_time => l_row['end_time'].to_i
+          })
+
+          n_writer.add({
+            :id => id_encode(row['DB_id']*2 + l_row['order_number']*2), 
+            :content => contents,
+            :is_document => l_row['is_document']
+          })
+        end
       end
     end
   end
 end
-
 
 
 
@@ -117,10 +126,4 @@ component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
 end
 
 
-
-def id_encode(string)
-  output = ""
-  string.each_byte {|b| output += b.to_s.rjust(3, "0") }
-  return output.to_i % 314159265
-end
 

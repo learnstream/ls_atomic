@@ -1,4 +1,4 @@
-DB_id,components,Notes,question,answer_type,choice_0,choice_1,choice_2,choice_3,answer,qID
+UniqueID,components,Notes,question,answer_type,choice_0,choice_1,choice_2,choice_3,answer,qID
 1,"136,16",needs integral/derivative components for later steps,"\(\displaystyle \text{Evaluate } \int x(3-x^2)^4 \, dx. \)",multi,\(\displaystyle (x/5)(3-x^2)^5 + C \),\(\displaystyle -(1/10)(3-x^2)^5 + C \),\(\displaystyle (1/5)(3-x^2)^5 + C \),\(\displaystyle -(1/5)(3-x^2)^5 + C \),1,q0111
 2,"136,16",needs integral/derivative components for later steps,"\(\displaystyle \text{Evaluate } \int \cos^4 x \sin x \, dx. \)",multi,\(\displaystyle -\cos^5 x + C \),\(\displaystyle (1/5) \cos^5 x + C \),\(\displaystyle -(1/5) \cos^5 x + C \),\(\displaystyle (1/5) \cos^5 x \sin x + C \),2,q0112
 3,"136,16",needs integral/derivative components for later steps,"\(\displaystyle \text{Evaluate the indefinite integral } \int \frac{x}{\sqrt{x+1}}\,dx. \)",multi,\(\displaystyle (2/3)(x+1)^{3/2} - 2(x+1)^{1/2} + C \),\(\displaystyle (2/3)(x+1)^{3/2} + C \),\(\displaystyle (2/3)(x+1)^{3/2} + (x+1)^{1/2} + C \),\(\displaystyle (x+1)^{3/2} - (x+1)^{1/2} + C \),1,q0113
