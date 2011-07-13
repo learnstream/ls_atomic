@@ -1,5 +1,6 @@
 class LessonComponentsController < ApplicationController
 
+  before_filter :authenticate 
   def create
     @lc = LessonComponent.new(params[:lesson_component])
     @lc.save

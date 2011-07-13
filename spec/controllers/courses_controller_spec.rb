@@ -119,11 +119,6 @@ describe CoursesController do
       response.should be_success
     end
 
-    it "should display components" do
-      get :show, :id => @course
-      response.should have_selector("h2", :content => "Concepts")
-    end
-
     describe "for teachers" do
 
       before(:each) do

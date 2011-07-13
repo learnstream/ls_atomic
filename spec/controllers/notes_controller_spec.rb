@@ -4,6 +4,8 @@ describe NotesController do
   render_views
 
   before(:each) do
+    @user = Factory(:user)
+    test_sign_in(@user)
     @lesson = Factory(:lesson)
     @event = Factory(:event, :lesson => @lesson)
     @note = Factory(:note)

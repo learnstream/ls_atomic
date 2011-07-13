@@ -20,6 +20,7 @@ class Quiz < ActiveRecord::Base
   include Playable
   
   attr_reader :component_tokens
+  attr_reader :event_token
 
   belongs_to :course
   has_many :quiz_components, :dependent => :destroy
@@ -112,4 +113,9 @@ class Quiz < ActiveRecord::Base
   def last_response_from(user)
     self.responses.by_user(user).first
   end
+
+  def event_token=(ids)
+    self.event_ids = ids.split(",")
+  end
+
 end

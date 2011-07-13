@@ -1,0 +1,22 @@
+#### Properties of the Limit
+
+Each of the following properties is proven using the rigorous definition of the limit. Let \(\lim\) stand for \(\displaystyle \lim_{x\to c}\), \(\displaystyle \lim_{x\to c^+}\), or \(\displaystyle \lim_{x\to c^-}\). Assume \(\lim f(x)\) and \(\lim g(x)\) both exist. 
+
+  * **(Uniqueness)**  If \(\lim f(x)=L_1\) and \(\lim f(x)=L_2\), then \(L_1=L_2\).   
+  
+
+  * **(Addition)**  \(\lim [f(x)+g(x)]=\lim f(x) +\lim g(x)\).   
+  
+
+  * **(Scalar multiplication)**  \(\lim [\alpha f(x)]=\alpha \lim f(x)\).   
+  
+
+  * **(Multiplication)**  \(\lim [f(x)g(x)]=\lim f(x) \cdot \lim g(x)\).   
+  
+
+  * **(Division)**  \(\displaystyle \lim \frac{f(x)}{g(x)}=\frac{\lim f(x)}{\lim g(x)}\), provided \(\lim g(x)\neq 0\).   
+  
+
+  * **(Powers)**  \(\displaystyle \lim [f(x)]^n=[\lim f(x)]^n\) for any positive integer \(n\). 
+
+In practice, much of the time we can "reason out" the value of a limit without explicitly using the \(\varepsilon\)--\(\delta\) definition.

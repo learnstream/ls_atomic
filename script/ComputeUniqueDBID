@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
+require 'digest/sha2'
 
+temp_hash = Digest::SHA2.new << ARGV.first
 
 output = ""
-ARGV.first.each_byte {|b| output += b.to_s.rjust(3, "0") }
+temp_hash.to_s.each_byte {|b| output += b.to_s.rjust(3, "0") }
 
 puts output.to_i % 314159265
 

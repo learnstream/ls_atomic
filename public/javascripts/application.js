@@ -30,7 +30,12 @@ $(function () {
       });
 
     $("#component_help_link").click(function() {
-        window.location.replace("/courses/" + course_id +  "/components/" + $("#course_components").val());
-        });
+      var component_id = $("#course_components").val()
+      if(component_id == "") {
+        window.location.replace("/courses/" + course_id +  "/memories/");
+      } else {
+        window.location.replace("/courses/" + course_id +  "/components/" + component_id);
+      }
+    });
   });
 

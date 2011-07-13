@@ -1,4 +1,4 @@
-UniqueID,components,Notes,question,answer_type,choice_0,choice_1,choice_2,choice_3,answer,qID
+UniqueID,components,Notes,question,answer_type,choice_0,choice_1,choice_2,choice_3,answer,qID,explanation,in_lesson
 1,"136,16",needs integral/derivative components for later steps,"\(\displaystyle \text{Evaluate } \int x(3-x^2)^4 \, dx. \)",multi,\(\displaystyle (x/5)(3-x^2)^5 + C \),\(\displaystyle -(1/10)(3-x^2)^5 + C \),\(\displaystyle (1/5)(3-x^2)^5 + C \),\(\displaystyle -(1/5)(3-x^2)^5 + C \),1,q0111
 2,"136,16",needs integral/derivative components for later steps,"\(\displaystyle \text{Evaluate } \int \cos^4 x \sin x \, dx. \)",multi,\(\displaystyle -\cos^5 x + C \),\(\displaystyle (1/5) \cos^5 x + C \),\(\displaystyle -(1/5) \cos^5 x + C \),\(\displaystyle (1/5) \cos^5 x \sin x + C \),2,q0112
 3,"136,16",needs integral/derivative components for later steps,"\(\displaystyle \text{Evaluate the indefinite integral } \int \frac{x}{\sqrt{x+1}}\,dx. \)",multi,\(\displaystyle (2/3)(x+1)^{3/2} - 2(x+1)^{1/2} + C \),\(\displaystyle (2/3)(x+1)^{3/2} + C \),\(\displaystyle (2/3)(x+1)^{3/2} + (x+1)^{1/2} + C \),\(\displaystyle (x+1)^{3/2} - (x+1)^{1/2} + C \),1,q0113
@@ -145,3 +145,13 @@ UniqueID,components,Notes,question,answer_type,choice_0,choice_1,choice_2,choice
 144,49,,Let \(f(x)=4x^3-6x^2-9x\). \(\displaystyle \text{Find the location of relative minima of } f(x). \),check,"\(\displaystyle (-1/2, 5/2) \)","\(\displaystyle (3/2, -27/2) \)","\(\displaystyle (2, -10) \)",\(\displaystyle \text{There are none.} \),2,q4808
 145,"48,52",,"Let \(f(x)=4x^3-6x^2-9x\). \(\displaystyle \text{What is the maximum value of } f(x) \text{ on the interval } [-1, 2]? \)",multi,\(\displaystyle 5/2 \),\(\displaystyle -10 \),\(\displaystyle -27/2 \),\(\displaystyle 10 \),0,q4809
 146,"49,52",,"Let \(f(x)=4x^3-6x^2-9x\). \(\displaystyle \text{What is the minimum value of } f(x) \text{ on the interval } [-1, 2]? \)",multi,\(\displaystyle 5/2 \),\(\displaystyle -10 \),\(\displaystyle -27/2 \),\(\displaystyle -15 \),2,q4810
+147,151,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow -3} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow -3} f(x) \text{ is undefined.} \],,,TRUE
+148,153,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow 2^+} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow 2^+} f(x) = -1 \],,,TRUE
+149,156,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow -5^+} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow -5^+} f(x) = 2 \],,,TRUE
+150,158,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow -\infty} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow -\infty} f(x)  = 0 \],,,TRUE
+151,152,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow 2^-} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow 2^-} f(x) = 1\],,,TRUE
+152,155,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow -5^-} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow -5^-} f(x) =2 \],,,TRUE
+153,159,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow \infty} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow \infty} f(x) \text{ is undefined.} \],,,TRUE
+154,154,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow 2} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow 2} f(x) \text{ is undefined.} \],,,TRUE
+155,157,"""ComputingLimits"" quizzes",Evaluate \[ \lim_{x\rightarrow -5} f(x) \] on the graph above.,self-rate,,,,,\[ \lim_{x\rightarrow -5} f(x) = 2 \],,,TRUE
+156,150,"""ComputingLimits"" quizzes","Evaluate \[ \lim_{x\rightarrow c} f(x) \text{ for } c\ne -5, -3, 2 \] on the graph above.",self-rate,,,,,\[ \lim_{x\rightarrow c} f(x) = f(c) \],,"The function \( f(x) \) is continuous at all of these points, and so the limit is just the value of the function evaluated at that point.",TRUE
