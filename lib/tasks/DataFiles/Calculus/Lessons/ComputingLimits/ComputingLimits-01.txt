@@ -3,4 +3,10 @@
 Consider the graph of a function \(f(x)\) shown below.   
 ![](http://www.math.hmc.edu/calculus/tutorials/limits/gif/graph.gif)
 
-We'll ask a series of limit questions to test your understanding.
+Evaluate each of the following limits, to check your understanding:
+
+~Q1Q
+
+~Q2Q
+
+~Q3Q

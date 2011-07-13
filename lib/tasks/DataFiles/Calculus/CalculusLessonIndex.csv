@@ -2,12 +2,13 @@ UniqueID,name,course_id,order_number,components,lesson_path
 1,Common Algebra Mistakes,2,0,,AlgebraReview
 2,"Review of Trigonometric, Logarithmic, and Exponential Functions",2,1,,TrigLogExpReview
 3,Functions and Transformations of Functions,2,2,,FunctionsReview
-4,Limit Definition of the Derivative,2,3,"83,84,85,86,87",LimitDefDerivative
-5,The Chain Rule,2,4,"10,11",ChainRule
-6,The Product Rule,2,5,"105,106",ProductRule
-7,The Quotient Rule,2,6,"107,108,109",QuotientRule
-8,L'Hospital's Rule,2,7,"80,81,82,140",LHospitalsRule
-9,The First Derivative: Maxima and Minima,2,8,"39,40,41,42,43,44,45,46,47,48,49,50,51,52",MaxMin
-10,Concavity and the Second Derivative Test,2,9,"113,114,115,116,117,118,119,120,121,122,123,124",Concavity
-11,Computing Integrals by Substitution,2,10,"15,16,136",USubstitution
-12,Integration by Parts,2,11,"77,78,79,137,138,139",IntegrationParts
+4,Limit Definition of the Derivative,2,4,"83,84,85,86,87",LimitDefDerivative
+5,The Chain Rule,2,5,"10,11",ChainRule
+6,The Product Rule,2,6,"105,106",ProductRule
+7,The Quotient Rule,2,7,"107,108,109",QuotientRule
+8,L'Hospital's Rule,2,8,"80,81,82,140",LHospitalsRule
+9,The First Derivative: Maxima and Minima,2,9,"39,40,41,42,43,44,45,46,47,48,49,50,51,52",MaxMin
+10,Concavity and the Second Derivative Test,2,10,"113,114,115,116,117,118,119,120,121,122,123,124",Concavity
+11,Computing Integrals by Substitution,2,11,"15,16,136",USubstitution
+12,Integration by Parts,2,12,"77,78,79,137,138,139",IntegrationParts
+13,Computing Limits,2,3,,ComputingLimits
