@@ -1,23 +1,23 @@
-DB_id,name,order_number,video_url,start_time,end_time,playable_type,note_content,is_document,note_DB_id,playable_path_trunk,playable_path_itr
-1,Common Algebra Mistakes,0,,,,Note,,TRUE,10000,AlgebraReview-,0
-,,1,,,,Note,,TRUE,10001,AlgebraReview-,1
-,,2,,,,Note,,TRUE,10002,AlgebraReview-,2
-,,3,,,,Note,,TRUE,10003,AlgebraReview-,3
-,,4,,,,Note,,TRUE,10004,AlgebraReview-,4
-,,5,,,,Note,,TRUE,10005,AlgebraReview-,5
-,,6,,,,Note,,TRUE,10006,AlgebraReview-,6
-,,7,,,,Note,,TRUE,10007,AlgebraReview-,7
-,,8,,,,Note,,TRUE,10008,AlgebraReview-,8
-,,9,,,,Note,,TRUE,10009,AlgebraReview-,9
-,,10,,,,Note,,TRUE,10010,AlgebraReview-,10
-,,11,,,,Note,,TRUE,10011,AlgebraReview-,11
-,,12,,,,Note,,TRUE,10012,AlgebraReview-,12
-,,13,,,,Note,,TRUE,10013,AlgebraReview-,13
-,,14,,,,Note,,TRUE,10014,AlgebraReview-,14
-,,15,,,,Note,,TRUE,10015,AlgebraReview-,15
-,,16,,,,Note,,TRUE,10016,AlgebraReview-,16
-,,17,,,,Note,,TRUE,10017,AlgebraReview-,17
-,,18,,,,Note,,TRUE,10018,AlgebraReview-,18
-,,19,,,,Note,,TRUE,10019,AlgebraReview-,19
-,,20,,,,Note,,TRUE,10020,AlgebraReview-,20
-,,21,,,,Note,,TRUE,10021,AlgebraReview-,21
+UniqueID,Lesson Name,order_number,video_url,start_time,end_time,playable_type,note_content,is_document,playable_path_trunk,playable_path_itr
+1,Common Algebra Mistakes,0,,,,Note,,TRUE,AlgebraReview-,0
+,,1,,,,Note,,TRUE,AlgebraReview-,1
+,,2,,,,Note,,TRUE,AlgebraReview-,2
+,,3,,,,Note,,TRUE,AlgebraReview-,3
+,,4,,,,Note,,TRUE,AlgebraReview-,4
+,,5,,,,Note,,TRUE,AlgebraReview-,5
+,,6,,,,Note,,TRUE,AlgebraReview-,6
+,,7,,,,Note,,TRUE,AlgebraReview-,7
+,,8,,,,Note,,TRUE,AlgebraReview-,8
+,,9,,,,Note,,TRUE,AlgebraReview-,9
+,,10,,,,Note,,TRUE,AlgebraReview-,10
+,,11,,,,Note,,TRUE,AlgebraReview-,11
+,,12,,,,Note,,TRUE,AlgebraReview-,12
+,,13,,,,Note,,TRUE,AlgebraReview-,13
+,,14,,,,Note,,TRUE,AlgebraReview-,14
+,,15,,,,Note,,TRUE,AlgebraReview-,15
+,,16,,,,Note,,TRUE,AlgebraReview-,16
+,,17,,,,Note,,TRUE,AlgebraReview-,17
+,,18,,,,Note,,TRUE,AlgebraReview-,18
+,,19,,,,Note,,TRUE,AlgebraReview-,19
+,,20,,,,Note,,TRUE,AlgebraReview-,20
+,,21,,,,Note,,TRUE,AlgebraReview-,21

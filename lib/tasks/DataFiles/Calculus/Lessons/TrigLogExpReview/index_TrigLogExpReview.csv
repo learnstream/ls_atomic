@@ -1,0 +1,7 @@
+UniqueID,Lesson Name,order_number,video_url,start_time,end_time,playable_type,note_content,is_document,playable_path_trunk,playable_path_itr
+2,"Review of Trigonometric, Logarithmic, and Exponential Functions",0,,,,Note,,TRUE,TrigLogExpReview-,0
+,,1,,,,Note,,TRUE,TrigLogExpReview-,1
+,,2,,,,Note,,TRUE,TrigLogExpReview-,2
+,,3,,,,Note,,TRUE,TrigLogExpReview-,3
+,,4,,,,Note,,TRUE,TrigLogExpReview-,4
+,,5,,,,Note,,TRUE,TrigLogExpReview-,5

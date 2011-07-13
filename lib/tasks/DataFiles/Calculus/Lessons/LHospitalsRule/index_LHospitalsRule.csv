@@ -1,0 +1,7 @@
+UniqueID,Lesson Name,order_number,video_url,start_time,end_time,playable_type,note_content,is_document,playable_path_trunk,playable_path_itr
+8,L'Hospital's Rule,0,,,,Note,,TRUE,LHospitalsRule-,0
+,,1,,,,Note,,TRUE,LHospitalsRule-,1
+,,2,,,,Note,,TRUE,LHospitalsRule-,2
+,,3,,,,Note,,TRUE,LHospitalsRule-,3
+,,4,,,,Note,,TRUE,LHospitalsRule-,4
+,,5,,,,Note,,TRUE,LHospitalsRule-,5

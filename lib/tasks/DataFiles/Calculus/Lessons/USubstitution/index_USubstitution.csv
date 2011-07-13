@@ -1,0 +1,7 @@
+UniqueID,Lesson Name,order_number,video_url,start_time,end_time,playable_type,note_content,is_document,playable_path_trunk,playable_path_itr
+11,Computing Integrals by Substitution,0,,,,Note,,TRUE,USubstitution-,0
+,,1,,,,Note,,TRUE,USubstitution-,1
+,,2,,,,Note,,TRUE,USubstitution-,2
+,,3,,,,Note,,TRUE,USubstitution-,3
+,,4,,,,Note,,TRUE,USubstitution-,4
+,,5,,,,Note,,TRUE,USubstitution-,5
