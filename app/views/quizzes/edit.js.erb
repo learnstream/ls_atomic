@@ -1,3 +1,10 @@
+<% content_for :javascript do %>
+  <%= javascript_include_tag "raphael-min" %>
+  <%= javascript_include_tag "Quiz.js" %>
+  <%= javascript_include_tag "AddAnswer.js" %>
+<% end %>
+
 $("#add-quiz").html("<%= escape_javascript(render :partial => 'form') %>");
 $("#holder").data("mode", "edit");
 prepareQuizEdit(<%= @quiz.id %>);
+doQuizPrep();
