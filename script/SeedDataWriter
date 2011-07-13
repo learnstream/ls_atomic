@@ -5,13 +5,14 @@
 require 'seed-fu'
 require 'rubygems'
 require 'csv'
+require 'digest/sha2'
 
 
 def id_encode(string)
   temp_hash = Digest::SHA2.new << string
   # Now, converts to integer...
   output = ""
-  temp_hash.each_byte {|b| output += b.to_s.rjust(3, "0") }
+  temp_hash.to_s.each_byte {|b| output += b.to_s.rjust(3, "0") }
   return output.to_i % 314159265
 end
 
