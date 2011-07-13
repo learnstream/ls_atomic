@@ -1,5 +1,3 @@
-#!META: title(Limit Definition of the Derivative); components(83,84,85,86,87);
-
 Once we know the most basic differentiation formulas and rules, we compute new derivatives using what we already know. We rarely think back to where the basic formulas and rules originated. 
 
 The geometric meaning of the derivative \[f'(x)=\frac{df(x)}{dx}\] is the slope of the line tangent to \(y=f(x)\) at \(x\). 

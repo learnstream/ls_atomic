@@ -1,5 +1,3 @@
-#!META: title(L'Hopital's Rule); components(80,81,82,140)
-
 Consider the limit \[\lim_{x\to a}\, \frac{f(x)}{g(x)}.\] If both the numerator and the denominator are finite at \(a\) and \(g(a)\neq 0\), then \[\lim_{x\to a}\, \frac{f(x)}{g(x)}=\frac{f(a)}{g(a)}.\] 
 
 #### Example

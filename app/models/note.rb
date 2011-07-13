@@ -19,6 +19,8 @@ end
 class Note < ActiveRecord::Base
   include Playable
   
+  attr_reader :event_token
+
   validates :content, :presence => true
 
   has_many :events, :as => :playable
@@ -28,5 +30,9 @@ class Note < ActiveRecord::Base
 
   def as_json(options = {})
     super["note"].merge({ "existing_event_attributes" => self.events[0].as_json["event"] })
+  end
+
+  def event_token=(ids)
+    self.event_ids = ids.split(",")
   end
 end

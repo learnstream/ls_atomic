@@ -1,5 +1,3 @@
-#!META: title(Product Rule for Derivatives); components(105,106);
-
 In Calculus and its applications we often encounter functions that are expressed as the product of two other functions, like the following examples: 
 
   * \(h(x) = x e^x = (x)(e^x),\)   

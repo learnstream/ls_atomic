@@ -1,6 +1,3 @@
-#!META: title(The First Derivative: Maxima and Minima); components(39,40,41,42,43,44,45,46,47,48,49,50,51,52);
-
-
 Consider the function \[ f(x) = 3x^4-4x^3-12x^2+3 \] on the interval \([-2,3]\). We cannot find regions of which \(f\) is increasing or decreasing, relative maxima or minima, or the absolute maximum or minimum value of \(f\) on \([-2,3]\) by inspection. Graphing by hand is tedious and imprecise. Even the use of a graphing program will only give us an approximation for the locations and values of maxima and minima. We can use the first derivative of \(f\), however, to find all these things quickly and easily. 
 
 Let \(f\) be continuous on an interval \(I\) and differentiable on the interior of \(I\). 

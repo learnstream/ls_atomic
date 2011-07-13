@@ -1,6 +1,3 @@
-#!META: title(Integration By Parts); components(77,78,79,137,138,139)
-
-
 We will use the **Product Rule** for derivatives to derive a powerful integration formula: 
 
   * Start with \((f(x)g(x))'=f(x)g'(x)+f'(x)g(x)\). 

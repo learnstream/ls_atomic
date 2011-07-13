@@ -1,5 +1,3 @@
-#!META: title(Functions and Transformations of Functions);
-
 We will review some of the important concepts dealing with functions and transformations of functions. Most likely you have encountered each of these ideas previously, but here we will tie the concepts together.
 
 ### Definition of a Function

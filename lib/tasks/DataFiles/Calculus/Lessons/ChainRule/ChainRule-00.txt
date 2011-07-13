@@ -1,5 +1,3 @@
-#!META: title(The Chain Rule); components(10,11)
-
 You probably remember the derivatives of \(\sin x\), \(\displaystyle{x^{8}}\), and \(\displaystyle{e^{x}}\). But what about functions like \(\displaystyle{\sin (2x-1)}\), \(\displaystyle{(3x^{2}-4x+1)^{8}}\), or \(\displaystyle{e^{-x^{2}}}\)? How do we take the derivative of **compositions** of functions? The **Chain Rule** allows us to use our knowledge of the derivatives of functions \(f(x)\) and \(g(x)\) to find the derivative of the composition \(f(g(x))\): 
 
 Suppose a function \(g(x)\) is differentiable at \(x\) and \(f(x)\) is differentiable at \(g(x)\). Then the composition \(f(g(x))\) is differentiable at \(x\). 

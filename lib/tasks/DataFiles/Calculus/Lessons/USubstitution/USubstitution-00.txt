@@ -1,5 +1,3 @@
-#!META: title(Computing Integrals by Substitution); components(15,16,136);
-
 Many integrals are most easily computed by means of a change of variables, commonly called a **\(u\)-substitution**.
 
 The substitution method amounts to applying the Chain Rule in reverse. That is, to compute an integral of the form

@@ -93,8 +93,9 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
         CSV.foreach(lesson_index_path, :return_headers => false, :headers => :first_row) do |l_row|
           contents = l_row['is_document'] == "TRUE" ? File.open(File.join(lesson_root_path, l_row['playable_path_trunk'] + l_row['playable_path_itr'].rjust(2,"0")) + ".txt", 'rb') { |ff| ff.read } : l_row['note_content']
 
+          event_id = id_encode("CalculusEvent-#{row['UniqueID']*2}#{l_row['order_number']*2}") 
           e_writer.add({
-            :id => id_encode("CalculusEvent-#{row['UniqueID']*2}#{l_row['order_number']*2}"), 
+            :id => event_id,
             :lesson_id => lesson_id,
             :order_number => l_row['order_number'].to_i,
             :video_url => l_row['video_url'],
@@ -105,7 +106,8 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
           n_writer.add({
             :id => id_encode("CalculusNote-#{row['UniqueID']*2}#{l_row['order_number']*2}"), 
             :content => contents,
-            :is_document => l_row['is_document']
+            :is_document => l_row['is_document'],
+            :event_token => event_id.to_s
           })
         end
       end

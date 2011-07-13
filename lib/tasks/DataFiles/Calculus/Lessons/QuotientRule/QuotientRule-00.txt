@@ -1,6 +1,3 @@
-#!META: title(Quotient Rule for Derivatives); components(107,108,109);
-
-
 Suppose we are working with a function \(h(x)\) that is a ratio of two functions \(f(x)\) and \(g(x)\). 
 
 **How is the derivative of \(h(x)\) related to \(f(x)\), \(g(x)\), and their derivatives?**
