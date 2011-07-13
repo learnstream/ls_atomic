@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+
+output = ""
+ARGV.first.each_byte {|b| output += b.to_s.rjust(3, "0") }
+
+puts output.to_i % 314159265
+
