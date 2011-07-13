@@ -38,7 +38,7 @@ Answer(s):
       <td> <%= r.answer %> </td>
       <td> 
         <% if r.status == "challenged" %>
-          <%= render :partial => 'quizzes/challenge_form', :locals => {:response => r} %>
+          <div id = "challenge-area"><%= render 'quizzes/challenge_link'%></div>
         <% else %>
           <%= r.status %> 
         <% end %>

@@ -44,6 +44,9 @@ class ResponsesController < ApplicationController
       @response.rate_components!(Integer(params[:quality]))
     elsif params[:response] # challenge a response labelled as incorrect
       @response.update_attributes(params[:response])
+      if(params[:response] == "correct" || params[:response] == "incorrect")
+        redirect_to course_quiz_path(@response.quiz)
+      end
     end
 
     @course = @response.quiz.course

@@ -1,5 +1,3 @@
-challenged!
-<div class = "hidden"
 <%= form_for response do |f| %>
   <%= f.hidden_field :status, :value => "correct" %>
   <div class = "actions"><%= f.submit "Accept" %></div>
@@ -8,4 +6,3 @@ challenged!
   <%= f.hidden_field :status, :value => "incorrect" %>
   <div class = "actions"><%= f.submit "Reject" %></div>
 <%end %>
-</div>
