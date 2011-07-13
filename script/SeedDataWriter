@@ -26,6 +26,15 @@ CALC_LESSON_NOTE_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures'
 
 PHYS_COMPONENTS = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Physics/PhysicsComponents.csv' )
 PHYS_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '08_physics_components.rb' )
+PHYS_QUIZ = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Physics/PhysicsExercises.csv' )
+PHYS_QUIZ_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '09_physics_quizzes.rb')
+PHYS_ANSW_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '10_physics_quiz_answers.rb')
+PHYS_LESSONS_INDEX = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Physics/PhysicsLessonIndex.csv' )
+PHYS_LESSON_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '11_physics_lessons.rb')
+PHYS_LESSON_EVENT_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '12_physics_lesson_events.rb')
+PHYS_LESSON_NOTE_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '13_physics_lesson_notes.rb')
+PHYS_VIDEO_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '14_physics_video.rb')
+
 
 # Create a seed_writer, walk the CSV, add to the file.
 component_writer = SeedFu::Writer.new({:class_name => 'Component', :seed_by => [:id] })
@@ -128,4 +137,97 @@ component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
   end
 end
 
+lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
+  event_writer.write(PHYS_LESSON_EVENT_OUT) do |e_writer|
+    note_writer.write(PHYS_LESSON_NOTE_OUT) do |n_writer|
+      video_writer.write(PHYS_VIDEO_OUT) do |v_writer|
+        quiz_writer.write(PHYS_QUIZ_OUT) do |q_writer|
 
+          CSV.foreach(PHYS_LESSONS_INDEX, :return_headers => false, :headers => :first_row) do |row|
+            lesson_id = id_encode("PhysicsLesson-#{row['UniqueID']}")
+            component_tokens = row['components'].to_s.split(",").map{ |c| id_encode("PhysicsComponents-#{c}") }.join(",")
+
+            l_writer.add({
+              :id => lesson_id,
+              :course_id => row['course_id'].to_i,
+              :name => row['name'],
+              :order_number => row['order_number'].to_i,
+              :component_tokens => component_tokens 
+            })
+          end
+            #lesson_root_path = File.join( File.dirname(__FILE__), '..', "lib/tasks/DataFiles/Calculus/Lessons/#{row['lesson_path']}")
+            #lesson_index_path = File.join( lesson_root_path, "index_#{row['lesson_path']}.csv")
+
+            CSV.foreach(PHYSICS_LESSONS_DOC, :return_headers => false, :headers => :first_row) do |l_row|
+              contents = l_row['note_content']
+              lesson_id = id_encode("PhysicsLesson-#{row['UniqueID']}")
+              event_id = id_encode("PhysicsEvent-#{row['UniqueID']*2}#{l_row['order_number']*2}") 
+              e_writer.add({
+                :id => event_id,
+                :lesson_id => lesson_id,
+                :order_number => l_row['order_number'].to_i,
+                :video_url => l_row['video_url'],
+                :start_time => l_row['start_time'].to_i,
+                :end_time => l_row['end_time'].to_i
+              })
+              #contents.gsub!(/~Q(\d+)Q/){ "~Q" + id_encode("CalculusExercises-#{$1}").to_s + "Q"}
+              if l_row['playable_type'] == "Note"
+                n_writer.add({
+                  :id => id_encode("CalculusNote-#{row['UniqueID']*2}#{l_row['order_number']*2}"), 
+                  :content => contents,
+                    :is_document => False,
+                    :event_token => event_id.to_s
+                })
+              elsif l_row['playable_type'] == "Quiz"
+                answer_tokens = l_row['answer'].split("&")
+                component_tokens = row['components'].to_s.split(",").map{ |c| id_encode("PhysicsComponents-#{c}") }.join(",")
+                quiz_id = id_encode("PhysicsExercises-#{row['UniqueID']}")
+                q_writer.add({
+                  :id => quiz_id, 
+                  :course_id => 1,
+                  :in_lesson => l_row['in_lesson'] == "1" ? True : False,
+                  :question => row['question'],
+                  :answer_type => row['answer_type'],
+                  :answer_input => { :type => row['answer_type'] }.to_json,
+                  :answer_output => {:type => "text"}.to_json,
+                  :component_tokens => component_tokens
+                  :event_token => event_id.to_s
+                })
+
+                row['answer'].split("").each do |a|
+                  a_writer.add({ :quiz_id => quiz_id, :text => a })
+                end 
+              end
+            end
+# Exports Calculus Quizzes
+quiz_writer.write(CALC_QUIZ_OUT) do |q_writer|
+  answer_writer.write(CALC_ANSW_OUT) do |a_writer|
+    CSV.foreach(CALC_QUIZ, :return_headers => false, :headers => :first_row) do |row|
+      answer_tokens = (0..3).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
+      component_tokens = row['components'].to_s.split(",").map{ |c| id_encode("CalculusComponents-#{c}") }.join(",")
+      quiz_id = id_encode("CalculusExercises-#{row['UniqueID']}")
+      q_writer.add({
+        :id => quiz_id, 
+        :course_id => 2,
+        :in_lesson => false,
+        :question => row['question'],
+        :answer_type => row['answer_type'],
+        :answer_input => { :type => row['answer_type'], :choices => answer_tokens}.to_json,
+        :answer_output => {:type => "text"}.to_json,
+        :component_tokens => component_tokens
+      })
+      row['answer'].split("").each do |a|
+        a_writer.add({ :quiz_id => quiz_id, :text => a })
+      end 
+    end
+  end
+end
+
+
+
+
+          end
+        end
+      end
+    end
+  end
