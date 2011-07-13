@@ -115,7 +115,6 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
   end
 end
 
-
 =begin
 # Exports Physics Components
 component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
@@ -129,6 +128,5 @@ component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
   end
 end
 =end
-
 
 

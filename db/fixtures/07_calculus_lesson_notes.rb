@@ -1,13 +1,13 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 00:07:09 -0700
+# Date: 2011-07-13 00:19:35 -0700
 # Seeding Note
 # Written with the command:
 #
 #   ./script/SeedDataWriter 
 #
 Note.seed(:id,
-  {:id=>286611468, :content=>"### Algebra Review\r\n--or--\r\n### A whirlwind tour of the most common mistakes on tests\r\n\r\n(The material in this tutorial is reprinted with permission of the authors and publisher of __How to Ace Calculus__ by Colin Adams, Abigail Franklin, and Joel Hass.)\r\n\r\nHere we will list some of the most common mistakes that we see on exams. If you can avoid these, then at least your mistakes will be uncommon. Most of the mistakes that occur repeatedly involve algebra, rather than calculus. They can be avoided by being careful and checking your work. Others involve common misunderstandings about various aspects of calculus. \r\n\r\n~Q219643414Q", :is_document=>"TRUE", :event_token=>"79156788"},
+  {:id=>286611468, :content=>"### Algebra Review\r\n--or--\r\n### A whirlwind tour of the most common mistakes on tests\r\n\r\n(The material in this tutorial is reprinted with permission of the authors and publisher of __How to Ace Calculus__ by Colin Adams, Abigail Franklin, and Joel Hass.)\r\n\r\nHere we will list some of the most common mistakes that we see on exams. If you can avoid these, then at least your mistakes will be uncommon. Most of the mistakes that occur repeatedly involve algebra, rather than calculus. They can be avoided by being careful and checking your work. Others involve common misunderstandings about various aspects of calculus. ", :is_document=>"TRUE", :event_token=>"79156788"},
   {:id=>286612469, :content=>"\\[ (x+y)^2 = x^2 + y^2 \\]\r\n\r\n**MISTAKE!**\r\n\r\nPowers don't behave this way. The correct way to expand this expression gives \\[ (x+y)^2 = (x+y)(x+y) = x^2 + 2xy + y^2. \\] ", :is_document=>"TRUE", :event_token=>"79157789"},
   {:id=>286613470, :content=>"\\[  \\frac{1}{x+y} = \\frac{1}{x} + \\frac{1}{y}  \\]     \r\n\r\n**MISTAKE!**\r\n\r\nThe rule for adding fractions gives \\[ \\frac{1}{x} + \\frac{1}{y} = \\frac{x+y}{xy}. \\] \r\n\r\nYou have to do this by first putting them over a common denominator:\r\n\r\n\\[ \\frac{1}{x} + \\frac{1}{y} = \\frac{y}{xy} + \\frac{x}{xy} = \\frac{x+y}{xy} \\] as shown above.", :is_document=>"TRUE", :event_token=>"79158790"},
   {:id=>286614471, :content=>"\\[ \\frac{1}{x+y} = \\frac{1}{x} + y . \\]\r\n\r\n**MISTAKE!**\r\n\r\nThis very common error comes from carelessness about what's in the denominator. It can be avoided by careful handwriting or frequent use of parentheses.", :is_document=>"TRUE", :event_token=>"79159791"},
