@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +36,6 @@
   <%= javascript_include_tag "showdown" %>
   <%= javascript_include_tag "ShowJax" %>
   <%= javascript_include_tag "jqueryregex.js" %>
-  <!-- <%= javascript_include_tag "json" %>  -->
-  <!-- <%= javascript_include_tag "jquery.colorbox.min" %> -->
   <%= yield :javascript %>
   <%= csrf_meta_tag %>
 </head>
@@ -73,13 +72,8 @@
   </header>
   <section>
   <%= yield(:panel) if content_for?(:panel) %>
-
-
-
-   
-  <% flash.each do |key, value| %>
-    <div class="flash <%= key %>"><%= value %></div>
-  <% end %>
+ 
+  <%= (flash_msg = yield(:flash_msg)).blank? ? render(:partial => 'shared/flash', :locals => { :flash => flash }) : flash_msg %>
   
   <%= yield %>
  </section>

@@ -1,0 +1,35 @@
+<% content_for :panel do %>
+  <div id="panel">
+    <div class="section">
+      Studying <%= link_to @course.name, @course %>
+    </div>
+
+    <div class="section bottom">
+      <%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
+      <% due = current_user.memories_due_with_quiz(@course).length %>
+      <% total = current_user.memories.reviewed_today.length %>
+    <div>
+      <span style="color: <% if due == 0 %> green<% else %> red <% end %>">
+          <span class="number"><%= due %></span> 
+          <%= due == 1 ? "concept" : "concepts" %> due
+        </span><br />
+      <span class="number"><%= total %></span> already studied today</div>
+      <br />
+
+      <div>
+        <% if due == 0 %>
+          You're done for now!
+        <% else %>
+          Time to study!
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+
+<% content_for :flash_msg do %>
+<% end %>
+
+<%= render :file => 'layouts/application' %>
+

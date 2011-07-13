@@ -41,7 +41,13 @@ class ResponsesController < ApplicationController
 
     if @response.save
       respond_to do |format|
-        format.html { redirect_to course_study_index_path(@course) }
+        format.html { 
+          notice = "Just studied: "
+          @response.quiz.components.each do |component|
+            studied += component.name + " "
+          end
+          flash[:notice] = notice
+          redirect_to course_study_index_path(@course) }
         format.json  
         format.js { render 'update', :format => :js }
       end

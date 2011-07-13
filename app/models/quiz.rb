@@ -37,6 +37,7 @@ class Quiz < ActiveRecord::Base
   after_update :save_event
 
   scope :exercises, where("in_lesson = ?", false) 
+  scope :locked, lambda { |user_id| joins(:components => :memories).where('memories.user_id = ?', user_id).merge(Memory.where('views = 0')).group('quizzes.id') }
 
   def to_json(options = {})
     super 

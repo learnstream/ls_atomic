@@ -6,13 +6,12 @@ class StudyController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
 
-    @quiz = Quiz.where(:in_lesson => false).where(:course_id => @course.id).joins(:components => :memories).where('memories.user_id = ?', current_user.id).merge(Memory.due_before(DateTime.now.utc)).sample
+    @quiz = Quiz.exercises.where('quizzes.id NOT IN (?)', Quiz.locked(current_user.id).all.map{ |quiz| quiz.id } ).where(:course_id => @course.id).joins(:components => :memories).where('memories.user_id = ?', current_user.id).merge(Memory.due_before(DateTime.now.utc)).group('quizzes.id').sample
 
     if @quiz
       redirect_to course_study_path(@course, @quiz)
       return
     end
-
     render 'index'
   end
 
