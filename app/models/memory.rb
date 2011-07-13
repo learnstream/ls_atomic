@@ -14,7 +14,7 @@ class Memory < ActiveRecord::Base
 
   scope :course_exercise, lambda { |course_id| in_course(course_id).due_before(DateTime.now.utc).viewed }
 
-  default_scope :order => 'memories.views > 0 DESC, memories.due'  
+  default_scope :order => 'memories.due'  
 
   def course
     component.course
