@@ -17,9 +17,7 @@
       <td class="<%= strength_class(memory) %>"><%= strength(memory) %></td> 
       <td><%= pluralize(memory.memory_ratings.count, "time") %></td>
       <td><% if strength(memory) != "Not being studied" %>
-            <%= form_for [@course, memory] do |f| %>
-            <%= f.submit "Stop studying" %> 
-            <% end %>
+          <%= render :partial => 'memories/stop_studying', :locals => {:memory => memory} %>
           <% end %>
       </td>
     </tr>
@@ -34,9 +32,7 @@
       <td class="<%= strength_class(memory) %>"><%= strength(memory) %></td> 
       <td><%= pluralize(memory.memory_ratings.count, "time") %></td>
       <td><% if strength(memory) != "Not being studied" %>
-            <%= form_for [@course, memory] do |f| %>
-            <%= f.submit "Stop studying" %> 
-            <% end %>
+          <%= render :partial => 'memories/stop_studying', :locals => {:memory => memory, :course => @course} %> 
           <% end %>
       </td>
     </tr>
