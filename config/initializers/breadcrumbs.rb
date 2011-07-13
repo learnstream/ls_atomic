@@ -39,7 +39,7 @@ Gretel::Crumbs.layout do
   end
 
   crumb :memories do |course|
-    link "Components", course_memories_path(course)
+    link "Concepts", course_memories_path(course)
     parent :course, course
   end
 
