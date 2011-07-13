@@ -45,17 +45,6 @@
   #stream-area .event {
     margin-bottom: 15px;
     padding: 10px;
-#content {
-  clear: both;
-  width: 690px;
-  height: 250px;
-  margin: auto;
-  padding: 50px 15px 0px 15px;
-  overflow: auto;
-  background: #eee; }
-  #content .event {
-    margin-bottom: 100px;
-    padding: 15px;
     background: #fff;
     border: 1px solid #ddd;
     -moz-border-radius: 10px;
@@ -66,7 +55,7 @@
     font-size: .8em; }
 
 #document-area {
-  width: 720px;
+  width: 700px;
   border: 8px solid #eee;
   padding: 20px 90px 20px 90px;
   margin: auto;
@@ -89,6 +78,12 @@
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px; }
+  #document-area .quiz-embed {
+    width: 640px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #f8f8f8; }
 
 #watch-lesson-links {
   clear: both;

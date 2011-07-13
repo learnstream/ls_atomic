@@ -7,7 +7,8 @@
                           :event => @note.events[0] } %>
   <div class="field" >
     <%= note_form.label :content %><br />
-    <%= note_form.text_area :content %>
+    <%= note_form.text_area :content %><br />
+    Embed a quiz: Use <code>~Q<span style="color:blue">id</span>Q</code>.
   </div>
   <div class="field">
     <%= note_form.label :is_document, "Display as document " %>

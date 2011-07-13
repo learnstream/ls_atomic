@@ -1,5 +1,12 @@
 Gretel::Crumbs.layout do
-  
+  def display_name(user)
+    if user.name.blank?
+      user.email
+    else
+      user.name
+    end
+  end
+ 
   # Remember to restart your application after editing this file.
   
   crumb :root do
@@ -28,6 +35,11 @@ Gretel::Crumbs.layout do
 
   crumb :study do |course|
     link "Study", course_study_index_path(course)
+    parent :course, course
+  end
+
+  crumb :memories do |course|
+    link "Components", course_memories_path(course)
     parent :course, course
   end
 
@@ -71,7 +83,7 @@ Gretel::Crumbs.layout do
 
   crumb :component_student do |component|
     link lambda {|component| "Component: #{component.name}"}, course_component_path(component.course,component)
-    parent :course, component.course
+    parent :memories, component.course
   end
 
   crumb :new_component do |course|
@@ -91,13 +103,18 @@ Gretel::Crumbs.layout do
   end
 
   crumb :quiz do |quiz|
-    link lambda {|quiz| "Quiz #{quiz.id}"}, course_quiz_path(quiz.course, quiz)
+    link lambda {|quiz| "Exercise: #{quiz.question}"}, course_quiz_path(quiz.course, quiz)
     parent :course, quiz.course
   end
 
   crumb :new_quiz do |course|
     link "New Exercise", new_course_quiz_path(course)
     parent :quizzes, course
+  end
+
+  crumb :edit_quiz do |quiz|
+    link lambda{|quiz| "Edit exercise: #{quiz.question}"}, edit_course_quiz_path(quiz.course,quiz)
+    parent :quizzes, quiz.course
   end
 
   #Users
@@ -107,7 +124,7 @@ Gretel::Crumbs.layout do
   end
 
   crumb :user do |user|
-    link lambda {|user| "#{user.email}"}, user_path(user)
+    link lambda {|user| "#{display_name(user)}"}, user_path(user)
     parent :users
   end
  

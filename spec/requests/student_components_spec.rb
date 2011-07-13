@@ -17,7 +17,7 @@ describe "Student components list" do
   end
 
   it "should allow the user to view components" do 
-    click_link "see all components"
+    click_link "see all concepts"
     page.should have_css("td", :text => @component.name)
   end
 
@@ -29,20 +29,20 @@ describe "Student components list" do
     @memory2 = @user.memories.find_by_component_id(@component2)
     @memory.view(4)
 
-    click_link "see all components"
+    click_link "see all concepts"
     within("td") do
       page.should have_content(@component.name)
     end
   end
 
   it "should list the status of each component" do
-    click_link "see all components"
+    click_link "see all concepts"
     page.should have_css("td", :text => @component.name)
     page.should have_css("td", :text => "Not started")
   end
 
   it "should allow the student to stop studying components" do
-    click_link "see all components"
+    click_link "see all concepts"
     click_button "Stop studying"
     page.should have_css("td", :text => "Not being studied")
   end
@@ -50,7 +50,7 @@ describe "Student components list" do
   it "should update the status when the component is viewed" do
     @memory = @user.memories.find_by_component_id(@component)
     @memory.view(4)
-    click_link "all components"
+    click_link "all concepts"
     page.should have_css("td", :text => @component.name)
     page.should have_css("td", :text => "Weak")
     page.should have_css("td", :text => "1 time")
