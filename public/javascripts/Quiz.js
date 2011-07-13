@@ -1,7 +1,20 @@
 $(document).ready(function () {
+  doQuizPrep();
+ 
+  $("#response_answer").keyup(function() {
+    answer = $("#response_answer").val();
+    if (answer == "") {
+      $("#answer-morph").val("Don't know");
+    } else {
+      $("#answer-morph").val("Check answer");
+    }
+  });
+   
+});
 
-    
-    var updateInputForm = function() {
+function doQuizPrep() {
+
+    function updateInputForm() {
       $(".extra-form").hide();
       if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
         $("#add-answer").hide();
@@ -37,20 +50,10 @@ $(document).ready(function () {
     };
 
     $("#quiz_answer_type").change(function() { 
-      console.log("answer type changed");
       $("#quiz_answers_attributes_0_text").val("");
       $("#quiz_answer_input").val("");
       $("#quiz_answer_output").val("");
       updateInputForm();
-    });
-
-    $("#response_answer").keyup(function() {
-      answer = $("#response_answer").val();
-      if (answer == "") {
-        $("#answer-morph").val("Don't know");
-      } else {
-        $("#answer-morph").val("Check answer");
-      }
     });
 
     $("#choices input").keyup(function() {
@@ -76,7 +79,7 @@ $(document).ready(function () {
     }
 
     updateInputForm();
-});
+}
 
 var getMultiInputJSON = function(type,div) {
   var jsonObj = { "type" : type };
