@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   end
 
   def memories_due_with_quiz(course)
-    memories.joins(:component => :quizzes).merge(Quiz.where(:in_lesson => false).where('quizzes.id NOT IN (?)', Quiz.locked(self.id).all.map{|q| q.id})).group('memories.id').in_course(course).due_before(Time.now.utc).all
+    memories.joins(:component => :quizzes).merge(Quiz.unlocked(course.id, self.id).exercises).group('memories.id').in_course(course).due_before(Time.now.utc).all
   end
 
   def number_of_memories_today(course)
