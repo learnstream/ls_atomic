@@ -102,7 +102,7 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
             :start_time => l_row['start_time'].to_i,
             :end_time => l_row['end_time'].to_i
           })
-
+          contents.gsub!(/~Q(\d+)Q/){ "~Q" + id_encode("CalculusExercises-#{$1}").to_s + "Q"}
           n_writer.add({
             :id => id_encode("CalculusNote-#{row['UniqueID']*2}#{l_row['order_number']*2}"), 
             :content => contents,
