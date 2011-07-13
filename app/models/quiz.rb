@@ -39,7 +39,7 @@ class Quiz < ActiveRecord::Base
 
   scope :exercises, where("in_lesson = ?", false) 
   scope :locked, lambda { |course_id, user_id| select('distinct quizzes.*, memories.user_id').where('quizzes.course_id = ?', course_id).joins(:components => :memories).where('memories.user_id = ?', user_id).merge(Memory.where('memories.views = 0')) }
-  scope :unlocked, lambda { |course_id, user_id| Quiz.locked(course_id, user_id).empty? ? where("quizzes.course_id = ?", course_id) : select('distinct quizzes.*, memories.user_id').where("quizzes.course_id = ? AND quizzes.id NOT IN (?)", course_id, Quiz.locked(course_id, user_id).all.map{ |q| q.id })}
+  scope :unlocked, lambda { |course_id, user_id| Quiz.locked(course_id, user_id).empty? ? where("quizzes.course_id = ?", course_id) : select('distinct quizzes.*').where("quizzes.course_id = ? AND quizzes.id NOT IN (?)", course_id, Quiz.locked(course_id, user_id).all.map{ |q| q.id })}
   scope :due, lambda { |course_id, user_id| select('distinct quizzes.*, memories.user_id').where('quizzes.course_id = ?', course_id).joins(:components => :memories).where('memories.user_id = ?', user_id).merge(Memory.due_before(DateTime.now.utc)) } 
 
   def to_json(options = {})
