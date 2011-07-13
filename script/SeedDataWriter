@@ -230,7 +230,7 @@ lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
             quiz_id = id_encode("PhysicsExercises-#{row['UniqueID']}")
             q_writer.add({
               :id => quiz_id, 
-              :course_id => 2,
+              :course_id => 1,
               :in_lesson => false,
               :question => row['question'],
               :answer_type => row['answer_type'],
