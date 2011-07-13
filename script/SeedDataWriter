@@ -25,7 +25,7 @@ CALC_LESSON_EVENT_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures
 CALC_LESSON_NOTE_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '07_calculus_lesson_notes.rb')
 
 PHYS_COMPONENTS = File.join( File.dirname(__FILE__), '..', 'lib/tasks/DataFiles/Physics/PhysicsComponents.csv' )
-PHYS_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '03_physics_components.rb' )
+PHYS_COMPONENTS_OUT = File.join( File.dirname(__FILE__), '..', 'db', 'fixtures', '08_physics_components.rb' )
 
 # Create a seed_writer, walk the CSV, add to the file.
 component_writer = SeedFu::Writer.new({:class_name => 'Component', :seed_by => [:id] })
@@ -115,8 +115,8 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
   end
 end
 
-=begin
 # Exports Physics Components
+#
 component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
   CSV.foreach( PHYS_COMPONENTS, :return_headers => false, :headers => :first_row) do |row|
     writer.add({
@@ -127,6 +127,5 @@ component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
     })
   end
 end
-=end
 
 
