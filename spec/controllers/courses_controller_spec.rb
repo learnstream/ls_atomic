@@ -111,6 +111,7 @@ describe CoursesController do
       test_sign_in(@user)
       @course = Factory(:course)
       @user.enroll!(@course)
+      @component = Factory(:component, :course => @course)
     end
   
     it "should be successful" do
@@ -120,7 +121,7 @@ describe CoursesController do
 
     it "should display components" do
       get :show, :id => @course
-      response.should have_selector("h2", :content => "Components")
+      response.should have_selector("h2", :content => "Concepts")
     end
 
     describe "for teachers" do
