@@ -163,7 +163,6 @@ h1.course-name {
   border-bottom: 1px solid #eee; }
 
 #course-content {
-  float: left;
   width: 600px; }
   #course-content .course-section {
     margin-bottom: 25px; }

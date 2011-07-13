@@ -16,6 +16,7 @@
       </p>
     </div>
 
+
     <div id="lessons" class="course-section">
       <h2>Lessons</h2>
       <%if @lessons.empty? %>
@@ -44,7 +45,7 @@
         </table>
       <% end %>
     </div>
-
+    
     <div id="components" class="course-section">
       <% if @components.empty? %>
       <% else %>
@@ -68,12 +69,3 @@
 
 </div>
 
-<% if current_user.memory_ratings.in_course(@course).count > 0 %>
-  <div id="stats-sidebar"><%= render 'stats' %></div>
-<% end %>
-
-
-<% content_for :javascript do %>
-  <%= javascript_include_tag "jquery.flot.js" %>
-  <%= javascript_include_tag "Stats" %>
-<% end %>
