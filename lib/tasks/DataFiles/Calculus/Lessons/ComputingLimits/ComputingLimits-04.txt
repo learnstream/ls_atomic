@@ -1,0 +1,11 @@
+#### Examples
+
+  * \(\displaystyle\lim_{x\to 2} \sqrt{x^2+12}=4\) since the function \(f(x)=\sqrt{x^2+12}\) is continuous at \(x=2\) and \(f(2)=4\). 
+  * \(\displaystyle\lim_{x\to \infty} \frac{1}{x}=0\) since as \(x\) increases, \(\displaystyle \frac{1}{x}\) gets arbitrarily close to \(0\). 
+  * \(\displaystyle\lim_{x\to 0^+} \ln |x|\) tends to \(-\infty\) and so does not exist since as \(x\) decreases to \(0\), \(\ln |x|\) gets arbitrarily large in magnitude and negative. 
+  * \(\displaystyle\lim_{x\to 3} \frac{x^2-9}{x-3}=6\) even though \(\displaystyle f(x)=\frac{x^2-9}{x-3}\) is undefined at \(3\) since \(\displaystyle \frac{x^2-9}{x-3}=x+3\) and \(\displaystyle \lim_{x\to 3} x+3 =6\). 
+
+What about something like \(\displaystyle\lim_{x\to 0} \frac{\sin x}{x}\)? When we cannot easily "reason out" the value of a limit, we can often use numerical methods or L'Hopital's Rule to determine the value of the limit. Can you convince yourself that \(\displaystyle\lim_{x\to 0} \frac{\sin x}{x}=1\)?
+
+
+* * *

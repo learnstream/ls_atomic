@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 12:32:16 -0700
+# Date: 2011-07-13 13:58:36 -0700
 # Seeding Answer
 # Written with the command:
 #
@@ -156,6 +156,16 @@ Answer.seed(:id,
   {:id=>37058798, :quiz_id=>220564361, :text=>"1"},
   {:id=>38058798, :quiz_id=>220564362, :text=>"2"},
   {:id=>39058798, :quiz_id=>220564363, :text=>"0"},
-  {:id=>40058798, :quiz_id=>220564364, :text=>"2"}
+  {:id=>40058798, :quiz_id=>220564364, :text=>"2"},
+  {:id=>41058798, :quiz_id=>220564365, :text=>"\\[ \\lim_{x\\rightarrow -3} f(x) \\text{ is undefined.} \\]"},
+  {:id=>42058798, :quiz_id=>220564366, :text=>"\\[ \\lim_{x\\rightarrow 2^+} f(x) = -1 \\]"},
+  {:id=>43058798, :quiz_id=>220564367, :text=>"\\[ \\lim_{x\\rightarrow -5^+} f(x) = 2 \\]"},
+  {:id=>258433623, :quiz_id=>220565358, :text=>"\\[ \\lim_{x\\rightarrow -\\infty} f(x)  = 0 \\]"},
+  {:id=>259433623, :quiz_id=>220565359, :text=>"\\[ \\lim_{x\\rightarrow 2^-} f(x) = 1\\]"},
+  {:id=>307955828, :quiz_id=>220565360, :text=>"\\[ \\lim_{x\\rightarrow -5^-} f(x) =2 \\]"},
+  {:id=>308955828, :quiz_id=>220565361, :text=>"\\[ \\lim_{x\\rightarrow \\infty} f(x) \\text{ is undefined.} \\]"},
+  {:id=>309955828, :quiz_id=>220565362, :text=>"\\[ \\lim_{x\\rightarrow 2} f(x) \\text{ is undefined.} \\]"},
+  {:id=>310955828, :quiz_id=>220565363, :text=>"\\[ \\lim_{x\\rightarrow -5} f(x) = 2 \\]"},
+  {:id=>311955828, :quiz_id=>220565364, :text=>"\\[ \\lim_{x\\rightarrow c} f(x) = f(c) \\]"}
 )
 # End auto-generated file.

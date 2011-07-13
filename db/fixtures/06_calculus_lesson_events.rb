@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 12:32:17 -0700
+# Date: 2011-07-13 13:58:36 -0700
 # Seeding Event
 # Written with the command:
 #
@@ -76,6 +76,10 @@ Event.seed(:id,
   {:id=>53586301, :lesson_id=>163348855, :order_number=>3, :video_url=>nil, :start_time=>0, :end_time=>0},
   {:id=>53587302, :lesson_id=>163348855, :order_number=>4, :video_url=>nil, :start_time=>0, :end_time=>0},
   {:id=>85642803, :lesson_id=>163348856, :order_number=>0, :video_url=>nil, :start_time=>0, :end_time=>0},
-  {:id=>85643804, :lesson_id=>163348856, :order_number=>1, :video_url=>nil, :start_time=>0, :end_time=>0}
+  {:id=>85643804, :lesson_id=>163348856, :order_number=>1, :video_url=>nil, :start_time=>0, :end_time=>0},
+  {:id=>85644805, :lesson_id=>163348856, :order_number=>2, :video_url=>nil, :start_time=>0, :end_time=>0},
+  {:id=>85645806, :lesson_id=>163348856, :order_number=>3, :video_url=>nil, :start_time=>0, :end_time=>0},
+  {:id=>85646807, :lesson_id=>163348856, :order_number=>4, :video_url=>nil, :start_time=>0, :end_time=>0},
+  {:id=>85647808, :lesson_id=>163348856, :order_number=>5, :video_url=>nil, :start_time=>0, :end_time=>0}
 )
 # End auto-generated file.

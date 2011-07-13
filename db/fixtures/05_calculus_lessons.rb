@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 12:32:17 -0700
+# Date: 2011-07-13 13:58:36 -0700
 # Seeding Lesson
 # Written with the command:
 #
@@ -19,6 +19,6 @@ Lesson.seed(:id,
   {:id=>163348853, :course_id=>2, :name=>"Concavity and the Second Derivative Test", :order_number=>10, :component_tokens=>"298899356,298899357,298899358,298899359,298899360,298899361,298899362,298900353,298900354,298900355,298900356,298900357"},
   {:id=>163348854, :course_id=>2, :name=>"Computing Integrals by Substitution", :order_number=>11, :component_tokens=>"145754643,145754644,298901359"},
   {:id=>163348855, :course_id=>2, :name=>"Integration by Parts", :order_number=>12, :component_tokens=>"145760645,145760646,145760647,298901360,298901361,298901362"},
-  {:id=>163348856, :course_id=>2, :name=>"Computing Limits", :order_number=>3, :component_tokens=>""}
+  {:id=>163348856, :course_id=>2, :name=>"Computing Limits", :order_number=>3, :component_tokens=>"298902360,298902361,298902362,298903353,298903354,298903355,298903356,298903357,298903358,298903359,298903360,298903361,298903362"}
 )
 # End auto-generated file.

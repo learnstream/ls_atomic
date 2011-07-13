@@ -61,20 +61,29 @@ end
 quiz_writer.write(CALC_QUIZ_OUT) do |q_writer|
   answer_writer.write(CALC_ANSW_OUT) do |a_writer|
     CSV.foreach(CALC_QUIZ, :return_headers => false, :headers => :first_row) do |row|
-      answer_tokens = (0..3).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
+
+      if ["multi", "check"].include?(row['answer_type']) 
+        answer_choice_tokens = (0..3).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
+        answer_tokens = row['answer'].split("") 
+        answer_input =  { :type => row['answer_type'], :choices => answer_choice_tokens}.to_json
+      elsif ["self-rate", "text"].include?(row['answer_type'])
+        answer_tokens = row['answer'].nil? ? [] : row['answer'].split("&") 
+        answer_input = { :type => row['answer_type'] }.to_json
+      end
+      #answer_tokens = (0..3).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
       component_tokens = row['components'].to_s.split(",").map{ |c| id_encode("CalculusComponents-#{c}") }.join(",")
       quiz_id = id_encode("CalculusExercises-#{row['UniqueID']}")
       q_writer.add({
         :id => quiz_id, 
         :course_id => 2,
-        :in_lesson => false,
+        :in_lesson => row['in_lesson'],
         :question => row['question'],
         :answer_type => row['answer_type'],
-        :answer_input => { :type => row['answer_type'], :choices => answer_tokens}.to_json,
+        :answer_input => answer_input, 
         :answer_output => {:type => "text"}.to_json,
         :component_tokens => component_tokens
       })
-      row['answer'].split("").each_with_index do |a, ans_i|
+      answer_tokens.each_with_index do |a, ans_i|
         answer_id = id_encode("CalculusExercisesAnswer-#{quiz_id}-#{ans_i}")
         a_writer.add({ :id => answer_id, :quiz_id => quiz_id, :text => a })
       end 

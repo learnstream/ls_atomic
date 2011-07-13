@@ -5,8 +5,22 @@ Consider the graph of a function \(f(x)\) shown below.
 
 Evaluate each of the following limits, to check your understanding:
 
-~Q1Q
+~Q147Q
 
-~Q2Q
+~Q148Q
 
-~Q3Q
+~Q149Q
+
+~Q150Q
+
+~Q151Q
+
+~Q152Q
+
+~Q153Q
+
+~Q154Q
+
+~Q155Q
+
+~Q156Q

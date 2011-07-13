@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 12:32:16 -0700
+# Date: 2011-07-13 13:58:36 -0700
 # Seeding Component
 # Written with the command:
 #
@@ -155,6 +155,19 @@ Component.seed(:id,
   {:id=>298902356, :course_id=>2, :name=>"What is the integration of a polynomial (or, more generally, linear combination of powers of the variable of integration)?", :description=>"**Power rule**: The integral with respect to \\(x\\) for a sum of powers of \\(x\\) with real coefficients and exponents is given by \\[\\int\\!\\left( \\sum^n_{k=0} a_k x^k\\right)\\,dx= \\sum^n_{k=0} \\frac{a_k x^{k+1}}{k+1} + C.\\]"},
   {:id=>298902357, :course_id=>2, :name=>"What is the derivative of a constant?", :description=>"The derivative of a constant is always zero. "},
   {:id=>298902358, :course_id=>2, :name=>"How can the limit of an exponential function be found?", :description=>"The logarithm of the limit equals the limit of the logarithm, so taking the logarithm of the expression first, finding the limit, and then taking the answer as the exponent of \\(e\\) is often easier."},
-  {:id=>298902359, :course_id=>2, :name=>"What is the first step for evaluating a limit for a rational function?", :description=>"See whether the expression in the limit simplifies. If so, you may be able to remove a singularity."}
+  {:id=>298902359, :course_id=>2, :name=>"What is the first step for evaluating a limit for a rational function?", :description=>"See whether the expression in the limit simplifies. If so, you may be able to remove a singularity."},
+  {:id=>298902360, :course_id=>2, :name=>"What is a left-hand limit?", :description=>"A left-hand limit is the limit of a function as you approach it from the left. We write \\[ \\lim_{x\\rightarrow c^-} f(x) \\]"},
+  {:id=>298902361, :course_id=>2, :name=>"What is a right-hand limit?", :description=>"A right-hand limit is the limit of a function as you approach it from the right. We write \\[ \\lim_{x\\rightarrow c^+} f(x) \\]"},
+  {:id=>298902362, :course_id=>2, :name=>"What is the definition of a limit?", :description=>"Let the function \\( f(x) \\) be defined at all \\( x \\) in an open interval containing \\( c \\), except possibly at \\( c \\) itself. Then the limit \\[ \\lim_{x\\rightarrow c} f(x) = L \\] if and only if for each \\( \\epsilon > 0 \\), there exists a \\( \\delta > 0 \\) such that \\[ \\text{ if } 0 < | x - c| < \\delta \\text{ then } | f(x) - L | < \\epsilon \\] In words, this is equivalent to saying that the limit \\[ \\lim_{x\\rightarrow c} f(x) = L \\] if and only if by taking \\( x \\) arbitrarily close to \\( c \\), we can get \\( f(x) \\) arbitrarily close to \\( L \\)."},
+  {:id=>298903353, :course_id=>2, :name=>"When does a limit exist?", :description=>"A two-sided limit \\( \\lim_{x\\rightarrow c} f(x) = L \\) exists if both the left- and right-hand limits exist, and are equal."},
+  {:id=>298903354, :course_id=>2, :name=>"What is the limit of a function that has a vertical asymptote at the limit point?", :description=>"The limit is undefined, because the function tends to infinity."},
+  {:id=>298903355, :course_id=>2, :name=>"What is the left-hand limit of a function with a jump-discontinuity at the limit point?", :description=>"The limit is the value of the function on the left-hand side of the jump discontinuity."},
+  {:id=>298903356, :course_id=>2, :name=>"What is the right-hand limit of a function with a jump-discontinuity at the limit point?", :description=>"The limit is the value of the function on the right-hand side of the jump discontinuity."},
+  {:id=>298903357, :course_id=>2, :name=>"What is the limit of a function with a jump-discontinuity at the limit point?", :description=>"The limit is undefined, because the left- and right-hand limits will have different values at the limit point (evaluated at the left- and right- hand side of the jump discontinuity)"},
+  {:id=>298903358, :course_id=>2, :name=>"What is the left-hand limit of a function that has a removable discontinuity at the limit point?", :description=>"The limit is the value of the function as you approach from the left, but not the \"defined\" value of the function itself at the limit point."},
+  {:id=>298903359, :course_id=>2, :name=>"What is the right-hand limit of a function that has a removable discontinuity at the limit point?", :description=>"The limit is the value of the function as you approach from the right, but not the \"defined\" value of the function itself at the limit point."},
+  {:id=>298903360, :course_id=>2, :name=>"What is the limit of a function that has a removable discontinuity at the limit point?", :description=>"The limit is the value of the left/right hand limits. \"Removable discontinuity\" in fact gets its name from the fact that we can \"remove\" the discontinuity by defining the function at the limit point as the limit itself."},
+  {:id=>298903361, :course_id=>2, :name=>"What is the limit of a function with a horizontal asymptote, as \\( x \\rightarrow \\pm\\infty \\)?", :description=>"The limit is simply the value of the asymptote."},
+  {:id=>298903362, :course_id=>2, :name=>"What is the limit of a function that tends to infinity as \\( x \\rightarrow \\pm\\infty \\)?", :description=>"The limit is undefined, because the function tends to infinity."}
 )
 # End auto-generated file.

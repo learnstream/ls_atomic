@@ -11,4 +11,4 @@ UniqueID,name,course_id,order_number,components,lesson_path
 10,Concavity and the Second Derivative Test,2,10,"113,114,115,116,117,118,119,120,121,122,123,124",Concavity
 11,Computing Integrals by Substitution,2,11,"15,16,136",USubstitution
 12,Integration by Parts,2,12,"77,78,79,137,138,139",IntegrationParts
-13,Computing Limits,2,3,,ComputingLimits
+13,Computing Limits,2,3,"147,148,149,150,151,152,153,154,155,156,157,158,159",ComputingLimits
