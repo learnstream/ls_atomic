@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     
     var updateInputForm = function() {
       $(".extra-form").hide();
@@ -36,6 +37,7 @@ $(document).ready(function () {
     };
 
     $("#quiz_answer_type").change(function() { 
+      console.log("answer type changed");
       $("#quiz_answers_attributes_0_text").val("");
       $("#quiz_answer_input").val("");
       $("#quiz_answer_output").val("");
