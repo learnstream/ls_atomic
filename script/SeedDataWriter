@@ -38,12 +38,12 @@ answer_writer = SeedFu::Writer.new({:class_name => "Answer", :seed_by => [:quiz_
 
 # Exports Calculus Components
 component_writer.write(CALC_COMPONENTS_OUT) do |writer|
-  CSV.foreach( CALC_COMPONENTS, :return_headers => false, :headers => :first_row) do |row|
+  CSV.foreach(CALC_COMPONENTS, :return_headers => false, :headers => :first_row) do |row|
     writer.add({
       :id => id_encode("CalculusComponents-#{row['UniqueID']}"),
       :course_id => 2,
-        :name => row['name'],
-        :description => row['description']
+      :name => row['name'],
+      :description => row['description']
     })
   end
 end
@@ -92,6 +92,7 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
           contents = l_row['is_document'] == "TRUE" ? File.open(File.join(lesson_root_path, l_row['playable_path_trunk'] + l_row['playable_path_itr'].rjust(2,"0")) + ".txt", 'rb') { |ff| ff.read } : l_row['note_content']
 
           e_writer.add({
+            :id => id_encode("CalculusEvent-#{row['UniqueID']*2}#{l_row['order_number']*2}"), 
             :lesson_id => lesson_id,
             :order_number => l_row['order_number'].to_i,
             :video_url => l_row['video_url'],
@@ -100,7 +101,7 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
           })
 
           n_writer.add({
-            :id => id_encode(row['DB_id']*2 + l_row['order_number']*2), 
+            :id => id_encode("CalculusNote-#{row['UniqueID']*2}#{l_row['order_number']*2}"), 
             :content => contents,
             :is_document => l_row['is_document']
           })
@@ -111,19 +112,19 @@ lesson_writer.write(CALC_LESSON_OUT) do |l_writer|
 end
 
 
-
+=begin
 # Exports Physics Components
 component_writer.write(PHYS_COMPONENTS_OUT) do |writer|
   CSV.foreach( PHYS_COMPONENTS, :return_headers => false, :headers => :first_row) do |row|
-    # Write the seed
     writer.add({
-      :id => row['DB_id'].to_i,
+      :id => id_encode("PhysicsComponent-#{row['UniqueID']}"),
       :course_id => 1,
       :name => row['name'],
       :description => row['description']
     })
   end
 end
+=end
 
 
 
