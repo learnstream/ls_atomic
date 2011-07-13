@@ -8,6 +8,7 @@ describe LessonStatusesController do
       @course = Factory(:course)
       @lesson = Factory(:lesson, :course => @course)
       @user = Factory(:user)
+      test_sign_in(@user)
       @user.enroll!(@course)
       @lesson_status = @user.lesson_statuses.find_by_lesson_id(@lesson)
 

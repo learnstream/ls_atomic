@@ -1,5 +1,7 @@
 class LessonStatusesController < ApplicationController
 
+  before_filter :authenticate
+
   def update
     @lesson_status = LessonStatus.find(params[:id])
 
