@@ -36,6 +36,7 @@ $(function () {
       } else {
         window.location.replace("/courses/" + course_id +  "/components/" + component_id);
       }
+      return false;
     });
   });
 
