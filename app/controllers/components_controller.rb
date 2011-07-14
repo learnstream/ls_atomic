@@ -51,7 +51,7 @@ class ComponentsController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:course_id])
+    @course = Course.find(params[:course_id]) unless params[:course_id].nil?
     @component = Component.find(params[:id])
     @videos = @component.videos
     @title = @component.name
