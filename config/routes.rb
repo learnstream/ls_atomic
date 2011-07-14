@@ -47,6 +47,7 @@ LsAtomic::Application.routes.draw do
   match '/signin', :to => 'user_sessions#new'
   match '/signout', :to => 'user_sessions#destroy'
   match '/about', :to => 'pages#about'
+  match '/contact', :to => 'pages#contact'
   match '/help', :to => 'pages#help'
   match '/home', :to => 'pages#home'
    

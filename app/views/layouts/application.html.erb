@@ -47,17 +47,20 @@
   <nav>
   <ul>
     <% if signed_in? %>
-      <%= display_name(current_user) %>
+      <li><%= display_name(current_user) %></li>
     <% end %>
     <li><%= link_to "Home", root_path  %></li>
     <% if signed_in? %>
 
       <% if current_user.admin? %>
-      <li><%= link_to "Users", users_path %></li>
-      <li><%= link_to "Courses", courses_path %></li>
-    <% end %>
+        <li><%= link_to "Users", users_path %></li>
+        <li><%= link_to "Courses", courses_path %></li>
+      <% end %>
+
+      <li><%= link_to "Help", help_path %></li>
       <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
   <% else %>
+    <li><%= link_to "FAQ", help_path %></li>
     <li><%= link_to "Sign in", signin_path %></li>
   <% end %>
   </ul>
@@ -83,4 +86,7 @@
  </section>
 </div>
 </body>
+<footer>
+
+</footer>
 </html>
