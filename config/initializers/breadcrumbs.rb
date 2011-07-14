@@ -103,8 +103,8 @@ Gretel::Crumbs.layout do
   end
 
   crumb :quiz do |quiz|
-    link lambda {|quiz| "Exercise: #{quiz.question}"}, course_quiz_path(quiz.course, quiz)
-    parent :course, quiz.course
+    link lambda {|quiz| "Exercise #{quiz.id}"}, course_quiz_path(quiz.course, quiz)
+    parent :quizzes, quiz.course
   end
 
   crumb :new_quiz do |course|
