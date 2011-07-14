@@ -132,7 +132,8 @@ ul#local-nav {
       line-height: 14px;
       color: #09c;
       background: #fff;
-      border: 0px none; }
+      border: 0px none;
+      width: auto; }
 
 .add-course-item {
   font-size: 1.2em;
@@ -360,6 +361,12 @@ a.study_button {
     #course-overview .course-listing ul.course-actions a {
       font-size: 1.5em; }
 
+/* Help Pages */
+#help-docs iframe {
+  margin: auto;
+  width: 850px;
+  padding: 10px; }
+
 /* Course index page */
 ul#courses {
   list-style-type: none; }
@@ -414,7 +421,8 @@ table.course-data {
     max-height: 40px;
     min-width: 110px;
     max-width: 110px;
-    margin-left: -110px; }
+    margin-left: -110px;
+    overflow: hidden; }
     #student-status td.label {
       background: #ccc; }
     #student-status td.due {
