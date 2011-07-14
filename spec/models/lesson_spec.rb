@@ -66,6 +66,14 @@ describe Lesson do
       @lesson.components.first.should == @component
     end
 
+    it "should allow components to be set through :component_tokens" do
+      @c1 = Factory(:component, :course => @course, :name => "name1") 
+      @c2 = Factory(:component, :course => @course, :name => "name2") 
+      @c3 = Factory(:component, :course => @course, :name => "name3") 
+      @lesson.component_tokens = [@c1.id, @c2.id, @c3.id].join(",") 
+      @lesson.save!
+      @lesson.components.should == [@c1, @c2, @c3]
+    end
   end
 
 end

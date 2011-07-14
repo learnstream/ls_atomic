@@ -23,6 +23,15 @@ describe Quiz do
     @quiz.components.should include(@component)
   end
 
+  it "should allow components to be set through :component_tokens" do
+    @c1 = Factory(:component, :course => @course, :name => "name1") 
+    @c2 = Factory(:component, :course => @course, :name => "name2") 
+    @c3 = Factory(:component, :course => @course, :name => "name3") 
+    @quiz.component_tokens = [@c1.id, @c2.id, @c3.id].join(",") 
+    @quiz.save!
+    @quiz.components.should == [@c1, @c2, @c3]
+  end
+
   it "should have a responses method" do
     @quiz.should respond_to(:responses)
   end

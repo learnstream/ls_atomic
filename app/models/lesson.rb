@@ -23,11 +23,10 @@ class Lesson < ActiveRecord::Base
 
 
 
-  #----- added
   def component_tokens=(ids)
     self.component_ids = ids.split(",")
   end
-  #---------
+
   private 
 
   def create_lesson_statuses
