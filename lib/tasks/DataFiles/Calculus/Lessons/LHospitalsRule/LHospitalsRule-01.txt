@@ -5,7 +5,6 @@ Suppose \(\lim f(x)=\lim g(x)=0\). Then
   1. If \(\displaystyle \lim\, \frac{f'(x)}{g'(x)}=L\), then \(\displaystyle \lim\, \frac{f(x)}{g(x)}=\lim \frac{f'(x)}{g'(x)}=L\). 
   2. If \(\displaystyle \lim\, \frac{f'(x)}{g'(x)}\) tends to \(+\infty\) or \(-\infty\) in the limit, then so does \(\displaystyle\frac{f(x)}{g(x)}\). 
 
-**[Geometrical Interpretation][4]** \(\qquad\) **[Sketch of the Proof of L'Hopital's Rule][5]**
 
 #### Examples
 
