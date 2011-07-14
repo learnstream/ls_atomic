@@ -265,6 +265,47 @@ h1.course-name {
   }
 }
 
+#lessons table {
+  border: 1px solid #666;
+}
+
+.study-button {
+  width: 150px;
+  text-align: center;
+  font-weight: bold;
+
+  &:hover {
+    background: #f8f8f8;
+    text-decoration: none;
+  }
+}
+
+.due-count {
+  color: #fff;
+  background: #f66;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  
+  width: 180px;
+  @include rounded(5px);
+  border: 1px solid darken(#f66, 15%);
+}
+
+.progress-wrap{
+  position: relative;
+}
+
+.progress-wrap, .progress-value, .progress-text {
+  /* The width and height of your image */
+  width: 45px; height: 10px;
+} 
+
+.progress-wrap, .progress-value {
+  background: #666;
+  @include rounded(3px);
+}
+
 /* Memory list */
 
 #memories {
