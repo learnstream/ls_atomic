@@ -58,6 +58,7 @@
       <% end %>
 
       <li><%= link_to "Help", help_path %></li>
+      <li><a onmouseover="UE.Popin.preload();" href="#" onclick="UE.Popin.show(); return false;">Feedback</a></li>
       <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
   <% else %>
     <li><%= link_to "FAQ", help_path %></li>
@@ -85,6 +86,22 @@
   <%= yield %>
  </section>
 </div>
+<script type='text/javascript'>
+
+var _ues = {
+host:'learnstream.userecho.com',
+forum:'7263',
+lang:'en',
+tab_show:false,
+};
+
+(function() {
+    var _ue = document.createElement('script'); _ue.type = 'text/javascript'; _ue.async = true;
+    _ue.src = ('https:' == document.location.protocol ? 'https://s3.amazonaws.com/' : 'http://') + 'cdn.userecho.com/js/widget-1.4.gz.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(_ue, s);
+  })();
+
+</script>
 </body>
 <footer>
 </footer>
