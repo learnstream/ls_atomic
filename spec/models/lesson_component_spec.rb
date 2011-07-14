@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe LessonComponent do
   before(:each) do
+    @user = Factory(:user)
     @course = Factory(:course)
     @lesson = Factory(:lesson, :course => @course)
     @component = Factory(:component, :course => @course)

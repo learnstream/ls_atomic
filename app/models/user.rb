@@ -84,6 +84,10 @@ class User < ActiveRecord::Base
     memories_due_with_quiz.map{|m| m.id}.uniq
   end
 
+  def memories_reviewed_today(course)
+    Memory.select("distinct memories.*").where("memories.user_id = ?", self.id).joins(:component => {:quizzes => :responses}).merge(Component.where(:course_id => course.id)).merge(Response.where('responses.created_at >= ? AND responses.created_at <= ?', DateTime.now.utc.beginning_of_day, DateTime.now.utc))
+  end
+
   def number_of_memories_today(course)
     memories.reviewed_today.length + memories_due_with_quiz(course).length
   end

@@ -4,13 +4,12 @@ class Memory < ActiveRecord::Base
   belongs_to :user
   belongs_to :component
 
-  before_create lambda { self.due = Time.now }
+  before_create lambda { self.due = Time.now}
 
   scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
   scope :due_before, lambda { |time| where("due <= ? AND views > 0", time) }
   scope :latest_studied, :order => 'last_viewed DESC'
   scope :viewed, where('views > ?', 0)
-  scope :reviewed_today, select('distinct memories.*').joins(:component => {:quizzes => :responses}).merge(Response.where('responses.created_at >= ? AND responses.created_at <= ?', DateTime.now.utc.beginning_of_day, DateTime.now.utc))
 
   scope :course_exercise, lambda { |course_id| in_course(course_id).due_before(DateTime.now.utc).viewed }
 
