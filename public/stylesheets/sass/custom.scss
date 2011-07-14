@@ -2,12 +2,19 @@ $body-color: #fff;
 $yt-width: 480px;
 $yt-height: 295px;
 
-body {
+html, body {
   background: $body-color; 
+  height: 100%;
 }
 
 .container {
   width: 100%;
+  margin: 0 auto -2em;
+  padding-bottom:4em;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+
 }
 
 header {
@@ -28,6 +35,9 @@ header {
     &:visited { color: $logo-color; }
   }    
 }
+.footer .push {height: 2em; /* NOTE, this should be same as -margin on container */}
+
+ #footer-bar { text-align: center; } 
 
 /* Common stuff */ 
 
@@ -49,7 +59,7 @@ section {
   background: $body-color;
   margin: auto;
   padding: 15px 60px 10px 60px;
-}
+ }
 
 h1 {
   font-size: 2em;
