@@ -324,6 +324,12 @@ a.study_button {
     #course-overview .course-listing ul.course-actions a {
       font-size: 1.5em; }
 
+/* Help Pages */
+#help-docs iframe {
+  margin: auto;
+  width: 850px;
+  padding: 10px; }
+
 /* Course index page */
 ul#courses {
   list-style-type: none; }
