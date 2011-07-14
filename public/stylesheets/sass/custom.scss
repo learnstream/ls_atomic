@@ -504,6 +504,7 @@ table.course-data {
     min-width: 110px; 
     max-width: 110px; 
     margin-left: -110px; 
+    overflow: hidden;
     &.label { background: #ccc; }
     &.due { background: red; }
     &.good { background: green; }                     

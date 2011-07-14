@@ -378,7 +378,8 @@ table.course-data {
     max-height: 40px;
     min-width: 110px;
     max-width: 110px;
-    margin-left: -110px; }
+    margin-left: -110px;
+    overflow: hidden; }
     #student-status td.label {
       background: #ccc; }
     #student-status td.due {
