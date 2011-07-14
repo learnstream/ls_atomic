@@ -15,7 +15,7 @@ describe LessonComponentsController do
 
   describe "POST 'create'" do
     before(:each) do
-      @attr = {:component_id => @component, :lesson_id => @lesson }
+      @attr = {:component_id => @component.id, :lesson_id => @lesson.id }
     end
 
     it "should create a new lesson component" do

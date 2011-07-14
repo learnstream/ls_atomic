@@ -10,11 +10,12 @@ class LessonComponent < ActiveRecord::Base
   after_create :unlock_memories_for_students
 
   def unlock_memories_for_students
-    @students = lesson.course.students
+    @students = self.component.course.students
     @students.each do |student|
       status = student.lesson_statuses.find_by_lesson_id(lesson)
-      if(status != -1)
-        student.
+      if(status.started?)
+        student.memories.find_by_component_id(component).unlock!
+      end
     end
   end
 end
