@@ -2,3 +2,4 @@ $("#events-area-teacher").append("<%= escape_javascript(render(@event)) %>");
 $("#events-area-teacher .event").last().find(".content").markdown();
 $("#add-note").html("<%= escape_javascript(render :partial => 'form') %>");
 prepareNoteNew();
+MathJax.Hub.Queue(["Typeset", MathJax.Hub, "events-area-teacher"]);
