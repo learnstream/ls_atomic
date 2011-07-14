@@ -1,6 +1,7 @@
 <li>
 <%= render :partial => 'courses/enrollment_button', :locals => {:course => course}%>
 <h3><%= link_to course.name, course %></h3>
-
+<div class="markdown">
 <p><%= course.description %></p>
+</div>
 </li>
