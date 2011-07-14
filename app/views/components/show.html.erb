@@ -33,11 +33,11 @@
 <% end %>
 
 <div id="component-back-link">
-  <% referer = (request.env["HTTP_REFERER"]).match(/(?:responses)|(?:lessons)/) unless request.env["HTTP_REFERER"].nil? %>
+  <% referer = (request.env["HTTP_REFERER"]).match(/(?:responses)|(?:lessons)|(?:study)/) unless request.env["HTTP_REFERER"].nil? %>
   <% if referer %>
-    <% if (referer[0] == "responses") %>
+    <% if (referer[0] == "responses" || referer[0] == "study")  %>
       <% returntext = "Return to studying" %>
-    <% elsif (referer[0] == "lessons") %>
+    <% elsif ( referer[0] == "lessons") %>
       <% returntext = "Return to lesson" %>
     <% end %>
     <%= link_to returntext, :back, :class => "quizbutton round" %>
