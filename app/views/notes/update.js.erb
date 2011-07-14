@@ -2,4 +2,4 @@ $("#note-<%= @updated_note.id %>").replaceWith("<%= escape_javascript(render(@ev
 $("#note-<%= @updated_note.id %> .content").markdown();
 $("#add-note").html("<%= escape_javascript(render :partial => 'form') %>");
 prepareNoteNew();
-renderLatex();
+MathJax.Hub.Queue(["Typeset", MathJax.Hub, "events-area-teacher"]);
