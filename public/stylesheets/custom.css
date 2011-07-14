@@ -132,7 +132,8 @@ ul#local-nav {
       line-height: 14px;
       color: #09c;
       background: #fff;
-      border: 0px none; }
+      border: 0px none;
+      width: auto; }
 
 .add-course-item {
   font-size: 1.2em;
