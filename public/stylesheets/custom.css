@@ -333,17 +333,19 @@ ul#courses {
   ul#courses p {
     margin-left: 100px;
     clear: right; }
-  ul#courses input {
-    background: #69c;
-    border: none;
-    font-size: 1.1em;
-    width: 80px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px; }
-  ul#courses input:hover {
-    background: #9fbfdf;
-    cursor: pointer; }
+
+.enroll-button {
+  background: #69c;
+  border: none;
+  font-size: 1.1em;
+  width: 80px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+
+.enroll-button:hover {
+  background: #9fbfdf;
+  cursor: pointer; }
 
 /* Course Show page */
 /* Teacher pages */
@@ -447,11 +449,11 @@ a.signup_button {
     text-decoration: none; }
 
 /* Buttons/Forms */
-#enroll_form {
+.enroll_form {
   display: inline; }
-  #enroll_form form {
+  .enroll_form form {
     display: inline; }
-  #enroll_form .actions {
+  .enroll_form .actions {
     display: inline; }
 
 .inline-button {
