@@ -157,7 +157,7 @@ describe User do
       @memory2.due = (Time.now.utc - 3000.days)
       @memory.save!
       @memory2.save!
-      @user.memories_due_with_quiz(@component.course).should == [@memory]
+      @user.memories_due_with_quiz(@component.course).should == [@memory.id]
     end 
 
   end
