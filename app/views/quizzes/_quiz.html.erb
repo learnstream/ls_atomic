@@ -1,27 +1,43 @@
 <div class="header markdown"><%= @quiz.question %></div>
+<% if (@quiz.answer_type == "multi") || (@quiz.answer_type == "check") %>
+  <div id = "quiz-choices">
+    Choices: 
+    <%= raw show_multi_choices(@quiz.answer_input) %>
+  </div>
+<% end %>
+<p class="markdown">
+Answer(s): 
+<ul>
+<% if (@quiz.answer_type == "multi") || (@quiz.answer_type == "check") %>
+  <%= quiz_answer(@quiz) %>
+<% else %>
+  <% @quiz.answers.each do |answer| %>
+    <%= answer.text %><br /> 
+  <% end %></p>
+<% end %>
+</ul>
 
-<p class="markdown">Answer(s): <% @quiz.answers.each do |answer| %><%= answer.text %> <% end %></p>
 
 <p id="explanation" class="markdown"><%= @quiz.explanation %></p>
 
 <p>Component(s): <% @quiz.components.each do |component| %><%= link_to component.name, course_component_path(@course, component) %><% end %></p>
 
-<p><%= @quiz.responses.count  %> responses given. <%= @quiz.percent_responses_correct %>% correct.</p>
+  <p><%= @quiz.responses.count  %> responses given. <%= @quiz.percent_responses_correct %>% correct.</p>
 
 
-<table id="student_responses">
-  <tr id="labels">
-    <th> Student </th>
-    <th> Response </th>
-    <th> Status </th>
-    <th> Date </th>
-  </tr>
-  <% @quiz.responses.each do |r| %>
-    <tr>
-      <td> <%= display_name(r.user) %> </td>
-      <td> <%= r.answer %> </td>
-      <td> <%= r.status %> </td>
-      <td> <%= time_ago_in_words(r.created_at) %> ago </td>
+  <table id="student_responses">
+    <tr id="labels">
+      <th> Student </th>
+      <th> Response </th>
+      <th> Status </th>
+      <th> Date </th>
     </tr>
-  <% end %>
-</table>
+    <% @quiz.responses.each do |r| %>
+      <tr>
+        <td> <%= display_name(r.user) %> </td>
+        <td> <%= r.answer %> </td>
+        <td> <%= r.status %> </td>
+        <td> <%= time_ago_in_words(r.created_at) %> ago </td>
+      </tr>
+    <% end %>
+  </table>
