@@ -13,8 +13,9 @@ class LessonComponent < ActiveRecord::Base
     @students = lesson.course.students
     @students.each do |student|
       status = student.lesson_statuses.find_by_lesson_id(lesson)
-      if(status != -1)
-        student.
+      if(status.started?)
+        student.memories.find_by_component_id(component).unlock!
+      end
     end
   end
 end
