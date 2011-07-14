@@ -61,9 +61,10 @@
     </div>
 
   <% else %>
+    <h1><%= @course.name %></h1>
 
     <p><%= @course.description %></p>
-    <%= render :partial => 'users/enroll', :locals => { :course => @course }  %>
+    <%= render :partial => 'users/enroll', :locals => { :course => @course } %>
 
   <% end %>
 

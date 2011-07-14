@@ -2,7 +2,6 @@ class ComponentsController < ApplicationController
   layout :choose_layout
 
   before_filter :authenticate
-  #before_filter :only => [:create, :edit, :update, :new, :index, :destroy] do 
   before_filter :except => [:show] do 
     check_permissions(params)
   end 
