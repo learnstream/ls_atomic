@@ -80,7 +80,8 @@ class User < ActiveRecord::Base
   end
 
   def memories_due_with_quiz(course)
-    memories.joins(:component => :quizzes).merge(Quiz.unlocked(course.id, self.id).exercises).group('memories.id').in_course(course).due_before(Time.now.utc).all
+    memories_due_with_quiz = memories.joins(:component => :quizzes).merge(Quiz.unlocked(course.id, self.id).exercises).in_course(course).due_before(Time.now.utc).all
+    memories_due_with_quiz.map{|m| m.id}.uniq
   end
 
   def number_of_memories_today(course)

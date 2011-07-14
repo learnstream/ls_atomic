@@ -76,10 +76,11 @@ quiz_writer.write(CALC_QUIZ_OUT) do |q_writer|
       #answer_tokens = (0..3).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
       component_tokens = row['components'].to_s.split(",").map{ |c| id_encode("CalculusComponents-#{c}") }.join(",")
       quiz_id = id_encode("CalculusExercises-#{row['UniqueID']}")
+      in_lesson = row['in_lesson'] == "TRUE" ? true : false
       q_writer.add({
         :id => quiz_id, 
         :course_id => 2,
-        :in_lesson => row['in_lesson'],
+        :in_lesson => in_lesson,
         :question => row['question'],
         :answer_type => row['answer_type'],
         :answer_input => answer_input, 
