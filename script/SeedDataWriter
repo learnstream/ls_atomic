@@ -2,11 +2,12 @@
 #
 # This is: script/generate_cities_seed_from_csv
 #
-require 'seed-fu'
+#require 'seed-fu'
+require File.join(File.dirname(__FILE__), '..', 'vendor/plugins/seed-fu/lib/seed-fu/writer')
+require 'active_support/core_ext'
 require 'rubygems'
 require 'csv'
 require 'digest/sha2'
-
 
 def id_encode(string)
   temp_hash = Digest::SHA2.new << string
