@@ -39,13 +39,11 @@ $(document).ready(function() {
 
 $.fn.embedQuizzes = function() { 
   var text = $(this).html();
-  console.log(text);
   
   text = text.replace(/~Q(\d+)Q/g, '<div id="quiz_$1" class="quiz-embed"></div>');
   $(this).html(text);
   $(this).find(".quiz-embed").each(function() {
       var fake_event = { id : $(this).attr("id").split("_")[1] };
-      console.log(fake_event);
       displayQuiz(fake_event, $(this));
       });
 }

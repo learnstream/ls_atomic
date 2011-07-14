@@ -1,2 +1,3 @@
 $("#quiz_<%= @response.quiz.id %> #rate-button-panel").hide();
-$("#nextlink").click();
+if (!$("#quiz_<%= @response.quiz.id %>").hasClass("quiz-embed"))
+  $("#nextlink").click();
