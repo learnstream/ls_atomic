@@ -3,7 +3,9 @@ $(document).ready(function() {
 });
 
 $.fn.markdown = function(typeset) {
-  mathDiv = this.selector.slice(1);
+  // It appears to typeset the whole page if it doesn't find the ID. Which
+  // works, but isn't all that great.
+  mathDiv = ($(this).attr("id"));
   converter = new Showdown.converter();
   $(this).html(converter.makeHtml($(this).text()));
   if (typeof(typeset) == "undefined" || typeset == true) {
@@ -17,10 +19,8 @@ $.fn.markdown = function(typeset) {
 // other things). 
 function typesetStubbornMath() {
   $(".MathJax_Preview").each( function() {
-    console.log("Text: " + $(this).text());
     if($(this).text() != "") {
       MathJax.Hub.Queue(["Typeset", MathJax.Hub, $(this).attr("id")]);
-      console.log("ID: " + $(this).attr("id"));
     }
   });
 
@@ -30,4 +30,5 @@ $.fn.markdownInner = function() {
   $(this).find(".markdown").each(function() {
       $(this).markdown(false); });
   MathJax.Hub.Queue(["Typeset", MathJax.Hub, mathDiv]);
+  typesetStubbornMath();
 }
