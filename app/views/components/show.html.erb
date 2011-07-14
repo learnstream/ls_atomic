@@ -33,7 +33,9 @@
 <% end %>
 
 <div id="component-back-link">
-  <% referer = (request.env["HTTP_REFERER"]).match(/(?:responses)|(?:lessons)/) %>
+  <% if (request.env["HTTP_REFERER"]) %>
+    <% referer = (request.env["HTTP_REFERER"]).match(/(?:responses)|(?:lessons)/) %>
+  <% end %>
   <% if referer %>
     <% if (referer && referer[0] == "responses") %>
       <% returntext = "Return to studying" %>
