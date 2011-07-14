@@ -450,9 +450,10 @@ ul#courses {
   }
   h3 { display: inline; margin-left: 15px; clear: right; }
   p { margin-left: 100px; clear: right; }
-  input { background: #69c; border: none; font-size: 1.1em; width: 80px; @include rounded(3px); }
-  input:hover { background: lighten(#69c, 15%); cursor: pointer; }
 }
+
+  .enroll-button { background: #69c; border: none; font-size: 1.1em; width: 80px; @include rounded(3px); }
+  .enroll-button:hover { background: lighten(#69c, 15%); cursor: pointer; }
 
 /* Course Show page */
 
@@ -576,7 +577,7 @@ a.signup_button {
 
 /* Buttons/Forms */
 
-#enroll_form {
+.enroll_form {
   display: inline;
 
   form { display: inline; }
