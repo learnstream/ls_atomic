@@ -4,7 +4,7 @@ class Memory < ActiveRecord::Base
   belongs_to :user
   belongs_to :component
 
-  before_create lambda { self.due = Time.now }
+  before_create lambda { self.due = Time.now}
 
   scope :in_course, lambda { |course_id| joins(:component).merge(Component.where(:course_id => course_id)) }
   scope :due_before, lambda { |time| where("due <= ? AND views > 0", time) }
