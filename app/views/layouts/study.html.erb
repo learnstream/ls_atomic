@@ -7,7 +7,7 @@
     <div class="section bottom">
       <%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
       <% due = current_user.memories_due_with_quiz(@course).length %>
-      <% total = current_user.memories.reviewed_today.length %>
+      <% total = current_user.memories_reviewed_today(@course).count %>
     <div>
       <span style="color: <% if due == 0 %> green<% else %> red <% end %>">
           <span class="number"><%= due %></span> 
