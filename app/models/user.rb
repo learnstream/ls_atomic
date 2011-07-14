@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :memory_ratings, :through => :memories
   has_many :lesson_statuses, :dependent => :destroy
   has_many :authentications, :dependent => :destroy
+  has_many :responses
 
   acts_as_authentic do |config|
     config.crypto_provider = Authlogic::CryptoProviders::MD5

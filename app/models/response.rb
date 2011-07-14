@@ -8,6 +8,7 @@ class Response < ActiveRecord::Base
   default_scope order("created_at DESC")
   scope :by_user, lambda { |user| where(:user_id => user.id) } 
   scope :correct, where(:status => "correct")
+  scope :in_course, lambda { |course| joins(:quiz).merge(Quiz.where(:course_id => course.id)) }
 
   def rate_components!(quality)
     self.has_been_rated = true

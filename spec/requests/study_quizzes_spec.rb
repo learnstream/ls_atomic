@@ -52,6 +52,24 @@ describe "Doing exercises" do
     page.should have_css("#judgement")
   end
 
+  it "should show the information about the last component studied" do
+    click_button "Skip"
+    @component2 = Factory(:component, :name => "Another componet", :course => @course)
+    @memory2 = @user.memories.find_by_component_id(@component2)
+    Timecop.travel(DateTime.now.utc - 3.days) do 
+      @memory2.view(0)
+      @memory2.save!
+    end
+    @quiz2 = Factory(:quiz, :course => @course)
+    @quiz2.components << @component2
+    @answer2 = Factory(:answer)
+    @quiz2.answers << @answer2
+
+    visit course_study_index_path(@course)
+    page.should have_content(@quiz2.question)
+    page.should have_css("a", :text => @component.name)
+  end
+
   describe "when the quiz has an event" do
 
     before(:each) do

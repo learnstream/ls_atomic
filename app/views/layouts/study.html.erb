@@ -4,16 +4,15 @@
       Studying <%= link_to @course.name, @course %>
     </div>
 
-    <div class="section bottom">
-      <%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
+    <div class="section">
       <% due = current_user.memories_due_with_quiz(@course).length %>
       <% total = current_user.memories_reviewed_today(@course).count %>
-    <div>
+      <div>
       <span style="color: <% if due == 0 %> green<% else %> red <% end %>">
           <span class="number"><%= due %></span> 
           <%= due == 1 ? "concept" : "concepts" %> due
         </span><br />
-      <span class="number"><%= total %></span> already studied today</div>
+        <span class="number"><%= total %></span> already studied today</div>
       <br />
 
       <div>
@@ -24,12 +23,23 @@
         <% end %>
       </div>
     </div>
+    
+    <% last_response = current_user.responses.in_course(@course).first %>
+    <% last_quiz = last_response.nil? ? nil : last_response.quiz %>
 
+    <% if last_quiz %>
+    <div class="section bottom">
+        Just studied:
+        <ul><% last_quiz.components.each do |component| %>
+            <li><%= link_to component.name, component %></li>
+          <% end %></ul>
+    </div>
+    <% end %>
   </div>
 <% end %>
 
 <% content_for :flash_msg do %><div />
-<% end %>
+  <% end %>
 
-<%= render :file => 'layouts/application' %>
+  <%= render :file => 'layouts/application' %>
 
