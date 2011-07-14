@@ -3,12 +3,8 @@ require 'spec_helper'
 describe LessonComponent do
   before(:each) do
     @user = Factory(:user)
-    test_sign_in(@user)
     @course = Factory(:course)
-    @user.enroll!(@course)
     @lesson = Factory(:lesson, :course => @course)
-    @event = Factory(:event, :lesson => @lesson)
-    @user.lesson_statuses.create!(:lesson => @lesson, :user => @user)
     @component = Factory(:component, :course => @course)
     @lesson_component = LessonComponent.create!(:lesson_id => @lesson.id, 
                                             :component_id => @component.id)
