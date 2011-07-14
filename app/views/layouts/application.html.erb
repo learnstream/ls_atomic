@@ -85,6 +85,13 @@
   
   <%= yield %>
  </section>
+ <div class="push"></div>
+</div>
+
+<div class="footer"> 
+  <div id="footer-bar">
+    <%= link_to "About", about_path %> |  <%= link_to "Contact", contact_path %> | <%= link_to "Help", help_path %>
+  </div>
 </div>
 <script type='text/javascript'>
 
@@ -103,6 +110,4 @@ tab_show:false,
 
 </script>
 </body>
-<footer>
-</footer>
 </html>
