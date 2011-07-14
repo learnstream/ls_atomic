@@ -10,6 +10,15 @@
   <%= @component.name%>
 </h1>
 
+<div id="back-link" class = "round quizbutton">
+<% referer = (request.env["HTTP_REFERER"]).match(/(?:responses)|(?:lessons)/) %>
+<% if (referer && referer[0] == "responses") %>
+  <%= link_to "Return to studying", :back %>
+<% elsif (referer && referer[0] == "lessons") %>
+  <%= link_to "Return to lesson", :back %>
+<%end %>
+</div>
+
 <p class="markdown">
   <%= @component.description %>
 </p>
