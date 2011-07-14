@@ -10,8 +10,11 @@
       <% if memories_due == 0 %>
         Complete a lesson to unlock more exercises.
       <% else %>
-        <%= link_to "Study now!", course_study_index_path(@course.id), :class => 'quizbutton round' %><br />
-        <%= pluralize(memories_due, "concept") %> to review
+        <div class="due-count">
+        <div class="quizbutton round study-button">
+          <%= link_to "Study now!", course_study_index_path(@course.id) %>
+        </div>
+          <%= pluralize(memories_due, "concept") %> to review</div>
       <% end %>
       </p>
     </div>
@@ -29,7 +32,14 @@
               <td><span class="lesson-number"><%= i+1 %></span></td>
               <td class="completion">
                 <% if lesson_status.completed %>
-                  ✓
+                  <div class="progress-wrap">
+                    <div class="progress-value" style="background: #0a0; width: 100%;"></div></div>
+                <% elsif lesson_status.started? %>
+                  <% events = lesson.events.map{|e| e.id} %>
+                  <% latest_event = lesson_status.event_id %>
+                  <% progress = (events.index(latest_event)+1.0)/events.length*100 %>
+                  <div class="progress-wrap">
+                    <div class="progress-value" style="background: #0a0; width: <%= progress %>%;"></div></div>
                 <% end %>
               </td>
               <td class="lesson-link"> <%= link_to lesson.name, [@course, lesson] %> </td>

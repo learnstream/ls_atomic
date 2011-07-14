@@ -192,6 +192,43 @@ h1.course-name {
       color: #666;
       margin-left: 5px; }
 
+#lessons table {
+  border: 1px solid #666; }
+
+.study-button {
+  width: 150px;
+  text-align: center;
+  font-weight: bold; }
+  .study-button:hover {
+    background: #f8f8f8;
+    text-decoration: none; }
+
+.due-count {
+  color: #fff;
+  background: #f66;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  width: 180px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #ff1a1a; }
+
+.progress-wrap {
+  position: relative; }
+
+.progress-wrap, .progress-value, .progress-text {
+  /* The width and height of your image */
+  width: 45px;
+  height: 10px; }
+
+.progress-wrap, .progress-value {
+  background: #666;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+
 /* Memory list */
 #memories td.needs-review {
   background: #fcc; }
