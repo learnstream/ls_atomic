@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+  console.log("hiya");
   var paper = Raphael("holder", 320, 240);
   //var c = paper.circle(100, 100, 40);
   var freebody = paper.rect(80, 80, 100, 100);

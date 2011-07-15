@@ -114,6 +114,11 @@ var displayQuiz = function(new_event,newdiv) {
           }
         });
 
+        // Load FBD if one exists 
+        if ($("#holder").length > 0) {
+          loadExistingFBD();
+        }
+
     });  
 }
 

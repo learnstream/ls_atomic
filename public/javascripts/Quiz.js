@@ -1,6 +1,6 @@
 $(document).ready(function () {
+
   doQuizPrep();
- 
   $("#response_answer").keyup(function() {
     answer = $("#response_answer").val();
     if (answer == "") {
@@ -13,6 +13,9 @@ $(document).ready(function () {
 });
 
 function doQuizPrep() {
+
+    ff = loadExistingFBD();
+    updateInputForm();
 
     function updateInputForm() {
       $(".extra-form").hide();
@@ -74,11 +77,6 @@ function doQuizPrep() {
         populateAnswer("#choices-check :checkbox");
     });
 
-    if ($("#quiz_answer_type option:selected").val() == 'fbd') { 
-      ff = loadExistingFBD();
-    }
-
-    updateInputForm();
 }
 
 var getMultiInputJSON = function(type,div) {
