@@ -6,9 +6,9 @@ class MemoriesController < ApplicationController
   def update
     @course = Course.find(params[:course_id])
     @memory = current_user.memories.find(params[:id])
-    if @memory.remove!
+    if @memory.update_attributes(params[:memory])
     else 
-      flash[:error] = "The memory could not be removed."
+      flash[:error] = "The memory could not be updated."
     end
 
     redirect_to course_memories_path(@course)

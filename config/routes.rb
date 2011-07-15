@@ -55,4 +55,6 @@ LsAtomic::Application.routes.draw do
 
   resources :lesson_components, :only => [:update, :create, :destroy]
 
+  match "/quizzes/challenge_link", :to => "quizzes#challenge_link"
+
 end
