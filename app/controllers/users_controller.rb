@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       return
     end
 
-    user.perm = new_perm
+    user.change_perm!(new_perm)
 
     if user.save
       flash[:success] = "Changed user role!"

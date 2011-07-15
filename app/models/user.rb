@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
     enrollments.find_by_course_id(course)
   end
 
+  def change_perm!(new_perm)
+    self.perm = new_perm
+    self.save!
+  end
+
   def enroll!(course)
     Enrollment.create!(:course_id => course.id, :user_id => self.id, :role => "student")
   end
@@ -102,4 +107,5 @@ class User < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+
 end
