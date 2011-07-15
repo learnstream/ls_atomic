@@ -592,9 +592,9 @@ table.course-data {
 
 
   ul { font-size: .4em; list-style-type: none;  }
-  ul li { display: inline-block; vertical-align: top; }
-
-  div {  max-width: $image-dim + 50px; }
+  ul li { display: inline-block; vertical-align: top; padding: 10px;  }
+    
+  div {  max-width: $image-dim + 50px; margin:auto; }
 
   .feature-head { font-weight: bold; font-size: 1.3em; }
 
@@ -604,8 +604,10 @@ table.course-data {
     min-width: $image-dim; 
     height: $image-dim; 
     border: 1px solid black; 
-    @include rounded(15px);
+    @include rounded(10px);
   }
+  .quotes { margin: 30px auto; max-width: 100%; width: 100%; }
+
 }
 
 #signup { 

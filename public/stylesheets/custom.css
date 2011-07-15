@@ -470,9 +470,11 @@ table.course-data {
     list-style-type: none; }
   #tagline ul li {
     display: inline-block;
-    vertical-align: top; }
+    vertical-align: top;
+    padding: 10px; }
   #tagline div {
-    max-width: 200px; }
+    max-width: 200px;
+    margin: auto; }
   #tagline .feature-head {
     font-weight: bold;
     font-size: 1.3em; }
@@ -481,9 +483,13 @@ table.course-data {
     min-width: 150px;
     height: 150px;
     border: 1px solid black;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px; }
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; }
+  #tagline .quotes {
+    margin: 30px auto;
+    max-width: 100%;
+    width: 100%; }
 
 #signup {
   margin: auto;
