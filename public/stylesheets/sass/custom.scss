@@ -204,17 +204,36 @@ ul#local-nav {
 
 
 /* Student course page */
-#stats-sidebar{ 
-  float: right; 
-  display: block; 
+#course-wrap {
+  margin: auto;
+  width: 950px;
+}
 
-  h3 { 
-    font-size: 1.2em;
+#stats-sidebar{ 
+  float: left; 
+  margin-left: 50px;
+
+  div.chart {
+    margin-bottom: 50px;
   }
 
-  div {
-    margin-top: 15px;
-    margin-bottom: 15px;
+  h2 {
+    font-size: 1.4em;
+    border-bottom: 1px dotted #eee;
+  }
+  
+  h3 { 
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: auto;
+    margin: 0px;
+  }
+
+  th,td {
+    padding: 0px;
   }
 }
 h1.course-name {
@@ -223,7 +242,8 @@ h1.course-name {
 }
 
 #course-content {
-  width: 600px;
+  width: 550px;
+  float: left;
 
   .course-section {
     margin-bottom: 25px;

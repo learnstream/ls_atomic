@@ -1,8 +1,9 @@
 <% breadcrumb :course, @course %>
 
-<div id="course-content">
   <% if current_user.student?(@course) %>
 
+  <div id="course-wrap">
+  <div id="course-content">
     <div id="exercises" class="course-section">
       <h2> Exercises </h2>
       <p>
@@ -68,14 +69,24 @@
         </p>
       <% end %>
     </div>
+  </div>
+  <div id="stats-sidebar">
+    <%= render :partial => 'stats' %>
+  </div>
 
+    <% content_for :javascript do %>
+      <%= javascript_include_tag "jquery.flot.js" %>
+      <%= javascript_include_tag "Stats" %>
+    <% end %>
   <% else %>
+  <div id="course-content">
     <h1><%= @course.name %></h1>
 
     <p class = markdown><%= @course.description %></p>
     <%= render :partial => 'users/enroll', :locals => { :course => @course } %>
+  </div>
+</div>
 
   <% end %>
 
-</div>
 
