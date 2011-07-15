@@ -10,7 +10,7 @@ $(document).ready(function(){
 var build_success_chart = function(course_id){
    var tick_label = [ [0, "4 weeks"], [7,"3 weeks"] ,[14,"2 weeks"], [21,"1 week"], [28, "now"]];
   $.get("/courses/" + course_id + "/success_stats.json", function(data) {
-    $.plot($("#stat-chart"), data.success_stats, { yaxis: { min: 0 }, xaxis: {max: 28, min: 0, ticks: tick_label}, series: { lines: { lineWidth: 0 }}, colors: [ "rgba(0,0,225,0.8)", "rgba(0,225,0,0.8)"], legend: { backgroundOpacity: 0, backgroundColor: null,noColumns: 2, position: "nw", margin: [0,-30] }} );
+    $.plot($("#stat-chart"), data.success_stats, { yaxis: { min: 0 }, xaxis: {max: 28, min: 0, ticks: tick_label}, series: { lines: { lineWidth: 0 }}, colors: [ "rgba(255,0,0,0.8)", "rgba(0,225,0,0.8)"], legend: { backgroundOpacity: 0, backgroundColor: null,noColumns: 1, position: "nw", margin: [0,0] }} );
   });
 }
 
@@ -24,7 +24,7 @@ var build_cards_due_chart = function(course_id){
 var build_achievement_chart = function(course_id){
   
   $.get("/courses/" + course_id + "/course_achieved_stats.json", function(data) {
-    $.plot($("#achievement-chart"), data.course_achieved_stats, { yaxis: { min: 0, max: 1}, xaxis: {ticks: achievementTicks} });
+    $.plot($("#achievement-chart"), data.course_achieved_stats, { yaxis: { min: 0, max: 100}, xaxis: {ticks: achievementTicks} });
   });
 }
 

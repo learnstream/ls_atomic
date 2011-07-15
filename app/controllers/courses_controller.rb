@@ -120,7 +120,13 @@ class CoursesController < ApplicationController
       end
       total_output[day] = [day, total_output[day][1] + 1]
     end
-    output_json = { :success_stats => [ {label: "Total", lines: {fill: true, fillColor: "rgba(0,0,255,0.8)"}, data: total_output},{label: "Correct", lines: {fill: true, fillColor: "rgba(0,255,0,0.8)"}, data: correct_output}] }
+    output_json = { :success_stats => [ 
+      {label: "Missed", 
+       lines: {fill: true, fillColor: "rgba(255,0,0,0.8)"}, 
+       data: total_output},
+      {label: "Correct", 
+       lines: {fill: true, fillColor: "rgba(0,255,0,0.8)"}, 
+       data: correct_output}] }
     respond_to do |format|
       format.json { render :json => output_json.to_json }
     end
@@ -167,9 +173,9 @@ class CoursesController < ApplicationController
 
     output.each do |x|
       if total_memories == 0
-        x[1] = 1.0
+        x[1] = 100
       else   
-        x[1] = Float(x[1]) / total_memories
+        x[1] = Float(x[1]) / total_memories * 100.0
       end
     end
 
