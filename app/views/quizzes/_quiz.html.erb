@@ -38,19 +38,15 @@ Answer(s):
       <td> <%= r.answer %> </td>
       <td> 
         <% if r.status == "challenged" %>
-          <div id = "challenge-area"><%= link_to "challenged", "/quizzes/challenge_link",:remote => true %></div>
+          <div id = "challenge-link"><%= link_to "challenged", "#",:remote => true %></div>
+          <div id = "challenge-form" class = "hidden"> 
+            <%= render :partial => 'quizzes/challenge_form', :locals => {:response => r} %>
+          </div>
         <% else %>
           <%= r.status %> 
         <% end %>
       </td>
       <td> <%= time_ago_in_words(r.created_at) %> ago </td>
     </tr>
-    <% @quiz.responses.each do |r| %>
-      <tr>
-        <td> <%= display_name(r.user) %> </td>
-        <td> <%= r.answer %> </td>
-        <td> <%= r.status %> </td>
-        <td> <%= time_ago_in_words(r.created_at) %> ago </td>
-      </tr>
     <% end %>
   </table>

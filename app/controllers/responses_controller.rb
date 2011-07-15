@@ -39,13 +39,21 @@ class ResponsesController < ApplicationController
 
   def update
     @response = Response.find(params[:id])
+    @quiz = @response.quiz
+    @course = @response.quiz.course
     
     if params[:quality] # self-rate a correct response
       @response.rate_components!(Integer(params[:quality]))
     elsif params[:response] # challenge a response labelled as incorrect
       @response.update_attributes(params[:response])
-      if(params[:response] == "correct" || params[:response] == "incorrect")
-        redirect_to course_quiz_path(@response.quiz)
+      if(params[:response][:status] == "correct") 
+        @quiz.answers.create!(:text => @response.answer) 
+        @quiz.save! 
+        redirect_to course_quiz_path(@course,@quiz)
+        return
+      elsif( params[:response][:status] == "incorrect")
+        redirect_to course_quiz_path(@course,@quiz)
+        return
       end
     end
 
