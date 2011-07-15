@@ -2,7 +2,8 @@
 
   <% if current_user.student?(@course) %>
 
-<div id="course-content">
+  <div id="course-wrap">
+  <div id="course-content">
     <div id="exercises" class="course-section">
       <h2> Exercises </h2>
       <p>
@@ -70,8 +71,6 @@
     </div>
   </div>
   <div id="stats-sidebar">
-
-    <h2>Progress</h2>
     <%= render :partial => 'stats' %>
   </div>
 
@@ -86,6 +85,7 @@
     <p><%= @course.description %></p>
     <%= render :partial => 'users/enroll', :locals => { :course => @course } %>
   </div>
+</div>
 
   <% end %>
 

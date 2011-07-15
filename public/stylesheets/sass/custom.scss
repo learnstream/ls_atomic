@@ -204,6 +204,11 @@ ul#local-nav {
 
 
 /* Student course page */
+#course-wrap {
+  margin: auto;
+  width: 950px;
+}
+
 #stats-sidebar{ 
   float: left; 
   margin-left: 50px;
@@ -237,7 +242,7 @@ h1.course-name {
 }
 
 #course-content {
-  width: 600px;
+  width: 550px;
   float: left;
 
   .course-section {

@@ -163,6 +163,10 @@ ul#local-nav {
     cursor: pointer; }
 
 /* Student course page */
+#course-wrap {
+  margin: auto;
+  width: 950px; }
+
 #stats-sidebar {
   float: left;
   margin-left: 50px; }
@@ -185,7 +189,7 @@ h1.course-name {
   border-bottom: 1px solid #eee; }
 
 #course-content {
-  width: 600px;
+  width: 550px;
   float: left; }
   #course-content .course-section {
     margin-bottom: 25px; }
