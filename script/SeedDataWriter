@@ -167,8 +167,13 @@ lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
               :course_id => row['course_id'].to_i,
               :name => row['name'],
               :order_number => row['order_number'].to_i,
+            #  :component_tokens => component_tokens 
+            })
+            l_writer.add({
+              :id => lesson_id,
               :component_tokens => component_tokens 
             })
+
           end
           #lesson_root_path = File.join( File.dirname(__FILE__), '..', "lib/tasks/DataFiles/Calculus/Lessons/#{row['lesson_path']}")
           #lesson_index_path = File.join( lesson_root_path, "index_#{row['lesson_path']}.csv")
@@ -195,7 +200,14 @@ lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
                 :event_token => event_id.to_s
               })
             elsif l_row['playable_type'] == "Quiz"
-              answer_tokens = l_row['answer'].split("&")
+              if ["multi", "check"].include?(l_row['answer_type']) 
+                answer_choice_tokens = (0..7).to_a.map { |a| l_row["choice_#{a}"] }.keep_if { |v| !v.nil? }
+                answer_tokens = l_row['answer'].split("") 
+                answer_input =  { :type => l_row['answer_type'], :choices => answer_choice_tokens}.to_json
+              elsif ["self-rate", "text"].include?(l_row['answer_type'])
+                answer_tokens = l_row['answer'].nil? ? [] : l_row['answer'].split("&") 
+                answer_input = { :type => l_row['answer_type'] }.to_json
+              end
               component_tokens = l_row['quiz_components'].to_s.split(",").map{ |c| id_encode("PhysicsComponents-#{c}") }.join(",")
               quiz_id = id_encode("PhysicsLessonQuiz-#{l_row['UniqueID']*2}#{l_row['order_number']*2}")
               q_writer.add({
@@ -204,7 +216,7 @@ lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
                 :in_lesson => l_row['in_lesson'] == "1" ? true : false,
                 :question => l_row['question'],
                 :answer_type => l_row['answer_type'],
-                :answer_input => { :type => l_row['answer_type'] }.to_json,
+                :answer_input => answer_input, 
                 :answer_output => {:type => "text"}.to_json,
                 :component_tokens => component_tokens,
                 :event_token => event_id.to_s

@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 19:12:41 -0700
+# Date: 2011-07-15 13:02:54 -0700
 # Seeding Answer
 # Written with the command:
 #
@@ -27,7 +27,7 @@ Answer.seed(:id,
   {:id=>274009766, :quiz_id=>69137162, :text=>"-m g"},
   {:id=>161029501, :quiz_id=>69137162, :text=>"- m g"},
   {:id=>237901455, :quiz_id=>220270966, :text=>"\\[ T_1 \\cos 60^\\circ \\]"},
-  {:id=>206909527, :quiz_id=>171401728, :text=>"3"},
+  {:id=>206909527, :quiz_id=>171401728, :text=>"2"},
   {:id=>155910834, :quiz_id=>233447297, :text=>"Weight of an object is defined as the force due to gravity. Thus, \\( \\text{Weight} = mg \\). This is contrasted with *apparent weight*, which is what Prof. Lewin discusses in this video."},
   {:id=>279577890, :quiz_id=>285032567, :text=>"Free-fall occurs when your apparent weight goes to zero."},
   {:id=>222282725, :quiz_id=>113898275, :text=>"Newtons, or units of *Force*"},
@@ -42,6 +42,8 @@ Answer.seed(:id,
   {:id=>3609705, :quiz_id=>15206332, :text=>"ten"},
   {:id=>283007001, :quiz_id=>239096010, :text=>"\\[ a_c = \\omega^2 r \\] or equivalently (for uniform circular motion) \\[ a_c = \\frac{v^2}{r} \\]"},
   {:id=>275326594, :quiz_id=>26160554, :text=>"The centripetal acceleration is caused by some contact force between you and the chair, which is bolted to the turn table."},
+  {:id=>66685042, :quiz_id=>39540277, :text=>"1"},
+  {:id=>245954573, :quiz_id=>216270222, :text=>"1"},
   {:id=>50070323, :quiz_id=>284626168, :text=>"2"},
   {:id=>128423446, :quiz_id=>42529564, :text=>"1"},
   {:id=>14110237, :quiz_id=>83440607, :text=>"1"},
@@ -104,12 +106,12 @@ Answer.seed(:id,
   {:id=>70040072, :quiz_id=>152261235, :text=>"1"},
   {:id=>225518092, :quiz_id=>216889744, :text=>"\\( v_{\\text{horiz}}(t=0) = B_0t_s - B_1\\frac{t_s^2}2 \\)"},
   {:id=>282339640, :quiz_id=>157477455, :text=>"\\[ v_x = -\\sqrt{ \\frac{k}{m} x_0^2 } \\]"},
-  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"},
-  {:id=>192177903, :quiz_id=>294369603, :text=>"Perfectly elastic"},
-  {:id=>282434625, :quiz_id=>69358839, :text=>"\\( - 2 m_{\\text{tot}} \\sqrt{2gh} \\)"}
+  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"}
 )
 # BREAK EVAL
 Answer.seed(:id,
+  {:id=>192177903, :quiz_id=>294369603, :text=>"Perfectly elastic"},
+  {:id=>282434625, :quiz_id=>69358839, :text=>"\\( - 2 m_{\\text{tot}} \\sqrt{2gh} \\)"},
   {:id=>239853207, :quiz_id=>126485481, :text=>"\\[ v_f = v_B \\frac{m_B}{m_A + m_B} \\]"},
   {:id=>14431446, :quiz_id=>25273872, :text=>"\\[ m_{\\text{rod}} = 1 \\units{kg} \\]"},
   {:id=>231321844, :quiz_id=>100182552, :text=>"Contact force (which has both frictional and normal components) between the wheel and the ground, and gravitational weight"},

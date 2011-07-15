@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 19:12:41 -0700
+# Date: 2011-07-15 13:02:54 -0700
 # Seeding Note
 # Written with the command:
 #
@@ -143,7 +143,7 @@ Note.seed(:id,
   {:id=>238823117, :content=>"For complex 3-D motion, decompose the motion (always described by the position vector, \\( \\mathbf r(t) \\) ) into three independent 1-D problems along the \\( \\uvec x, \\uvec y \\) and \\( \\uvec z \\) axes. We can then use the standard kinematics equations to solve!", :is_document=>false, :event_token=>"40507597"},
   {:id=>110257213, :content=>"End of 3-D kinematics", :is_document=>false, :event_token=>"221320359"},
   {:id=>191164106, :content=>"Example - Projectile motion in a plane", :is_document=>false, :event_token=>"269496267"},
-  {:id=>185752220, :content=>"1D motion, constant acceleration equations: \n\\begin{align} x(t) &= x_0 + v_{0,x} t + frac{1}{2}a_{x} t^2 \\\\ \nv_{x}(t) &= v_{0,x} + a_x t \\\\ \na_{x}(t) &= a_x \\end{align}", :is_document=>false, :event_token=>"60704488"},
+  {:id=>185752220, :content=>"1D motion, constant acceleration equations: \n\\[ \\begin{align} x(t) &= x_0 + v_{0,x} t + frac{1}{2}a_{x} t^2 \\\\ \nv_{x}(t) &= v_{0,x} + a_x t \\\\ \na_{x}(t) &= a_x \\end{align} \\]", :is_document=>false, :event_token=>"60704488"},
   {:id=>250986758, :content=>"It can be useful to analyze the motion of objects with regard to only one axis at a time. This is one reason why it is important to choose your coordinate system well at the start of the problem", :is_document=>false, :event_token=>"291607341"},
   {:id=>256351736, :content=>"Acceleration due to gravity only affects velocity in the y direction", :is_document=>false, :event_token=>"12399312"},
   {:id=>136567657, :content=>"Demonstration of independence of movement in several axes", :is_document=>false, :event_token=>"296387404"},
@@ -185,6 +185,22 @@ Note.seed(:id,
   {:id=>182233277, :content=>"The force that causes your circular motion is called the \"centripetal force.\" *Centripetal* means \"towards the center,\" that is, it is the force directed towards the center causing your circular acceleration.", :is_document=>false, :event_token=>"123917907"},
   {:id=>76917656, :content=>"If the centripetal force disappears, you will fly off in whatever direction your velocity vector is pointing. That is, you will fly off in a straight line tangent to the circle!", :is_document=>false, :event_token=>"65541609"},
   {:id=>21693782, :content=>"Demonstration of circular motion.", :is_document=>false, :event_token=>"256021041"},
-  {:id=>237755702, :content=>"END of introduction to centripetal force", :is_document=>false, :event_token=>"154117809"}
+  {:id=>237755702, :content=>"END of introduction to centripetal force", :is_document=>false, :event_token=>"154117809"},
+  {:id=>43610578, :content=>"Begin example with two masses hanging from a pulley.", :is_document=>false, :event_token=>"55850665"},
+  {:id=>170846143, :content=>"Imagine that masses \\(m_1\\) and \\(m_2\\), where \\(m_2 \\gt m_1\\), are attached to either end of a frictionless pulley.", :is_document=>false, :event_token=>"106290631"},
+  {:id=>213453376, :content=>"The tension in the string on the left side must be equal to the tension of the string on the right side. \\[\\mathbf{T_{left}} = \\mathbf{T_{right}}\\] because the string is massless and the pulley is frictionless.", :is_document=>false, :event_token=>"258989315"},
+  {:id=>115868597, :content=>"Given that the tension on each side is the same, and we've discovered that tension is an indication of weight, we must conclude that both masses have the same weight.", :is_document=>false, :event_token=>"96894627"},
+  {:id=>35424026, :content=>"End of tension in a massless rope.", :is_document=>false, :event_token=>"265786108"},
+  {:id=>58824759, :content=>"Calculate acceleration and tension in this system.", :is_document=>false, :event_token=>"64237265"},
+  {:id=>120828743, :content=>"Force-balance for the first mass, where positive acceleration is upwards: \\[ \\begin{align} \\mathbf T - m_1\\mathbf g &= m_1\\mathbf a \\\\ \\mathbf T &= m_1(\\mathbf a + \\mathbf g) \\end{align} \\]", :is_document=>false, :event_token=>"200449159"},
+  {:id=>196016027, :content=>"In pulley systems, it is conventional to define the \"positive\" direction as a \"direction of positive rotation\". Because we are guessing that the system will rotate clockwise, we define any motion in the clockwise direction as positive motion. For the mass \\( m_2 \\), motion downwards is positive because that corresponds to \"clockwise\" rotation.", :is_document=>false, :event_token=>"144861101"},
+  {:id=>269432990, :content=>"Force-balance for the second mass, where now positive acceleration is downwards (clockwise motion): \\[ \\begin{align} m_2\\mathbf g - \\mathbf T &= m_2\\mathbf a \\\\ \\mathbf T &= m_2(\\mathbf g - \\mathbf a) \\end{align} \\]", :is_document=>false, :event_token=>"82017567"},
+  {:id=>215621098, :content=>"Substitute and solve: \\[ \\begin{align*} a &= \\frac{m_2  - m_1}{m_1 + m_2}g \\\\ T &= \\frac{2 m_1 m_2 g}{m_1 + m_2} \\end{align*} \\]", :is_document=>false, :event_token=>"241726229"},
+  {:id=>140432319, :content=>"Check some limiting cases -- Always a good practice!", :is_document=>false, :event_token=>"160998647"},
+  {:id=>113135251, :content=>"\\( m_1 = m_2 = m \\). We find  \\[ \\begin{align} a &= 0 \\\\ T &= mg \\end{align} \\] This should be obvious! When the masses are equal, the system should hang in equilibrium, and so the tension must be equal to the force due to gravity, \\( F_g = mg \\).", :is_document=>false, :event_token=>"291246857"},
+  {:id=>183254734, :content=>"\\( m_2 >> m_1; m_1 \\rightarrow 0 \\). \\[ \\begin{align} a &\\rightarrow g \\\\ T &\\rightarrow 0 \\end{align} \\] This should also be obvious! \\( m_2 \\) goes into freefall, and so the tension must go to zero and it should be accelerating at \\( a = g \\).", :is_document=>false, :event_token=>"100690487"},
+  {:id=>90259162, :content=>"If \\( m_2 > m_1 \\), it will be accelerating clockwise. Thus, \\( m_1 \\) will have gained weight (from a situation where it is hanging in static equilibrium, where the weight is \\( F_w = m_1 g \\) ), and \\( m_2 \\) will have lost weight (from static equilibrium \\( F_w = m_2 g \\) ). However, because the *tension* is the same throughout the rope, both \\( m_1 \\) and \\( m_2 \\) now have the *same* weight as they rotate on the pulley. Remember, weight is just defined as that tensional force!", :is_document=>false, :event_token=>"58385194"},
+  {:id=>28966907, :content=>"We then know that \\[ m_1 g < T < m_2 g \\] and can demonstrate this with some simple numbers.", :is_document=>false, :event_token=>"136213194"},
+  {:id=>23335891, :content=>"End of example", :is_document=>false, :event_token=>"311484076"}
 )
 # End auto-generated file.

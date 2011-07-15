@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-13 19:12:41 -0700
+# Date: 2011-07-15 13:02:54 -0700
 # Seeding Component
 # Written with the command:
 #
@@ -171,6 +171,7 @@ Component.seed(:id,
   {:id=>97547787, :course_id=>1, :name=>"In what direction does the cross product point?", :description=>"The direction of the cross product is **always** perpendicular to the two vectors in the product. Thus, if \\[ \\mathbf A \\times \\mathbf B = \\mathbf C \\] the vector \\( \\mathbf C \\) is perpendicular to both \\( \\mathbf A \\) and \\( \\mathbf B \\). There are, of course, two such perpendicular vectors pointing in exactly opposite directions, and hence we use the right hand rule to figure out which one by definition."},
   {:id=>131062268, :course_id=>1, :name=>"When should a balance of torques be assumed?", :description=>"Torque-balance is used for rotational equilibrium problems, that is, in problems where the objects are free to rotate but are in a state of rotational equilibrium (not rotating). This comes from the rotational equivalent of Newton's 2nd law, or \\[ \\mathbf \\tau = I \\mathbf \\alpha \\] Thus, if there are no net torques (ie, all torques are balanced) then the system will not accelerate."},
   {:id=>39312510, :course_id=>1, :name=>"When is angular momentum conserved?", :description=>"Angular momentum is conserved when there are no net external torques acting on a system."},
-  {:id=>304828508, :course_id=>1, :name=>"How is rotational kinetic energy related to angular momentum and the moment of inertia?", :description=>"We start with \\[ \\text{K.E.} = \\frac{1}{2} I \\omega^2 \\] and know that for rigidly rotating bodies, \\[ L = I \\omega \\] Thus, we find that \\[ \\text{K.E.} = \\frac{L^2}{2I} \\]"}
+  {:id=>304828508, :course_id=>1, :name=>"How is rotational kinetic energy related to angular momentum and the moment of inertia?", :description=>"We start with \\[ \\text{K.E.} = \\frac{1}{2} I \\omega^2 \\] and know that for rigidly rotating bodies, \\[ L = I \\omega \\] Thus, we find that \\[ \\text{K.E.} = \\frac{L^2}{2I} \\]"},
+  {:id=>67029639, :course_id=>1, :name=>"What is the tension in a massless string?", :description=>"Imagine taking a small slice of the string. Because it is massless, if there are __any__ unbalanced forces, that slice will have infinite acceleration. Thus, the tension must be equal on both sides of the slice, and thus the tension must be **equal everywhere in a massless string.**"}
 )
 # End auto-generated file.

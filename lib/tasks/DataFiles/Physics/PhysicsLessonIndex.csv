@@ -1,15 +1,16 @@
 UniqueID,name,course_id,order_number,components,lesson_path,Notes
-1,"Introduction to Position, Velocity, and Acceleration",1,2,"74,75,76,77,78,79,80,81,82,83,84,136,137",,NOTE: displacement not addressed very well...
-2,"Example with Position, Velocity, and Acceleration",1,3
-3,Introduction to Vectors,1,0,"1,2,3,4,6,133"
+1,"Introduction to Position, Velocity, and Acceleration",1,2,"30,33,34,35,36,74,75,76,77,78,79,80,81,82,83,84,136,137",,NOTE: displacement not addressed very well...
+2,"Example with Position, Velocity, and Acceleration",1,3,"17,18,19,20"
+3,Introduction to Vectors,1,0,"1,2,3,4,5,6,7,133"
 4,Multiplication of Vectors,1,1,"8,9,131,132,134,135,140"
-5,Conservation of momentum example - Ice skater,1,12
-6,Newton's 1st and 2nd Laws,1,7,"42,57,100,101,128,146,147"
+5,Conservation of momentum example - Ice skater,1,13
+6,Newton's 1st and 2nd Laws,1,7,"42,57,62,100,101,128,146,147"
 7,Newton's 3rd Law,1,8,129
 8,Example of Newton's Laws with Hanging Mass,1,9
 9,Introduction to Weight,1,10,"102,103,138,139"
-10,Example - Block sliding down frictionless plane,1,11
+10,Example - Block sliding down frictionless plane,1,12
 11,Kinematics motion in 3-D space,1,5
-12,Example - Projectile motion in a plane,1,4
+12,Example - Projectile motion in a plane,1,4,"31,32"
 13,Example - Monkey hunting and projectile motion,1,6
-14,Centripetal forces and accelerations,1,13,"48,89,90,91,141,142,143,144"
+14,Centripetal forces and accelerations,1,14,"44,45,46,47,48,49,89,90,91,141,142,143,144"
+15,Example - Two masses on a pulley,1,11,"22,163"
