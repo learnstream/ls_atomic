@@ -36,7 +36,7 @@ Gretel::Crumbs.layout do
 
   # Course
   crumb :courses do
-    link "Courses", courses_path
+    link "All Courses", courses_path
   end
 
   crumb :course do |course|
