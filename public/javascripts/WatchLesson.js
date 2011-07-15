@@ -15,22 +15,27 @@ $(document).ready(function() {
         }
 
 
+        // For resuming the video at where you were watching before
         var events_loaded = $("#content .event").length;
-        if (current_index != -1 && current_index >= events_loaded) { 
+        $("#resume").show();
+        $("#resume").click(function() {
+          var events_loaded = $("#content .event").length;
+          for ( i = events_loaded; i <= current_index; i++)  {
+            loadEvent(i, data.events, lesson_status_id, current_index);
+          }
 
-          $("#resume").show();
-          $("#resume").click(function() {
-            var events_loaded = $("#content .event").length;
-            for ( i = events_loaded; i <= current_index; i++)  {
-              loadEvent(i, data.events, lesson_status_id, current_index);
-            }
+          $(this).hide();
+          return false;
+        });
 
-            $(this).hide();
-            return false;
-          });
+        resumeText = ""
+        if(data.events[current_index].type == "Document") {
 
-          $("#resume").text("Resume at " + formatTime(data.events[current_index].start_time)); 
+          resumeText = "Resume at previous spot in lesson"; 
+        } else{
+          resumeText = "Resume at " + formatTime(data.events[current_index].start_time); 
         }
+        $("#resume").text(resumeText); 
       }
 
       loadEvent(0, data.events, lesson_status_id, current_index);
@@ -242,12 +247,28 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
 
   createNavLinks(index,events,lesson_status_id,current_index);
 
+  
   if (new_event.type == "Document") {
     $("<div>").addClass("nav-link-area")
               .append($("#nextlink").clone(true)
+                                    .attr("id", "prevlink")
+                                    .text("Previous")
                                     .addClass("video-nav-link"))
+              .append($("#nextlink").clone(true)
+                                    .addClass("video-nav-link"))
+              .append($("#resume").clone(true)
+                                  .addClass("video-nav-link"))
               .appendTo("#document-area");
   }
+  $("#prevlink").unbind('click');
+  if(index == 0) {
+    $("#prevlink").hide();
+  }
+
+  $("#prevlink").click(function() {
+      loadEvent(index - 1, events, lesson_status_id, current_index);
+      return false;
+    });
 
   if (new_event.type == "Note") {
     // scroll to the new div 

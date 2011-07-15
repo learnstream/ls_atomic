@@ -12,10 +12,31 @@ Gretel::Crumbs.layout do
   crumb :root do
     link "Home", root_path
   end
+  
+  crumb :home do
+    link "My Courses", root_path
+    parent :root
+  end
+  
+  crumb :help do
+    link "Help FAQ", help_path
+    parent :root
+  end
+  
+  crumb :about do
+    link "About Learnstream", help_path
+    parent :root
+  end
+  
+  crumb :contact do
+    link "Contact Us", help_path
+    parent :root
+  end
+  
 
   # Course
   crumb :courses do
-    link "Courses", courses_path
+    link "All Courses", courses_path
   end
 
   crumb :course do |course|

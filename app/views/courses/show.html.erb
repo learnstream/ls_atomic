@@ -82,7 +82,7 @@
   <div id="course-content">
     <h1><%= @course.name %></h1>
 
-    <p><%= @course.description %></p>
+    <p class = markdown><%= @course.description %></p>
     <%= render :partial => 'users/enroll', :locals => { :course => @course } %>
   </div>
 </div>
