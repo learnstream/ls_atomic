@@ -1,5 +1,6 @@
 $(document).ready(function() {
    $(".markdown").each(function() { $(this).markdown(); });
+   $(".jaxonly").each(function() {$(this).renderJax(); });
 });
 
 $.fn.markdown = function(typeset) {
@@ -31,4 +32,8 @@ $.fn.markdownInner = function() {
       $(this).markdown(false); });
   MathJax.Hub.Queue(["Typeset", MathJax.Hub, mathDiv]);
   typesetStubbornMath();
+}
+
+$.fn.renderJax = function() {
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub, $(this).attr("id")]);
 }

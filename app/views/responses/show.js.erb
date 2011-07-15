@@ -2,3 +2,4 @@ $("#quiz_<%= @response.quiz.id %>").html("<%=escape_javascript render @response 
 $("#quiz_<%= @response.quiz.id %> .next-button").hide();
 $("#quiz_<%= @response.quiz.id %> .quizbutton").attr("data-remote", "true");
 $("#quiz_<%= @response.quiz.id %>").markdownInner();
+$("#quiz_<%= @response.quiz.id %>").renderJax();

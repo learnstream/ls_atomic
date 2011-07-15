@@ -4,7 +4,7 @@
 <div id="judgement">
   <% if not @response.status.blank? %> 
     Your answer: 
-    <span class="answer <%= @response.status %>">
+    <span class="answer <%= @response.status %> jaxonly">
       <%= user_answer(@response) %>
     </span><br />
     <% if @response.status == "correct" %>
