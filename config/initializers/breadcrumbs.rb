@@ -41,7 +41,7 @@ Gretel::Crumbs.layout do
 
   crumb :course do |course|
     link lambda {|course| "#{course.name}"}, course_path(course)
-    parent :courses
+    parent :home
   end
 
   crumb :new_course do
