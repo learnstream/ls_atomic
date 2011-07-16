@@ -9,7 +9,6 @@ $(document).ready(function () {
       $("#answer-morph").val("Check answer");
     }
   });
-   
 });
 
 function doQuizPrep() {
