@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   def change_perm!(new_perm)
     self.perm = new_perm
-    self.save!
+    self.save!(false)
   end
 
   def enroll!(course)

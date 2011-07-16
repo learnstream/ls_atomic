@@ -45,7 +45,8 @@ class UsersController < ApplicationController
 
     user.change_perm!(new_perm)
 
-    if user.save
+    # "save false" to ignore validations
+    if user.save(false)
       flash[:success] = "Changed user role!"
       redirect_to users_path 
     else 
