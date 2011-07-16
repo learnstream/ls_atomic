@@ -74,6 +74,8 @@ class Quiz < ActiveRecord::Base
   def check_answer(response)
     if(response.answer.kind_of?(Array))
       response.answer = response.answer.join("")
+    elsif(response.answer.nil?)
+      response.answer = ""
     end
     
     response_answer = response.answer.downcase
