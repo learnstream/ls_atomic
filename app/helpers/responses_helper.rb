@@ -1,6 +1,6 @@
 module ResponsesHelper
   def user_answer(response)
-    if response.answer = ""
+    if (response.answer == "")
       ""
     elsif response.quiz.answer_type == 'multi'
       show_multi_answer(response.answer, response.quiz.answer_input)
