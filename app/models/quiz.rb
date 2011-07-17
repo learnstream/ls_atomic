@@ -100,7 +100,7 @@ class Quiz < ActiveRecord::Base
       return 0
     end
 
-    (responses.correct.count / responses.count * 100).round(0)
+    (Float(responses.correct.count) / responses.count * 100).round(0)
   end
 
   def due_for?(user)
