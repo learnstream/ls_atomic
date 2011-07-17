@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-15 13:02:54 -0700
+# Date: 2011-07-16 17:12:31 -0700
 # Seeding Answer
 # Written with the command:
 #
@@ -55,9 +55,7 @@ Answer.seed(:id,
   {:id=>91325246, :quiz_id=>4020965, :text=>"1"},
   {:id=>61972081, :quiz_id=>85281037, :text=>"3"},
   {:id=>43963779, :quiz_id=>47900232, :text=>"2"},
-  {:id=>241577072, :quiz_id=>4423334, :text=>"0"},
-  {:id=>233605089, :quiz_id=>4423334, :text=>"1"},
-  {:id=>83205977, :quiz_id=>4423334, :text=>"3"},
+  {:id=>241577072, :quiz_id=>4423334, :text=>"013"},
   {:id=>203623821, :quiz_id=>169883234, :text=>"2"},
   {:id=>205498033, :quiz_id=>161167502, :text=>"0"},
   {:id=>32179582, :quiz_id=>297166644, :text=>"1"},
@@ -65,8 +63,7 @@ Answer.seed(:id,
   {:id=>29510781, :quiz_id=>78158510, :text=>"3"},
   {:id=>7480437, :quiz_id=>62375761, :text=>"2"},
   {:id=>225320880, :quiz_id=>79048073, :text=>"1"},
-  {:id=>172293373, :quiz_id=>105584916, :text=>"1"},
-  {:id=>73567643, :quiz_id=>105584916, :text=>"3"},
+  {:id=>172293373, :quiz_id=>105584916, :text=>"13"},
   {:id=>69827070, :quiz_id=>181194830, :text=>"6"},
   {:id=>230967716, :quiz_id=>192833008, :text=>"3"},
   {:id=>299932270, :quiz_id=>193413250, :text=>"1"},
@@ -87,9 +84,7 @@ Answer.seed(:id,
   {:id=>229292393, :quiz_id=>132535009, :text=>"2"},
   {:id=>76564485, :quiz_id=>154931351, :text=>"0"},
   {:id=>12528527, :quiz_id=>70960053, :text=>"0"},
-  {:id=>88373492, :quiz_id=>106540630, :text=>"1"},
-  {:id=>190803908, :quiz_id=>106540630, :text=>"2"},
-  {:id=>40221525, :quiz_id=>106540630, :text=>"3"},
+  {:id=>88373492, :quiz_id=>106540630, :text=>"123"},
   {:id=>237048003, :quiz_id=>200375869, :text=>"2"},
   {:id=>3969484, :quiz_id=>271412656, :text=>"1"},
   {:id=>131626204, :quiz_id=>97601658, :text=>"2"},
@@ -106,15 +101,15 @@ Answer.seed(:id,
   {:id=>70040072, :quiz_id=>152261235, :text=>"1"},
   {:id=>225518092, :quiz_id=>216889744, :text=>"\\( v_{\\text{horiz}}(t=0) = B_0t_s - B_1\\frac{t_s^2}2 \\)"},
   {:id=>282339640, :quiz_id=>157477455, :text=>"\\[ v_x = -\\sqrt{ \\frac{k}{m} x_0^2 } \\]"},
-  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"}
-)
-# BREAK EVAL
-Answer.seed(:id,
+  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"},
   {:id=>192177903, :quiz_id=>294369603, :text=>"Perfectly elastic"},
   {:id=>282434625, :quiz_id=>69358839, :text=>"\\( - 2 m_{\\text{tot}} \\sqrt{2gh} \\)"},
   {:id=>239853207, :quiz_id=>126485481, :text=>"\\[ v_f = v_B \\frac{m_B}{m_A + m_B} \\]"},
   {:id=>14431446, :quiz_id=>25273872, :text=>"\\[ m_{\\text{rod}} = 1 \\units{kg} \\]"},
-  {:id=>231321844, :quiz_id=>100182552, :text=>"Contact force (which has both frictional and normal components) between the wheel and the ground, and gravitational weight"},
+  {:id=>231321844, :quiz_id=>100182552, :text=>"Contact force (which has both frictional and normal components) between the wheel and the ground, and gravitational weight"}
+)
+# BREAK EVAL
+Answer.seed(:id,
   {:id=>201571704, :quiz_id=>127010828, :text=>"2.5"},
   {:id=>308810051, :quiz_id=>205410036, :text=>"20"},
   {:id=>190471682, :quiz_id=>217517882, :text=>"1"}
