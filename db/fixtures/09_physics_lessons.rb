@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-16 17:12:31 -0700
+# Date: 2011-07-18 13:17:48 -0700
 # Seeding Lesson
 # Written with the command:
 #
@@ -36,6 +36,10 @@ Lesson.seed(:id,
   {:id=>43385732, :course_id=>1, :name=>"Centripetal forces and accelerations", :order_number=>14},
   {:id=>43385732, :component_tokens=>"250567652,41201639,46075556,102787240,90112461,191543570,86388434,203625267,30329891,186216977,23137634,226492683,291668703"},
   {:id=>239080850, :course_id=>1, :name=>"Example - Two masses on a pulley", :order_number=>11},
-  {:id=>239080850, :component_tokens=>"254585637,67029639"}
+  {:id=>239080850, :component_tokens=>"254585637,67029639"},
+  {:id=>55405375, :course_id=>1, :name=>"Introduction to Angular Momentum", :order_number=>15},
+  {:id=>55405375, :component_tokens=>"67380227,39312510,163050383"},
+  {:id=>109150917, :course_id=>1, :name=>"Conservation of angular momentum", :order_number=>16},
+  {:id=>109150917, :component_tokens=>""}
 )
 # End auto-generated file.

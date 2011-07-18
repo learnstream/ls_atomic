@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-16 17:12:31 -0700
+# Date: 2011-07-18 13:17:48 -0700
 # Seeding Note
 # Written with the command:
 #
@@ -201,6 +201,28 @@ Note.seed(:id,
   {:id=>183254734, :content=>"\\( m_2 >> m_1; m_1 \\rightarrow 0 \\). \\[ \\begin{align} a &\\rightarrow g \\\\ T &\\rightarrow 0 \\end{align} \\] This should also be obvious! \\( m_2 \\) goes into freefall, and so the tension must go to zero and it should be accelerating at \\( a = g \\).", :is_document=>false, :event_token=>"100690487"},
   {:id=>90259162, :content=>"If \\( m_2 > m_1 \\), it will be accelerating clockwise. Thus, \\( m_1 \\) will have gained weight (from a situation where it is hanging in static equilibrium, where the weight is \\( F_w = m_1 g \\) ), and \\( m_2 \\) will have lost weight (from static equilibrium \\( F_w = m_2 g \\) ). However, because the *tension* is the same throughout the rope, both \\( m_1 \\) and \\( m_2 \\) now have the *same* weight as they rotate on the pulley. Remember, weight is just defined as that tensional force!", :is_document=>false, :event_token=>"58385194"},
   {:id=>28966907, :content=>"We then know that \\[ m_1 g < T < m_2 g \\] and can demonstrate this with some simple numbers.", :is_document=>false, :event_token=>"136213194"},
-  {:id=>23335891, :content=>"End of example", :is_document=>false, :event_token=>"311484076"}
+  {:id=>23335891, :content=>"End of example", :is_document=>false, :event_token=>"311484076"},
+  {:id=>56404024, :content=>"This lecture begins a series on angular momentum and torque.", :is_document=>false, :event_token=>"245579293"},
+  {:id=>204864245, :content=>"If an object has a mass \\(m\\) and a velocity \\(\\mathbf v\\) then it has a momentum, \\(\\mathbf p=m\\mathbf v\\). For an arbitrary point \\(q\\) it also has an **angular momentum** __relative__ to the point \\(q\\): \\[ \\mathbf L_q = \\mathbf r_q \\times \\mathbf p = (\\mathbf r_q \\times \\mathbf v)m \\] \\[ |L_q| = mvr_q\\sin\\theta = mvr_{\\perp}\\] (Lewin has accidentally written \\(c\\) in place of \\(q\\) on the board.)", :is_document=>false, :event_token=>"160998359"},
+  {:id=>232343249, :content=>"The direction and magnitude are determined by the cross product.", :is_document=>false, :event_token=>"265868563"},
+  {:id=>45078156, :content=>"Any point on the same line as the velocity vector has an angular momentum of zero. So angular momentum is not an __intrinsic__ property of the object; it depends on the choice of the origin point.", :is_document=>false, :event_token=>"98726344"},
+  {:id=>51918588, :content=>"Suppose an object is thrown from point \\(c\\) into a path of projectile motion with velocity \\(\\mathbf v\\) and experiencing downward gravitational force \\(mg\\). What is the angular momentum with respect to \\(c\\) at the initial time 0? It is zero because the position vector has length zero. What is the angular momentum with respect to \\(c\\) at a later time \\(t\\)? It is nonzero, so it has changed!", :is_document=>false, :event_token=>"227440311"},
+  {:id=>122140109, :content=>"Here is a case where velocity is changing but angular momentum is not. If the Earth objects rotates around the sun with a constant speed but a velocity that is always changing, then the angular momentum is pointing out of the board and has magnitude \\[|L_c|=m|\\mathbf r_c\\times\\mathbf v|=mrv\\], which doesn't change based on the position of the vector. On the other hand, for a point that is not at the sun, the angular momentum will be changing.", :is_document=>false, :event_token=>"103383912"},
+  {:id=>118634708, :content=>"\\[\\mathbf L_q=\\mathbf r_q\\times \\mathbf p\\] By differentiating and applying the product rule, \\[\\frac{d\\mathbf L_q}{dt_q}=\\frac{d\\mathbf r_q}{dt}\\times\\mathbf p+\\mathbf r_q\\times\\frac{d\\mathbf p}{dt}\\] However \\(\\frac{\\mathbf r_q}{dt}\\) is \\(\\mathbf v\\), and velocity is in the same direction as momentum, so this term is zero. Note that \\(\\frac{\\mathbf p}{dt}\\) is force. So we define torque as \\[ \\frac{d\\mathbf L_q}{dt_q} = \\mathbf r_q \\times F = \\tau_q \\] In the sun example, the gravitational force exerted on the Earth is in the same direction as \\(\\mathbf r\\), so the torque is zero.", :is_document=>false, :event_token=>"201073569"},
+  {:id=>219495941, :content=>"If there is a torque about a point, then the angular momentum about that point will be changing. This is analogous to **force** and **linear momentum**!", :is_document=>false, :event_token=>"116703592"}
+)
+# BREAK EVAL
+Note.seed(:id,
+  {:id=>309085146, :content=>"End of introduction to angular momentum.", :is_document=>false, :event_token=>"217946800"},
+  {:id=>64564117, :content=>"Now we will consider the angular momentum of an object rather than a single point.", :is_document=>false, :event_token=>"64064142"},
+  {:id=>25758246, :content=>"Suppose a disc with center at \\(c\\), radius \\(R\\), and mass \\(M\\) is rotating about its center with angular velocity \\( \\omega \\) What is the angular momentum of the disc?", :is_document=>false, :event_token=>"273624094"},
+  {:id=>271849645, :content=>"The momentum for each element \\(i\\) is given by \\(L_{c_i}=m_ir_{i_c}v_i\\). Each element is moving with the same angular momentum \\(\\omega\\), so this can be written \\(v=\\omega r_i\\) (not \\(R\\) since the radius to a particular point may be less than \\(R\\)).", :is_document=>false, :event_token=>"95339223"},
+  {:id=>19673997, :content=>"To find the angular momentum of the disc, take the sum of these elements. \\[L_{disk_C}=\\omega\\sum_im_ir_{i_c}^2=I_c\\omega\\]", :is_document=>false, :event_token=>"281448280"},
+  {:id=>17116497, :content=>"For a rotation about the center of mass, the angular momentum is the same regardless of the source point chosen. This is known as the **spin angular momentum** of the object.", :is_document=>false, :event_token=>"76310410"},
+  {:id=>262051584, :content=>"Suppose Professor Lewin is rotating on a turntable, holding his arms out with weights of mass \\(m=1.8\\units{kg}\\). The total mass of himself, the turntable, and the weights is \\(M=75\\units{kg}\\).", :is_document=>false, :event_token=>"226226366"},
+  {:id=>304926574, :content=>"The angular momentum is conserved and points vertically upward.", :is_document=>false, :event_token=>"247887749"},
+  {:id=>72195073, :content=>"When he pulls his arms in, the moment of inertia is decreased, so angular velocity is increased so that momentum is conserved. Assuming he is a cylinder of radius \\(R=20\\units{cm}\\), then his moment of inertia is \\[|I|=\\frac 12MR^2\\approx 1.5\\] When his arms are outstretched, there is an additional component of the extra weights at a radius of 90 cm. The total moment of inertia is then about 4.5, so the angular velocity is increased by a factor of 3.", :is_document=>false, :event_token=>"260817849"},
+  {:id=>303160261, :content=>"Lewin does the experiment!", :is_document=>false, :event_token=>"286018576"},
+  {:id=>312368907, :content=>"End of lesson on conservation of angular momentum.", :is_document=>false, :event_token=>"208338535"}
 )
 # End auto-generated file.

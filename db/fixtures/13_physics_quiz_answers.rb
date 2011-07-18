@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-16 17:12:31 -0700
+# Date: 2011-07-18 13:17:48 -0700
 # Seeding Answer
 # Written with the command:
 #
@@ -44,6 +44,11 @@ Answer.seed(:id,
   {:id=>275326594, :quiz_id=>26160554, :text=>"The centripetal acceleration is caused by some contact force between you and the chair, which is bolted to the turn table."},
   {:id=>66685042, :quiz_id=>39540277, :text=>"1"},
   {:id=>245954573, :quiz_id=>216270222, :text=>"1"},
+  {:id=>44035608, :quiz_id=>293464350, :text=>"0"},
+  {:id=>188160209, :quiz_id=>223806516, :text=>"Angular momentum \\( \\mathbf L \\) is defined as \\[ \\mathbf L = \\mathbf r \\times \\mathbf p \\] Note, this must always be **in relation** to a particular point!"},
+  {:id=>9768648, :quiz_id=>7350787, :text=>"0"},
+  {:id=>72064219, :quiz_id=>75441037, :text=>"1"},
+  {:id=>213820239, :quiz_id=>234680652, :text=>"0"},
   {:id=>50070323, :quiz_id=>284626168, :text=>"2"},
   {:id=>128423446, :quiz_id=>42529564, :text=>"1"},
   {:id=>14110237, :quiz_id=>83440607, :text=>"1"},
@@ -101,17 +106,30 @@ Answer.seed(:id,
   {:id=>70040072, :quiz_id=>152261235, :text=>"1"},
   {:id=>225518092, :quiz_id=>216889744, :text=>"\\( v_{\\text{horiz}}(t=0) = B_0t_s - B_1\\frac{t_s^2}2 \\)"},
   {:id=>282339640, :quiz_id=>157477455, :text=>"\\[ v_x = -\\sqrt{ \\frac{k}{m} x_0^2 } \\]"},
-  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"},
+  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"}
+)
+# BREAK EVAL
+Answer.seed(:id,
   {:id=>192177903, :quiz_id=>294369603, :text=>"Perfectly elastic"},
   {:id=>282434625, :quiz_id=>69358839, :text=>"\\( - 2 m_{\\text{tot}} \\sqrt{2gh} \\)"},
   {:id=>239853207, :quiz_id=>126485481, :text=>"\\[ v_f = v_B \\frac{m_B}{m_A + m_B} \\]"},
   {:id=>14431446, :quiz_id=>25273872, :text=>"\\[ m_{\\text{rod}} = 1 \\units{kg} \\]"},
-  {:id=>231321844, :quiz_id=>100182552, :text=>"Contact force (which has both frictional and normal components) between the wheel and the ground, and gravitational weight"}
-)
-# BREAK EVAL
-Answer.seed(:id,
+  {:id=>231321844, :quiz_id=>100182552, :text=>"Contact force (which has both frictional and normal components) between the wheel and the ground, and gravitational weight"},
   {:id=>201571704, :quiz_id=>127010828, :text=>"2.5"},
   {:id=>308810051, :quiz_id=>205410036, :text=>"20"},
-  {:id=>190471682, :quiz_id=>217517882, :text=>"1"}
+  {:id=>190471682, :quiz_id=>217517882, :text=>"1"},
+  {:id=>18200047, :quiz_id=>164909098, :text=>"Contact force (which has both frictional and normal components) between the wheel and the ground, and gravitational weight"},
+  {:id=>122502430, :quiz_id=>241234653, :text=>"0"},
+  {:id=>260191642, :quiz_id=>15572240, :text=>"1"},
+  {:id=>196702465, :quiz_id=>33824064, :text=>"1"},
+  {:id=>12027311, :quiz_id=>271333539, :text=>"0"},
+  {:id=>147788851, :quiz_id=>88097988, :text=>"0"},
+  {:id=>77688869, :quiz_id=>108160339, :text=>"1"},
+  {:id=>81036728, :quiz_id=>227964026, :text=>"0"},
+  {:id=>299148148, :quiz_id=>226660669, :text=>"0"},
+  {:id=>108227855, :quiz_id=>234566338, :text=>"3"},
+  {:id=>160322597, :quiz_id=>71967220, :text=>"4"},
+  {:id=>147072982, :quiz_id=>237805406, :text=>"(a) \\( \\theta = \\tan^{-1}(\\mu_s) \\)\n(b) the angle of repose is the same on both the asteroid and the moon"},
+  {:id=>56231421, :quiz_id=>17470646, :text=>"9.23"}
 )
 # End auto-generated file.

@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-16 17:12:31 -0700
+# Date: 2011-07-18 13:17:48 -0700
 # Seeding Event
 # Written with the command:
 #
@@ -228,6 +228,30 @@ Event.seed(:id,
   {:id=>100690487, :lesson_id=>239080850, :order_number=>15, :video_url=>"http://www.youtube.com/watch?v=zfTE4J87aQQ", :start_time=>990, :end_time=>1094},
   {:id=>58385194, :lesson_id=>239080850, :order_number=>16, :video_url=>"http://www.youtube.com/watch?v=zfTE4J87aQQ", :start_time=>1094, :end_time=>1120},
   {:id=>136213194, :lesson_id=>239080850, :order_number=>17, :video_url=>"http://www.youtube.com/watch?v=zfTE4J87aQQ", :start_time=>1120, :end_time=>1227},
-  {:id=>311484076, :lesson_id=>239080850, :order_number=>18, :video_url=>"http://www.youtube.com/watch?v=zfTE4J87aQQ", :start_time=>1227, :end_time=>1227}
+  {:id=>311484076, :lesson_id=>239080850, :order_number=>18, :video_url=>"http://www.youtube.com/watch?v=zfTE4J87aQQ", :start_time=>1227, :end_time=>1227},
+  {:id=>245579293, :lesson_id=>55405375, :order_number=>1, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>0, :end_time=>27},
+  {:id=>160998359, :lesson_id=>55405375, :order_number=>2, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>27, :end_time=>165},
+  {:id=>32514938, :lesson_id=>55405375, :order_number=>3, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>165, :end_time=>165},
+  {:id=>265868563, :lesson_id=>55405375, :order_number=>4, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>165, :end_time=>181},
+  {:id=>98726344, :lesson_id=>55405375, :order_number=>5, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>181, :end_time=>252},
+  {:id=>227440311, :lesson_id=>55405375, :order_number=>6, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>252, :end_time=>337},
+  {:id=>103383912, :lesson_id=>55405375, :order_number=>7, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>337, :end_time=>502},
+  {:id=>201073569, :lesson_id=>55405375, :order_number=>8, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>502, :end_time=>645},
+  {:id=>116703592, :lesson_id=>55405375, :order_number=>9, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>645, :end_time=>725},
+  {:id=>239732015, :lesson_id=>55405375, :order_number=>10, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>725, :end_time=>725},
+  {:id=>217946800, :lesson_id=>55405375, :order_number=>11, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>725, :end_time=>725},
+  {:id=>64064142, :lesson_id=>109150917, :order_number=>1, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>724, :end_time=>740},
+  {:id=>273624094, :lesson_id=>109150917, :order_number=>2, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>740, :end_time=>770},
+  {:id=>95339223, :lesson_id=>109150917, :order_number=>3, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>770, :end_time=>905},
+  {:id=>281448280, :lesson_id=>109150917, :order_number=>4, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>905, :end_time=>960},
+  {:id=>76310410, :lesson_id=>109150917, :order_number=>5, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>960, :end_time=>1055},
+  {:id=>226226366, :lesson_id=>109150917, :order_number=>6, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1055, :end_time=>1125},
+  {:id=>108838911, :lesson_id=>109150917, :order_number=>7, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1125, :end_time=>1125},
+  {:id=>247887749, :lesson_id=>109150917, :order_number=>8, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1125, :end_time=>1193},
+  {:id=>859750, :lesson_id=>109150917, :order_number=>9, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1193, :end_time=>1193},
+  {:id=>116487160, :lesson_id=>109150917, :order_number=>10, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1193, :end_time=>1193},
+  {:id=>260817849, :lesson_id=>109150917, :order_number=>11, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1193, :end_time=>1392},
+  {:id=>286018576, :lesson_id=>109150917, :order_number=>12, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1392, :end_time=>1530},
+  {:id=>208338535, :lesson_id=>109150917, :order_number=>13, :video_url=>"http://www.youtube.com/watch?v=ibePFvo22x4", :start_time=>1530, :end_time=>1530}
 )
 # End auto-generated file.
