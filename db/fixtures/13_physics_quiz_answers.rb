@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 13:44:51 -0700
+# Date: 2011-07-18 14:14:54 -0700
 # Seeding Answer
 # Written with the command:
 #
@@ -104,12 +104,18 @@ Answer.seed(:id,
   {:id=>274905191, :quiz_id=>62295335, :text=>"3"},
   {:id=>12508052, :quiz_id=>262388053, :text=>"1"},
   {:id=>70040072, :quiz_id=>152261235, :text=>"1"},
-  {:id=>225518092, :quiz_id=>216889744, :text=>"\\( v_{\\text{horiz}}(t=0) = B_0t_s - B_1\\frac{t_s^2}2 \\)"},
-  {:id=>282339640, :quiz_id=>157477455, :text=>"\\[ v_x = -\\sqrt{ \\frac{k}{m} x_0^2 } \\]"},
-  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"}
+  {:id=>293234980, :quiz_id=>209986189, :text=>"Watts"},
+  {:id=>236517737, :quiz_id=>234436455, :text=>"Pascals"},
+  {:id=>231310016, :quiz_id=>121121161, :text=>"Joules"}
 )
 # BREAK EVAL
 Answer.seed(:id,
+  {:id=>218307658, :quiz_id=>270359323, :text=>"Newtons"},
+  {:id=>280310171, :quiz_id=>306098976, :text=>"momentum"},
+  {:id=>274723911, :quiz_id=>61027117, :text=>"\\[ \\unitsf{kg-m}{s} \\]"},
+  {:id=>225518092, :quiz_id=>216889744, :text=>"\\( v_{\\text{horiz}}(t=0) = B_0t_s - B_1\\frac{t_s^2}2 \\)"},
+  {:id=>282339640, :quiz_id=>157477455, :text=>"\\[ v_x = -\\sqrt{ \\frac{k}{m} x_0^2 } \\]"},
+  {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"},
   {:id=>192177903, :quiz_id=>294369603, :text=>"Perfectly elastic"},
   {:id=>282434625, :quiz_id=>69358839, :text=>"\\( - 2 m_{\\text{tot}} \\sqrt{2gh} \\)"},
   {:id=>239853207, :quiz_id=>126485481, :text=>"\\[ v_f = v_B \\frac{m_B}{m_A + m_B} \\]"},

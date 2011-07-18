@@ -247,6 +247,7 @@ lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
               :course_id => 1,
               :in_lesson => false,
               :question => row['question'],
+              :explanation => row['explanation'],
               :answer_type => row['answer_type'],
               :answer_input => answer_input,
               :answer_output => {:type => "text"}.to_json,
