@@ -233,7 +233,7 @@ lesson_writer.write(PHYS_LESSON_OUT) do |l_writer|
           #
           CSV.foreach(PHYS_QUIZ, :return_headers => false, :headers => :first_row) do |row|
             if ["multi", "check"].include?(row['answer_type']) 
-              answer_choice_tokens = (0..7).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
+              answer_choice_tokens = (0..8).to_a.map { |a| row["choice_#{a}"] }.keep_if { |v| !v.nil? }
               answer_tokens = [row['answer']] 
               answer_input =  { :type => row['answer_type'], :choices => answer_choice_tokens}.to_json
             elsif ["self-rate", "text"].include?(row['answer_type'])
