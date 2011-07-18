@@ -17,5 +17,15 @@ We list here some of the most commonly used identities:
  * \( \displaystyle\cos(\alpha +\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta\)
  * \( \displaystyle C_1\cos(\omega x)+C_2\sin(\omega x)=A\sin(\omega x+\phi) \qquad{\small\textrm{where }} A=\sqrt{C_1^2+C_2^2},\quad \phi=\arctan (C_1/C_2)\)
 
+And of course, for right triangles you also have the Pythagorean Theorem:
+ * \( a^2 + b^2 = c^2 \)
+
+Generalizing the Pythagorean theorem for non-right triangles, we have the Law of Cosines:
+ * \( \displaystyle c^2 = a^2 + b^2 -2 a b \cos\theta \) where \(a\) and \(b\) are the lengths of two adjacent sides on a triangle, and \(c\) is the length of the third side, and \( \theta\) is the angle between sides \(a\) and \(b\).
+It is worth noting, this follows nicely from defining the sides of a triangle in terms of vector addition and taking advantage of the geometric definition of the dot-product:
+\[ \mathbf c = (\mathbf a - \mathbf b) \rightarrow |\mathbf c|^2 = (\mathbf a - \mathbf b)^2 = |\mathbf a|^2 + |\mathbf b|^2 - 2 \mathbf a \cdot \mathbf b \rightarrow \]
+\[ |\mathbf c|^2 = |\mathbf a|^2 + |\mathbf b|^2 - 2|\mathbf a||\mathbf b| \cos \theta \]
+as desired.
+
 These are good to be familiar with, so you can recognize them and look them up if needed. Many problems will become infinitely easier to solve if you can make the right substitution using these trig identities!
 
