@@ -1,6 +1,6 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 14:14:54 -0700
+# Date: 2011-07-18 20:38:43 -0700
 # Seeding Answer
 # Written with the command:
 #
@@ -113,6 +113,11 @@ Answer.seed(:id,
   {:id=>218307658, :quiz_id=>270359323, :text=>"Newtons"},
   {:id=>280310171, :quiz_id=>306098976, :text=>"momentum"},
   {:id=>274723911, :quiz_id=>61027117, :text=>"\\[ \\unitsf{kg-m}{s} \\]"},
+  {:id=>272719103, :quiz_id=>203941454, :text=>"\\( \\units{N} \\cdot \\units{m} \\)"},
+  {:id=>162862668, :quiz_id=>161459876, :text=>"\\( \\units{kg\\ m^2} \\)"},
+  {:id=>219963909, :quiz_id=>79200501, :text=>"\\( J \\), or Joules"},
+  {:id=>292491459, :quiz_id=>151177502, :text=>"\\( \\units{m/s} \\)"},
+  {:id=>32408200, :quiz_id=>50141684, :text=>"\\( N \\), or Newtons"},
   {:id=>225518092, :quiz_id=>216889744, :text=>"\\( v_{\\text{horiz}}(t=0) = B_0t_s - B_1\\frac{t_s^2}2 \\)"},
   {:id=>282339640, :quiz_id=>157477455, :text=>"\\[ v_x = -\\sqrt{ \\frac{k}{m} x_0^2 } \\]"},
   {:id=>63236940, :quiz_id=>87746465, :text=>"Perfectly inelastic collision"},
@@ -121,6 +126,7 @@ Answer.seed(:id,
   {:id=>239853207, :quiz_id=>126485481, :text=>"\\[ v_f = v_B \\frac{m_B}{m_A + m_B} \\]"},
   {:id=>14431446, :quiz_id=>25273872, :text=>"\\[ m_{\\text{rod}} = 1 \\units{kg} \\]"},
   {:id=>231321844, :quiz_id=>100182552, :text=>"Contact force (which has both frictional and normal components) between the wheel and the ground, and gravitational weight"},
+  {:id=>196756187, :quiz_id=>180494096, :text=>"yes"},
   {:id=>201571704, :quiz_id=>127010828, :text=>"2.5"},
   {:id=>308810051, :quiz_id=>205410036, :text=>"20"},
   {:id=>190471682, :quiz_id=>217517882, :text=>"1"},
