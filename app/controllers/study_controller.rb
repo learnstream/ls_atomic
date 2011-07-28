@@ -7,7 +7,9 @@ class StudyController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
 
-    @quiz = Quiz.exercises.unlocked(@course.id, current_user.id).due(@course.id, current_user.id).sample
+    #@quiz = Quiz.exercises.unlocked(@course.id, current_user.id).due(@course.id, current_user.id).sample
+    @memory = current_user.memories_due_with_quiz(@course).sample
+    @quiz = @memory.nil? ? nil : Quiz.memory(@memory).sample
 
     if @quiz
       redirect_to course_study_path(@course, @quiz)
