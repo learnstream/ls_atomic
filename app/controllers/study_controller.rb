@@ -9,7 +9,7 @@ class StudyController < ApplicationController
 
     #@quiz = Quiz.exercises.unlocked(@course.id, current_user.id).due(@course.id, current_user.id).sample
     @memory = current_user.memories_due_with_quiz(@course).sample
-    @quiz = @memory.nil? ? nil : Quiz.memory(@memory).sample
+    @quiz = @memory.nil? ? nil : Quiz.study_memory(@course, current_user, @memory).exercises.sample
 
     if @quiz
       redirect_to course_study_path(@course, @quiz)
