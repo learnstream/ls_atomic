@@ -585,7 +585,7 @@ table.course-data {
     &.due { background: red; }
     &.good { background: green; }                     
     &.unviewed { background: white; }  
-    &.student-column { position:fixed; margin-left: -116px; padding-right:4px;background: #ccc; }
+    &.student-column { margin-left: -116px; padding-right:4px;background: #ccc; }
     &.unused { background: #fff; border: 0px none; }
   }
 }

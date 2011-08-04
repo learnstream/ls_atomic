@@ -458,7 +458,6 @@ table.course-data {
     #student-status td.unviewed {
       background: white; }
     #student-status td.student-column {
-      position: fixed;
       margin-left: -116px;
       padding-right: 4px;
       background: #ccc; }
