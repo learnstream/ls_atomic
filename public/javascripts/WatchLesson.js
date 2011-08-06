@@ -177,6 +177,8 @@ var createNavLinks = function(index, events,lesson_status_id, current_index) {
     $("#nextlink").hide();
     $("#showall").hide();
   } else {
+    $("#nextlink").show();
+    $("#showall").show();
 
     $("#nextlink").click(function() {
       loadEvent(index + 1, events, lesson_status_id, current_index);
@@ -250,25 +252,26 @@ var loadEvent = function(index, events, lesson_status_id, current_index) {
   
   if (new_event.type == "Document") {
     $("<div>").addClass("nav-link-area")
-              .append($("#nextlink").clone(true)
-                                    .attr("id", "prevlink")
-                                    .text("Previous")
-                                    .addClass("video-nav-link"))
+              .append($("<a>").attr("id", "prevlink")
+                              .attr("href", "#")
+                              .text("Previous")
+                              .addClass("video-nav-link"))
               .append($("#nextlink").clone(true)
                                     .addClass("video-nav-link"))
               .append($("#resume").clone(true)
                                   .addClass("video-nav-link"))
               .appendTo("#document-area");
-  }
-  $("#prevlink").unbind('click');
-  if(index == 0) {
-    $("#prevlink").hide();
+    
+    if(index == 0) {
+      $("#prevlink").hide();
+    } else {
+      $("#prevlink").click(function() {
+        loadEvent(index - 1, events, lesson_status_id, current_index);
+        return false;
+      });
+    }
   }
 
-  $("#prevlink").click(function() {
-      loadEvent(index - 1, events, lesson_status_id, current_index);
-      return false;
-    });
 
   if (new_event.type == "Note") {
     // scroll to the new div 
