@@ -34,6 +34,6 @@
 
 <div id="watch-lesson-links"><%= link_to "Study this course", course_study_index_path(@course), :class => "round quizbutton" %>
   <% if @lesson.next_lesson  %>
-    <%= link_to "Next lesson: #{@lesson.next_lesson.name}", course_lesson_path(@course, @lesson.next_lesson), :class => "round quizbutton" %>
+    <%= link_to "Next lesson", course_lesson_path(@course, @lesson.next_lesson), :class => "round quizbutton" %>
   <% end %>
 </div>
