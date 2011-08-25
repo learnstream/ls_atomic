@@ -1,10 +1,10 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 20:38:43 -0700
+# Date: 2011-08-25 00:28:55 -0600
 # Seeding Event
 # Written with the command:
 #
-#   ./script/SeedDataWriter 
+#   ./SeedDataWriter 
 #
 Event.seed(:id,
   {:id=>45991292, :lesson_id=>231263311, :order_number=>1, :video_url=>"http://www.youtube.com/watch?v=8Ig-e509uRQ", :start_time=>0, :end_time=>35},

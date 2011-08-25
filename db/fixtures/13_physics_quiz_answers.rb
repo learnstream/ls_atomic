@@ -1,10 +1,10 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 20:38:43 -0700
+# Date: 2011-08-25 00:28:55 -0600
 # Seeding Answer
 # Written with the command:
 #
-#   ./script/SeedDataWriter 
+#   ./SeedDataWriter 
 #
 Answer.seed(:id,
   {:id=>209766862, :quiz_id=>160278960, :text=>"1"},

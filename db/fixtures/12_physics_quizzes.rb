@@ -1,10 +1,10 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 20:38:43 -0700
+# Date: 2011-08-25 00:28:55 -0600
 # Seeding Quiz
 # Written with the command:
 #
-#   ./script/SeedDataWriter 
+#   ./SeedDataWriter 
 #
 Quiz.seed(:id,
   {:id=>160278960, :course_id=>1, :in_lesson=>false, :question=>"What is the magnitude of \\( \\uvec y \\)?", :answer_type=>"text", :answer_input=>"{\"type\":\"text\"}", :answer_output=>"{\"type\":\"text\"}", :component_tokens=>"134890592", :event_token=>"120803835"},

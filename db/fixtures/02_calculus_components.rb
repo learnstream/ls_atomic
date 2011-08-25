@@ -1,10 +1,10 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 20:38:43 -0700
+# Date: 2011-08-25 00:28:54 -0600
 # Seeding Component
 # Written with the command:
 #
-#   ./script/SeedDataWriter 
+#   ./SeedDataWriter 
 #
 Component.seed(:id,
   {:id=>254777316, :course_id=>2, :name=>"What is an antiderivative?", :description=>"Let \\(f(x)\\) be continuous on \\([a,b]\\). If \\(G(x)\\) is continuous on \\([a,b]\\) and \\(G'(x)=f(x)\\) for all \\(x\\in (a,b)\\), then \\(G\\) is called an **antiderivative** of \\(f\\). "},

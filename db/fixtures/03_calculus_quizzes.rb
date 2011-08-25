@@ -1,10 +1,10 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 20:38:43 -0700
+# Date: 2011-08-25 00:28:54 -0600
 # Seeding Quiz
 # Written with the command:
 #
-#   ./script/SeedDataWriter 
+#   ./SeedDataWriter 
 #
 Quiz.seed(:id,
   {:id=>139919151, :course_id=>2, :in_lesson=>false, :question=>"\\(\\displaystyle \\text{Evaluate } \\int x(3-x^2)^4 \\, dx. \\)", :answer_type=>"multi", :answer_input=>"{\"type\":\"multi\",\"choices\":[\"\\\\(\\\\displaystyle (x/5)(3-x^2)^5 + C \\\\)\",\"\\\\(\\\\displaystyle -(1/10)(3-x^2)^5 + C \\\\)\",\"\\\\(\\\\displaystyle (1/5)(3-x^2)^5 + C \\\\)\",\"\\\\(\\\\displaystyle -(1/5)(3-x^2)^5 + C \\\\)\"]}", :answer_output=>"{\"type\":\"text\"}", :component_tokens=>"39602143,285712046"},

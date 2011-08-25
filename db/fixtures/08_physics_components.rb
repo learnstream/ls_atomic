@@ -1,10 +1,10 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 20:38:43 -0700
+# Date: 2011-08-25 00:28:55 -0600
 # Seeding Component
 # Written with the command:
 #
-#   ./script/SeedDataWriter 
+#   ./SeedDataWriter 
 #
 Component.seed(:id,
   {:id=>193188329, :course_id=>1, :name=>"How is a vector denoted?", :description=>"Learnstream uses boldface to indicate a vector, such as \\( \\textbf v \\). Many sources use an arrow above the variable, as in \\( \\vec v \\)"},

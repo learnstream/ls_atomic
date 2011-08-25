@@ -1,10 +1,10 @@
 # DO NOT MODIFY THIS FILE, it was auto-generated.
 #
-# Date: 2011-07-18 20:38:43 -0700
+# Date: 2011-08-25 00:28:55 -0600
 # Seeding Note
 # Written with the command:
 #
-#   ./script/SeedDataWriter 
+#   ./SeedDataWriter 
 #
 Note.seed(:id,
   {:id=>220408914, :content=>"MIT - Position, Velocity, Acceleration", :is_document=>false, :event_token=>"45991292"},
